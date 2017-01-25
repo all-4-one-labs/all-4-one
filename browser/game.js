@@ -1,0 +1,1 @@
+window.game = new window.EventEmitter()
