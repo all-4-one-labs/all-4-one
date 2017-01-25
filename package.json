@@ -1,0 +1,19 @@
+{
+  "name": "project-tesseract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eScribMac/project-tesseract.git"
+  },
+  "author": "Jeffrey Horn, Tedman Hsu, Richard Shyong, Evan Scribner-MacLean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eScribMac/project-tesseract/issues"
+  },
+  "homepage": "https://github.com/eScribMac/project-tesseract#readme"
+}
