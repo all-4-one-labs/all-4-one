@@ -1,9 +1,10 @@
 // this is global now
-window.whiteboard = new window.EventEmitter();
+// window.whiteboard = new window.EventEmitter();
 
-(function () {
+export default function whiteboard () {
 
-    // Ultimately, the color of our stroke;
+    // Ultimately, the color of our stro
+
     var color;
 
     // The color selection elements on the DOM.
@@ -28,7 +29,7 @@ window.whiteboard = new window.EventEmitter();
 
     var canvas = document.querySelector('#paint');
     var sketch = document.querySelector('#sketch');
-    var sketchStyle = getComputedStyle(sketch);
+    // var sketchStyle = getComputedStyle(sketch);
 
     canvas.width = parseInt(sketchStyle.getPropertyValue('width'));
     canvas.height = parseInt(sketchStyle.getPropertyValue('height'));
@@ -95,4 +96,4 @@ window.whiteboard = new window.EventEmitter();
 
     };
 
-})();
+};

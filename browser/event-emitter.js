@@ -1,9 +1,9 @@
 // Here is our constructor function, available globally (set to the window object!)
-window.EventEmitter = function () {
-    this.subscribers = {};
-};
+// window.EventEmitter = function () {
+//     this.subscribers = {};
+// };
 
-(function (EE) {
+export default function eEmitter (EE) {
 
     // To be used like:
     // instanceOfEE.on('touchdown', cheerFn);
@@ -41,4 +41,4 @@ window.EventEmitter = function () {
 
     };
 
-})(window.EventEmitter);
+};

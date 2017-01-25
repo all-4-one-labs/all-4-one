@@ -1,13 +1,12 @@
 
 
-var path = require('path');
+var path, {resolve} = require('path');
 
 var http = require('http');
 var server = http.createServer();
 
 var express = require('express');
 var app = express();
-
 
 var socketio = require('socket.io'); 
 
@@ -52,14 +51,14 @@ io.on('connection', function(socket){
 })
 
 
-app.use(express.static(path.join(__dirname, 'browser')));
+app.use(express.static(resolve(__dirname,'public')))
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
+app.get('/', (_, res) => res.sendFile(resolve(__dirname,'public', 'index.html')))
 
 server.listen(4020, function () {
     console.log('The server is listening on port 4020!');
 });
+
+
+
 
