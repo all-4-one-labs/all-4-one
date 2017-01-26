@@ -6,7 +6,6 @@ var bullets;
 var fireRate = 400;
 
 export default function create() {
-
     //this settings
     this.world.setBounds(-1000, -1000, 2000, 2000);
     this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -54,4 +53,4 @@ export default function create() {
     
 }
 
-module.exports = {player, bullets, walls, cursors, wasd, fireRate}
+export {player, bullets, walls, cursors, wasd, fireRate}
