@@ -4,6 +4,7 @@ var nextFire = 0;
 export default function update() {
     //  Collide the player and the stars with the platforms
     this.physics.arcade.collide(player, walls);
+    this.physics.arcade.collide(bullets, walls, (bullets, walls) => bullets.kill());
 
 
     //  Reset the players velocity (movement)
@@ -46,37 +47,25 @@ export default function update() {
         player.frame = 0;
     }
 
-
+var tempGame = this;
 function fire(direction) {
-        if (this.time.now > nextFire && bullets.countDead() > 0) {
-                nextFire = this.time.now + fireRate;
+        if (tempGame.time.now > nextFire && bullets.countDead() > 0) {
+                nextFire = tempGame.time.now + fireRate;
                 var bullet = bullets.getFirstDead();
                 bullet.scale.setTo(0.5);
                 bullet.reset(player.x, player.y);
                 switch(direction) {
-                    case 'left' : this.physics.arcade.moveToXY(bullet, -1000, player.y, 500); break;
-                    case 'right': this.physics.arcade.moveToXY(bullet, 1000, player.y, 500); break;
-                    case 'up': this.physics.arcade.moveToXY(bullet, player.x, -1000, 500); break;
-                    case 'down': this.physics.arcade.moveToXY(bullet, player.x, 1000, 500); break;
-                    case 'up-left': this.physics.arcade.moveToXY(bullet, player.x - 1000, player.y - 1000, 500); break;
-                    case 'up-right': this.physics.arcade.moveToXY(bullet, player.x + 1000, player.y - 1000, 500); break;
-                    case 'down-left': this.physics.arcade.moveToXY(bullet, player.x - 1000, player.y + 1000, 500); break;
-                    case 'down-right': this.physics.arcade.moveToXY(bullet, player.x + 1000, player.y + 1000, 500); break;
+                    case 'left' : tempGame.physics.arcade.moveToXY(bullet, -1000, player.y, 500); break;
+                    case 'right': tempGame.physics.arcade.moveToXY(bullet, 1000, player.y, 500); break;
+                    case 'up': tempGame.physics.arcade.moveToXY(bullet, player.x, -1000, 500); break;
+                    case 'down': tempGame.physics.arcade.moveToXY(bullet, player.x, 1000, 500); break;
+                    case 'up-left': tempGame.physics.arcade.moveToXY(bullet, player.x - 1000, player.y - 1000, 500); break;
+                    case 'up-right': tempGame.physics.arcade.moveToXY(bullet, player.x + 1000, player.y - 1000, 500); break;
+                    case 'down-left': tempGame.physics.arcade.moveToXY(bullet, player.x - 1000, player.y + 1000, 500); break;
+                    case 'down-right': tempGame.physics.arcade.moveToXY(bullet, player.x + 1000, player.y + 1000, 500); break;
                 }
         }
 }
-    // function fire() {
-    //     if (this.time.now > nextFire && bullets.countDead() > 0) {
-    //         nextFire = this.time.now + fireRate;
-    //         var bullet = bullets.getFirstDead();
-    //         bullet.scale.setTo(0.5);
-    //         console.log('player', player.x, player.y)
-    //         bullet.reset(player.x - 8, player.y - 8);
-
-    //         this.physics.arcade.moveToPointer(bullet, 300);
-    //         console.log('bullet', bullet.x, bullet.y)
-    //     }
-    // }
 
     if (cursors.up.isDown && cursors.left.isDown)
     {
