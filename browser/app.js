@@ -3,8 +3,7 @@ import 'p2';
 import 'phaser';
 
 import eEmitter from './event-emitter.js';
-import game from './game.js';
-
+import game from './main.js';
 
 let EventEmitter = function () {
 	this.subscribers = {};
