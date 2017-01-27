@@ -29,18 +29,11 @@ export default function create() {
     wall.body.immovable = true;
 
     //player
-    player = new Player(id, game)
+    player = new Player(id, game);
 
 
     //monster
-    monster = new Monster(id, game)
-    // monster = game.add.sprite(500, 0, 'monster');
-    // monster.anchor.set(0.5);
-    // monster.scale.setTo(2);
-    // monster.animations.add('idle', [0]);
-    // game.physics.arcade.enable(monster);
-    // monster.body.collideWorldBounds = true;
-    // monster.health = 100;
+    monster = new Monster(id, game);
 
     //bullets
     bullets = game.add.group();
@@ -52,18 +45,10 @@ export default function create() {
     bullets.setAll('checkWorldBounds', true);
     bullets.setAll('outOfBoundsKill', true);
 
-    //  Our controls.
-    // cursors = this.input.keyboard.createCursorKeys();
-    // wasd = {
-    //     up: this.input.keyboard.addKey(Phaser.Keyboard.W),
-    //     down: this.input.keyboard.addKey(Phaser.Keyboard.S),
-    //     left: this.input.keyboard.addKey(Phaser.Keyboard.A),
-    //     right: this.input.keyboard.addKey(Phaser.Keyboard.D),
-    // };
-
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
 
 }
 
-export {player, walls, cursors, wasd, fireRate, monster, bullets}
+export {player, walls, cursors, wasd, fireRate, monster, bullets};
+
