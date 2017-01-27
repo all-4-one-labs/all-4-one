@@ -2,3 +2,5 @@ node_modules
 bundle.js
 bundle.min.js
 bundle.js.map
+.DS_Store
+.DS_Store?
