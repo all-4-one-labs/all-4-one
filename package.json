@@ -1,5 +1,5 @@
 {
-  "name": "Project Tesseract",
+  "name": "Project-Tesseract",
   "version": "1.0.0",
   "description": "Asymmetrical Multiplayer Game, FSA 1610 Capstone Project",
   "main": "server.js",
