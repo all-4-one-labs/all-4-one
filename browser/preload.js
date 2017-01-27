@@ -1,12 +1,9 @@
 export default function preload() {
-  console.log('I AM THE PRELOAD FILE ')
   this.load.image('ground', 'assets/sky.png');
   this.load.image('wall', 'assets/platform.png');
-  this.load.spritesheet('dude', 'assets/player-topdown.png', 150, 117, -1, 0, 0);
+  this.load.spritesheet('dude', 'assets/player-topdown.png', 150, 117);
   this.load.image('bullet', 'assets/bullet.png');
-  this.load.image('monster', 'assets/monster-lizard.png');
+  this.load.spritesheet('monster', 'assets/monster-lizard.png', 80 , 56);
+  //this.load.image('button', 'assets/big-red-button.png');
+};
 
-}
-
-
-//150, 117

@@ -1,10 +1,17 @@
-import {player, bullets, walls, cursors, wasd, fireRate} from './create.js'
+import {player, bullets, walls, cursors, wasd, fireRate, monster} from './create.js'
 var nextFire = 0;
 
 export default function update() {
-    //  Collide the player and the stars with the platforms
+    //  Collision
     this.physics.arcade.collide(player, walls);
+    this.physics.arcade.collide(player, monster);
+    this.physics.arcade.collide(monster, walls);
     this.physics.arcade.collide(bullets, walls, (bullets, walls) => bullets.kill());
+    this.physics.arcade.collide(bullets, monster, (monster, bullet) => {
+        bullet.kill();
+        monster.health -= 20;
+        if (monster.health === 0 ) monster.kill();
+    });
 
 
     //  Reset the players velocity (movement)
@@ -43,7 +50,6 @@ export default function update() {
     {
         //  Stand still
         player.animations.stop();
-
         player.frame = 0;
     }
 
@@ -64,7 +70,7 @@ function fire(direction) {
                     case 'down-left': tempGame.physics.arcade.moveToXY(bullet, player.x - 1000, player.y + 1000, 500); break;
                     case 'down-right': tempGame.physics.arcade.moveToXY(bullet, player.x + 1000, player.y + 1000, 500); break;
                 }
-        }
+    }
 }
 
     if (cursors.up.isDown && cursors.left.isDown)
