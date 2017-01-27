@@ -1,9 +1,9 @@
 {
-  "name": "World-Wide-Whiteboard",
+  "name": "Project Tesseract",
   "version": "1.0.0",
-  "description": "socket.io workshop @ Fullstack Academy",
-  "main": "index.js",
-  "author": "instructors@fullstackacademy.com",
+  "description": "Asymmetrical Multiplayer Game, FSA 1610 Capstone Project",
+  "main": "server.js",
+  "author": "Evan, Jeff, Ted and Rich. Please see github",
   "scripts": {
     "test": "check-node-version --node '>= 6.7.0' && mocha --compilers js:babel-register app/**/*.test.js app/**/*.test.jsx db/**/*.test.js server/**/*.test.js",
     "test-watch": "check-node-version --node '>= 6.7.0' && mocha --compilers js:babel-register --watch app/**/*.test.js app/**/*.test.jsx db/**/*.test.js server/**/*.test.js",
