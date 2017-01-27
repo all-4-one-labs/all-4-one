@@ -1,14 +1,14 @@
-import {bullets, fireRate} from '../create.js' //change to being from bullets file 
+import {bullets, fireRate} from '../create.js' //change to being from bullets file
 
 export default class Player {
   constructor(id, game){
     this.health = 100;
     this.id = id;
     this.game = game;
-    this.create()
-    this.update = this.update.bind(this)
-    this.fire = this.fire.bind(this)
-    this.nextFire = 0
+    this.update = this.update.bind(this);
+    this.fire = this.fire.bind(this);
+    this.nextFire = 0;
+    this.create();
   }
 
   create() {
@@ -23,6 +23,7 @@ export default class Player {
     this.game.camera.follow(this.player);
     this.game.physics.arcade.enable(this.player);
     this.player.body.collideWorldBounds = true;
+    this.player.boundsPadding = 0;
 
     //controls
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -38,7 +39,39 @@ export default class Player {
     this.player.body.velocity.x = 0;
     this.player.body.velocity.y = 0;
 
-    if (this.wasd.left.isDown)
+    if (this.wasd.up.isDown && this.wasd.left.isDown)
+    {
+        //  Move up-left
+        this.player.body.velocity.x = -150;
+        this.player.body.velocity.y = -150;
+
+        this.player.animations.play('left');
+    }
+    else if (this.wasd.up.isDown && this.wasd.right.isDown)
+    {
+        //  Move up-right
+        this.player.body.velocity.x = 150;
+        this.player.body.velocity.y = -150;
+
+        this.player.animations.play('right');
+    }
+    else if (this.wasd.down.isDown && this.wasd.left.isDown)
+    {
+        //  Move down-left
+        this.player.body.velocity.x = -150;
+        this.player.body.velocity.y = 150;
+
+        this.player.animations.play('left');
+    }
+    else if (this.wasd.down.isDown && this.wasd.right.isDown)
+    {
+        //  Move down-right
+        this.player.body.velocity.x = 150;
+        this.player.body.velocity.y = 150;
+
+        this.player.animations.play('right');
+    }
+    else if (this.wasd.left.isDown)
     {
         //  Move left
         this.player.body.velocity.x = -150;
