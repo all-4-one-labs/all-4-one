@@ -1,4 +1,8 @@
 import {player, bullets, walls, cursors, wasd, fireRate, monster} from './create.js'
+
+// require('./app.js')(io);
+
+
 var nextFire = 0;
 
 export default function update() {
@@ -52,6 +56,16 @@ export default function update() {
         player.animations.stop();
         player.frame = 0;
     }
+
+if (socket) {
+    socket.emit('move', player.worldPosition)
+}
+
+socket.on('sendMove', (data) => {
+    player.y = data.y;
+    player.x = data.x;
+})
+
 
 var tempGame = this;
 function fire(direction) {
