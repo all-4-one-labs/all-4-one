@@ -1,8 +1,8 @@
-import {bullets, fireRate} from './create.js' //change to being from bullets file 
-    
+import {bullets, fireRate} from './create.js' //change to being from bullets file
+
 // Check for movement
 const moveCheck = function(){
-  
+
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
     //  Move up-left
     this.player.body.velocity.x = -150;
@@ -71,10 +71,11 @@ const fireBulletsCheck = function(){
 
 //fire helper function
 const fire = function(direction) {
-  if (this.game.time.now > this.nextFire && bullets.countDead() > 0) {
+  if (this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
     this.nextFire = this.game.time.now + fireRate;
-    var bullet = bullets.getFirstDead();
-    bullet.scale.setTo(0.5);
+    var bullet = bullets.bullets.getFirstDead();
+    bullet.scale.setTo(0.25);
+    bullet.body.setSize(20, 30);
     bullet.reset(this.player.x, this.player.y);
     switch(direction) {
       case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.player.y, 500); break;

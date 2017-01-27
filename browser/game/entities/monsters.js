@@ -1,10 +1,8 @@
 export default class Monster {
   constructor(id, game){
-    this.health = 100;
     this.id = id;
     this.game = game;
-    this.create()
-    this.update = this.update.bind(this)
+    this.create();
   }
 
   create() {
@@ -15,10 +13,8 @@ export default class Monster {
     this.monster.animations.add('idle', [0]);
     this.game.physics.arcade.enable(this.monster);
     this.monster.body.collideWorldBounds = true;
+    this.monster.body.setSize(50, 50, 20, 10);
+    this.monster.health = 100;
   }
-
-  update(){
-  }
-
 
 }

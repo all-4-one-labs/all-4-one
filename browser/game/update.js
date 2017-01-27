@@ -3,25 +3,25 @@ import {player, bullets, walls, cursors, wasd, fireRate, monster} from './create
 
 export default function update() {
     //  Collision
-    this.physics.arcade.collide(player, walls);
-    this.physics.arcade.collide(player, monster);
-    this.physics.arcade.collide(monster, walls);
-    this.physics.arcade.collide(bullets, walls, (bullets, walls) => bullets.kill());
-    this.physics.arcade.collide(bullets, monster, (monster, bullet) => {
+    this.physics.arcade.collide(player.player, walls.walls);
+    this.physics.arcade.collide(player.player, monster.monster);
+    this.physics.arcade.collide(monster, walls.walls);
+    this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
+    this.physics.arcade.collide(bullets.bullets, monster.monster, (monster, bullet) => {
         bullet.kill();
         monster.health -= 20;
-        if (monster.health === 0 ) monster.kill();
+        if (monster.health <= 0 ) monster.kill();
     });
 
     player.update();
 
 
-    if (socket) {
-        socket.emit('move', player.worldPosition)
-    }
+    // if (socket) {
+    //     socket.emit('move', player.worldPosition)
+    // }
 
-    socket.on('sendMove', (data) => {
-        player.y = data.y;
-        player.x = data.x;
-    });
+    // socket.on('sendMove', (data) => {
+    //     player.y = data.y;
+    //     player.x = data.x;
+    // });
 }
