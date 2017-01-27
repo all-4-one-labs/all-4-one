@@ -48,7 +48,7 @@ io.on('connection', function(socket){
   }); 
 
   socket.on('move', (data) => {
-    console.log('hit')
+    // console.log('hit')
     socket.broadcast.emit('sendMove', data)
   })
 
@@ -59,8 +59,8 @@ app.use(express.static(resolve(__dirname,'public')))
 
 app.get('/', (_, res) => res.sendFile(resolve(__dirname,'public', 'index.html')))
 
-server.listen(4020, function () {
-    console.log('The server is listening on port 4020!');
+server.listen(process.env.PORT || 4020, function () {
+    console.log('The server is listening on port ' + 4020/*TODO: fix this process.env.PORT ? process.env.PORT : 4020*/);
 });
 
 
