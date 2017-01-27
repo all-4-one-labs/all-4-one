@@ -12,7 +12,7 @@ eEmitter(EventEmitter);
 
 
 // we need this socket object to send messages to our server 
-var socket = io(window.location.origin); 
+window.socket = io(window.location.origin); 
 
 socket.on('connect', function(){
 

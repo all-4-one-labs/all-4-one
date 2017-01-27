@@ -47,6 +47,10 @@ io.on('connection', function(socket){
     socket.broadcast.emit('otherDraw', start, end, color); 
   }); 
 
+  socket.on('move', (data) => {
+    console.log('hit')
+    socket.broadcast.emit('sendMove', data)
+  })
 
 })
 
