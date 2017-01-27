@@ -1,4 +1,5 @@
 import {bullets, fireRate} from './create.js' //change to being from bullets file 
+import Monster from './entities/monsters.js';
     
 // Check for movement
 const moveCheck = function(){
@@ -89,5 +90,11 @@ const fire = function(direction) {
   }
 }
 
-export { moveCheck, fireBulletsCheck, fire }
+const spawnMonster = function() {
+  if (this.game.input.activePointer.isDown) {
+    var monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+  }
+};
+
+export { moveCheck, fireBulletsCheck, fire, spawnMonster }
 
