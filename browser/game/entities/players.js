@@ -1,4 +1,4 @@
-import { moveCheck, fireBulletsCheck, fire } from '../controls.js';
+import { moveCheck, fireBulletsCheck, fire, spawnMonster } from '../controls.js' 
 
 
 export default class Player {
@@ -41,6 +41,8 @@ export default class Player {
 
     moveCheck.call(this);
     fireBulletsCheck.call(this);
+    spawnMonster.call(this);
+
     }
 
 }

@@ -30,7 +30,7 @@ export default function create() {
 
 
     //monster
-    monster = new Monster(id, game);
+    // monster = new Monster(id, game);
 
     //bullets
     bullets = new Bullets(game);
