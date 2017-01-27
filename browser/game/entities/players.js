@@ -1,5 +1,5 @@
-// import {bullets, fireRate} from '../create.js' //change to being from bullets file
 import { moveCheck, fireBulletsCheck, fire, spawnMonster } from '../controls.js' 
+
 
 export default class Player {
   constructor(id, game){
@@ -24,7 +24,6 @@ export default class Player {
     this.game.camera.follow(this.player);
     this.game.physics.arcade.enable(this.player);
     this.player.body.collideWorldBounds = true;
-    this.player.boundsPadding = 0;
 
     //controls
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -45,5 +44,5 @@ export default class Player {
     spawnMonster.call(this);
 
     }
-    
+
 }

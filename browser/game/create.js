@@ -1,5 +1,7 @@
-import Player from './entities/players.js'
-import Monster from './entities/monsters.js'
+import Player from './entities/players.js';
+import Monster from './entities/monsters.js';
+import Bullets from './entities/bullets.js';
+import Wall from './entities/mapObjects.js';
 
 var player;
 var walls;
@@ -21,12 +23,7 @@ export default function create() {
     game.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
 
     //walls
-    walls = game.add.group();
-    walls.enableBody = true;
-    var wall = walls.create(400, 400, 'wall');
-    wall.body.immovable = true;
-    wall = walls.create(-150, 250, 'wall');
-    wall.body.immovable = true;
+    walls = new Wall(game);
 
     //player
     player = new Player(id, game);
@@ -36,14 +33,7 @@ export default function create() {
     // monster = new Monster(id, game);
 
     //bullets
-    bullets = game.add.group();
-    bullets.enableBody = true;
-    game.physics.arcade.enable(bullets);
-    bullets.createMultiple(50, 'bullet');
-    bullets.setAll('anchor.x', 0.5);
-    bullets.setAll('anchor.y', 0.5);
-    bullets.setAll('checkWorldBounds', true);
-    bullets.setAll('outOfBoundsKill', true);
+    bullets = new Bullets(game);
 
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
