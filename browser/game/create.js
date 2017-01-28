@@ -14,6 +14,7 @@ var button;
 var monster;
 var bullets;
 let id = 0;
+let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 export default function create() {
     var game = this;
 
@@ -41,5 +42,4 @@ export default function create() {
 
 }
 
-export {player, walls, cursors, wasd, fireRate, monster, bullets};
-
+export {player, walls, cursors, wasd, fireRate, monster, bullets, teammates};
