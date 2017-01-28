@@ -4,8 +4,7 @@ export default class Monster {
     this.id = id;
     this.game = game;
     this.spawnLocation = spawnLocation;
-    this.create()
-    this.update = this.update.bind(this)
+    this.create();
   }
 
   create() {

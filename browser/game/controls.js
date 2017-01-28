@@ -1,7 +1,10 @@
-import {bullets, fireRate} from './create.js' //change to being from bullets file 
+import {bullets, fireRate} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
-    
+
 // Check for movement
+
+var monster;
+
 const moveCheck = function(){
 
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
@@ -93,9 +96,9 @@ const fire = function(direction) {
 
 const spawnMonster = function() {
   if (this.game.input.activePointer.isDown) {
-    var monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+     monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
   }
 };
 
-export { moveCheck, fireBulletsCheck, fire, spawnMonster }
+export { moveCheck, fireBulletsCheck, fire, spawnMonster, monster }
 
