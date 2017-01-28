@@ -1,5 +1,6 @@
 import {bullets, fireRate} from './create.js' //change to being from bullets file 
 import Monster from './entities/monsters.js';
+const monsters = [];
     
 // Check for movement
 const moveCheck = function(){
@@ -76,6 +77,11 @@ const fire = function(direction) {
     this.nextFire = this.game.time.now + fireRate;
     var bullet = bullets.getFirstDead();
     bullet.scale.setTo(0.5);
+
+    this.game.physics.arcade.enable(bullet);
+    bullet.body.collideWorldBounds = true;
+
+
     bullet.reset(this.player.x, this.player.y);
     switch(direction) {
       case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.player.y, 500); break;
@@ -92,9 +98,9 @@ const fire = function(direction) {
 
 const spawnMonster = function() {
   if (this.game.input.activePointer.isDown) {
-    var monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+    monsters.push(new Monster(170, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
   }
 };
 
-export { moveCheck, fireBulletsCheck, fire, spawnMonster }
+export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters }
 
