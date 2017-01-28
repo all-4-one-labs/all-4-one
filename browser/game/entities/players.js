@@ -36,6 +36,7 @@ export default class Player {
   }
 
   update(){
+    //what do these lines do?
     this.player.body.velocity.x = 0;
     this.player.body.velocity.y = 0;
 
