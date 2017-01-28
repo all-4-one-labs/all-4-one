@@ -3,11 +3,11 @@ import Monster from './entities/monsters.js';
 import socket from '../socket'
 // Check for movement
 
-var monster;
+var monsters = [];
 
 const moveCheck = function(){
 
-  let moved = true
+  let moved = true;
 
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
     //  Move up-left
@@ -106,9 +106,10 @@ const fire = function(direction) {
 const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;
-    monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+    monsters.push(new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
+    console.log('this is monsters array', monsters);
   }
 };
 
-export { moveCheck, fireBulletsCheck, fire, spawnMonster, monster }
+export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters };
 
