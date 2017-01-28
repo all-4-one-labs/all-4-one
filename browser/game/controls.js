@@ -1,11 +1,13 @@
 import {bullets, fireRate} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
-
+import socket from '../socket'
 // Check for movement
 
 var monster;
 
 const moveCheck = function(){
+
+  let moved = true
 
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
     //  Move up-left
@@ -47,6 +49,13 @@ const moveCheck = function(){
     //  Stand still
     this.player.animations.stop();
     this.player.frame = 0;
+    moved = false
+  }
+
+  if(moved){
+    if (socket) {
+      socket.emit('move', this.player.position)
+    }
   }
 
 }

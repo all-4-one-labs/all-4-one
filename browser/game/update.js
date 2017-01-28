@@ -22,19 +22,17 @@ export default function update() {
     player.update();
 
 
-    if (socket) {
-        socket.emit('move', player.player.position)
-    }
+    // if (socket) {
+    //     socket.emit('move', player.player.position)
+    // }
 
     socket.on('player_data', (data) => {
-        console.log('aaaaaaaaaaaa', data)
         //this functions needs to do the following:
         //iterate through the players object and:
         //  create a new shallow player sprite for each new other player
         //  update the positions of all preexisting other players
         //  probably not do anything with the local players position(maybe we can handle big discrepancies server-side?)
         for (let id in data) {
-            console.log('bbbbbbbbb', data[id])
             if (id !== player.id) {
                 //if the player already exists, just move them
                 //otherwise create them at the place they need to be
