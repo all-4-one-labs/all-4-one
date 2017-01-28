@@ -2,6 +2,8 @@ import Player from './entities/players.js';
 import Monster from './entities/monsters.js';
 import Bullets from './entities/bullets.js';
 import Wall from './entities/mapObjects.js';
+import socket from '../socket';
+
 
 var player;
 var walls;
@@ -11,12 +13,11 @@ var fireRate = 400;
 var button;
 var monster;
 var bullets;
-
+let id = 0;
 export default function create() {
     var game = this;
 
     //temporary for testing purposes
-    let id = 1
     //this settings
     game.world.setBounds(-1000, -1000, 2000, 2000);
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -24,9 +25,9 @@ export default function create() {
 
     //walls
     walls = new Wall(game);
-
+    console.log(socket)
     //player
-    player = new Player(id, game);
+    player = new Player(socket.id, game);
 
 
     //monster
