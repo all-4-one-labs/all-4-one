@@ -1,4 +1,4 @@
-import {bullets, fireRate} from './create.js' //change to being from bullets file
+import {bullets, fireRate, monsterRate} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
 import socket from '../socket'
 // Check for movement
@@ -104,8 +104,9 @@ const fire = function(direction) {
 }
 
 const spawnMonster = function() {
-  if (this.game.input.activePointer.isDown) {
-     monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+  if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
+    this.nextMonster = this.game.time.now + monsterRate;
+    monster = new Monster(1, this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
   }
 };
 
