@@ -9,6 +9,7 @@ export default class Player {
     this.update = this.update.bind(this);
     // this.fire = this.fire.bind(this);
     this.nextFire = 0;
+    this.nextMonster = 0;
     this.create();
   }
 
