@@ -12,10 +12,7 @@ export default function update() {
     for (let i = 0; i < monsters.length; i++) {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
-            // monster.kill();
-            // console.log(monster);
-            // console.log(this.game.time.now);
-            console.log(player.health);
+            console.log('Player Health:', player.health);
             if (this.game.time.now > monster.nextAttack) {
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
@@ -38,27 +35,28 @@ export default function update() {
     player.update();
 
 
-    // if (socket) {
-    //     socket.emit('move', player.player.position)
-    // }
 
-    // socket.on('player_data', (data) => {
-    //     //this functions needs to do the following:
-    //     //iterate through the players object and:
-    //     //  create a new shallow player sprite for each new other player
-    //     //  update the positions of all preexisting other players
-    //     //  probably not do anything with the local players position(maybe we can handle big discrepancies server-side?)
-    //     for (let id in data) {
-    //         if (id !== player.id) {
-    //             //if the player already exists, just move them
-    //             //otherwise create them at the place they need to be
-    //             if (teammates[id]){
-    //                 teammates[id].sprite.position = data[id].position
-    //             } else {
-    //                 //TODO finish constructing
-    //                 teammates[id] = new Teammate(id, this, data[id].position)
-    //             }
-    //         }
-    //     }
-    // });
+    if (socket) {
+        socket.emit('move', player.player.position)
+    }
+
+    socket.on('player_data', (data) => {
+        //this functions needs to do the following:
+        //iterate through the players object and:
+        //  create a new shallow player sprite for each new other player
+        //  update the positions of all preexisting other players
+        //  probably not do anything with the local players position(maybe we can handle big discrepancies server-side?)
+        for (let id in data) {
+            if (id !== player.id) {
+                //if the player already exists, just move them
+                //otherwise create them at the place they need to be
+                if (teammates[id]){
+                    teammates[id].sprite.position = data[id].position
+                } else {
+                    //TODO finish constructing
+                    teammates[id] = new Teammate(id, this, data[id].position)
+                }
+            }
+        }
+    });
 }
