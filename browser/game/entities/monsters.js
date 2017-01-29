@@ -1,7 +1,8 @@
+import {player} from '../create.js';
+
 export default class Monster {
 
-  constructor(id, game, spawnLocation){
-    this.id = id;
+  constructor(game, spawnLocation){
     this.game = game;
     this.spawnLocation = spawnLocation;
     this.create();
@@ -16,6 +17,12 @@ export default class Monster {
     this.game.physics.arcade.enable(this.monster);
     this.monster.body.setSize(50, 50, 20, 10);
     this.monster.health = 100;
+
+    this.monster.nextAttack = 0;
+    this.monster.attackRate = 1000;
   }
 
+  update(playerX, playerY) {
+    this.game.physics.arcade.moveToXY(this.monster, playerX, playerY, 100);
+  }
 }
