@@ -3,7 +3,6 @@ import { moveCheck, fireBulletsCheck, fire, spawnMonster } from '../controls.js'
 
 export default class Player {
   constructor(id, game){
-    this.health = 100;
     this.id = id;
     this.game = game;
     this.update = this.update.bind(this);
@@ -25,6 +24,7 @@ export default class Player {
     this.game.camera.follow(this.player);
     this.game.physics.arcade.enable(this.player);
     this.player.body.collideWorldBounds = true;
+    this.player.health = 100;
 
     //controls
     this.cursors = this.game.input.keyboard.createCursorKeys();
