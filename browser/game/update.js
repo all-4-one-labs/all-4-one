@@ -36,6 +36,7 @@ export default function update() {
     player.update();
     let data = store.getState().players;
 
+
     for (let id in data) {
         if (id !== player.id) {
             //if the player already exists, just move them
