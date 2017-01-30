@@ -15,10 +15,11 @@ const removePlayer = id => ({
 })
 
 const playerReducers = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case PLAYER_MOVE:
       newState = Object.assign({}, state)
       newState[action.id] = Object.assign({}, state[action.id], action.data)
+      // console.log('3-Server: Player Reducer', action, newState)
       return newState
     case REMOVE_PLAYER:
       return state
@@ -28,4 +29,4 @@ const playerReducers = (state = initialState, action) => {
 }
 
 
-module.exports = { playerReducers }
+module.exports = { playerReducers, playerMove, removePlayer }

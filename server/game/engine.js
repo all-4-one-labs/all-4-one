@@ -2,8 +2,9 @@ const store = require('../store');
 
 const broadcastGameState = (io) => {
    setInterval(() => {
-    let {players} = store.getState()
-    io.emit('player_data', players)
+    // console.log('4-Server: Emitting state', store.getState())
+    let state = store.getState()
+    io.emit('player_data', state)
   }, 1000 / 30)
 }
 
