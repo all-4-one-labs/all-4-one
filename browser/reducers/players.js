@@ -1,3 +1,7 @@
+// KF: I don't see much actual state management going right now, so that should be a main focus going 
+// forward. I know you guys already have that as a goal for the next couple days, so definitely try
+// to get it more resolved ASAP.
+
 //Initial State
 const initialState = {};
 

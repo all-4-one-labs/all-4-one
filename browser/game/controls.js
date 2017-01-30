@@ -5,6 +5,10 @@ import Monster from './entities/monsters.js';
 
 var monster;
 
+// KF: I feel like this could be more DRY. Consider making some helper functions 
+// for things you do repeatedly like setting the player's velocity, e.g. 
+// const setVelocity = (direction, num) => this.player.body.velocity[direction] = num
+
 const moveCheck = function(){
 
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
