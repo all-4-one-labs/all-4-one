@@ -34,8 +34,6 @@ export default function update() {
 
     player.update();
 
-
-
     if (socket) {
         socket.emit('move', player.player.position)
     }
