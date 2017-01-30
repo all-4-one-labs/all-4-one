@@ -2,6 +2,7 @@ import {player, bullets, walls, cursors, wasd, fireRate, teammates} from './crea
 import { monsters } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
+import store from '../store.js';
 
 // require('./app.js')(io);
 
@@ -33,30 +34,20 @@ export default function update() {
     }
 
     player.update();
+    let data = store.getState().players;
 
-
-
-    if (socket) {
-        socket.emit('move', player.player.position)
-    }
-
-    socket.on('player_data', (data) => {
-        //this functions needs to do the following:
-        //iterate through the players object and:
-        //  create a new shallow player sprite for each new other player
-        //  update the positions of all preexisting other players
-        //  probably not do anything with the local players position(maybe we can handle big discrepancies server-side?)
-        for (let id in data) {
-            if (id !== player.id) {
-                //if the player already exists, just move them
-                //otherwise create them at the place they need to be
-                if (teammates[id]){
-                    teammates[id].sprite.position = data[id].position
-                } else {
-                    //TODO finish constructing
-                    teammates[id] = new Teammate(id, this, data[id].position)
-                }
+    for (let id in data) {
+        if (id !== player.id) {
+            //if the player already exists, just move them
+            //otherwise create them at the place they need to be
+            if (teammates[id]){
+                teammates[id].sprite.position = data[id].position
+            } else {
+                //TODO finish constructing
+                teammates[id] = new Teammate(id, this, data[id].position)
             }
         }
-    });
+    }
+
+
 }

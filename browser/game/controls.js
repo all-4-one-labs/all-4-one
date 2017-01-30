@@ -54,7 +54,7 @@ const moveCheck = function(){
 
   if(moved){
     if (socket) {
-      socket.emit('move', this.player.position)
+      socket.emit('playerMove', this.player.position)
     }
   }
 
