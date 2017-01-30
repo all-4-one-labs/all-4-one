@@ -1,5 +1,9 @@
 
 
+// KF: Are you guys going to allow users to create accounts at all? I'm not sure it's
+// necessary BUT if you think that's a possibility I would recommend dealing with the DB and
+// other backend logic for user accounts as soon as possible.
+
 var path, {resolve} = require('path');
 
 var http = require('http');
@@ -21,6 +25,7 @@ server.on('request', app);
 var io = socketio(server);
 
 //put state here for now. this needs to be redux (or something) eventually
+// ^^ KF: Yup.
 let players = {}
 
 // // use socket server as an event emitter in order to listen for new connctions
@@ -46,6 +51,7 @@ io.on('connection', function(socket){
   //emit player data 30 times per second
   //this will eventually become it's own function
   //should this be outside of io.on?
+  // KF: Not sure...
   setInterval(() =>{
     socket.emit('player_data', players)
   }, 1000 / 30)

@@ -5,6 +5,10 @@ import socket from '../socket'
 
 var monsters = [];
 
+// KF: I feel like this could be more DRY. Consider making some helper functions 
+// for things you do repeatedly like setting the player's velocity, e.g. 
+// const setVelocity = (direction, num) => this.player.body.velocity[direction] = num
+
 const moveCheck = function(){
 
   let moved = true;
