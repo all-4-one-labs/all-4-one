@@ -6,74 +6,38 @@ import socket from '../socket'
 var monsters = [];
 
 const moveCheck = function(){
-
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
-    //  Move up-left
-    this.player.body.velocity.x = -150;
-    this.player.body.velocity.y = -150;
-    this.player.animations.play('left');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'left'});
-    }
+    move.call(this, -150, -150, 'left');
   } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
-    //  Move up-right
-    this.player.body.velocity.x = 150;
-    this.player.body.velocity.y = -150;
-    this.player.animations.play('right');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'right'});
-    }
+    move.call(this, 150, -150, 'right');
   } else if (this.wasd.down.isDown && this.wasd.left.isDown) {
-    //  Move down-left
-    this.player.body.velocity.x = -150;
-    this.player.body.velocity.y = 150;
-    this.player.animations.play('left');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'left'});
-    }
+    move.call(this, -150, 150, 'left');
   } else if (this.wasd.down.isDown && this.wasd.right.isDown) {
-    //  Move down-right
-    this.player.body.velocity.x = 150;
-    this.player.body.velocity.y = 150;
-    this.player.animations.play('right');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'right'});
-    }
+    move.call(this, 150, 150, 'right');
   } else if (this.wasd.left.isDown) {
-    //  Move left
-    this.player.body.velocity.x = -150;
-    this.player.animations.play('left');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'left'});
-    }
+    move.call(this, -150, 0, 'left');
   } else if (this.wasd.right.isDown) {
-    //  Move right
-    this.player.body.velocity.x = 150;
-    this.player.animations.play('right');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'right'});
-    }
+    move.call(this, 150, 0, 'right');
   } else if (this.wasd.up.isDown) {
-    //  Move up
-    this.player.body.velocity.y = -150;
-    this.player.animations.play('up');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'up'});
-    }
+    move.call(this, 0, -150, 'up');
   } else if (this.wasd.down.isDown) {
-    //  Move down
-    this.player.body.velocity.y = 150;
-    this.player.animations.play('down');
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'down'});
-    }
+    move.call(this, 0, 150, 'down');
   } else {
-    //  Stand still
+    move.call(this, 0, 0, 'stop');
+  }
+}
+
+const move = function(x, y, direction){
+  if (direction === 'stop' ) {
     this.player.animations.stop();
     this.player.frame = 0;
-    if (socket) {
-      socket.emit('playerMove', {position: this.player.position, animation: 'stop'});
-    }
+  } else {
+    this.player.body.velocity.x = x;
+    this.player.body.velocity.y = y;
+    this.player.animations.play(direction);
+  }
+  if (socket) {
+    socket.emit('playerMove', {position: this.player.position, animation: direction});
   }
 };
 
@@ -123,7 +87,6 @@ const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;
     monsters.push(new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
-    console.log('this is monsters array', monsters);
   }
 };
 

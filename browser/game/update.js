@@ -7,6 +7,7 @@ import store from '../store.js';
 export default function update() {
     //  Collision
     player.update();
+
     this.physics.arcade.collide(player.player, walls.walls);
     this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
     for (let i = 0; i < monsters.length; i++) {
