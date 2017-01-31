@@ -21,7 +21,7 @@ const playerReducers = (state = initialState, action) => {
       newState[action.id] = Object.assign({}, action.data);
       break;
     case REMOVE_PLAYER:
-      newState[action.id] = Object.assign({delete: 1});
+      delete newState[action.id];
       break;
     default:
       return state;
