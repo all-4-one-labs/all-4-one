@@ -35,15 +35,12 @@ export default function update() {
         });
     }
 
-    // for (let j = 0; j < teammates.length; j++) {
-    //     this.physics.arcade(player.player, teammates[j])
-    // }
-
     let data = store.getState().players;
     for (let id in data) {
         if (id !== player.id) {
             //if the player already exists, just move them
             if (teammates[id]){
+                this.physics.arcade.collide(player.player, teammates[id].sprite, () => console.log('player collision'));
                 if(data[id].animation !== 'stop' && data[id].position) {
                     teammates[id].sprite.x = data[id].position.x;
                     teammates[id].sprite.y = data[id].position.y;

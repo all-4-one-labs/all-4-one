@@ -15,5 +15,7 @@ export default class Teammate {
     this.sprite.animations.add('right', [33, 34, 35, 36, 37, 38, 39], 10, true);
     this.sprite.animations.add('down', [0, 1, 2, 3, 4, 5, 6], 10, true);
     this.sprite.animations.add('up', [11, 12, 13, 14, 15, 16, 17], 10, true);
+    this.sprite.body.immovable = true;
+    this.sprite.body.setSize(60, 80, 45, 35);
   }
 }
