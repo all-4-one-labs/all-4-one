@@ -1,4 +1,4 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates} from './create.js';
+import {player, bullets, walls, cursors, wasd, fireRate, teammates, collideLayer} from './create.js';
 import { monsters } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
@@ -8,6 +8,7 @@ import store from '../store.js';
 
 export default function update() {
     //  Collision
+    this.physics.arcade.collide(player.player, collideLayer)
     this.physics.arcade.collide(player.player, walls.walls);
     this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
     for (let i = 0; i < monsters.length; i++) {
@@ -23,6 +24,7 @@ export default function update() {
             }
         });
         this.physics.arcade.collide(monsters[i].monster, walls.walls);
+        this.physics.arcade.collide(monsters[i].monster, collideLayer);
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
             monster.health -= 20;

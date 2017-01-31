@@ -14,7 +14,9 @@ var monsterRate = 1000;
 var button;
 var bullets;
 let id = 0;
-let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
+let teammates = {};
+let map, layer, collideLayer;
+ //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 export default function create() {
     var game = this;
 
@@ -24,9 +26,19 @@ export default function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
 
+    // map
+    map = game.add.tilemap('tilemap');
+    map.addTilesetImage('terrain_atlas', 'tileset')
+    layer = map.createLayer('Bottom');
+    collideLayer = map.createLayer('landscapeCollision')
+
+    layer.resizeWorld();
+    map.setCollisionBetween(1,2000, true, 'landscapeCollision')
+    
     //walls
     walls = new Wall(game);
     console.log(socket)
+    
     //player
     player = new Player(socket.id, game);
 
@@ -40,6 +52,7 @@ export default function create() {
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
 
+
 }
 
-export {player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates};
+export {player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates, collideLayer};
