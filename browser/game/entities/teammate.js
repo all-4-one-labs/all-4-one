@@ -1,15 +1,15 @@
 
 
 export default class Teammate {
-  constructor(id, game, position){
+  constructor(id, game, xcord, ycord){
     this.id = id
     this.game = game
-    this.create(position);
+    this.create(xcord, ycord);
   }
 
-  create(position) {
+  create(xcord, ycord) {
     //double check coordinates being passed in
-    this.sprite = this.game.add.sprite(position.x, position.y, 'dude')
+    this.sprite = this.game.add.sprite(xcord, ycord, 'dude')
     //how do we handle animations for other players?
   }
 }

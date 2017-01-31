@@ -3,4 +3,5 @@ import players from './players.js'
 
 export default combineReducers({
   players,
-})
+});
+
