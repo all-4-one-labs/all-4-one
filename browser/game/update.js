@@ -36,11 +36,19 @@ export default function update() {
     }
 
     let data = store.getState().players;
+
+    //delete teammate if they disconnect
+    for (let id in teammates) {
+        if (!data[id]) {
+            teammates[id].sprite.kill();
+            delete teammates[id];
+        }
+    }
     for (let id in data) {
         if (id !== player.id) {
             //if the player already exists, just move them
             if (teammates[id]){
-                if(data[id].animation !== 'stop' && data[id].position) {
+                if(data[id].animation !== 'stop') {
                     teammates[id].sprite.x = data[id].position.x;
                     teammates[id].sprite.y = data[id].position.y;
                     teammates[id].sprite.animations.play(data[id].animation);
@@ -53,11 +61,6 @@ export default function update() {
             else if (data[id].position){
                 teammates[id] = new Teammate(id, this, data[id].position.x, data[id].position.y)
             }
-            //delete teammate if they disconnect
-            // else if (data[id].delete) {
-            //     console.log(teammates);
-            //     teammates[id].sprite.kill();
-            // }
         }
     }
 

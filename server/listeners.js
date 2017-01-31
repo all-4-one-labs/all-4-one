@@ -14,7 +14,7 @@ const listeners = function(io, socket){
 
   socket.on('disconnect', function(){
     console.log('socket id ' + socket.id + ' has disconnected.')
-    store.dispatch(removePlayer(socket.id))
+    store.dispatch(removePlayer(socket.id));
   })
 }
 

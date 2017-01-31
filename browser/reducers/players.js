@@ -6,9 +6,9 @@ const RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
 
 
 //Action Creators
-export const receivePlayerdata = (player) => ({
+export const receivePlayerdata = (players) => ({
   type: RECEIVE_PLAYERS,
-  player
+  players
 });
 
 //Reducers
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case RECEIVE_PLAYERS:
-      newState = Object.assign({}, state, action.player);
+      newState = Object.assign({}, action.players);
       break;
     default: return state;
   }
