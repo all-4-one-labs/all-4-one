@@ -1,0 +1,18 @@
+GUIDE TO ADDING FEATURES INTO STATE MANAGEMENT SYSTEM:
+
+FRONT END:
+1. Import socket into your feature and use it to emit your data:
+socket.emit('throw bomb', bombdata)
+
+-Emit on discrete player actions, not in the update loop
+
+BACK END:
+
+2. Add the .on to the listeners.js file on the backend and dispatch your data to the store
+3. Add a reducer (Make a new file in the reducers folder if appropriate)
+
+-The backend periodically emits it's state, so you don't need to do anything else
+
+FRONT END II:
+4. Add a listener for the data in listeners.js and a reducer in the reducers folder. This should be nearly identical to what you did on the backend. 
+5. Add game logic to handle the new data in the state, the logic should ultimently be called from the update loop
