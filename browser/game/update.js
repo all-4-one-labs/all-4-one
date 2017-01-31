@@ -8,18 +8,19 @@ import store from '../store.js';
 
 export default function update() {
     //  Collision
+    player.update();
     this.physics.arcade.collide(player.player, walls.walls);
     this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
     for (let i = 0; i < monsters.length; i++) {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
-            console.log('Player Health:', player.health);
             if (this.game.time.now > monster.nextAttack) {
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
             }
             if (player.health <= 0) {
                 player.kill();
+                player.healthBar.kill();
             }
         });
         this.physics.arcade.collide(monsters[i].monster, walls.walls);
@@ -28,12 +29,12 @@ export default function update() {
             monster.health -= 20;
             if (monster.health <= 0 ) {
                 monster.kill();
+                monster.healthBar.kill();
                 monsters.splice(i, 1);
             }
         });
     }
 
-    player.update();
     // console.log(store.getState());
     let data = store.getState().players;
 
