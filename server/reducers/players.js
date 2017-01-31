@@ -15,17 +15,18 @@ const removePlayer = id => ({
 })
 
 const playerReducers = (state = initialState, action) => {
-  newState = Object.assign({},state);
+  let newState = Object.assign({},state);
   switch (action.type) {
     case PLAYER_MOVE:
       newState[action.id] = Object.assign({}, action.data);
-      return newState;
+      break;
     case REMOVE_PLAYER:
-      newState[action.id] = Object.assign({delete:1});
-      return newState;
+      newState[action.id] = Object.assign({delete: 1});
+      break;
     default:
       return state;
   }
+  return newState;
 }
 
 

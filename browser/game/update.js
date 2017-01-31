@@ -40,11 +40,17 @@ export default function update() {
         if (id !== player.id) {
             //if the player already exists, just move them
             if (teammates[id] && teammates[id].delete !== 1){
-                teammates[id].sprite.x = data[id].x;
-                teammates[id].sprite.y = data[id].y;
+                if(data[id].animation !== 'stop') {
+                    teammates[id].sprite.x = data[id].position.x;
+                    teammates[id].sprite.y = data[id].position.y;
+                    teammates[id].sprite.animations.play(data[id].animation);
+                } else {
+                    teammates[id].sprite.animations.stop();
+                    teammates[id].sprite.frame = 0;
+                }
             }
             //else create them at the place they need to be
-            else if (data[id].x){
+            else if (data[id].position){
                 teammates[id] = new Teammate(id, this, 0, 0)
             }
             //delete teammate if they disconnect

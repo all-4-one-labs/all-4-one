@@ -7,59 +7,75 @@ var monsters = [];
 
 const moveCheck = function(){
 
-  let moved = true;
-
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
     //  Move up-left
     this.player.body.velocity.x = -150;
     this.player.body.velocity.y = -150;
     this.player.animations.play('left');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'left'});
+    }
   } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
     //  Move up-right
     this.player.body.velocity.x = 150;
     this.player.body.velocity.y = -150;
     this.player.animations.play('right');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'right'});
+    }
   } else if (this.wasd.down.isDown && this.wasd.left.isDown) {
     //  Move down-left
     this.player.body.velocity.x = -150;
     this.player.body.velocity.y = 150;
     this.player.animations.play('left');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'left'});
+    }
   } else if (this.wasd.down.isDown && this.wasd.right.isDown) {
     //  Move down-right
     this.player.body.velocity.x = 150;
     this.player.body.velocity.y = 150;
     this.player.animations.play('right');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'right'});
+    }
   } else if (this.wasd.left.isDown) {
     //  Move left
     this.player.body.velocity.x = -150;
     this.player.animations.play('left');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'left'});
+    }
   } else if (this.wasd.right.isDown) {
     //  Move right
     this.player.body.velocity.x = 150;
     this.player.animations.play('right');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'right'});
+    }
   } else if (this.wasd.up.isDown) {
     //  Move up
     this.player.body.velocity.y = -150;
     this.player.animations.play('up');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'up'});
+    }
   } else if (this.wasd.down.isDown) {
     //  Move down
     this.player.body.velocity.y = 150;
     this.player.animations.play('down');
+    if (socket) {
+      socket.emit('playerMove', {position: this.player.position, animation: 'down'});
+    }
   } else {
     //  Stand still
     this.player.animations.stop();
     this.player.frame = 0;
-    moved = false
-  }
-
-  if(moved){
     if (socket) {
-      socket.emit('playerMove', this.player.position)
+      socket.emit('playerMove', {position: this.player.position, animation: 'stop'});
     }
   }
-
-}
-
+};
 
 //fire bullets
 const fireBulletsCheck = function(){

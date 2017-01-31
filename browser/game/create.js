@@ -26,7 +26,7 @@ export default function create() {
 
     //walls
     walls = new Wall(game);
-    console.log(socket)
+
     //player
     player = new Player(socket.id, game);
 
