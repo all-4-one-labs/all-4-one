@@ -35,6 +35,10 @@ export default function update() {
         });
     }
 
+    // for (let j = 0; j < teammates.length; j++) {
+    //     this.physics.arcade(player.player, teammates[j])
+    // }
+
     let data = store.getState().players;
     for (let id in data) {
         if (id !== player.id) {
