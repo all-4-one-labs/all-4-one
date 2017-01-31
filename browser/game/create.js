@@ -15,7 +15,7 @@ var button;
 var bullets;
 let id = 0;
 let teammates = {};
-let map, layer, collideLayer;
+let map, layer, layer2, collideLayer;
  //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 export default function create() {
     var game = this;
@@ -42,7 +42,7 @@ export default function create() {
     //player
     player = new Player(socket.id, game);
 
-
+    layer2 = map.createLayer('over');
     //monster
     // monster = new Monster(id, game);
 
