@@ -40,8 +40,7 @@ export default function update() {
     //delete teammate if they disconnect
     for (let id in teammates) {
         if (!players[id]) {
-            teammates[id].sprite.kill();
-            teammates[id].sprite.healthBar.kill();
+            teammates[id].kill();
             delete teammates[id];
         }
     }
@@ -53,8 +52,7 @@ export default function update() {
             teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
             teammates[id].sprite.healthBar.setPercent(players[id].health);
             if (players[id].health <= 0) {
-                teammates[id].sprite.kill();
-                teammates[id].sprite.healthBar.kill();
+                teammates[id].kill();
             }
             //if the player already exists, just move them
                 if(players[id].animation !== 'stop') {

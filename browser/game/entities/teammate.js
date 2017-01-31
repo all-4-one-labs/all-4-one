@@ -16,4 +16,9 @@ export default class Teammate {
     this.sprite.animations.add('up', [11, 12, 13, 14, 15, 16, 17], 10, true);
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40});
   }
+
+  kill() {
+    this.sprite.kill();
+    this.sprite.healthBar.kill();
+  }
 }
