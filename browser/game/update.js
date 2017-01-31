@@ -35,13 +35,11 @@ export default function update() {
         });
     }
 
-    // console.log(store.getState());
     let data = store.getState().players;
-    console.log(data);
     for (let id in data) {
         if (id !== player.id) {
             //if the player already exists, just move them
-            if (teammates[id]){
+            if (teammates[id] && teammates[id].delete !== 1){
                 teammates[id].sprite.x = data[id].x;
                 teammates[id].sprite.y = data[id].y;
             }
@@ -50,7 +48,7 @@ export default function update() {
                 teammates[id] = new Teammate(id, this, 0, 0)
             }
             //delete teammate if they disconnect
-            else if (!teammates[id]) {
+            else if (teammates[id] && teammates[id].delete === 1) {
                 teammates[id].sprite.kill();
             }
         }
