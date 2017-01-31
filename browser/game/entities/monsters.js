@@ -1,4 +1,5 @@
 import {player} from '../create.js';
+import HealthBar from './HealthBar.js';
 
 export default class Monster {
 
@@ -17,6 +18,7 @@ export default class Monster {
     this.game.physics.arcade.enable(this.monster);
     this.monster.body.setSize(50, 50, 20, 10);
     this.monster.health = 100;
+    this.monster.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.monster.x - 7, y: this.monster.y - 40});
 
     this.monster.nextAttack = 0;
     this.monster.attackRate = 1000;
@@ -24,5 +26,7 @@ export default class Monster {
 
   update(playerX, playerY) {
     this.game.physics.arcade.moveToXY(this.monster, playerX, playerY, 100);
+    this.monster.healthBar.setPosition(this.monster.x - 7, this.monster.y - 40);
+    this.monster.healthBar.setPercent(this.monster.health);
   }
 }
