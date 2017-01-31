@@ -14,11 +14,8 @@ export const receivePlayerdata = (players) => ({
 //Reducers
 export default (state = initialState, action) => {
   switch (action.type) {
-
     case RECEIVE_PLAYERS:
-      // console.log('6-Client: hit reducer', action)
-      return Object.assign({}, state, action.players.players);
-
+      return Object.assign({}, state, action.players);
     default: return state;
   }
 };

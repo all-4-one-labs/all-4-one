@@ -37,19 +37,21 @@ export default function update() {
 
     // console.log(store.getState());
     let data = store.getState().players;
-
-
+    console.log(data);
     for (let id in data) {
         if (id !== player.id) {
             //if the player already exists, just move them
-            //otherwise create them at the place they need to be
             if (teammates[id]){
-                teammates[id].sprite.x = data[id].x
-                teammates[id].sprite.y = data[id].y
-            } else if (data[id].x){
-                //console.log('7-Client: Hit create teammate logic')
-                //TODO finish constructing
+                teammates[id].sprite.x = data[id].x;
+                teammates[id].sprite.y = data[id].y;
+            }
+            //else create them at the place they need to be
+            else if (data[id].x){
                 teammates[id] = new Teammate(id, this, 0, 0)
+            }
+            //delete teammate if they disconnect
+            else if (!teammates[id]) {
+                teammates[id].sprite.kill();
             }
         }
     }

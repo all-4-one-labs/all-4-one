@@ -54,7 +54,6 @@ const moveCheck = function(){
 
   if(moved){
     if (socket) {
-      console.log('1-Client: move-emit', this.player.position)
       socket.emit('playerMove', this.player.position)
     }
   }
