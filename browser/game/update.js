@@ -39,8 +39,8 @@ export default function update() {
     for (let id in data) {
         if (id !== player.id) {
             //if the player already exists, just move them
-            if (teammates[id] && teammates[id].delete !== 1){
-                if(data[id].animation !== 'stop') {
+            if (teammates[id]){
+                if(data[id].animation !== 'stop' && data[id].position) {
                     teammates[id].sprite.x = data[id].position.x;
                     teammates[id].sprite.y = data[id].position.y;
                     teammates[id].sprite.animations.play(data[id].animation);
@@ -51,12 +51,13 @@ export default function update() {
             }
             //else create them at the place they need to be
             else if (data[id].position){
-                teammates[id] = new Teammate(id, this, 0, 0)
+                teammates[id] = new Teammate(id, this, data[id].position.x, data[id].position.y)
             }
             //delete teammate if they disconnect
-            else if (teammates[id] && teammates[id].delete === 1) {
-                teammates[id].sprite.kill();
-            }
+            // else if (data[id].delete) {
+            //     console.log(teammates);
+            //     teammates[id].sprite.kill();
+            // }
         }
     }
 
