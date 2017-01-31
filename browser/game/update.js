@@ -4,8 +4,6 @@ import socket from '../socket';
 import Teammate from './entities/teammate.js';
 import store from '../store.js';
 
-// require('./app.js')(io);
-
 export default function update() {
     //  Collision
     player.update();
