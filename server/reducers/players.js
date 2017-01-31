@@ -18,8 +18,7 @@ const playerReducers = (state = initialState, action) => {
   switch (action.type) {
     case PLAYER_MOVE:
       newState = Object.assign({}, state)
-      newState[action.id] = Object.assign({}, state[action.id], action.data)
-      // console.log('3-Server: Player Reducer', action, newState)
+      newState[action.id] = Object.assign({}, state[action.id], action.data);
       return newState
     case REMOVE_PLAYER:
       return state

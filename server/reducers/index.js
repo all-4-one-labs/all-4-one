@@ -3,4 +3,4 @@ const players = require('./players.js').playerReducers
 
 module.exports = combineReducers({
   players
-})
+});
