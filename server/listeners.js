@@ -1,5 +1,5 @@
 const store = require('./store');
-const {playerMove, removePlayer} = require('./reducers/players')
+const {playerMove, removePlayer, damagePlayer} = require('./reducers/players')
 
 const listeners = function(io, socket){
 
@@ -15,6 +15,10 @@ const listeners = function(io, socket){
   socket.on('disconnect', function(){
     console.log('socket id ' + socket.id + ' has disconnected.')
     store.dispatch(removePlayer(socket.id));
+  });
+
+  socket.on('damage', function(data) {
+    store.dispatch(damagePlayer(socket.id, data));
   })
 }
 
