@@ -51,6 +51,7 @@ export default function update() {
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){
+                this.physics.arcade.collide(player.player, teammates[id].sprite);
 
                 //healthbar
                 teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
@@ -69,6 +70,7 @@ export default function update() {
                     teammates[id].sprite.x = players[id].position.x;
                     teammates[id].sprite.y = players[id].position.y;
                     teammates[id].sprite.animations.play(players[id].animation);
+
                 } else {
                     teammates[id].sprite.animations.stop();
                     teammates[id].sprite.frame = 0;
