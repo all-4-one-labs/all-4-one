@@ -14,9 +14,9 @@ var button;
 var bullets;
 let id = 0;
 
-var teamBullet;
-let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
-let map, layer, topOver, bottomOver, fringe, collideLayer;
+let teammates = {};
+let map, groundLayer, featuresBottom, playerOnBottom, playerOnTop, playerBehindBottom, playerBehindTop, playerCollide;
+
  //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 
 export default function create() {
@@ -32,33 +32,34 @@ export default function create() {
     // map
     map = this.add.tilemap('tilemap');
     map.addTilesetImage('terrain_atlas', 'tileset')
-    layer = map.createLayer('Bottom');
-    collideLayer = map.createLayer('landscapeCollision')
 
-
-    layer.resizeWorld();
-    map.setCollisionBetween(1,2000, true, 'landscapeCollision')
+    groundLayer = map.createLayer('groundLayer');
+    featuresBottom = map.createLayer('featuresBottom')
+    playerCollide = map.createLayer('playerCollide')
+    
+    groundLayer.resizeWorld();
+    map.setCollisionBetween(1,2000, true, 'playerCollide')
+    
 
     //walls
     // walls = new Wall(this);
 
     //player
-    bottomOver = map.createLayer('bottomOver');
-    topOver = map.createLayer('topOver')
 
-
-    //player
+    playerOnBottom = map.createLayer('playerOnBottom');
+    playerOnTop = map.createLayer('playerOnTop')
     player = new Player(socket.id, this);
 
+    playerBehindBottom = map.createLayer('playerBehindBottom');
+    playerBehindTop = map.createLayer('playerBehindTop');
 
-    fringe = map.createLayer('fringe');
     //monster
     // monster = new Monster(id, this);
 
     //bullets
     bullets = new Bullets(this);
 
-    teamBullet = new Bullets(this);
+    let teamBullet = new Bullets(this);
 
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
@@ -66,3 +67,4 @@ export default function create() {
 }
 
 export { player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates, teamBullet, collideLayer };
+

@@ -91,7 +91,6 @@ const spawnMonster = function() {
     this.nextMonster = this.game.time.now + monsterRate;
     let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
     monsters.push(newMonster);
-
     monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health })
   }
 };
