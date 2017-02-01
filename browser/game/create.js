@@ -16,26 +16,25 @@ var bullets;
 let id = 0;
 let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 export default function create() {
-    var game = this;
 
     //temporary for testing purposes
     //this settings
-    game.world.setBounds(-1000, -1000, 2000, 2000);
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
+    this.world.setBounds(-1000, -1000, 2000, 2000);
+    this.physics.startSystem(Phaser.Physics.ARCADE);
+    this.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
 
     //walls
-    walls = new Wall(game);
+    walls = new Wall(this);
 
     //player
-    player = new Player(socket.id, game);
+    player = new Player(socket.id, this);
 
 
     //monster
-    // monster = new Monster(id, game);
+    // monster = new Monster(id, this);
 
     //bullets
-    bullets = new Bullets(game);
+    bullets = new Bullets(this);
 
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
