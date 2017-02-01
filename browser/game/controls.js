@@ -1,10 +1,9 @@
 import {bullets, fireRate, monsterRate} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
-import socket from '../socket'
+import socket from '../socket';
 // Check for movement
 
 var monsters = [];
-var count = 0;
 
 const move = function(x, y, direction){
   if (direction === 'stop' ) {
@@ -81,10 +80,7 @@ const fire = function(direction) {
       case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
     }
-    // if (socket) {
-    //   socket.emit('playerMove', {fire: {direction, count}});
-    //   count++;
-    // }
+    if (socket) socket.emit('playerShoot', {fire: direction});
   }
 };
 

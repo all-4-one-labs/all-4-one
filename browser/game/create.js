@@ -14,9 +14,12 @@ var monsterRate = 1000;
 var button;
 var bullets;
 let id = 0;
-let teammates = {};
+
+var teamBullet;
+let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 let map, layer, topOver, bottomOver, fringe, collideLayer;
  //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
+
 export default function create() {
 
     //temporary for testing purposes
@@ -57,9 +60,11 @@ export default function create() {
     //bullets
     bullets = new Bullets(this);
 
+    teamBullet = new Bullets(this);
+
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
 
 }
 
-export {player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates, collideLayer};
+export {player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates, teamBullet, collideLayer};

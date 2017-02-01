@@ -2,6 +2,7 @@ const initialState = {};
 const PLAYER_MOVE = 'PLAYER_MOVE';
 const REMOVE_PLAYER = 'REMOVE_PLAYER';
 const DAMAGE_PLAYER = 'DAMAGE_PLAYER';
+const PLAYER_SHOOT = 'PLAYER_SHOOT';
 
 const playerMove = (id, data) => ({
   type: PLAYER_MOVE,
@@ -20,17 +21,30 @@ const damagePlayer = (id, data) => ({
   data
 });
 
+const playerShoot = (id, data) => ({
+  type: PLAYER_SHOOT,
+  id,
+  data
+});
+
 const playerReducers = (state = initialState, action) => {
-  let newState = Object.assign({},state);
+  let newState = Object.assign({}, state);
+  let player = {
+    health: 100,
+    bool: false
+  };
   switch (action.type) {
     case PLAYER_MOVE:
-      newState[action.id] = Object.assign({}, {health: 100}, state[action.id] , action.data);
+      newState[action.id] = Object.assign( {}, player, state[action.id], action.data);
       break;
     case REMOVE_PLAYER:
       delete newState[action.id];
       break;
     case DAMAGE_PLAYER:
-      newState[action.id] = Object.assign({}, {health: 100}, state[action.id], action.data);
+      newState[action.id] = Object.assign( {}, player, state[action.id], action.data);
+      break;
+    case PLAYER_SHOOT:
+      newState[action.id] = Object.assign( {}, player, state[action.id], action.data);
       break;
     default:
       return state;
@@ -39,4 +53,4 @@ const playerReducers = (state = initialState, action) => {
 }
 
 
-module.exports = { playerReducers, playerMove, removePlayer, damagePlayer }
+module.exports = { playerReducers, playerMove, removePlayer, damagePlayer , playerShoot}
