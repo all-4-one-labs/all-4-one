@@ -1,4 +1,4 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates} from './create.js';
+import {player, bullets, walls, cursors, wasd, fireRate, teammates, collideLayer} from './create.js';
 import { monsters } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
@@ -9,6 +9,12 @@ export default function update() {
     player.update();
     this.physics.arcade.collide(player.player, walls.walls);
     this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
+
+    this.physics.arcade.collide(player.player, collideLayer)
+
+    player.update();
+    // this.physics.arcade.collide(player.player, walls.walls);
+    // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
     for (let i = 0; i < monsters.length; i++) {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
@@ -22,7 +28,8 @@ export default function update() {
                 player.healthBar.kill();
             }
         });
-        this.physics.arcade.collide(monsters[i].monster, walls.walls);
+        // this.physics.arcade.collide(monsters[i].monster, walls.walls);
+        this.physics.arcade.collide(monsters[i].monster, collideLayer);
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
             monster.health -= 20;
@@ -46,6 +53,7 @@ export default function update() {
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){
+                this.physics.arcade.collide(player.player, teammates[id].sprite);
 
                 //healthbar
                 teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
@@ -55,7 +63,7 @@ export default function update() {
                 }
 
                 //bullets
-                if (players[id].fire !== undefined) {
+                if (players[id].bool) {
                     teammates[id].fire(players[id].fire);
                 }
 
@@ -64,6 +72,7 @@ export default function update() {
                     teammates[id].sprite.x = players[id].position.x;
                     teammates[id].sprite.y = players[id].position.y;
                     teammates[id].sprite.animations.play(players[id].animation);
+
                 } else {
                     teammates[id].sprite.animations.stop();
                     teammates[id].sprite.frame = 0;
