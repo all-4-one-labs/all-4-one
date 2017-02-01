@@ -24,7 +24,7 @@ const playerReducers = (state = initialState, action) => {
   let newState = Object.assign({},state);
   switch (action.type) {
     case PLAYER_MOVE:
-      newState[action.id] = Object.assign({}, {health: 100}, state[action.id] , action.data);
+      newState[action.id] = Object.assign({}, {health: 100}, state[action.id], action.data);
       break;
     case REMOVE_PLAYER:
       delete newState[action.id];

@@ -1,5 +1,5 @@
 const store = require('./store.js')
-const { broadcastGameState } = require('./game/engine')
+const { broadcastGameState, gameTimer } = require('./game/engine')
 const listeners = require('./listeners')
 
 var path, {resolve} = require('path');
@@ -29,6 +29,9 @@ var io = socketio(server);
 io.on('connection', (socket) => {listeners(io, socket)})
 
 broadcastGameState(io)
+
+let time = 15 * 60
+gameTimer(time, io)
 
 app.use(express.static(resolve(__dirname, '..', 'public')))
 

@@ -7,7 +7,6 @@ import store from '../store.js';
 export default function update() {
     //  Collision
     player.update();
-
     this.physics.arcade.collide(player.player, walls.walls);
     this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
     for (let i = 0; i < monsters.length; i++) {
@@ -36,7 +35,6 @@ export default function update() {
     }
 
     let players = store.getState().players;
-    console.log(players);
     //delete teammate if they disconnect
     for (let id in teammates) {
         if (!players[id]) {
