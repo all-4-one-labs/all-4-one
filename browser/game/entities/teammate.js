@@ -1,10 +1,10 @@
 import HealthBar from './HealthBar.js';
-import { bullets, fireRate, monsterRate } from '../create.js' //change to being from bullets file
+import { teamBullet, fireRate, monsterRate } from '../create.js' //change to being from bullets file
 
 export default class Teammate {
   constructor(id, game, xcord, ycord){
-    this.id = id
-    this.game = game
+    this.id = id;
+    this.game = game;
     this.create(xcord, ycord);
     this.nextFire = 0;
   }
@@ -26,9 +26,9 @@ export default class Teammate {
   }
 
   fire(direction) {
-    if (this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
+    if (this.game.time.now > this.nextFire && teamBullet.bullets.countDead() > 0) {
       this.nextFire = this.game.time.now + fireRate;
-      var bullet = bullets.bullets.getFirstDead();
+      var bullet = teamBullet.bullets.getFirstDead();
       bullet.scale.setTo(0.25);
       bullet.body.setSize(20, 30);
       bullet.reset(this.sprite.x, this.sprite.y);
