@@ -1,11 +1,11 @@
 import store from '../store'
 import Survivor from './survivorMode.js';
 
-let player, bullets, collideLayer, teamBullet;
+let player, bullets, playerCollide, teamBullet;
 let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 
 // import Player from './entities/players.js';
-// import Bullets from './entities/bullets.js';
+import Bullets from './entities/bullets.js';
 // // import Wall from './entities/mapObjects.js';
 // import socket from '../socket';
 
@@ -33,44 +33,37 @@ export default function create() {
     
     // map, order matters!
     let map = this.add.tilemap('tilemap');
-    map.addTilesetImage('terrain_atlas', 'tileset')
+    map.addTilesetImage('terrain_atlas', 'tileset');
 
 //     let layer = map.createLayer('Bottom');
-//     collideLayer = map.createLayer('landscapeCollision')
+//     playerCollide = map.createLayer('landscapeCollision')
 //     layer.resizeWorld();
 //     map.setCollisionBetween(1,2000, true, 'landscapeCollision')
-
-    playerCollide = map.createLayer('playerCollide')
-
 //     map.createLayer('bottomOver');
 //     map.createLayer('topOver');
 
     // different logic depending on survivor or gamemaster
-    
-    if (store.getState().gameMode === 'survivor') {     
+
+    playerCollide = map.createLayer('playerCollide');
+
+    let groundLayer = map.createLayer('groundLayer');
+    let featuresBottom = map.createLayer('featuresBottom');
+
+    groundLayer.resizeWorld();
+    map.setCollisionBetween(1, 2000, true, 'playerCollide');
+
+    let playerOnBottom = map.createLayer('playerOnBottom');
+    let playerOnTop = map.createLayer('playerOnTop');
+//     player = new Player(socket.id, this);
+
+    if (store.getState().gameMode === 'survivor') {
         let survivor = new Survivor(this);
         player = survivor.createPlayer();
         bullets = survivor.createBullets();
     }
 
-    groundLayer = map.createLayer('groundLayer');
-    featuresBottom = map.createLayer('featuresBottom')
-
-    groundLayer.resizeWorld();
-    map.setCollisionBetween(1,2000, true, 'playerCollide')
-    
-
-    //walls
-    // walls = new Wall(this);
-
-    //player
-
-    playerOnBottom = map.createLayer('playerOnBottom');
-    playerOnTop = map.createLayer('playerOnTop')
-//     player = new Player(socket.id, this);
-
-    playerBehindBottom = map.createLayer('playerBehindBottom');
-    playerBehindTop = map.createLayer('playerBehindTop');
+    let playerBehindBottom = map.createLayer('playerBehindBottom');
+    let playerBehindTop = map.createLayer('playerBehindTop');
 
 
     teamBullet = new Bullets(this);
@@ -79,4 +72,4 @@ export default function create() {
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
 }
 
-export {player, bullets, teammates, teamBullet, collideLayer};
+export {player, bullets, teammates, teamBullet, playerCollide};
