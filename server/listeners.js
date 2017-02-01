@@ -1,6 +1,6 @@
 const store = require('./store');
 const { playerMove, removePlayer, damagePlayer, playerShoot } = require('./reducers/players');
-const { createMonsters } = require('./reducers/monsters');
+const { monsterMove } = require('./reducers/monsters');
 
 const listeners = function(io, socket){
 
@@ -30,8 +30,8 @@ const listeners = function(io, socket){
     store.dispatch(damagePlayer(socket.id, data));
   });
 
-  socket.on('monstersCreate', function(arr) {
-    store.dispatch(createMonsters(socket.id, arr));
+  socket.on('monsterMove', function(data) {
+    // store.dispatch(monsterMove(socket.id, data));
   });
 }
 

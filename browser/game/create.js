@@ -65,4 +65,4 @@ export default function create() {
 
 }
 
-export {player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates, teamBullet, collideLayer};
+export { player, walls, cursors, wasd, fireRate, monsterRate, bullets, teammates, teamBullet, collideLayer };

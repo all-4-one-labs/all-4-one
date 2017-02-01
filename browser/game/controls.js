@@ -4,6 +4,7 @@ import socket from '../socket';
 // Check for movement
 
 var monsters = [];
+var monstersLocation = [];
 
 const move = function(x, y, direction){
   if (direction === 'stop' ) {
@@ -88,10 +89,12 @@ const fire = function(direction) {
 const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;
-    monsters.push(new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
-    socket.emit('monstersCreate', {monsters})
+    let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+    monsters.push(newMonster);
+
+    monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health })
   }
 };
 
-export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters };
+export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters, monstersLocation };
 
