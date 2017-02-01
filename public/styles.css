@@ -1,0 +1,44 @@
+#gamemaster {
+    position: fixed;
+    top: 50%;
+    left: 25%;
+    font-size: 50px;
+    margin: 10px;
+    padding: 40px;
+    width: 20%;
+    border-style: solid;
+    text-align: center;
+    text-decoration: none;
+}
+
+#survivor {
+    position: fixed;
+    top: 50%;
+    right: 20%;
+    font-size: 50px;
+    margin: 10px;
+    padding:40px;
+    width: 20%;
+    border-style: solid;
+    text-align: center;
+    text-decoration: none;
+}
+
+#title {
+    position: fixed;
+    top: 20%;
+    left: 10%;
+    font-size: 500%;
+}
+
+#subtitle {
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    font-size: 250%;
+}
+
+a:hover {
+    font-color: red;
+    background-color: turquoise;
+}
