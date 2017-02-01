@@ -17,6 +17,8 @@ export default function update() {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
             if (this.game.time.now > monster.nextAttack) {
+                player.body.immovable = true;
+                monster.body.immovable = true;
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
                 socket.emit('damage', {health: player.health});

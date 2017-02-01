@@ -1,7 +1,6 @@
 import Player from './entities/players.js';
-import Monster from './entities/monsters.js';
 import Bullets from './entities/bullets.js';
-import Wall from './entities/mapObjects.js';
+// import Wall from './entities/mapObjects.js';
 import socket from '../socket';
 
 

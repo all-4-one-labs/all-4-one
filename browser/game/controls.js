@@ -70,7 +70,7 @@ const fire = function(direction) {
     bullet.scale.setTo(0.25);
     bullet.body.setSize(20, 30);
     bullet.reset(this.player.x, this.player.y);
-    switch(direction) {
+    switch (direction) {
       case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.player.y, 500); break;
       case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.player.y, 500); break;
       case 'up': this.game.physics.arcade.moveToXY(bullet, this.player.x, -1000, 500); break;
@@ -79,6 +79,7 @@ const fire = function(direction) {
       case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y - 1000, 500); break;
       case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
+      default: break;
     }
     if (socket) socket.emit('playerShoot', {fire: direction});
   }
@@ -88,6 +89,7 @@ const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;
     monsters.push(new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
+    socket.emit('monstersCreate', {monsters})
   }
 };
 

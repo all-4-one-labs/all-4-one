@@ -7,7 +7,6 @@ export default class Monster {
     this.game = game;
     this.spawnLocation = spawnLocation;
     this.create();
-    this.speed = 100;
   }
 
   create() {
@@ -19,7 +18,7 @@ export default class Monster {
     this.monster.animations.add('left', [0,1,2,3,4,5,6,7,8,9], 20, true);
     this.monster.animations.add('right', [0,1,2,3,4,5,6,7,8,9], 20, true);
     this.game.physics.arcade.enable(this.monster);
-    this.monster.body.setSize(50, 50, 0, 0);
+    this.monster.body.setSize(50, 50, 30, 30);
     this.monster.health = 100;
     this.monster.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.monster.x - 7, y: this.monster.y - 40});
     this.monster.nextAttack = 0;
@@ -37,7 +36,7 @@ export default class Monster {
 
     }
 
-    this.game.physics.arcade.moveToXY(this.monster, playerX, playerY, this.speed);
+    this.game.physics.arcade.moveToXY(this.monster, playerX, playerY, 100);
     this.monster.healthBar.setPosition(this.monster.x - 7, this.monster.y - 40);
     this.monster.healthBar.setPercent(this.monster.health);
 
