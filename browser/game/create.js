@@ -59,7 +59,7 @@ export default function create() {
     //bullets
     bullets = new Bullets(this);
 
-    teamBullet = new Bullets(this);
+    let teamBullet = new Bullets(this);
 
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
