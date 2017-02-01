@@ -81,10 +81,10 @@ const fire = function(direction) {
       case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
     }
-    if (socket) {
-      socket.emit('playerMove', {fire: {direction, count}});
-      count++;
-    }
+    // if (socket) {
+    //   socket.emit('playerMove', {fire: {direction, count}});
+    //   count++;
+    // }
   }
 };
 
