@@ -85,7 +85,7 @@ export default function update() {
 
                 } else {
                     teammates[id].sprite.animations.stop();
-                    teammates[id].sprite.frame = 0;
+                    teammates[id].sprite.frame = 7;
                 }
             }
 
