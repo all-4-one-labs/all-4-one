@@ -15,22 +15,23 @@ var button;
 var bullets;
 let id = 0;
 let teammates = {};
-let map, layer, layer2, collideLayer;
+let map, layer, topOver, bottomOver, fringe, collideLayer;
  //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 export default function create() {
     var game = this;
 
     //temporary for testing purposes
     //this settings
+    game.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
     game.world.setBounds(-1000, -1000, 2000, 2000);
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
 
     // map
     map = game.add.tilemap('tilemap');
     map.addTilesetImage('terrain_atlas', 'tileset')
     layer = map.createLayer('Bottom');
     collideLayer = map.createLayer('landscapeCollision')
+
 
     layer.resizeWorld();
     map.setCollisionBetween(1,2000, true, 'landscapeCollision')
@@ -40,9 +41,11 @@ export default function create() {
     console.log(socket)
     
     //player
+    bottomOver = map.createLayer('bottomOver');
+    topOver = map.createLayer('topOver')
     player = new Player(socket.id, game);
 
-    layer2 = map.createLayer('over');
+    fringe = map.createLayer('fringe');
     //monster
     // monster = new Monster(id, game);
 
@@ -51,7 +54,6 @@ export default function create() {
 
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
-
 
 }
 

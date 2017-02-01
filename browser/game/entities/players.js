@@ -24,6 +24,7 @@ export default class Player {
     this.game.camera.follow(this.player);
     this.game.physics.arcade.enable(this.player);
     this.player.body.collideWorldBounds = true;
+    this.player.body.setSize(35, 57, 50, 60)
     this.player.health = 100;
 
     //controls
