@@ -1,5 +1,5 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates, collideLayer} from './create.js';
-import { monsters } from './controls.js';
+import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide} from './create.js';
+import { monsters, monstersLocation } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
 import store from '../store.js';
@@ -7,15 +7,18 @@ import store from '../store.js';
 export default function update() {
     //  Collision
 
-    this.physics.arcade.collide(player.player, collideLayer)
-
+    this.physics.arcade.collide(player.player, playerCollide)
+    
     player.update();
     // this.physics.arcade.collide(player.player, walls.walls);
     // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
+
     for (let i = 0; i < monsters.length; i++) {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
             if (this.game.time.now > monster.nextAttack) {
+                player.body.immovable = true;
+                // monster.body.immovable = true;
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
                 socket.emit('damage', {health: player.health});
@@ -25,8 +28,11 @@ export default function update() {
                 player.healthBar.kill();
             }
         });
+        
+        this.physics.arcade.collide(monsters[i].monster, playerCollide);
+
         // this.physics.arcade.collide(monsters[i].monster, walls.walls);
-        this.physics.arcade.collide(monsters[i].monster, collideLayer);
+
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
             monster.health -= 20;
@@ -36,7 +42,14 @@ export default function update() {
                 monsters.splice(i, 1);
             }
         });
+        for (let j = 0; j < monsters.length; j++) {
+            if(i !== j && monsters[j]) {
+                this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
+            }
+        }
     }
+
+    socket.emit('monsterMove', {monsters: monstersLocation});
 
     let players = store.getState().players;
     //delete teammate if they disconnect

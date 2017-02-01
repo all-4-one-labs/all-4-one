@@ -9,7 +9,9 @@ export default function preload() {
   this.load.spritesheet('monster', 'assets/MummyC.png', 16 , 16);
   //this.load.image('button', 'assets/utton.png');
   this.load.tilemap('tilemap', 'tilemap/tesseract.json', null, Phaser.Tilemap.TILED_JSON);
-  this.load.image('tileset', 'tilemap/terrain_atlas.png');
+  this.load.image('tileset', 'tilemap/tilesets/terrain_atlas.png');
+
   store.dispatch(receiveGameMode(sessionStorage.getItem('mode')));
+
 }
 

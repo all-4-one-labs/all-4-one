@@ -6,6 +6,7 @@ import socket from '../socket';
 let monsters = [];
 let fireRate = 400;
 let monsterRate = 1000;
+var monstersLocation = [];
 
 const move = function(x, y, direction){
   if (direction === 'stop' ) {
@@ -72,7 +73,7 @@ const fire = function(direction) {
     bullet.scale.setTo(0.25);
     bullet.body.setSize(20, 30);
     bullet.reset(this.player.x, this.player.y);
-    switch(direction) {
+    switch (direction) {
       case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.player.y, 500); break;
       case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.player.y, 500); break;
       case 'up': this.game.physics.arcade.moveToXY(bullet, this.player.x, -1000, 500); break;
@@ -81,6 +82,7 @@ const fire = function(direction) {
       case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y - 1000, 500); break;
       case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
+      default: break;
     }
     if (socket) socket.emit('playerShoot', {fire: direction});
   }
@@ -89,9 +91,11 @@ const fire = function(direction) {
 const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;
-    monsters.push(new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
+    let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
+    monsters.push(newMonster);
+    monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health })
   }
 };
 
-export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters };
+export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters, monstersLocation };
 

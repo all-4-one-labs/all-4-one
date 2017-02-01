@@ -4,3 +4,4 @@ bundle.min.js
 bundle.js.map
 .DS_Store
 .DS_Store?
+npm-debug.log
