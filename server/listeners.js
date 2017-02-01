@@ -1,5 +1,6 @@
 const store = require('./store');
-const {playerMove, removePlayer, damagePlayer, playerShoot} = require('./reducers/players')
+const { playerMove, removePlayer, damagePlayer, playerShoot } = require('./reducers/players');
+const { createMonsters } = require('./reducers/monsters');
 
 const listeners = function(io, socket){
 
@@ -10,15 +11,15 @@ const listeners = function(io, socket){
 
   socket.on('playerMove', (data) => {
     store.dispatch(playerMove(socket.id, data));
-  })
+  });
 
    socket.on('playerShoot', (data) => {
     store.dispatch(playerShoot(socket.id, data));
-  })
+  });
 
   socket.on('changeDirection', (data) => {
     store.dispatch(playerMove(socket.id, data));
-  })
+  });
 
   socket.on('disconnect', function(){
     console.log('socket id ' + socket.id + ' has disconnected.')
@@ -27,7 +28,11 @@ const listeners = function(io, socket){
 
   socket.on('damage', function(data) {
     store.dispatch(damagePlayer(socket.id, data));
-  })
+  });
+
+  socket.on('monstersCreate', function(arr) {
+    store.dispatch(createMonsters(socket.id, arr));
+  });
 }
 
-module.exports = listeners
+module.exports = listeners;
