@@ -36,6 +36,7 @@ export default function update() {
     }
 
     let players = store.getState().players;
+    console.log(players);
     //delete teammate if they disconnect
     for (let id in teammates) {
         if (!players[id]) {
@@ -43,17 +44,24 @@ export default function update() {
             delete teammates[id];
         }
     }
-    // console.log(players);
+
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){
-            //healthbar
-            teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
-            teammates[id].sprite.healthBar.setPercent(players[id].health);
-            if (players[id].health <= 0) {
-                teammates[id].kill();
-            }
-            //if the player already exists, just move them
+
+                //healthbar
+                teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
+                teammates[id].sprite.healthBar.setPercent(players[id].health);
+                if (players[id].health <= 0) {
+                    teammates[id].kill();
+                }
+
+                //bullets
+                if (players[id].fire !== undefined) {
+                    teammates[id].fire(players[id].fire);
+                }
+
+                //if the player already exists, just move them
                 if(players[id].animation !== 'stop') {
                     teammates[id].sprite.x = players[id].position.x;
                     teammates[id].sprite.y = players[id].position.y;
@@ -63,6 +71,7 @@ export default function update() {
                     teammates[id].sprite.frame = 0;
                 }
             }
+
             //else create them at the place they need to be
             else if (players[id].position) {
                 teammates[id] = new Teammate(id, this, players[id].position.x, players[id].position.y);

@@ -1,4 +1,4 @@
-import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls.js'
+import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls.js';
 import HealthBar from './HealthBar.js';
 
 export default class Player {
@@ -46,7 +46,6 @@ export default class Player {
     moveCheck.call(this);
     if (this.player.health > 0) fireBulletsCheck.call(this);
     spawnMonster.call(this);
-
     }
 
 }

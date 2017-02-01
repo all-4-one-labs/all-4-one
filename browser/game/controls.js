@@ -4,6 +4,21 @@ import socket from '../socket'
 // Check for movement
 
 var monsters = [];
+var count = 0;
+
+const move = function(x, y, direction){
+  if (direction === 'stop' ) {
+    this.player.animations.stop();
+    this.player.frame = 0;
+  } else {
+    this.player.body.velocity.x = x;
+    this.player.body.velocity.y = y;
+    this.player.animations.play(direction);
+  }
+  if (socket) {
+    socket.emit('playerMove', {position: this.player.position, animation: direction});
+  }
+};
 
 const moveCheck = function(){
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
@@ -24,20 +39,6 @@ const moveCheck = function(){
     move.call(this, 0, 150, 'down');
   } else {
     move.call(this, 0, 0, 'stop');
-  }
-}
-
-const move = function(x, y, direction){
-  if (direction === 'stop' ) {
-    this.player.animations.stop();
-    this.player.frame = 0;
-  } else {
-    this.player.body.velocity.x = x;
-    this.player.body.velocity.y = y;
-    this.player.animations.play(direction);
-  }
-  if (socket) {
-    socket.emit('playerMove', {position: this.player.position, animation: direction});
   }
 };
 
@@ -80,8 +81,12 @@ const fire = function(direction) {
       case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
     }
+    if (socket) {
+      socket.emit('playerMove', {fire: {direction, count}});
+      count++;
+    }
   }
-}
+};
 
 const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {

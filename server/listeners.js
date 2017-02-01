@@ -9,7 +9,7 @@ const listeners = function(io, socket){
   console.log('socket id: ', socket.id)
 
   socket.on('playerMove', (data) => {
-    store.dispatch(playerMove(socket.id, data))
+    store.dispatch(playerMove(socket.id, data));
   })
 
   socket.on('disconnect', function(){
