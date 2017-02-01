@@ -1,9 +1,11 @@
-import {bullets, fireRate, monsterRate} from './create.js' //change to being from bullets file
+import {bullets} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
 import socket from '../socket';
 // Check for movement
 
-var monsters = [];
+let monsters = [];
+let fireRate = 400;
+let monsterRate = 1000;
 var monstersLocation = [];
 
 const move = function(x, y, direction){
