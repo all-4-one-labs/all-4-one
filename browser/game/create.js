@@ -1,8 +1,4 @@
-import Player from './entities/players.js';
-import Bullets from './entities/bullets.js';
-// import Wall from './entities/mapObjects.js';
-import socket from '../socket';
-
+import store from '../store'
 import Survivor from './survivorMode.js';
 
 let player, bullets, collideLayer, teamBullet;
@@ -25,17 +21,21 @@ export default function create() {
     map.setCollisionBetween(1,2000, true, 'landscapeCollision')
 
     map.createLayer('bottomOver');
-    map.createLayer('topOver')
+    map.createLayer('topOver');
 
     // different logic depending on survivor or gamemaster
     
-    // let survivor = new Survivor(this);
-    // survivor.create();
+    if (store.getState().gameMode === 'survivor') {     
+        let survivor = new Survivor(this);
+        player = survivor.createPlayer();
+        bullets = survivor.createBullets();
+    }
 
-            //player
-        player = new Player(socket.id, this);
-        //bullets
-        bullets = new Bullets(this);
+
+    // //player
+    //     player = new Player(socket.id, this);
+    // //bullets
+    //     bullets = new Bullets(this);
 
 
     teamBullet = new Bullets(this);
