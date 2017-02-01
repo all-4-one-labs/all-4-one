@@ -31,7 +31,7 @@ export default function create() {
 
 
     // map
-    map = game.add.tilemap('tilemap');
+    map = this.add.tilemap('tilemap');
     map.addTilesetImage('terrain_atlas', 'tileset')
     layer = map.createLayer('Bottom');
     collideLayer = map.createLayer('landscapeCollision')
@@ -39,15 +39,14 @@ export default function create() {
 
     layer.resizeWorld();
     map.setCollisionBetween(1,2000, true, 'landscapeCollision')
-    
-    //walls
 
-    
+    //walls
+    // walls = new Wall(this);
+
     //player
     bottomOver = map.createLayer('bottomOver');
     topOver = map.createLayer('topOver')
-    
-    walls = new Wall(this);
+
 
     //player
     player = new Player(socket.id, this);
