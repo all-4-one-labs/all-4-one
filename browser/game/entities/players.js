@@ -16,7 +16,7 @@ export default class Player {
     //set up player sprite on the map
     this.player = this.game.add.sprite(0, 0, 'dude');
     this.player.anchor.set(0.5);
-    this.player.scale.setTo(1);
+    this.player.scale.setTo(0.5);
     this.player.animations.add('left', [22, 23, 24, 25, 26, 27, 28], 10, true);
     this.player.animations.add('right', [33, 34, 35, 36, 37, 38, 39], 10, true);
     this.player.animations.add('down', [0, 1, 2, 3, 4, 5, 6], 10, true);
@@ -24,6 +24,9 @@ export default class Player {
     this.game.camera.follow(this.player);
     this.game.physics.arcade.enable(this.player);
     this.player.body.collideWorldBounds = true;
+
+    this.player.body.setSize(60, 80, 45, 35);
+
     this.player.health = 100;
     this.player.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.player.x - 7, y: this.player.y - 40});
 

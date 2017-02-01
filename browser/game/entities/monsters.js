@@ -14,7 +14,9 @@ export default class Monster {
     this.monster = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, 'monster');
     this.monster.anchor.set(0.5);
     this.monster.scale.setTo(2);
-    this.monster.animations.add('idle', [0]);
+    this.monster.animations.add('idle', [0,1,2,3,4,5,6,7,8,9], 20, true);
+    this.monster.animations.add('left', [0,1,2,3,4,5,6,7,8,9], 20, true);
+    this.monster.animations.add('right', [0,1,2,3,4,5,6,7,8,9], 20, true);
     this.game.physics.arcade.enable(this.monster);
     this.monster.body.setSize(50, 50, 20, 10);
     this.monster.health = 100;
@@ -25,8 +27,19 @@ export default class Monster {
   }
 
   update(playerX, playerY) {
+
+   
+    if (playerX < this.monster.x) {
+      this.monster.animations.play('left');
+    }
+    else if (playerX > this.monster.x) {
+      this.monster.animations.play('right');
+
+    }
+
     this.game.physics.arcade.moveToXY(this.monster, playerX, playerY, 100);
     this.monster.healthBar.setPosition(this.monster.x - 7, this.monster.y - 40);
     this.monster.healthBar.setPercent(this.monster.health);
+
   }
 }
