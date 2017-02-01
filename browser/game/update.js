@@ -15,6 +15,7 @@ export default function update() {
     player.update();
     // this.physics.arcade.collide(player.player, walls.walls);
     // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
+
     for (let i = 0; i < monsters.length; i++) {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
@@ -39,6 +40,11 @@ export default function update() {
                 monsters.splice(i, 1);
             }
         });
+        for (let j = 0; j < monsters.length; j++) {
+            if(i !== j && monsters[j]) {
+                this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
+            }
+        }
     }
 
     let players = store.getState().players;
