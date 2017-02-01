@@ -48,7 +48,7 @@ const moveCheck = function(){
   } else {
     //  Stand still
     this.player.animations.stop();
-    this.player.frame = 0;
+    this.player.frame = 7;
     moved = false
   }
 

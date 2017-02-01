@@ -27,12 +27,14 @@ export default function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // map
+    // Order of layers matter, must render in order
+    // ie, the playerCollide layer must render before groundLayer, or you can see the tiles for the collisions (looks very wrong)
     map = game.add.tilemap('tilemap');
     map.addTilesetImage('terrain_atlas', 'tileset')
+    playerCollide = map.createLayer('playerCollide')
     groundLayer = map.createLayer('groundLayer');
     featuresBottom = map.createLayer('featuresBottom')
-    playerCollide = map.createLayer('playerCollide')
-    
+
     groundLayer.resizeWorld();
     map.setCollisionBetween(1,2000, true, 'playerCollide')
     
