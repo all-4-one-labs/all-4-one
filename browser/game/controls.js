@@ -40,7 +40,14 @@ const moveCheck = function(){
   } else if (this.wasd.down.isDown) {
     move.call(this, 0, 150, 'down');
   } else {
+<<<<<<< HEAD
+    //  Stand still
+    this.player.animations.stop();
+    this.player.frame = 7;
+    moved = false
+=======
     move.call(this, 0, 0, 'stop');
+>>>>>>> 3c71bbced5fd9cc108fb7de2527b548078615e5d
   }
 };
 

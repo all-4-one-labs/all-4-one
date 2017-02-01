@@ -40,6 +40,8 @@ export default function create() {
 //     layer.resizeWorld();
 //     map.setCollisionBetween(1,2000, true, 'landscapeCollision')
 
+    playerCollide = map.createLayer('playerCollide')
+
 //     map.createLayer('bottomOver');
 //     map.createLayer('topOver');
 
@@ -53,8 +55,7 @@ export default function create() {
 
     groundLayer = map.createLayer('groundLayer');
     featuresBottom = map.createLayer('featuresBottom')
-    playerCollide = map.createLayer('playerCollide')
-    
+
     groundLayer.resizeWorld();
     map.setCollisionBetween(1,2000, true, 'playerCollide')
     
