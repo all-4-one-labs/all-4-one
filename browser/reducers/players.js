@@ -13,12 +13,12 @@ export const receivePlayerdata = (players) => ({
 
 //Reducers
 export default (state = initialState, action) => {
+  let newState;
   switch (action.type) {
-
     case RECEIVE_PLAYERS:
-      // console.log('6-Client: hit reducer', action)
-      return Object.assign({}, state, action.players.players);
-
+      newState = Object.assign({}, action.players);
+      break;
     default: return state;
   }
+  return newState;
 };

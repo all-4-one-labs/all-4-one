@@ -1,66 +1,52 @@
 import {bullets, fireRate, monsterRate} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
-import socket from '../socket'
+import socket from '../socket';
 // Check for movement
 
 var monsters = [];
 
-const moveCheck = function(){
-
-  let moved = true;
-
-  if (this.wasd.up.isDown && this.wasd.left.isDown) {
-    //  Move up-left
-    this.player.body.velocity.x = -150;
-    this.player.body.velocity.y = -150;
-    this.player.animations.play('left');
-  } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
-    //  Move up-right
-    this.player.body.velocity.x = 150;
-    this.player.body.velocity.y = -150;
-    this.player.animations.play('right');
-  } else if (this.wasd.down.isDown && this.wasd.left.isDown) {
-    //  Move down-left
-    this.player.body.velocity.x = -150;
-    this.player.body.velocity.y = 150;
-    this.player.animations.play('left');
-  } else if (this.wasd.down.isDown && this.wasd.right.isDown) {
-    //  Move down-right
-    this.player.body.velocity.x = 150;
-    this.player.body.velocity.y = 150;
-    this.player.animations.play('right');
-  } else if (this.wasd.left.isDown) {
-    //  Move left
-    this.player.body.velocity.x = -150;
-    this.player.animations.play('left');
-  } else if (this.wasd.right.isDown) {
-    //  Move right
-    this.player.body.velocity.x = 150;
-    this.player.animations.play('right');
-  } else if (this.wasd.up.isDown) {
-    //  Move up
-    this.player.body.velocity.y = -150;
-    this.player.animations.play('up');
-  } else if (this.wasd.down.isDown) {
-    //  Move down
-    this.player.body.velocity.y = 150;
-    this.player.animations.play('down');
+const move = function(x, y, direction){
+  if (direction === 'stop' ) {
+    this.player.animations.stop();
+    this.player.frame = 0;
   } else {
+    this.player.body.velocity.x = x;
+    this.player.body.velocity.y = y;
+    this.player.animations.play(direction);
+  }
+  if (socket) {
+    socket.emit('playerMove', {position: this.player.position, animation: direction});
+  }
+};
+
+const moveCheck = function(){
+  if (this.wasd.up.isDown && this.wasd.left.isDown) {
+    move.call(this, -150, -150, 'left');
+  } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
+    move.call(this, 150, -150, 'right');
+  } else if (this.wasd.down.isDown && this.wasd.left.isDown) {
+    move.call(this, -150, 150, 'left');
+  } else if (this.wasd.down.isDown && this.wasd.right.isDown) {
+    move.call(this, 150, 150, 'right');
+  } else if (this.wasd.left.isDown) {
+    move.call(this, -150, 0, 'left');
+  } else if (this.wasd.right.isDown) {
+    move.call(this, 150, 0, 'right');
+  } else if (this.wasd.up.isDown) {
+    move.call(this, 0, -150, 'up');
+  } else if (this.wasd.down.isDown) {
+    move.call(this, 0, 150, 'down');
+  } else {
+<<<<<<< HEAD
     //  Stand still
     this.player.animations.stop();
     this.player.frame = 7;
     moved = false
+=======
+    move.call(this, 0, 0, 'stop');
+>>>>>>> 3c71bbced5fd9cc108fb7de2527b548078615e5d
   }
-
-  if(moved){
-    if (socket) {
-      console.log('1-Client: move-emit', this.player.position)
-      socket.emit('playerMove', this.player.position)
-    }
-  }
-
-}
-
+};
 
 //fire bullets
 const fireBulletsCheck = function(){
@@ -91,7 +77,7 @@ const fire = function(direction) {
     bullet.scale.setTo(0.25);
     bullet.body.setSize(20, 30);
     bullet.reset(this.player.x, this.player.y);
-    switch(direction) {
+    switch (direction) {
       case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.player.y, 500); break;
       case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.player.y, 500); break;
       case 'up': this.game.physics.arcade.moveToXY(bullet, this.player.x, -1000, 500); break;
@@ -100,15 +86,16 @@ const fire = function(direction) {
       case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y - 1000, 500); break;
       case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
+      default: break;
     }
+    if (socket) socket.emit('playerShoot', {fire: direction});
   }
-}
+};
 
 const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;
     monsters.push(new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}));
-    console.log('this is monsters array', monsters);
   }
 };
 

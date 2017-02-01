@@ -12,7 +12,6 @@ export default class Wall {
     this.wall.body.immovable = true;
     this.wall = this.walls.create(-150, 250, 'wall');
     this.wall.body.immovable = true;
-    this.wall.body.setSize(320, 1, 45, 0);
   }
 
 }
