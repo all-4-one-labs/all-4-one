@@ -8,14 +8,7 @@ export default function update() {
     //  Collision
 
     this.physics.arcade.collide(player.player, playerCollide)
-
-    player.update();
-
-    this.physics.arcade.collide(player.player, walls.walls);
-    this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
-
-   
-
+    
     player.update();
     // this.physics.arcade.collide(player.player, walls.walls);
     // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
