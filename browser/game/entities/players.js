@@ -1,5 +1,6 @@
 import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls.js';
 import HealthBar from './HealthBar.js';
+import socket from '../../socket.js';
 
 export default class Player {
   constructor(id, game){
@@ -38,13 +39,16 @@ export default class Player {
   }
 
   update(){
-    //what do these lines do?
     this.player.body.velocity.x = 0;
     this.player.body.velocity.y = 0;
     this.player.healthBar.setPosition(this.player.x - 7, this.player.y - 40);
     this.player.healthBar.setPercent(this.player.health);
     moveCheck.call(this);
     if (this.player.health > 0) fireBulletsCheck.call(this);
+    var bool = (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.left.isDown || this.cursors.right.isDown);
+    if (socket) {
+      bool ? socket.emit('playerShoot', {bool: true}) : socket.emit('playerShoot', {bool: false});
+    }
     spawnMonster.call(this);
     }
 

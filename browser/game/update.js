@@ -36,7 +36,6 @@ export default function update() {
     }
 
     let players = store.getState().players;
-    console.log(players);
     //delete teammate if they disconnect
     for (let id in teammates) {
         if (!players[id]) {
@@ -57,7 +56,7 @@ export default function update() {
                 }
 
                 //bullets
-                if (players[id].fire !== undefined) {
+                if (players[id].bool) {
                     teammates[id].fire(players[id].fire);
                 }
 
