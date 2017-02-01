@@ -1,19 +1,19 @@
 const initialState = {};
-const CREATE_MONSTERS = 'CREATE_MONSTERS';
+const MONSTER_MOVE = 'MONSTER_MOVE';
 
 
-const createMonsters = (id, arr) => ({
-  type: CREATE_MONSTERS,
+const monsterMove = (id, data) => ({
+  type: MONSTER_MOVE,
   id,
-  arr
+  data
 });
 
 const monstersReducers = (state = initialState, action) => {
-  let newState = Object.assign({}, state);
+  let newState;
 
   switch (action.type) {
-    case CREATE_MONSTERS:
-      newState[action.id] = Object.assign( {}, player, state[action.id], action.data);
+    case MONSTER_MOVE:
+      newState = Object.assign( {}, state, action.data);
       break;
     default:
       return state;
@@ -22,4 +22,4 @@ const monstersReducers = (state = initialState, action) => {
 }
 
 
-module.exports = { monstersReducers, createMonsters }
+module.exports = { monstersReducers, monsterMove }

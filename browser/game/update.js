@@ -1,5 +1,5 @@
 import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide} from './create.js';
-import { monsters } from './controls.js';
+import { monsters, monstersLocation } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
 import store from '../store.js';
@@ -18,7 +18,7 @@ export default function update() {
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
             if (this.game.time.now > monster.nextAttack) {
                 player.body.immovable = true;
-                monster.body.immovable = true;
+                // monster.body.immovable = true;
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
                 socket.emit('damage', {health: player.health});
@@ -48,6 +48,8 @@ export default function update() {
             }
         }
     }
+
+    socket.emit('monsterMove', {monsters: monstersLocation});
 
     let players = store.getState().players;
     //delete teammate if they disconnect
