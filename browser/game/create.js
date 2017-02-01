@@ -48,7 +48,7 @@ export default function create() {
 
     playerOnBottom = map.createLayer('playerOnBottom');
     playerOnTop = map.createLayer('playerOnTop')
-    player = new Player(socket.id, game);
+    player = new Player(socket.id, this);
 
     playerBehindBottom = map.createLayer('playerBehindBottom');
     playerBehindTop = map.createLayer('playerBehindTop');
