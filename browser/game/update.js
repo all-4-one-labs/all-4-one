@@ -1,13 +1,14 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates} from './create.js';
+import {player, bullets, walls, cursors, wasd, fireRate, teammates, collideLayer} from './create.js';
 import { monsters } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
 import store from '../store.js';
 
-// require('./app.js')(io);
-
 export default function update() {
     //  Collision
+
+    this.physics.arcade.collide(player.player, collideLayer)
+
     player.update();
     this.physics.arcade.collide(player.player, walls.walls);
     this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
@@ -17,6 +18,7 @@ export default function update() {
             if (this.game.time.now > monster.nextAttack) {
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
+                socket.emit('damage', {health: player.health});
             }
             if (player.health <= 0) {
                 player.kill();
@@ -24,6 +26,7 @@ export default function update() {
             }
         });
         this.physics.arcade.collide(monsters[i].monster, walls.walls);
+        this.physics.arcade.collide(monsters[i].monster, collideLayer);
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
             monster.health -= 20;
@@ -35,35 +38,49 @@ export default function update() {
         });
     }
 
-    let data = store.getState().players;
-
+    let players = store.getState().players;
+    console.log(players);
     //delete teammate if they disconnect
     for (let id in teammates) {
-        if (!data[id]) {
-            teammates[id].sprite.kill();
+        if (!players[id]) {
+            teammates[id].kill();
             delete teammates[id];
         }
     }
-    for (let id in data) {
+
+    for (let id in players) {
         if (id !== player.id) {
-            //if the player already exists, just move them
             if (teammates[id]){
                 this.physics.arcade.collide(player.player, teammates[id].sprite);
-                if(data[id].animation !== 'stop') {
 
-                    teammates[id].sprite.x = data[id].position.x;
-                    teammates[id].sprite.y = data[id].position.y;
-                    teammates[id].sprite.animations.play(data[id].animation);
+                //healthbar
+                teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
+                teammates[id].sprite.healthBar.setPercent(players[id].health);
+                if (players[id].health <= 0) {
+                    teammates[id].kill();
+                }
+
+                //bullets
+                if (players[id].fire !== undefined) {
+                    teammates[id].fire(players[id].fire);
+                }
+
+                //if the player already exists, just move them
+                if(players[id].animation !== 'stop') {
+                    teammates[id].sprite.x = players[id].position.x;
+                    teammates[id].sprite.y = players[id].position.y;
+                    teammates[id].sprite.animations.play(players[id].animation);
+
                 } else {
                     teammates[id].sprite.animations.stop();
                     teammates[id].sprite.frame = 0;
                 }
             }
+
             //else create them at the place they need to be
-            else if (data[id].position){
-                teammates[id] = new Teammate(id, this, data[id].position.x, data[id].position.y)
+            else if (players[id].position) {
+                teammates[id] = new Teammate(id, this, players[id].position.x, players[id].position.y);
             }
         }
     }
-
 }
