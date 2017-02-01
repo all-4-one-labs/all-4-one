@@ -1,12 +1,11 @@
-import { moveCheck, fireBulletsCheck, fire, spawnMonster } from '../controls.js' 
-
+import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls.js';
+import HealthBar from './HealthBar.js';
 
 export default class Player {
   constructor(id, game){
     this.id = id;
     this.game = game;
     this.update = this.update.bind(this);
-    // this.fire = this.fire.bind(this);
     this.nextFire = 0;
     this.nextMonster = 0;
     this.create();
@@ -26,6 +25,8 @@ export default class Player {
     this.player.body.collideWorldBounds = true;
     this.player.body.setSize(35, 57, 50, 60)
     this.player.health = 100;
+    this.player.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.player.x - 7, y: this.player.y - 40});
+
 
     //controls
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -41,11 +42,11 @@ export default class Player {
     //what do these lines do?
     this.player.body.velocity.x = 0;
     this.player.body.velocity.y = 0;
-
+    this.player.healthBar.setPosition(this.player.x - 7, this.player.y - 40);
+    this.player.healthBar.setPercent(this.player.health);
     moveCheck.call(this);
-    fireBulletsCheck.call(this);
+    if (this.player.health > 0) fireBulletsCheck.call(this);
     spawnMonster.call(this);
-
     }
 
 }
