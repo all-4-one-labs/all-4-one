@@ -29,7 +29,7 @@ const gameTimer = (duration, io) =>{
 
 //currently not implemented on the front end
 const endgame = (io) => {
-  io.emit('end_game', {survivorwin: true})
+  io.emit('end_game', {survivorWin: true})
 }
 
 module.exports = { broadcastGameState, gameTimer }

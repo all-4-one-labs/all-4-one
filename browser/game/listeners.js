@@ -8,5 +8,11 @@ export default socket => {
     store.dispatch(receivePlayerdata(data.players));
   });
 
+  socket.on('end_game', data =>{
+    if(data.survivorWin) {
+      //phaser freeze, display message on screen, redirect to somewhere
+    }
+  })
+
 };
 
