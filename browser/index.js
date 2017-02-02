@@ -6,7 +6,8 @@ import 'phaser';
 
 import game from './game/game.js';
 import store from './store';
-import { initializeSocket } from './socket';
+import { initializeSocket, emitClient } from './socket';
 
 initializeSocket();
+emitClient();
 

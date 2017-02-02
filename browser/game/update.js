@@ -1,23 +1,26 @@
-import {bullets, teammates} from './create.js';
+import {bullets, teammates, player} from './create.js';
 import { monsters, monstersLocation } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
 import store from '../store.js';
+import { receiveHealth } from '../reducers/players.js';
+import Survivor from './survivorMode.js';
+import GameMaster from './gameMasterMode.js';
 
 export default function update() {
     //  Collision
 
-<<<<<<< HEAD
+
     //#survivor
     // this.physics.arcade.collide(player.player, playerCollide);
     // player.update();
-=======
-    this.physics.arcade.collide(player.player, playerCollide)
 
+    // this.physics.arcade.collide(player.player, playerCollide)
+
+    // player.update();
+    // // this.physics.arcade.collide(player.player, walls.walls);
+    // // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
     player.update();
-    // this.physics.arcade.collide(player.player, walls.walls);
-    // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
->>>>>>> a1b9a2dc8ff715b5096f6576a12288db7240004c
 
     //#gamemaster - maybe? not sure how this logic is going to work
     for (let i = 0; i < monsters.length; i++) {
@@ -28,7 +31,7 @@ export default function update() {
                 // monster.body.immovable = true;
                 monster.nextAttack = this.game.time.now + monster.attackRate;
                 player.health -= 20;
-                socket.emit('damage', {health: player.health});
+                store.dispatch(receiveHealth({health: player.health}));
             }
             if (player.health <= 0) {
                 player.kill();
@@ -64,12 +67,7 @@ export default function update() {
             delete teammates[id];
         }
     }
-<<<<<<< HEAD
 
-    //#gamemaster #survivor - needs to exist on both
-=======
-    console.log(players);
->>>>>>> a1b9a2dc8ff715b5096f6576a12288db7240004c
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){

@@ -1,6 +1,8 @@
 import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls.js';
 import HealthBar from './HealthBar.js';
 import socket from '../../socket.js';
+import store from '../../store.js';
+import {receiveBool} from '../../reducers/players.js';
 
 export default class Player {
   constructor(id, game){
@@ -51,9 +53,8 @@ export default class Player {
     moveCheck.call(this);
     if (this.player.health > 0) fireBulletsCheck.call(this);
     var bool = (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.left.isDown || this.cursors.right.isDown);
-    if (socket) {
-      bool ? socket.emit('playerShoot', {bool: true}) : socket.emit('playerShoot', {bool: false});
-    }
+    store.dispatch(receiveBool({bool: bool}));
+
     spawnMonster.call(this);
     }
 

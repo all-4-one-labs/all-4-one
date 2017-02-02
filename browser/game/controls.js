@@ -1,6 +1,8 @@
 import {bullets} from './create.js' //change to being from bullets file
 import Monster from './entities/monsters.js';
-import socket from '../socket';
+import store from '../store.js';
+import socket from '../socket.js'
+import {receivePosition, receiveFireData} from '../reducers/players.js';
 // Check for movement
 
 let monsters = [];
@@ -17,9 +19,7 @@ const move = function(x, y, direction){
     this.player.body.velocity.y = y;
     this.player.animations.play(direction);
   }
-  if (socket) {
-    socket.emit('playerMove', {position: this.player.position, animation: direction});
-  }
+    store.dispatch(receivePosition({ position: this.player.position, animation: direction }));
 };
 
 const moveCheck = function(){
@@ -87,7 +87,7 @@ const fire = function(direction) {
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y + 10000, 600); break;
       default: break;
     }
-    if (socket) socket.emit('playerShoot', {fire: direction, rate: fireRate});
+    store.dispatch(receiveFireData({fire: direction, rate: fireRate}));
   }
 };
 
