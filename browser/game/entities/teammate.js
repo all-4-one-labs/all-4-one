@@ -1,5 +1,5 @@
 import HealthBar from './HealthBar.js';
-import { teamBullet } from '../create.js' //change to being from bullets file
+import { teamBullet } from '../engine/create.js' //change to being from bullets file
 
 export default class Teammate {
   constructor(id, game, xcord, ycord){

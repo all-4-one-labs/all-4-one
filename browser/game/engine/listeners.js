@@ -1,6 +1,6 @@
-import store from '../store'
-import {receiveServerPlayer} from '../reducers/players.js'
-import {updateTime} from '../reducers/game.js'
+import store from '../../store'
+import {receiveServerPlayer} from '../../reducers/players.js'
+import {updateTime} from '../../reducers/game.js'
 
 export default socket => {
 

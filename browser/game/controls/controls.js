@@ -1,8 +1,8 @@
-import {bullets} from './create.js' //change to being from bullets file
-import Monster from './entities/monsters.js';
-import store from '../store.js';
-import socket from '../socket.js'
-import {receivePosition, receiveFireData} from '../reducers/players.js';
+import {bullets} from '../engine/create.js' //change to being from bullets file
+import Monster from '../entities/monsters.js';
+import store from '../../store.js';
+import socket from '../../socket.js'
+import {receivePosition, receiveFireData} from '../../reducers/players.js';
 // Check for movement
 
 let monsters = [];

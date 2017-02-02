@@ -1,4 +1,4 @@
-import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls.js';
+import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 import socket from '../../socket.js';
 import store from '../../store.js';

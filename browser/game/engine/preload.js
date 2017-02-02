@@ -1,5 +1,5 @@
-import store from '../store.js';
-import {receiveGameMode} from '../reducers/gameMode.js';
+import store from '../../store.js';
+import {receiveGameMode} from '../../reducers/gameMode.js';
 
 export default function preload() {
   this.load.spritesheet('dude', 'assets/PeopleSpriteSheet2.png', 32, 32);

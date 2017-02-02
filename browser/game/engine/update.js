@@ -1,11 +1,10 @@
 import {bullets, teammates, player} from './create.js';
-import { monsters, monstersLocation } from './controls.js';
-import socket from '../socket';
-import Teammate from './entities/teammate.js';
-import store from '../store.js';
-import { receiveHealth } from '../reducers/players.js';
-import Survivor from './survivorMode.js';
-import GameMaster from './gameMasterMode.js';
+import { monsters, monstersLocation } from '../controls/controls.js';
+import socket from '../../socket';
+import Teammate from '../entities/teammate.js';
+import store from '../../store.js';
+import { receiveHealth } from '../../reducers/players.js';
+import GameMaster from '../controls/gameMaster.js';
 
 export default function update() {
     //  Collision

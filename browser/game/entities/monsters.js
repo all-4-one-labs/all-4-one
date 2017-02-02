@@ -1,4 +1,4 @@
-import {player} from '../create.js';
+import {player} from '../engine/create.js';
 import HealthBar from './HealthBar.js';
 
 export default class Monster {
