@@ -1,7 +1,6 @@
 import {bullets} from '../engine/create.js' //change to being from bullets file
 import Monster from '../entities/monsters.js';
 import store from '../../store.js';
-import socket from '../../socket.js'
 import {receivePosition, receiveFireData} from '../../reducers/players.js';
 // Check for movement
 
@@ -10,86 +9,61 @@ let fireRate = 300;
 let monsterRate = 1000;
 var monstersLocation = [];
 
-const move = function(x, y, direction){
-  if (direction === 'stop' ) {
-    this.player.animations.stop();
-    this.player.frame = 7;
-  } else {
-    this.player.body.velocity.x = x;
-    this.player.body.velocity.y = y;
-    this.player.animations.play(direction);
-  }
-    store.dispatch(receivePosition({ position: this.player.position, animation: direction }));
-};
-
 const moveCheck = function(){
-  if (this.wasd.up.isDown && this.wasd.left.isDown) {
-    move.call(this, -142, -142, 'left');
-  } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
-    move.call(this, 142, -142, 'right');
-  } else if (this.wasd.down.isDown && this.wasd.left.isDown) {
-    move.call(this, -142, 142, 'left');
-  } else if (this.wasd.down.isDown && this.wasd.right.isDown) {
-    move.call(this, 142, 142, 'right');
-  } else if (this.wasd.left.isDown) {
-    move.call(this, -200, 0, 'left');
-  } else if (this.wasd.right.isDown) {
-    move.call(this, 200, 0, 'right');
-  } else if (this.wasd.up.isDown) {
-    move.call(this, 0, -200, 'up');
-  } else if (this.wasd.down.isDown) {
-    move.call(this, 0, 200, 'down');
-  } else {
-    //  Stand still
-    this.player.animations.stop();
-    this.player.frame = 7;
-    move.call(this, 0, 0, 'stop');
-  }
-};
+  let xCord = 0
+  let yCord = 0
+  let direction
+  if (this.wasd.left.isDown) xCord = -200
+  if (this.wasd.right.isDown) xCord = 200
+  if (this.wasd.up.isDown) yCord = -200
+  if (this.wasd.down.isDown) yCord = 200
 
-//fire bullets
-const fireBulletsCheck = function(){
-  if (this.cursors.up.isDown && this.cursors.left.isDown) {
-    fire.call(this,'up-left');
-  } else if (this.cursors.up.isDown && this.cursors.right.isDown) {
-    fire.call(this,'up-right');
-  } else if (this.cursors.down.isDown && this.cursors.left.isDown) {
-    fire.call(this,'down-left');
-  } else if (this.cursors.down.isDown && this.cursors.right.isDown) {
-    fire.call(this,'down-right');
-  } else if (this.cursors.left.isDown) {
-    fire.call(this,'left');
-  } else if (this.cursors.right.isDown) {
-    fire.call(this,'right');
-  } else if (this.cursors.up.isDown) {
-    fire.call(this,'up');
-  } else if (this.cursors.down.isDown) {
-    fire.call(this,'down');
+  //set animation
+  if (yCord) direction = yCord > 0 ? 'down' : 'up'
+  if (xCord) direction = xCord > 0 ? 'right' : 'left'
+
+  //  Stand still
+  if (!xCord && !yCord) {
+    this.player.animations.stop()
+    this.player.frame = 7
+    direction = 'stop'
   }
+
+  //adjust diagonal
+  if (xCord && yCord) {
+    xCord = (142 * xCord) / 200
+    yCord = (142 * yCord) / 200
+  }
+
+  this.player.body.velocity.x = xCord
+  this.player.body.velocity.y = yCord
+  this.player.animations.play(direction)
+
+  store.dispatch(receivePosition({ position: this.player.position, animation: direction }))
 }
 
-//fire helper function
-const fire = function(direction) {
-  if (this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
-    this.nextFire = this.game.time.now + fireRate;
-    var bullet = bullets.bullets.getFirstDead();
-    bullet.scale.setTo(0.25);
-    bullet.body.setSize(20, 30);
-    bullet.reset(this.player.x, this.player.y);
-    switch (direction) {
-      case 'left' : this.game.physics.arcade.moveToXY(bullet, this.player.x - 10000, this.player.y, 600); break;
-      case 'right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y, 600); break;
-      case 'up': this.game.physics.arcade.moveToXY(bullet, this.player.x, this.player.y - 10000, 600); break;
-      case 'down': this.game.physics.arcade.moveToXY(bullet, this.player.x, this.player.y + 10000, 600); break;
-      case 'up-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 10000, this.player.y - 10000, 600); break;
-      case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y - 10000, 600); break;
-      case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 10000, this.player.y + 10000, 600); break;
-      case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y + 10000, 600); break;
-      default: break;
-    }
-    store.dispatch(receiveFireData({fire: direction, rate: fireRate}));
+
+//fire bullets
+
+const fireBulletsCheck = function(){
+  let xCord = 0
+  let yCord = 0
+  if (this.cursors.left.isDown) xCord = -10000
+  if (this.cursors.right.isDown) xCord = 10000
+  if (this.cursors.up.isDown) yCord = -10000
+  if (this.cursors.down.isDown) yCord = 10000
+
+  if ((yCord || xCord) && this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
+    this.nextFire = this.game.time.now + fireRate
+    let bullet = bullets.bullets.getFirstDead()
+    bullet.scale.setTo(0.25)
+    bullet.body.setSize(20, 30)
+    bullet.reset(this.player.x, this.player.y)
+    this.game.physics.arcade.moveToXY(bullet, this.player.x + xCord, this.player.y + yCord, 600)
+    //fire needs to be refactored when recieved and drawn by a new client
+    store.dispatch(receiveFireData({fire: [xCord, yCord], rate: fireRate}))
   }
-};
+}
 
 //#gameMaster - we need to work on this to create a monster for players
 const spawnMonster = function() {
@@ -101,5 +75,5 @@ const spawnMonster = function() {
   }
 };
 
-export { moveCheck, fireBulletsCheck, fire, spawnMonster, monsters, monstersLocation };
+export { moveCheck, fireBulletsCheck, spawnMonster, monsters, monstersLocation };
 
