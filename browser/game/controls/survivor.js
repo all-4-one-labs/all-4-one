@@ -18,6 +18,7 @@ export default class Survivor {
         return new Bullets(this.game);
     }
     update() {
+        // DO WE NEED THIS UPDATE??? Player entity already has an update method
         player.update();
         this.game.physics.arcade.collide(player.player, playerCollide);
 

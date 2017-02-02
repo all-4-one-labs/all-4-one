@@ -4,7 +4,7 @@ import { monsters, monstersLocation } from '../controls/controls.js';
 import Teammate from '../entities/teammate.js';
 import store from '../../store.js';
 import { receiveHealth } from '../../reducers/players.js';
-import GameMaster from '../controls/gameMaster.js';
+import gameMaster from '../controls/gameMaster.js';
 
 let teammates = {};
 
