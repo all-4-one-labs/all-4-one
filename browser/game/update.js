@@ -7,9 +7,17 @@ import store from '../store.js';
 export default function update() {
     //  Collision
 
+<<<<<<< HEAD
     //#survivor
     // this.physics.arcade.collide(player.player, playerCollide);
     // player.update();
+=======
+    this.physics.arcade.collide(player.player, playerCollide)
+
+    player.update();
+    // this.physics.arcade.collide(player.player, walls.walls);
+    // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
+>>>>>>> a1b9a2dc8ff715b5096f6576a12288db7240004c
 
     //#gamemaster - maybe? not sure how this logic is going to work
     for (let i = 0; i < monsters.length; i++) {
@@ -27,7 +35,7 @@ export default function update() {
                 player.healthBar.kill();
             }
         });
-        
+
         this.physics.arcade.collide(monsters[i].monster, playerCollide);
 
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
@@ -56,8 +64,12 @@ export default function update() {
             delete teammates[id];
         }
     }
+<<<<<<< HEAD
 
     //#gamemaster #survivor - needs to exist on both
+=======
+    console.log(players);
+>>>>>>> a1b9a2dc8ff715b5096f6576a12288db7240004c
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){
@@ -72,7 +84,7 @@ export default function update() {
 
                 //bullets
                 if (players[id].bool) {
-                    teammates[id].fire(players[id].fire);
+                    teammates[id].fire(players[id].fire, players[id].rate);
                 }
 
                 //if the player already exists, just move them

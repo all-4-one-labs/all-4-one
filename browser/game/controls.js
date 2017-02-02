@@ -87,7 +87,7 @@ const fire = function(direction) {
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y + 10000, 600); break;
       default: break;
     }
-    if (socket) socket.emit('playerShoot', {fire: direction});
+    if (socket) socket.emit('playerShoot', {fire: direction, rate: fireRate});
   }
 };
 
@@ -97,7 +97,7 @@ const spawnMonster = function() {
     this.nextMonster = this.game.time.now + monsterRate;
     let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
     monsters.push(newMonster);
-    monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health })
+    monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health });
   }
 };
 
