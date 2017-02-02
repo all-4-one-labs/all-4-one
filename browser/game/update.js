@@ -1,4 +1,4 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide} from './create.js';
+import {bullets, teammates} from './create.js';
 import { monsters, monstersLocation } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
@@ -7,12 +7,11 @@ import store from '../store.js';
 export default function update() {
     //  Collision
 
-    this.physics.arcade.collide(player.player, playerCollide)
-    
-    player.update();
-    // this.physics.arcade.collide(player.player, walls.walls);
-    // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
+    //#survivor
+    // this.physics.arcade.collide(player.player, playerCollide);
+    // player.update();
 
+    //#gamemaster - maybe? not sure how this logic is going to work
     for (let i = 0; i < monsters.length; i++) {
         monsters[i].update(player.player.x, player.player.y);
         this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
@@ -30,8 +29,6 @@ export default function update() {
         });
         
         this.physics.arcade.collide(monsters[i].monster, playerCollide);
-
-        // this.physics.arcade.collide(monsters[i].monster, walls.walls);
 
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
@@ -60,6 +57,7 @@ export default function update() {
         }
     }
 
+    //#gamemaster #survivor - needs to exist on both
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){

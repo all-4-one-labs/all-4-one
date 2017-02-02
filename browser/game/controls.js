@@ -4,7 +4,7 @@ import socket from '../socket';
 // Check for movement
 
 let monsters = [];
-let fireRate = 400;
+let fireRate = 300;
 let monsterRate = 1000;
 var monstersLocation = [];
 
@@ -24,21 +24,21 @@ const move = function(x, y, direction){
 
 const moveCheck = function(){
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
-    move.call(this, -150, -150, 'left');
+    move.call(this, -142, -142, 'left');
   } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
-    move.call(this, 150, -150, 'right');
+    move.call(this, 142, -142, 'right');
   } else if (this.wasd.down.isDown && this.wasd.left.isDown) {
-    move.call(this, -150, 150, 'left');
+    move.call(this, -142, 142, 'left');
   } else if (this.wasd.down.isDown && this.wasd.right.isDown) {
-    move.call(this, 150, 150, 'right');
+    move.call(this, 142, 142, 'right');
   } else if (this.wasd.left.isDown) {
-    move.call(this, -150, 0, 'left');
+    move.call(this, -200, 0, 'left');
   } else if (this.wasd.right.isDown) {
-    move.call(this, 150, 0, 'right');
+    move.call(this, 200, 0, 'right');
   } else if (this.wasd.up.isDown) {
-    move.call(this, 0, -150, 'up');
+    move.call(this, 0, -200, 'up');
   } else if (this.wasd.down.isDown) {
-    move.call(this, 0, 150, 'down');
+    move.call(this, 0, 200, 'down');
   } else {
     //  Stand still
     this.player.animations.stop();
@@ -77,20 +77,21 @@ const fire = function(direction) {
     bullet.body.setSize(20, 30);
     bullet.reset(this.player.x, this.player.y);
     switch (direction) {
-      case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.player.y, 500); break;
-      case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.player.y, 500); break;
-      case 'up': this.game.physics.arcade.moveToXY(bullet, this.player.x, -1000, 500); break;
-      case 'down': this.game.physics.arcade.moveToXY(bullet, this.player.x, 1000, 500); break;
-      case 'up-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y - 1000, 500); break;
-      case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y - 1000, 500); break;
-      case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 1000, this.player.y + 1000, 500); break;
-      case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
+      case 'left' : this.game.physics.arcade.moveToXY(bullet, this.player.x - 10000, this.player.y, 600); break;
+      case 'right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y, 600); break;
+      case 'up': this.game.physics.arcade.moveToXY(bullet, this.player.x, this.player.y - 10000, 600); break;
+      case 'down': this.game.physics.arcade.moveToXY(bullet, this.player.x, this.player.y + 10000, 600); break;
+      case 'up-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 10000, this.player.y - 10000, 600); break;
+      case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y - 10000, 600); break;
+      case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.player.x - 10000, this.player.y + 10000, 600); break;
+      case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 10000, this.player.y + 10000, 600); break;
       default: break;
     }
     if (socket) socket.emit('playerShoot', {fire: direction});
   }
 };
 
+//#gameMaster - we need to work on this to create a monster for players
 const spawnMonster = function() {
   if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
     this.nextMonster = this.game.time.now + monsterRate;

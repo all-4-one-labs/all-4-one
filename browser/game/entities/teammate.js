@@ -50,4 +50,5 @@ export default class Teammate {
       }
     }
   }
+  
 }
