@@ -87,7 +87,7 @@ const fire = function(direction) {
       case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.player.x + 1000, this.player.y + 1000, 500); break;
       default: break;
     }
-    if (socket) socket.emit('playerShoot', {fire: direction});
+    if (socket) socket.emit('playerShoot', {fire: direction, rate: fireRate});
   }
 };
 

@@ -8,7 +8,7 @@ export default function update() {
     //  Collision
 
     this.physics.arcade.collide(player.player, playerCollide)
-    
+
     player.update();
     // this.physics.arcade.collide(player.player, walls.walls);
     // this.physics.arcade.collide(bullets.bullets, walls.walls, (bullets, walls) => bullets.kill());
@@ -28,7 +28,7 @@ export default function update() {
                 player.healthBar.kill();
             }
         });
-        
+
         this.physics.arcade.collide(monsters[i].monster, playerCollide);
 
         // this.physics.arcade.collide(monsters[i].monster, walls.walls);
@@ -59,7 +59,7 @@ export default function update() {
             delete teammates[id];
         }
     }
-
+    console.log(players);
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){
@@ -74,7 +74,7 @@ export default function update() {
 
                 //bullets
                 if (players[id].bool) {
-                    teammates[id].fire(players[id].fire);
+                    teammates[id].fire(players[id].fire, players[id].rate);
                 }
 
                 //if the player already exists, just move them

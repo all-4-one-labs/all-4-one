@@ -6,7 +6,7 @@ const broadcastGameState = (io) => {
     let state = store.getState();
     io.emit('player_data', state);
   }, 1000 / 30);
-}
+};
 
 //duration is in seconds
 const gameTimer = (duration, io) =>{
