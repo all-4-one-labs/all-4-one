@@ -1,7 +1,8 @@
 import Player from '../entities/players.js';
 import socket from '../../socket';
 import Bullets from '../entities/bullets.js';
-import {player, playerCollide} from '../engine/create.js';
+import { player } from '../engine/create.js';
+import { playerCollide } from '../engine/createMap.js';
 
 export default class Survivor {
     constructor(game){

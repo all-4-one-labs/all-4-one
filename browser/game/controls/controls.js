@@ -1,4 +1,4 @@
-import {bullets} from '../engine/create.js' //change to being from bullets file
+import { bullets } from '../engine/create.js' //change to being from bullets file
 import Monster from '../entities/monsters.js';
 import store from '../../store.js';
 import {receivePosition, receiveFireData} from '../../reducers/players.js';
