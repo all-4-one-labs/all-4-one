@@ -1,4 +1,4 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide} from './create.js';
+import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide, testText} from './create.js';
 import { monsters, monstersLocation } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
@@ -6,7 +6,11 @@ import store from '../store.js';
 
 export default function update() {
     //  Collision
-
+    // let text = store.getState().game;
+    // let style = { font: "24px Arial", fill: "#ff0044", align: "center" };
+    // let testText = this.add.text(1215, 0, text, style)
+    // testText.fixedToCamera = true
+    testText.setText(store.getState().game)
     this.physics.arcade.collide(player.player, playerCollide)
 
     player.update();
@@ -59,7 +63,6 @@ export default function update() {
             delete teammates[id];
         }
     }
-    console.log(players);
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){

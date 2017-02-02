@@ -5,9 +5,9 @@ import {updateTime} from '../reducers/game.js'
 export default socket => {
 
   socket.on('game_data', data => {
-    // console.log(data)
+    console.log(data)
     store.dispatch(receivePlayerdata(data.players));
-    store.dispatch(updateTime(data.minutes, data.seconds))
+    store.dispatch(updateTime(data.engine.minutes, data.engine.seconds))
   });
 
   socket.on('end_game', data => {
