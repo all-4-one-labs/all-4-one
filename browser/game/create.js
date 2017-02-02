@@ -65,6 +65,10 @@ export default function create() {
     let playerBehindBottom = map.createLayer('playerBehindBottom');
     let playerBehindTop = map.createLayer('playerBehindTop');
 
+    var text = '15:00';
+    var style = { font: "24px Arial", fill: "#ff0044", align: "center" };
+    let testText = this.add.text(1215, 0, text, style)
+    testText.fixedToCamera = true
 
     teamBullet = new Bullets(this);
    

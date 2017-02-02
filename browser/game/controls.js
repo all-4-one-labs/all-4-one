@@ -16,13 +16,12 @@ const move = function(x, y, direction){
     this.player.body.velocity.x = x;
     this.player.body.velocity.y = y;
     this.player.animations.play(direction);
-  }
-  if (socket) {
+  } if (socket) {
     socket.emit('playerMove', {position: this.player.position, animation: direction});
   }
 };
 
-const moveCheck = function(){
+const moveCheck = function (){
   if (this.wasd.up.isDown && this.wasd.left.isDown) {
     move.call(this, -150, -150, 'left');
   } else if (this.wasd.up.isDown && this.wasd.right.isDown) {
@@ -48,7 +47,7 @@ const moveCheck = function(){
 };
 
 //fire bullets
-const fireBulletsCheck = function(){
+const fireBulletsCheck = function (){
   if (this.cursors.up.isDown && this.cursors.left.isDown) {
     fire.call(this,'up-left');
   } else if (this.cursors.up.isDown && this.cursors.right.isDown) {
