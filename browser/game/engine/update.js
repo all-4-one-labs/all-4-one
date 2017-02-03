@@ -10,8 +10,11 @@ let LocalTeammates = {};
 
 export default function update() {
   //test text
-  testText.setText(store.getState().game)
+  let time = store.getState().game
+  testText.setText(time)
+  if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" })
 
+  console.log(LocalTeammates)
   //  Collision
   this.physics.arcade.collide(player.player, playerCollide)
 
@@ -55,7 +58,6 @@ export default function update() {
   // socket.emit('monsterMove', {monsters: monstersLocation});
 
   let teammatesFromServer = store.getState().players.players;
-  console.log(teammatesFromServer)
   //delete teammate if they disconnect
   for (let id in LocalTeammates) {
       if (!teammatesFromServer[id]) {
