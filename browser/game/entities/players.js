@@ -32,7 +32,7 @@ export default class Player {
     // this.player.body.setSize(60, 80, 45, 35);
 
     this.player.health = 100;
-    this.player.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.player.x - 7, y: this.player.y - 40});
+    this.player.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.player.x - 7, y: this.player.y - 40, bg: {color: 'black'}});
 
 
     //controls
