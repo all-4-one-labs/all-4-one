@@ -1,7 +1,7 @@
 import store from '../store'
 import Survivor from './survivorMode.js';
 
-let player, bullets, playerCollide, teamBullet;
+let player, bullets, playerCollide, teamBullet, testText;
 let teammates = {} //TODO: on the backend .on('connection'), populate this with existing players instead of waiting for the first interval
 
 // import Player from './entities/players.js';
@@ -27,11 +27,11 @@ import Bullets from './entities/bullets.js';
 export default function create() {
     //temporary for testing purposes
     //this settings
-    this.world.setBounds(-1000, -1000, 2000, 2000);
+    //120 x 80 (32px each)
+    this.world.setBounds(-1920, -1280, 3840, 2560);
     this.physics.startSystem(Phaser.Physics.ARCADE);
-    this.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
     
-    // map, order matters!
+    // create map, order matters!
     let map = this.add.tilemap('tilemap');
     map.addTilesetImage('terrain_atlas', 'tileset');
 
@@ -65,11 +65,14 @@ export default function create() {
     let playerBehindBottom = map.createLayer('playerBehindBottom');
     let playerBehindTop = map.createLayer('playerBehindTop');
 
-
     teamBullet = new Bullets(this);
    
+    let text = '15:00';
+    let style = { font: "24px Arial", fill: "#ff0044", align: "center" };
+    testText = this.add.text(1215, 0, text, style)
+    testText.fixedToCamera = true
     //button
     //button = this.add.button(this.world.centerX - 95, 400, 'button', spawn, this, 2, 1, 0);
 }
 
-export {player, bullets, teammates, teamBullet, playerCollide};
+export {player, bullets, teammates, teamBullet, playerCollide, testText};

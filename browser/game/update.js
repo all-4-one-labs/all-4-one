@@ -1,4 +1,4 @@
-import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide} from './create.js';
+import {player, bullets, walls, cursors, wasd, fireRate, teammates, playerCollide, testText} from './create.js';
 import { monsters, monstersLocation } from './controls.js';
 import socket from '../socket';
 import Teammate from './entities/teammate.js';
@@ -6,7 +6,11 @@ import store from '../store.js';
 
 export default function update() {
     //  Collision
-
+    // let text = store.getState().game;
+    // let style = { font: "24px Arial", fill: "#ff0044", align: "center" };
+    // let testText = this.add.text(1215, 0, text, style)
+    // testText.fixedToCamera = true
+    testText.setText(store.getState().game)
     this.physics.arcade.collide(player.player, playerCollide)
 
     player.update();
@@ -32,6 +36,11 @@ export default function update() {
         this.physics.arcade.collide(monsters[i].monster, playerCollide);
 
         // this.physics.arcade.collide(monsters[i].monster, walls.walls);
+        for (let j = 0; j < monsters.length; j++) {
+            if (i !== j && monsters[j]) {
+                this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
+            }
+        }
 
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
@@ -42,11 +51,6 @@ export default function update() {
                 monsters.splice(i, 1);
             }
         });
-        for (let j = 0; j < monsters.length; j++) {
-            if(i !== j && monsters[j]) {
-                this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
-            }
-        }
     }
 
     socket.emit('monsterMove', {monsters: monstersLocation});
@@ -59,7 +63,6 @@ export default function update() {
             delete teammates[id];
         }
     }
-    console.log(players);
     for (let id in players) {
         if (id !== player.id) {
             if (teammates[id]){

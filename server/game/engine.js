@@ -4,7 +4,7 @@ const {timerTick} = require('../reducers/engine')
 const broadcastGameState = (io) => {
    setInterval(() => {
     let state = store.getState();
-    io.emit('player_data', state);
+    io.emit('game_data', state);
   }, 1000 / 30);
 };
 
@@ -29,7 +29,7 @@ const gameTimer = (duration, io) =>{
 
 //currently not implemented on the front end
 const endgame = (io) => {
-  io.emit('end_game', {survivorwin: true})
+  io.emit('end_game', {survivorWin: true})
 }
 
 module.exports = { broadcastGameState, gameTimer }
