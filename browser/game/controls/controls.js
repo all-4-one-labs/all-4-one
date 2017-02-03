@@ -9,7 +9,7 @@ let fireRate = 300;
 let monsterRate = 1000;
 var monstersLocation = [];
 
-const moveCheck = function(){
+const move = function(){
   let xCord = 0
   let yCord = 0
   let direction
@@ -24,8 +24,8 @@ const moveCheck = function(){
 
   //  Stand still
   if (!xCord && !yCord) {
-    this.player.animations.stop()
-    this.player.frame = 7
+    this.sprite.animations.stop()
+    this.sprite.frame = 7
     direction = 'stop'
   }
 
@@ -35,17 +35,17 @@ const moveCheck = function(){
     yCord = (142 * yCord) / 200
   }
 
-  this.player.body.velocity.x = xCord
-  this.player.body.velocity.y = yCord
-  this.player.animations.play(direction)
+  this.sprite.body.velocity.x = xCord
+  this.sprite.body.velocity.y = yCord
+  this.sprite.animations.play(direction)
 
-  store.dispatch(updatePosition({ position: this.player.position, animation: direction }))
+  store.dispatch(updatePosition({ position: this.sprite.position, animation: direction }))
 }
 
 
 //fire bullets
 
-const fireBulletsCheck = function(){
+const fireBullet = function(){
   let xCord = 0
   let yCord = 0
   if (this.cursors.left.isDown) xCord = -10000
@@ -53,13 +53,13 @@ const fireBulletsCheck = function(){
   if (this.cursors.up.isDown) yCord = -10000
   if (this.cursors.down.isDown) yCord = 10000
 
-  if ((xCord || yCord) && this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
+  if ((xCord || yCord) && this.game.time.now > this.nextFire && bullets.sprite.countDead() > 0) {
     this.nextFire = this.game.time.now + fireRate
-    let bullet = bullets.bullets.getFirstDead()
-    bullet.scale.setTo(0.25)
+    let bullet = bullets.sprite.getFirstDead()
+    bullet.scale.setTo(1)
     bullet.body.setSize(20, 30)
-    bullet.reset(this.player.x, this.player.y)
-    this.game.physics.arcade.moveToXY(bullet, this.player.x + xCord, this.player.y + yCord, 600)
+    bullet.reset(this.sprite.x, this.sprite.y)
+    this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)
     //fire needs to be refactored when recieved and drawn by a new client
   }
   store.dispatch(survivorFire({fire: [xCord, yCord], rate: fireRate}))
@@ -71,9 +71,9 @@ const spawnMonster = function() {
     this.nextMonster = this.game.time.now + monsterRate;
     let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
     monsters.push(newMonster);
-    monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health });
+    monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
   }
 };
 
-export { moveCheck, fireBulletsCheck, spawnMonster, monsters, monstersLocation };
+export { move, fireBullet, spawnMonster, monsters, monstersLocation };
 

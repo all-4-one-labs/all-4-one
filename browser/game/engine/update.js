@@ -10,10 +10,13 @@ let LocalTeammates = {};
 
 export default function update() {
   //test text
-  testText.setText(store.getState().game)
+  let time = store.getState().game
+  testText.setText(time)
+  if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" })
 
+  console.log(LocalTeammates)
   //  Collision
-  this.physics.arcade.collide(player.player, playerCollide)
+  this.physics.arcade.collide(player.sprite, playerCollide)
 
   player.update();
   // store.dispatch(updateHealth({health: player.player.health}));
@@ -21,8 +24,8 @@ export default function update() {
 
   //#gamemaster - maybe? not sure how this logic is going to work
   for (let i = 0; i < monsters.length; i++) {
-      monsters[i].update(player.player.x, player.player.y);
-      this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
+      monsters[i].update(player.sprite.x, player.sprite.y);
+      this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
               player.body.immovable = true;
               // monster.body.immovable = true;
@@ -38,12 +41,12 @@ export default function update() {
 
       for (let j = 0; j < monsters.length; j++) {
           if (i !== j && monsters[j]) {
-              this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
+              this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);
           }
       }
-      this.physics.arcade.collide(monsters[i].monster, playerCollide);
+      this.physics.arcade.collide(monsters[i].sprite, playerCollide);
 
-      this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
+      this.physics.arcade.collide(bullets.sprite, monsters[i].sprite, (monster, bullet) => {
           bullet.kill();
           monster.health -= 20;
           if (monster.health <= 0 ) {
@@ -57,7 +60,7 @@ export default function update() {
   // socket.emit('monsterMove', {monsters: monstersLocation});
 
   let teammatesFromServer = store.getState().players.players;
-  // console.log(teammatesFromServer)
+
   //delete teammate if they disconnect
   for (let id in LocalTeammates) {
       if (!teammatesFromServer[id]) {
@@ -70,7 +73,7 @@ export default function update() {
     if (id !== player.id) {
       //perhaps we don't need the second half of the conditional below....add initial state?????????????
       if (LocalTeammates[id] && teammatesFromServer[id].position){
-        this.physics.arcade.collide(player.player, LocalTeammates[id].sprite);
+        this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);

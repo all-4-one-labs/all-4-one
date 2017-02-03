@@ -8,6 +8,12 @@ const broadcastGameState = (io) => {
   }, 1000/30); 
 };
 
+//currently not implemented on the front end
+//also, this function will need to 'restart' the game for the server eventually
+const endgame = (io) => {
+  io.emit('end_game', {survivorWin: true})
+}
+
 //duration is in seconds
 const gameTimer = (duration, io) =>{
     var timer = duration, minutes, seconds;
@@ -27,10 +33,6 @@ const gameTimer = (duration, io) =>{
     }, 1000);
 }
 
-//currently not implemented on the front end
-const endgame = (io) => {
-  io.emit('end_game', {survivorWin: true})
-}
 
 module.exports = { broadcastGameState, gameTimer }
 
