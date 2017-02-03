@@ -1,4 +1,4 @@
-import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls/controls.js';
+import { moveCheck, fireBulletsCheck } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 import socket from '../../socket.js';
 import store from '../../store.js';
@@ -25,6 +25,7 @@ export default class Player {
     this.player.animations.add('up', [43,42,43,44], 10, true);
     this.game.camera.follow(this.player);
     this.game.physics.arcade.enable(this.player);
+    // this.player.body.setTo(6, 20, 13, 6)
     this.player.body.collideWorldBounds = true;
 
     // this.player.body.setSize(35, 57, 50, 60)
@@ -52,7 +53,6 @@ export default class Player {
     this.player.healthBar.setPercent(this.player.health);
     moveCheck.call(this);
     if (this.player.health > 0) fireBulletsCheck.call(this);
-    spawnMonster.call(this);
     }
 
 }

@@ -25,11 +25,7 @@ export default class Monster {
   create() {
     //set up monster sprite on the 
 
-    let newMonster;
-
-
-
-
+   // let newMonster;
 
     this.monster = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, 'monsterA');
     this.monster.anchor.set(0.5);
