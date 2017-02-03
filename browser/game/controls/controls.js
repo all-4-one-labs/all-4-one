@@ -53,7 +53,7 @@ const fireBulletsCheck = function(){
   if (this.cursors.up.isDown) yCord = -10000
   if (this.cursors.down.isDown) yCord = 10000
 
-  if ((yCord || xCord) && this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
+  if ((xCord || yCord) && this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
     this.nextFire = this.game.time.now + fireRate
     let bullet = bullets.bullets.getFirstDead()
     bullet.scale.setTo(0.25)

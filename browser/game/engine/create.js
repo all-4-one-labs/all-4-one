@@ -29,7 +29,6 @@ export default function create() {
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
-      console.log('fe state',state)
       //we don't need to be sending the entire state
       socket.emit('send_all_data', {
         position: state.players.position, 

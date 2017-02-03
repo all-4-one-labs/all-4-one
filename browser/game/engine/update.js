@@ -6,7 +6,7 @@ import store from '../../store.js';
 import { updateHealth } from '../../reducers/players.js';
 import gameMaster from '../controls/gameMaster.js';
 
-let teammates = {};
+let LocalTeammates = {};
 
 export default function update() {
   //  Collision
@@ -51,45 +51,46 @@ export default function update() {
 
   // socket.emit('monsterMove', {monsters: monstersLocation});
 
-  let players = store.getState().players;
+  let teammatesFromServer = store.getState().players.players;
+  console.log(teammatesFromServer)
   //delete teammate if they disconnect
-  for (let id in teammates) {
-      if (!players[id]) {
-          teammates[id].kill();
-          delete teammates[id];
+  for (let id in LocalTeammates) {
+      if (!teammatesFromServer[id]) {
+          LocalTeammates[id].kill();
+          delete LocalTeammates[id];
       }
   }
 
-  for (let id in players) {
+  for (let id in teammatesFromServer) {
     if (id !== player.id) {
-      if (teammates[id]){
-        this.physics.arcade.collide(player.player, teammates[id].sprite);
+      //perhaps we don't need the second half of the conditional below....add initial state?????????????
+      if (LocalTeammates[id] && teammatesFromServer[id].position){
+        this.physics.arcade.collide(player.player, LocalTeammates[id].sprite);
 
         //healthbar
-        teammates[id].sprite.healthBar.setPosition(teammates[id].sprite.x - 7, teammates[id].sprite.y - 40);
-        teammates[id].sprite.healthBar.setPercent(players[id].health);
-        if (players[id].health <= 0) {
-          teammates[id].kill();
+        LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
+        LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health);
+        if (teammatesFromServer[id].health <= 0) {
+          LocalTeammates[id].kill();
         }
 
         //bullets
-        if (players[id].fire[0] || players[id].fire[1]) {
-          teammates[id].fire(players[id].fire, players[id].rate);
-        }
-
+          if (teammatesFromServer[id].fire[0] || teammatesFromServer[id].fire[1]) {
+            LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate);
+          }
         //if the player already exists, just move them
-        if (players[id].animation !== 'stop') {
-          teammates[id].sprite.x = players[id].position.x;
-          teammates[id].sprite.y = players[id].position.y;
-          teammates[id].sprite.animations.play(players[id].animation);
+        if (teammatesFromServer[id].animation !== 'stop') {
+          LocalTeammates[id].sprite.x = teammatesFromServer[id].position.x;
+          LocalTeammates[id].sprite.y = teammatesFromServer[id].position.y;
+          LocalTeammates[id].sprite.animations.play(teammatesFromServer[id].animation);
 
         } else {
-          teammates[id].sprite.animations.stop();
-          teammates[id].sprite.frame = 7;
+          LocalTeammates[id].sprite.animations.stop();
+          LocalTeammates[id].sprite.frame = 7;
         }
       //else create them at the place they need to be
-      } else if (players[id].position) {
-        teammates[id] = new Teammate(id, this, players[id].position.x, players[id].position.y);
+      } else if (teammatesFromServer[id].position) {
+        LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y);
       }
     }
   }

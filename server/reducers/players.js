@@ -16,14 +16,12 @@ const receiveClientData = (id, data) => ({
 
 const playerReducers = (state = initialState, action) => {
   let newState = Object.assign( {}, state)
-  console.log('action:', action)
   switch (action.type) {
     case REMOVE_PLAYER:
-      delete newState[action.id];
+      delete newState.players[action.id];
       break;
     case RECEIVE_CLIENT_DATA:
       newState.players[action.id] = action.data
-      console.log('newState', newState)
       break;
     default:
       return state;

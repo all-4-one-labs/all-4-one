@@ -33,6 +33,7 @@ export default (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case RECEIVE_SERVER_PLAYER:
+      // console.log(action)
       newState = Object.assign({}, action.serverPlayer);
       break;
     case UPDATE_POSITION:
