@@ -1,6 +1,7 @@
 
 import { move, fireBullet } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
+import {spawnMonster} from '../controls/gameMasterControls.js';
 
 import store from '../../store.js';
 import { updateHealth } from '../../reducers/players.js';
@@ -54,5 +55,6 @@ export default class Player {
     this.sprite.healthBar.setPercent(this.sprite.health);
     move.call(this);
     if (this.sprite.health > 0) fireBullet.call(this);
+    spawnMonster.call(this);
   }
 }

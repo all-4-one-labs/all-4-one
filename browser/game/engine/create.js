@@ -4,6 +4,7 @@ import GameMaster from '../controls/gameMaster.js';
 import socket from '../../socket'
 import Bullets from '../entities/bullets.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js'
+import { createButtons } from './createButtons.js';
 
 let player, bullets, teamBullet, survivor, gameMaster, testText;
 
@@ -19,9 +20,9 @@ export default function create() {
     survivor = new Survivor(this);
     player = survivor.createPlayer();
     bullets = survivor.createBullets();
-    console.log('create', bullets)
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster = new GameMaster(this);
+    gameMaster.create();
   }
 
   createMapPostPlayer()
@@ -36,18 +37,18 @@ export default function create() {
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
-      // console.log(state)
       socket.emit('send_all_data', {
-        position: state.players.position, 
-        animation: state.players.animation, 
-        fire: state.players.fire, 
+        position: state.players.position,
+        animation: state.players.animation,
+        fire: state.players.fire,
         rate: state.players.rate,
         health: state.players.health
       });
     }, 1000/30);
   }
 
-  emitClient()
+  emitClient();
+
 }
 
 export {player, bullets, teamBullet, survivor, gameMaster, testText};

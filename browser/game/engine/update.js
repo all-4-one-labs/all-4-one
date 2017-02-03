@@ -14,6 +14,19 @@ export default function update() {
   // this.game.paused = true
   //  Collision
 
+  //camera move
+    if (this.input.keyboard.addKey(Phaser.Keyboard.W).isDown) {
+        this.game.camera.y -= 15;
+    }
+    else if (this.input.keyboard.addKey(Phaser.Keyboard.A).isDown) {
+        this.game.camera.x -= 15;
+    }
+    else if (this.input.keyboard.addKey(Phaser.Keyboard.S).isDown) {
+        this.game.camera.y += 15;
+    }
+    else if (this.input.keyboard.addKey(Phaser.Keyboard.D).isDown) {
+        this.game.camera.x += 15;
+    }
 
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
@@ -44,15 +57,17 @@ export default function update() {
    }
   //handle monsters
   //#gamemaster - maybe? not sure how this logic is going to work
-  for (let i = 0; i < monsters.length; i++) {
 
-    if (player) { 
+
+  for (let i = 0; i < monsters.length; i++) {
+    monsters[i].update(); //take out
+    if (player) {
       monsters[i].update(player.sprite.x, player.sprite.y);
       this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
               player.body.immovable = true;
               monster.nextAttack = this.game.time.now + monster.attackRate;
-              player.health -= 20;
+              player.health -= monster.attack;
               store.dispatch(updateHealth({health: player.health}));
           }
           if (player.health <= 0) {
@@ -61,7 +76,7 @@ export default function update() {
           }
 
       });
-    
+
       for (let j = 0; j < monsters.length; j++) {
           if (i !== j && monsters[j]) {
               this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);

@@ -1,4 +1,5 @@
-import { spawnMonster } from './gameMasterControls.js'
+import { spawnMonster } from './gameMasterControls.js';
+import { createButtons, clickedMonster } from '../engine/createButtons.js';
 
 export default class GameMaster {
     constructor(game){
@@ -8,11 +9,11 @@ export default class GameMaster {
     }
 
     create() {
-        // this.button = this.game.add.button(0, 0, 'button', actionOnClick, this)
+        createButtons.call(this);
     }
 
     update() {
-      spawnMonster.call(this)
+        spawnMonster.call(this, clickedMonster);
     }
 
 }
