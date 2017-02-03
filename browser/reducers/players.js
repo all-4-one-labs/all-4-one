@@ -28,8 +28,6 @@ export const updateHealth = (health) => ({
   health
 })
 
-
-
 //Reducers
 export default (state = initialState, action) => {
   let newState;
