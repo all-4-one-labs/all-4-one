@@ -5,7 +5,7 @@ const broadcastGameState = (io) => {
    setInterval(() => {
     let state = store.getState();
     io.emit('game_data', state);
-  }, 1000/30); 
+  }, 1000 / 30); 
 };
 
 //currently not implemented on the front end
@@ -15,9 +15,9 @@ const endgame = (io) => {
 }
 
 //duration is in seconds
-const gameTimer = (duration, io) =>{
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
+const gameTimer = (duration, io) => {
+    let timer = duration, minutes, seconds;
+    let tick = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -28,7 +28,7 @@ const gameTimer = (duration, io) =>{
 
         if (--timer < 0) {
             endgame(io)
-            timer = duration;
+            clearInterval(tick);
         }
     }, 1000);
 }

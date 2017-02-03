@@ -10,23 +10,30 @@ let LocalTeammates = {};
 
 export default function update() {
   //test text
-  let time = store.getState().game
+  let time = store.getState().game.time
   testText.setText(time)
   if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" })
-
-  console.log(LocalTeammates)
+  // this.game.paused = true
   //  Collision
   this.physics.arcade.collide(player.sprite, playerCollide)
 
   player.update();
 
+  //player win
+  if (store.getState().game.timeUp) {
+      let winMessageText = 'SURVIVORS WIN';
+      let winMessageStyle = { font: '96px Arial', fill: '#ff0044', align: 'center' };
+      let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
+      winMessage.fixedToCamera = true
+      this.game.paused = true
+   }
+  //handle monsters
   //#gamemaster - maybe? not sure how this logic is going to work
   for (let i = 0; i < monsters.length; i++) {
       monsters[i].update(player.sprite.x, player.sprite.y);
       this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
               player.body.immovable = true;
-              // monster.body.immovable = true;
               monster.nextAttack = this.game.time.now + monster.attackRate;
               player.health -= 20;
               store.dispatch(updateHealth({health: player.health}));
@@ -55,8 +62,7 @@ export default function update() {
       });
   }
 
-  // socket.emit('monsterMove', {monsters: monstersLocation});
-
+  //render shallow teammates
   let teammatesFromServer = store.getState().players.players;
   //delete teammate if they disconnect
   for (let id in LocalTeammates) {
@@ -68,7 +74,6 @@ export default function update() {
 
   for (let id in teammatesFromServer) {
     if (id !== player.id) {
-      //perhaps we don't need the second half of the conditional below....add initial state?????????????
       if (LocalTeammates[id] && teammatesFromServer[id].position){
         this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
@@ -93,7 +98,7 @@ export default function update() {
           LocalTeammates[id].sprite.animations.stop();
           LocalTeammates[id].sprite.frame = 7;
         }
-      //else create them at the place they need to be
+      //for a new teammate, create them at the place they need to be
       } else if (teammatesFromServer[id].position) {
         LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y);
       }

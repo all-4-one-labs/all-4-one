@@ -1,6 +1,6 @@
 import store from '../../store'
 import {receiveServerPlayer} from '../../reducers/players.js'
-import {updateTime} from '../../reducers/game.js'
+import {updateTime, endGame} from '../../reducers/game.js'
 
 export default socket => {
 
@@ -10,9 +10,7 @@ export default socket => {
   });
 
   socket.on('end_game', data => {
-    if (data.survivorWin) {
-      //phaser freeze, display message on screen, redirect to somewhere
-    }
+    store.dispatch(endGame(data))
     });
 };
 
