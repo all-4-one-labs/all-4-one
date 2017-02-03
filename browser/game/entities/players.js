@@ -1,4 +1,4 @@
-import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls/controls.js';
+import { move, fireBullet, spawnMonster } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 
 export default class Player {
@@ -46,8 +46,8 @@ export default class Player {
     this.sprite.body.velocity.y = 0;
     this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
     this.sprite.healthBar.setPercent(this.sprite.health);
-    moveCheck.call(this);
-    if (this.sprite.health > 0) fireBulletsCheck.call(this);
+    move.call(this);
+    if (this.sprite.health > 0) fireBullet.call(this);
     spawnMonster.call(this);
     }
 

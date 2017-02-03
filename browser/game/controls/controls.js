@@ -9,7 +9,7 @@ let fireRate = 300;
 let monsterRate = 1000;
 var monstersLocation = [];
 
-const moveCheck = function(){
+const move = function(){
   let xCord = 0
   let yCord = 0
   let direction
@@ -45,7 +45,7 @@ const moveCheck = function(){
 
 //fire bullets
 
-const fireBulletsCheck = function(){
+const fireBullet = function(){
   let xCord = 0
   let yCord = 0
   if (this.cursors.left.isDown) xCord = -10000
@@ -71,9 +71,9 @@ const spawnMonster = function() {
     this.nextMonster = this.game.time.now + monsterRate;
     let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
     monsters.push(newMonster);
-    monstersLocation.push({x: newMonster.monster.position.x, y: newMonster.monster.position.y, health: newMonster.monster.health });
+    monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
   }
 };
 
-export { moveCheck, fireBulletsCheck, spawnMonster, monsters, monstersLocation };
+export { move, fireBullet, spawnMonster, monsters, monstersLocation };
 

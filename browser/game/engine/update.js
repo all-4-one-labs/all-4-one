@@ -23,7 +23,7 @@ export default function update() {
   //#gamemaster - maybe? not sure how this logic is going to work
   for (let i = 0; i < monsters.length; i++) {
       monsters[i].update(player.sprite.x, player.sprite.y);
-      this.physics.arcade.collide(player.sprite, monsters[i].monster, (player, monster) => {
+      this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
               player.body.immovable = true;
               // monster.body.immovable = true;
@@ -39,12 +39,12 @@ export default function update() {
 
       for (let j = 0; j < monsters.length; j++) {
           if (i !== j && monsters[j]) {
-              this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
+              this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);
           }
       }
-      this.physics.arcade.collide(monsters[i].monster, playerCollide);
+      this.physics.arcade.collide(monsters[i].sprite, playerCollide);
 
-      this.physics.arcade.collide(bullets.sprite, monsters[i].monster, (monster, bullet) => {
+      this.physics.arcade.collide(bullets.sprite, monsters[i].sprite, (monster, bullet) => {
           bullet.kill();
           monster.health -= 20;
           if (monster.health <= 0 ) {
