@@ -16,14 +16,14 @@ export default function update() {
 
   console.log(LocalTeammates)
   //  Collision
-  this.physics.arcade.collide(player.player, playerCollide)
+  this.physics.arcade.collide(player.sprite, playerCollide)
 
   player.update();
 
   //#gamemaster - maybe? not sure how this logic is going to work
   for (let i = 0; i < monsters.length; i++) {
-      monsters[i].update(player.player.x, player.player.y);
-      this.physics.arcade.collide(player.player, monsters[i].monster, (player, monster) => {
+      monsters[i].update(player.sprite.x, player.sprite.y);
+      this.physics.arcade.collide(player.sprite, monsters[i].monster, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
               player.body.immovable = true;
               // monster.body.immovable = true;
@@ -44,7 +44,7 @@ export default function update() {
       }
       this.physics.arcade.collide(monsters[i].monster, playerCollide);
 
-      this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
+      this.physics.arcade.collide(bullets.sprite, monsters[i].monster, (monster, bullet) => {
           bullet.kill();
           monster.health -= 20;
           if (monster.health <= 0 ) {
@@ -70,7 +70,7 @@ export default function update() {
     if (id !== player.id) {
       //perhaps we don't need the second half of the conditional below....add initial state?????????????
       if (LocalTeammates[id] && teammatesFromServer[id].position){
-        this.physics.arcade.collide(player.player, LocalTeammates[id].sprite);
+        this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);

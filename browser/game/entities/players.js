@@ -1,8 +1,5 @@
 import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
-import socket from '../../socket.js';
-import store from '../../store.js';
-import {receiveBool} from '../../reducers/players.js';
 
 export default class Player {
   constructor(id, game){
@@ -15,24 +12,23 @@ export default class Player {
   }
 
   create() {
-    //set up player sprite on the map
-    this.player = this.game.add.sprite(0, 0, 'dude');
-    this.player.anchor.set(0.5);
-    this.player.scale.setTo(1);
-    this.player.animations.add('left', [19,18,19,20], 10, true);
-    this.player.animations.add('right', [31,30,31,32], 10, true);
-    this.player.animations.add('down', [7,6,7,8], 10, true);
-    this.player.animations.add('up', [43,42,43,44], 10, true);
-    this.game.camera.follow(this.player);
-    this.game.physics.arcade.enable(this.player);
-    this.player.body.collideWorldBounds = true;
+    //set up sprite sprite on the map
+    this.sprite = this.game.add.sprite(0, 0, 'dude');
+    this.sprite.anchor.set(0.5);
+    this.sprite.scale.setTo(1);
+    this.sprite.animations.add('left', [19,18,19,20], 10, true);
+    this.sprite.animations.add('right', [31,30,31,32], 10, true);
+    this.sprite.animations.add('down', [7,6,7,8], 10, true);
+    this.sprite.animations.add('up', [43,42,43,44], 10, true);
+    this.game.camera.follow(this.sprite);
 
-    // this.player.body.setSize(35, 57, 50, 60)
+    //collision
+    this.game.physics.arcade.enable(this.sprite);
+    this.sprite.body.collideWorldBounds = true;
 
-    // this.player.body.setSize(60, 80, 45, 35);
-
-    this.player.health = 100;
-    this.player.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.player.x - 7, y: this.player.y - 40, bg: {color: 'black'}});
+    //health bar (maybe factor this out so we can give it its own render layer?)
+    this.sprite.health = 100;
+    this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bg: {color: 'black'}});
 
 
     //controls
@@ -46,12 +42,12 @@ export default class Player {
   }
 
   update(){
-    this.player.body.velocity.x = 0;
-    this.player.body.velocity.y = 0;
-    this.player.healthBar.setPosition(this.player.x - 7, this.player.y - 40);
-    this.player.healthBar.setPercent(this.player.health);
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.velocity.y = 0;
+    this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
+    this.sprite.healthBar.setPercent(this.sprite.health);
     moveCheck.call(this);
-    if (this.player.health > 0) fireBulletsCheck.call(this);
+    if (this.sprite.health > 0) fireBulletsCheck.call(this);
     spawnMonster.call(this);
     }
 
