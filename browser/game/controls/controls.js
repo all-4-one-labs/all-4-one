@@ -61,4 +61,4 @@ const fireBullet = function(){
   store.dispatch(survivorFire({fire: [xCord, yCord], rate: fireRate}))
 }
 
-export { moveCheck, fireBulletsCheck };
+export { move, fireBullet };

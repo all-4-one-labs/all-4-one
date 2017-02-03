@@ -20,13 +20,13 @@ export default function update() {
     player.update()
     teammateUpdate.call(this, player);
     this.physics.arcade.collide(player.sprite, playerCollide)
+    this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
+      bullet.kill();
+    })
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster.update()
     teammateUpdate.call(this, 'gm');
   }
-  this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
-    bullet.kill();
-  })
 
 //   lines 32 and 33 now in if statement on line 19
 //   this.physics.arcade.collide(player.sprite, playerCollide)
@@ -78,5 +78,6 @@ export default function update() {
               monsters.splice(i, 1);
           }
       });
+    }
   }
 }

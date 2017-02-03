@@ -19,6 +19,7 @@ export default function create() {
     survivor = new Survivor(this);
     player = survivor.createPlayer();
     bullets = survivor.createBullets();
+    console.log('create', bullets)
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster = new GameMaster(this);
   }
