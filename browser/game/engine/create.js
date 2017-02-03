@@ -35,12 +35,14 @@ export default function create() {
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
-      //we don't need to be sending the entire state
+      // console.log(state)
       socket.emit('send_all_data', {
         position: state.players.position, 
         animation: state.players.animation, 
         fire: state.players.fire, 
-        rate: state.players.rate});
+        rate: state.players.rate,
+        health: state.players.health
+      });
     }, 1000/30);
   }
 

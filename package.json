@@ -23,7 +23,7 @@
     "phaser": "^2.6.2",
     "pixi": "^0.3.1",
     "redux": "^3.6.0",
-    "redux-logger": "^2.7.4",
+    "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "script-loader": "^0.7.0",
     "socket.io": "^1.7.2"

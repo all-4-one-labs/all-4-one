@@ -1,6 +1,10 @@
 import { move, fireBullet, spawnMonster } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 
+import store from '../../store.js';
+import { updateHealth } from '../../reducers/players.js';
+
+
 export default class Player {
   constructor(id, game){
     this.id = id;
@@ -28,6 +32,7 @@ export default class Player {
 
     //health bar (maybe factor this out so we can give it its own render layer?)
     this.sprite.health = 100;
+    store.dispatch(updateHealth({health: this.sprite.health}));
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bg: {color: 'black'}});
 
 
