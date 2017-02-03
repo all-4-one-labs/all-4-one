@@ -1,4 +1,6 @@
 import Monster from '../entities/monsters.js';
+import store from '../../store.js';
+
 
 let monsterRate = 1000;
 let monsters = [];
@@ -46,14 +48,30 @@ const monsterDictionary = {
 };
 
 const spawnMonster = function(clickedMonster) {
-  if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster) {
-    this.nextMonster = this.game.time.now + monsterRate;
-    let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY}, monsterDictionary[clickedMonster]);
-    monsters.push(newMonster);
-    monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
+  let pointer = this.game.input.activePointer
+  let text = 'CAN\'T SPAWN HERE'
+  let style = { font: "24px Arial", fill: "#ffffff", align: "center" }
+  let enemyPlayers = store.getState().players.players;
+  if (!enemyPlayers) enemyPlayers = {}
+  let playerMultiplier = Object.keys(enemyPlayers).length;
+
+  if ((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) {
+    if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster) {
+      this.nextMonster = this.game.time.now + monsterRate/playerMultiplier;
+      let newMonster = new Monster(this.game, {x: pointer.worldX, y: pointer.worldY}, monsterDictionary[clickedMonster]);
+      monsters.push(newMonster);
+      monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
+    }
+  } else {
+    if (this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown) {
+      let alert = this.game.add.text(540, 360, text, style)
+      alert.fixedToCamera = true;
+      setTimeout(() => {
+        alert.destroy()
+      }, 1000)
+    }
   }
+
 };
-
-
 
 export {spawnMonster, monsters, monstersLocation}

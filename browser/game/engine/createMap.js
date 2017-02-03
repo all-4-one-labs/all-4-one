@@ -1,4 +1,4 @@
-// Not the best way to export playerCollide and bulletCollide
+           // Not the best way to export playerCollide and bulletCollide
 let map, playerCollide, bulletCollide;
 
 function createMapPrePlayer(game) {

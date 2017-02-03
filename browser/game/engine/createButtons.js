@@ -1,7 +1,7 @@
 let clickedMonster;
 
 
-function createButtons(monster) {
+function createButtons() {
     let mummyC = this.game.add.button(400, 680, 'mummyC', clickMonster, this, 2, 1, 0);
     let lurkerC = this.game.add.button(600, 680, 'lurkerC', clickMonster, this, 2, 1, 0);
     let slimeB = this.game.add.button(800, 680, 'slimeB', clickMonster, this, 2, 1, 0);
