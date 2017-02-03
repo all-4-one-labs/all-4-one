@@ -19,6 +19,8 @@ export default function update() {
   this.physics.arcade.collide(player.sprite, playerCollide)
 
   player.update();
+  // store.dispatch(updateHealth({health: player.player.health}));
+  // console.log('this is the store', store.getState());
 
   //#gamemaster - maybe? not sure how this logic is going to work
   for (let i = 0; i < monsters.length; i++) {
@@ -58,6 +60,7 @@ export default function update() {
   // socket.emit('monsterMove', {monsters: monstersLocation});
 
   let teammatesFromServer = store.getState().players.players;
+
   //delete teammate if they disconnect
   for (let id in LocalTeammates) {
       if (!teammatesFromServer[id]) {
@@ -75,6 +78,7 @@ export default function update() {
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
         LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health);
+
         if (teammatesFromServer[id].health <= 0) {
           LocalTeammates[id].kill();
         }
