@@ -1,4 +1,4 @@
-import { bullets } from '../engine/create.js' //change to being from bullets file
+import { bullets, blaster } from '../engine/create.js' //change to being from bullets file
 import store from '../../store.js';
 import {updatePosition, survivorFire} from '../../reducers/players.js';
 // Check for movement
@@ -50,6 +50,7 @@ const fireBullet = function(){
   if (this.cursors.down.isDown) yCord = 10000
 
   if ((xCord || yCord) && this.game.time.now > this.nextFire && bullets.sprite.countDead() > 0) {
+    blaster.play('', 0, 0.3);
     this.nextFire = this.game.time.now + fireRate
     let bullet = bullets.sprite.getFirstDead()
     bullet.scale.setTo(1)
