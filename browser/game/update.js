@@ -36,6 +36,11 @@ export default function update() {
         this.physics.arcade.collide(monsters[i].monster, playerCollide);
 
         // this.physics.arcade.collide(monsters[i].monster, walls.walls);
+        for (let j = 0; j < monsters.length; j++) {
+            if (i !== j && monsters[j]) {
+                this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
+            }
+        }
 
         this.physics.arcade.collide(bullets.bullets, monsters[i].monster, (monster, bullet) => {
             bullet.kill();
@@ -46,11 +51,6 @@ export default function update() {
                 monsters.splice(i, 1);
             }
         });
-        for (let j = 0; j < monsters.length; j++) {
-            if(i !== j && monsters[j]) {
-                this.physics.arcade.collide(monsters[i].monster, monsters[j].monster);
-            }
-        }
     }
 
     socket.emit('monsterMove', {monsters: monstersLocation});
