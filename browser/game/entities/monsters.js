@@ -23,8 +23,15 @@ export default class Monster {
   }
 
   create() {
-    //set up monster sprite on the map
-    this.monster = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, 'monster');
+    //set up monster sprite on the 
+
+    let newMonster;
+
+
+
+
+
+    this.monster = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, 'monsterA');
     this.monster.anchor.set(0.5);
     this.monster.scale.setTo(2);
     this.monster.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, true);

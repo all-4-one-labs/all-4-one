@@ -56,7 +56,7 @@ const fireBulletsCheck = function(){
   if ((xCord || yCord) && this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
     this.nextFire = this.game.time.now + fireRate
     let bullet = bullets.bullets.getFirstDead()
-    bullet.scale.setTo(0.25)
+    bullet.scale.setTo(1)
     bullet.body.setSize(20, 30)
     bullet.reset(this.player.x, this.player.y)
     this.game.physics.arcade.moveToXY(bullet, this.player.x + xCord, this.player.y + yCord, 600)
