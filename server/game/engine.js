@@ -5,7 +5,7 @@ const broadcastGameState = (io) => {
    setInterval(() => {
     let state = store.getState();
     io.emit('game_data', state);
-  }, 1000 / 30); 
+  }, 1000 / 60); 
 };
 
 //currently not implemented on the front end
