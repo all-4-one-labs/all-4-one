@@ -27,9 +27,9 @@ import Bullets from './entities/bullets.js';
 export default function create() {
     //temporary for testing purposes
     //this settings
-    this.world.setBounds(-1000, -1000, 2000, 2000);
+    //120 x 80 (32px each)
+    this.world.setBounds(-1920, -1280, 3840, 2560);
     this.physics.startSystem(Phaser.Physics.ARCADE);
-    this.add.tileSprite(-1000, -1000, 2000, 2000, 'ground');
     
     // create map, order matters!
     let map = this.add.tilemap('tilemap');
