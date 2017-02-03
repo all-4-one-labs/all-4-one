@@ -4,8 +4,9 @@ const {timerTick} = require('../reducers/engine')
 const broadcastGameState = (io) => {
    setInterval(() => {
     let state = store.getState();
+    // console.log('hi', store.getState().players.players)
     io.emit('game_data', state);
-  }, 1000 / 30);
+  }, 1000); //dont forget to fix
 };
 
 //duration is in seconds

@@ -3,7 +3,7 @@ import { playerCollide } from './createMap.js';
 import { monsters, monstersLocation } from '../controls/controls.js';
 import Teammate from '../entities/teammate.js';
 import store from '../../store.js';
-import { receiveHealth } from '../../reducers/players.js';
+import { updateHealth } from '../../reducers/players.js';
 import gameMaster from '../controls/gameMaster.js';
 
 let teammates = {};
@@ -23,7 +23,7 @@ export default function update() {
               // monster.body.immovable = true;
               monster.nextAttack = this.game.time.now + monster.attackRate;
               player.health -= 20;
-              store.dispatch(receiveHealth({health: player.health}));
+              store.dispatch(updateHealth({health: player.health}));
           }
           if (player.health <= 0) {
               player.kill();
@@ -73,7 +73,7 @@ export default function update() {
         }
 
         //bullets
-        if (players[id].bool) {
+        if (players[id].fire[0] || players[id].fire[1]) {
           teammates[id].fire(players[id].fire, players[id].rate);
         }
 

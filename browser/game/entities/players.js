@@ -52,9 +52,6 @@ export default class Player {
     this.player.healthBar.setPercent(this.player.health);
     moveCheck.call(this);
     if (this.player.health > 0) fireBulletsCheck.call(this);
-    var bool = (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.left.isDown || this.cursors.right.isDown);
-    store.dispatch(receiveBool({bool: bool}));
-
     spawnMonster.call(this);
     }
 

@@ -26,12 +26,13 @@ export default function create() {
   createMapPostPlayer()
 
   teamBullet = new Bullets(this);
-
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
+      console.log('frontend state', state)
+      //we don't need to be sending the entire state
       socket.emit('send_all_data', state);
-    }, 1000 / 30);
+    }, 1000/30);
   }
   emitClient()
 }

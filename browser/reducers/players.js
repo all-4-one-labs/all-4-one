@@ -3,12 +3,9 @@ const initialState = {};
 
 //Action Types
 const RECEIVE_SERVER_PLAYER = 'RECEIVE_SERVER_PLAYER';
-const RECEIVE_POSITION = 'RECEIVE_POSITION';
-const RECEIVE_FIRE_DATA = 'RECEIVE_FIRE_DATA';
-const RECEIVE_HEALTH = 'RECEIVE_HEALTH';
-const RECEIVE_BOOL = 'RECEIVE_BOOL';
-
-
+const UPDATE_POSITION = 'UPDATE_POSITION';
+const SURVIVOR_FIRE = 'SURVIVOR_FIRE';
+const UPDATE_HEALTH = 'UPDATE_HEALTH';
 
 //Action Creators
 export const receiveServerPlayer = (serverPlayer) => ({
@@ -16,25 +13,22 @@ export const receiveServerPlayer = (serverPlayer) => ({
   serverPlayer
 });
 
-export const receivePosition = (positionData) => ({
-  type: RECEIVE_POSITION,
+export const updatePosition = (positionData) => ({
+  type: UPDATE_POSITION,
   positionData
 })
 
-export const receiveFireData = (fireData) => ({
-  type: RECEIVE_FIRE_DATA,
+export const survivorFire = (fireData) => ({
+  type: SURVIVOR_FIRE,
   fireData
 })
 
-export const receiveHealth = (health) => ({
-  type: RECEIVE_HEALTH,
+export const updateHealth = (health) => ({
+  type: UPDATE_HEALTH,
   health
 })
 
-export const receiveBool = (bool) => ({
-  type: RECEIVE_BOOL,
-  bool
-})
+
 
 //Reducers
 export default (state = initialState, action) => {
@@ -43,17 +37,14 @@ export default (state = initialState, action) => {
     case RECEIVE_SERVER_PLAYER:
       newState = Object.assign({}, action.serverPlayer);
       break;
-    case RECEIVE_POSITION:
+    case UPDATE_POSITION:
       newState = Object.assign({}, state, action.positionData);
       break;
-    case RECEIVE_FIRE_DATA:
+    case SURVIVOR_FIRE:
       newState = Object.assign({}, state, action.fireData);
       break;
-    case RECEIVE_HEALTH:
+    case UPDATE_HEALTH:
       newState = Object.assign({}, state, action.health);
-      break;
-    case RECEIVE_BOOL:
-      newState = Object.assign({}, state, action.bool);
       break;
     default: return state;
   }

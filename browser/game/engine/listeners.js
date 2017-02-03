@@ -15,8 +15,5 @@ export default socket => {
       //phaser freeze, display message on screen, redirect to somewhere
     }
     });
-
-    setInterval(() => {socket.emit('send_all_data', store.getState()), 1000/30});
-
 };
 

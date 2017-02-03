@@ -1,7 +1,7 @@
 import { bullets } from '../engine/create.js' //change to being from bullets file
 import Monster from '../entities/monsters.js';
 import store from '../../store.js';
-import {receivePosition, receiveFireData} from '../../reducers/players.js';
+import {updatePosition, survivorFire} from '../../reducers/players.js';
 // Check for movement
 
 let monsters = [];
@@ -39,7 +39,7 @@ const moveCheck = function(){
   this.player.body.velocity.y = yCord
   this.player.animations.play(direction)
 
-  store.dispatch(receivePosition({ position: this.player.position, animation: direction }))
+  store.dispatch(updatePosition({ position: this.player.position, animation: direction }))
 }
 
 
@@ -61,8 +61,8 @@ const fireBulletsCheck = function(){
     bullet.reset(this.player.x, this.player.y)
     this.game.physics.arcade.moveToXY(bullet, this.player.x + xCord, this.player.y + yCord, 600)
     //fire needs to be refactored when recieved and drawn by a new client
-    store.dispatch(receiveFireData({fire: [xCord, yCord], rate: fireRate}))
   }
+  store.dispatch(survivorFire({fire: [xCord, yCord], rate: fireRate}))
 }
 
 //#gameMaster - we need to work on this to create a monster for players
