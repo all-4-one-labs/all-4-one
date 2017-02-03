@@ -1,4 +1,3 @@
-import {player} from '../create.js';
 import HealthBar from './HealthBar.js';
 
 import easystarjs from 'easystarjs';
@@ -35,9 +34,9 @@ export default class Monster {
     this.monster = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, 'monsterA');
     this.monster.anchor.set(0.5);
     this.monster.scale.setTo(2);
-    this.monster.animations.add('idle', [0,1,2,3,4,5,6,7,8,9], 20, true);
-    this.monster.animations.add('left', [0,1,2,3,4,5,6,7,8,9], 20, true);
-    this.monster.animations.add('right', [0,1,2,3,4,5,6,7,8,9], 20, true);
+    this.monster.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, true);
+    this.monster.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, true);
+    this.monster.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, true);
     this.game.physics.arcade.enable(this.monster);
     this.monster.body.setSize(12, 12, 2, 4);
     this.monster.health = 100;

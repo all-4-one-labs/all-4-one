@@ -2,21 +2,48 @@
 const initialState = {};
 
 //Action Types
-const RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
-
+const RECEIVE_SERVER_PLAYER = 'RECEIVE_SERVER_PLAYER';
+const UPDATE_POSITION = 'UPDATE_POSITION';
+const SURVIVOR_FIRE = 'SURVIVOR_FIRE';
+const UPDATE_HEALTH = 'UPDATE_HEALTH';
 
 //Action Creators
-export const receivePlayerdata = (players) => ({
-  type: RECEIVE_PLAYERS,
-  players
+export const receiveServerPlayer = (serverPlayer) => ({
+  type: RECEIVE_SERVER_PLAYER,
+  serverPlayer
 });
+
+export const updatePosition = (positionData) => ({
+  type: UPDATE_POSITION,
+  positionData
+})
+
+export const survivorFire = (fireData) => ({
+  type: SURVIVOR_FIRE,
+  fireData
+})
+
+export const updateHealth = (health) => ({
+  type: UPDATE_HEALTH,
+  health
+})
 
 //Reducers
 export default (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case RECEIVE_PLAYERS:
-      newState = Object.assign({}, action.players);
+    case RECEIVE_SERVER_PLAYER:
+      // console.log(action)
+      newState = Object.assign({}, action.serverPlayer);
+      break;
+    case UPDATE_POSITION:
+      newState = Object.assign({}, state, action.positionData);
+      break;
+    case SURVIVOR_FIRE:
+      newState = Object.assign({}, state, action.fireData);
+      break;
+    case UPDATE_HEALTH:
+      newState = Object.assign({}, state, action.health);
       break;
     default: return state;
   }
