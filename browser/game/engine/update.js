@@ -1,4 +1,4 @@
-import { bullets, player } from './create.js';
+import { bullets, player, testText } from './create.js';
 import { playerCollide } from './createMap.js';
 import { monsters, monstersLocation } from '../controls/controls.js';
 import Teammate from '../entities/teammate.js';
@@ -9,6 +9,9 @@ import gameMaster from '../controls/gameMaster.js';
 let LocalTeammates = {};
 
 export default function update() {
+  //test text
+  testText.setText(store.getState().game)
+
   //  Collision
   this.physics.arcade.collide(player.player, playerCollide)
 

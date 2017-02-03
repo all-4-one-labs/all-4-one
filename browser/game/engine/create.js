@@ -5,7 +5,7 @@ import socket from '../../socket'
 import Bullets from '../entities/bullets.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js'
 
-let player, bullets, teamBullet, survivor, gameMaster;
+let player, bullets, teamBullet, survivor, gameMaster, testText;
 
 export default function create() {
   //this settings
@@ -26,6 +26,12 @@ export default function create() {
   createMapPostPlayer()
 
   teamBullet = new Bullets(this);
+
+  let text = '15:00';
+  let style = { font: "24px Arial", fill: "#ff0044", align: "center" };
+  testText = this.add.text(1215, 0, text, style)
+  testText.fixedToCamera = true
+
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
@@ -37,7 +43,8 @@ export default function create() {
         rate: state.players.rate});
     }, 1000/30);
   }
+
   emitClient()
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster};
+export {player, bullets, teamBullet, survivor, gameMaster, testText};

@@ -6,7 +6,7 @@ export default socket => {
 
   socket.on('game_data', data => {
     store.dispatch(receiveServerPlayer(data.players));
-    store.dispatch(updateTime(data.minutes, data.seconds))
+    store.dispatch(updateTime(data.engine.minutes, data.engine.seconds)) 
   });
 
   socket.on('end_game', data => {

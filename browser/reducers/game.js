@@ -10,10 +10,13 @@ export const updateTime = (minutes, seconds) => ({
 
 export default (state = initialState, action) => {
   let newState
-  switch(action.type) {
+  switch (action.type) {
     case UPDATE_TIME:
-      newState = Object.assign({}, action.minutes, action.secondsß)
+      // console.log(action) //object update time minutes undefined seconds undefined
+      
+      newState = action.minutes + ':' + action.seconds
       break
     default: return state
   }
+  return newState
 }
