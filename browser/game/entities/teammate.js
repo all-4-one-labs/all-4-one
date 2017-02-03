@@ -2,15 +2,15 @@ import HealthBar from './HealthBar.js';
 import { teamBullet } from '../engine/create.js' //change to being from bullets file
 
 export default class Teammate {
-  constructor(id, game, xcord, ycord){
+  constructor(id, game, xCord, yCord){
     this.id = id;
     this.game = game;
-    this.create(xcord, ycord);
+    this.create(xCord, yCord);
     this.nextFire = 0;
   }
 
-  create(xcord, ycord) {
-    this.sprite = this.game.add.sprite(xcord, ycord, 'dude');
+  create(xCord, yCord) {
+    this.sprite = this.game.add.sprite(xCord, yCord, 'dude');
     this.game.physics.arcade.enable(this.sprite);
     this.sprite.anchor.set(0.5);
     this.sprite.animations.add('left', [19,18,19,20], 10, true);
@@ -31,34 +31,14 @@ export default class Teammate {
   }
   fire (xCord, yCord, fireRate) {
 
-    if ((xCord || yCord) && this.game.time.now > this.nextFire && teamBullet.bullets.countDead() > 0) {
+    if ((xCord || yCord) && this.game.time.now > this.nextFire && teamBullet.sprite.countDead() > 0) {
         this.nextFire = this.game.time.now + fireRate
-        let bullet = teamBullet.bullets.getFirstDead()
+        let bullet = teamBullet.sprite.getFirstDead()
         bullet.scale.setTo(1)
         bullet.body.setSize(20, 30)
         bullet.reset(this.sprite.x, this.sprite.y)
         this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)
-        //fire needs to be refactored when recieved and drawn by a new client
       }
-
-    // if (this.game.time.now > this.nextFire && teamBullet.bullets.countDead() > 0) {
-    //   this.nextFire = this.game.time.now + fireRate;
-    //   var bullet = teamBullet.bullets.getFirstDead();
-    //   bullet.scale.setTo(0.25);
-    //   bullet.body.setSize(20, 30);
-    //   bullet.reset(this.sprite.x, this.sprite.y);
-    //   switch (direction) {
-    //     case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.sprite.y, 500); break;
-    //     case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.sprite.y, 500); break;
-    //     case 'up': this.game.physics.arcade.moveToXY(bullet, this.sprite.x, -1000, 500); break;
-    //     case 'down': this.game.physics.arcade.moveToXY(bullet, this.sprite.x, 1000, 500); break;
-    //     case 'up-left': this.game.physics.arcade.moveToXY(bullet, this.sprite.x - 1000, this.sprite.y - 1000, 500); break;
-    //     case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.sprite.x + 1000, this.sprite.y - 1000, 500); break;
-    //     case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.sprite.x - 1000, this.sprite.y + 1000, 500); break;
-    //     case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.sprite.x + 1000, this.sprite.y + 1000, 500); break;
-    //     default: break;
-    //   }
-    // }
   }
   
 }

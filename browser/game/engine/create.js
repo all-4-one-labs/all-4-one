@@ -28,19 +28,21 @@ export default function create() {
   teamBullet = new Bullets(this);
 
   let text = '15:00';
-  let style = { font: "24px Arial", fill: "#ff0044", align: "center" };
+  let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
   testText = this.add.text(1215, 0, text, style)
   testText.fixedToCamera = true
 
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
-      //we don't need to be sending the entire state
+      // console.log(state)
       socket.emit('send_all_data', {
         position: state.players.position, 
         animation: state.players.animation, 
         fire: state.players.fire, 
-        rate: state.players.rate});
+        rate: state.players.rate,
+        health: state.players.health
+      });
     }, 1000/30);
   }
 

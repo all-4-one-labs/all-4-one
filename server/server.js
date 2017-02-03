@@ -30,7 +30,8 @@ io.on('connection', (socket) => {listeners(io, socket)})
 
 broadcastGameState(io)
 
-let time = 15 * 60
+//don't forget to change this back to 15 minutes
+let time = 10 * 60
 gameTimer(time, io)
 
 app.use(express.static(resolve(__dirname, '..', 'public')))
