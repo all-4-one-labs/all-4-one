@@ -1,8 +1,7 @@
 import { moveCheck, fireBulletsCheck, spawnMonster } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
-import socket from '../../socket.js';
 import store from '../../store.js';
-import {receiveBool} from '../../reducers/players.js';
+import { updateHealth } from '../../reducers/players.js';
 
 export default class Player {
   constructor(id, game){
@@ -32,6 +31,7 @@ export default class Player {
     // this.player.body.setSize(60, 80, 45, 35);
 
     this.player.health = 100;
+    store.dispatch(updateHealth({health: this.player.health}));
     this.player.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.player.x - 7, y: this.player.y - 40, bg: {color: 'black'}});
 
 

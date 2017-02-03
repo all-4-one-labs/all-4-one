@@ -63,7 +63,7 @@ export default class Monster {
       if (gridMonster.x > 119) gridMonster.x = 119;
       if (gridMonster.y > 79) gridMonster.y = 79;
 
-      console.log('player', playerX, playerY, 'monster', this.monster.x, this.monster.y);
+      // console.log('player', playerX, playerY, 'monster', this.monster.x, this.monster.y);
       easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
       // console.log('monster:', grid[gridMonster.x][gridMonster.y], 'player:', grid[gridPlayer.x][gridPlayer.y]);
       easystar.setIterationsPerCalculation(1000);

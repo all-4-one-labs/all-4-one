@@ -35,6 +35,7 @@ const listeners = function(io, socket){
   // });
 
   socket.on('send_all_data', (data) => {
+    // console.log(data);
     store.dispatch(receiveClientData(socket.id, data));
   })
 }
