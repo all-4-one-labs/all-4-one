@@ -1,5 +1,5 @@
 import HealthBar from './HealthBar.js';
-import { teamBullet } from '../create.js' //change to being from bullets file
+import { teamBullet } from '../engine/create.js' //change to being from bullets file
 
 export default class Teammate {
   constructor(id, game, xcord, ycord){
@@ -29,25 +29,36 @@ export default class Teammate {
     this.sprite.kill();
     this.sprite.healthBar.kill();
   }
+  fire (xCord, yCord, fireRate) {
 
-  fire(direction, rate) {
-    if (this.game.time.now > this.nextFire && teamBullet.bullets.countDead() > 0) {
-      this.nextFire = this.game.time.now + rate;
-      var bullet = teamBullet.bullets.getFirstDead();
-      bullet.scale.setTo(0.25);
-      bullet.body.setSize(20, 30);
-      bullet.reset(this.sprite.x, this.sprite.y);
-      switch (direction) {
-        case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.sprite.y, 500); break;
-        case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.sprite.y, 500); break;
-        case 'up': this.game.physics.arcade.moveToXY(bullet, this.sprite.x, -1000, 500); break;
-        case 'down': this.game.physics.arcade.moveToXY(bullet, this.sprite.x, 1000, 500); break;
-        case 'up-left': this.game.physics.arcade.moveToXY(bullet, this.sprite.x - 1000, this.sprite.y - 1000, 500); break;
-        case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.sprite.x + 1000, this.sprite.y - 1000, 500); break;
-        case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.sprite.x - 1000, this.sprite.y + 1000, 500); break;
-        case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.sprite.x + 1000, this.sprite.y + 1000, 500); break;
-        default: break;
+    if ((xCord || yCord) && this.game.time.now > this.nextFire && teamBullet.bullets.countDead() > 0) {
+        this.nextFire = this.game.time.now + fireRate
+        let bullet = teamBullet.bullets.getFirstDead()
+        bullet.scale.setTo(0.25)
+        bullet.body.setSize(20, 30)
+        bullet.reset(this.sprite.x, this.sprite.y)
+        this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)
+        //fire needs to be refactored when recieved and drawn by a new client
       }
-    }
+
+    // if (this.game.time.now > this.nextFire && teamBullet.bullets.countDead() > 0) {
+    //   this.nextFire = this.game.time.now + fireRate;
+    //   var bullet = teamBullet.bullets.getFirstDead();
+    //   bullet.scale.setTo(0.25);
+    //   bullet.body.setSize(20, 30);
+    //   bullet.reset(this.sprite.x, this.sprite.y);
+    //   switch (direction) {
+    //     case 'left' : this.game.physics.arcade.moveToXY(bullet, -1000, this.sprite.y, 500); break;
+    //     case 'right': this.game.physics.arcade.moveToXY(bullet, 1000, this.sprite.y, 500); break;
+    //     case 'up': this.game.physics.arcade.moveToXY(bullet, this.sprite.x, -1000, 500); break;
+    //     case 'down': this.game.physics.arcade.moveToXY(bullet, this.sprite.x, 1000, 500); break;
+    //     case 'up-left': this.game.physics.arcade.moveToXY(bullet, this.sprite.x - 1000, this.sprite.y - 1000, 500); break;
+    //     case 'up-right': this.game.physics.arcade.moveToXY(bullet, this.sprite.x + 1000, this.sprite.y - 1000, 500); break;
+    //     case 'down-left': this.game.physics.arcade.moveToXY(bullet, this.sprite.x - 1000, this.sprite.y + 1000, 500); break;
+    //     case 'down-right': this.game.physics.arcade.moveToXY(bullet, this.sprite.x + 1000, this.sprite.y + 1000, 500); break;
+    //     default: break;
+    //   }
+    // }
   }
+  
 }
