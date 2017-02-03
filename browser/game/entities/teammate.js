@@ -34,7 +34,7 @@ export default class Teammate {
     if ((xCord || yCord) && this.game.time.now > this.nextFire && teamBullet.sprite.countDead() > 0) {
         this.nextFire = this.game.time.now + fireRate
         let bullet = teamBullet.sprite.getFirstDead()
-        bullet.scale.setTo(0.25)
+        bullet.scale.setTo(1)
         bullet.body.setSize(20, 30)
         bullet.reset(this.sprite.x, this.sprite.y)
         this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)

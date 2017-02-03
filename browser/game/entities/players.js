@@ -1,4 +1,5 @@
-import { move, fireBullet, spawnMonster } from '../controls/controls.js';
+
+import { moveCheck, fireBulletsCheck } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 
 import store from '../../store.js';
@@ -16,6 +17,7 @@ export default class Player {
   }
 
   create() {
+
     //set up sprite sprite on the map
     this.sprite = this.game.add.sprite(0, 0, 'dude');
     this.sprite.anchor.set(0.5);
@@ -35,7 +37,6 @@ export default class Player {
     store.dispatch(updateHealth({health: this.sprite.health}));
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bg: {color: 'black'}});
 
-
     //controls
     this.cursors = this.game.input.keyboard.createCursorKeys();
     this.wasd = {
@@ -53,7 +54,4 @@ export default class Player {
     this.sprite.healthBar.setPercent(this.sprite.health);
     move.call(this);
     if (this.sprite.health > 0) fireBullet.call(this);
-    spawnMonster.call(this);
-    }
-
 }

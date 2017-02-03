@@ -1,12 +1,10 @@
-import { bullets, player, testText } from './create.js';
-import { playerCollide } from './createMap.js';
-import { monsters, monstersLocation } from '../controls/controls.js';
-import Teammate from '../entities/teammate.js';
+import { bullets, player, testText, gameMaster } from './create.js';
+import { playerCollide, bulletCollide } from './createMap.js';
+import { monsters } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateHealth } from '../../reducers/players.js';
-import gameMaster from '../controls/gameMaster.js';
+import { teammateUpdate } from './teammateUpdate.js';
 
-let LocalTeammates = {};
 
 export default function update() {
   //test text
@@ -15,9 +13,24 @@ export default function update() {
   if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" })
   // this.game.paused = true
   //  Collision
-  this.physics.arcade.collide(player.sprite, playerCollide)
 
-  player.update();
+
+  // Checks which gameMode was chosen and updates appropriately
+  if (store.getState().gameMode === 'survivor') {
+    player.update()
+    teammateUpdate.call(this, player);
+    this.physics.arcade.collide(player.sprite, playerCollide)
+  } else if (store.getState().gameMode === 'gamemaster') {
+    gameMaster.update()
+    teammateUpdate.call(this, 'gm');
+  }
+  this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
+    bullet.kill();
+  })
+
+//   lines 32 and 33 now in if statement on line 19
+//   this.physics.arcade.collide(player.sprite, playerCollide)
+//   player.update();
   // store.dispatch(updateHealth({health: player.player.health}));
   // console.log('this is the store', store.getState());
 
@@ -32,6 +45,8 @@ export default function update() {
   //handle monsters
   //#gamemaster - maybe? not sure how this logic is going to work
   for (let i = 0; i < monsters.length; i++) {
+
+    if (player) { 
       monsters[i].update(player.sprite.x, player.sprite.y);
       this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
@@ -44,8 +59,9 @@ export default function update() {
               player.kill();
               player.healthBar.kill();
           }
-      });
 
+      });
+    
       for (let j = 0; j < monsters.length; j++) {
           if (i !== j && monsters[j]) {
               this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);
@@ -62,50 +78,5 @@ export default function update() {
               monsters.splice(i, 1);
           }
       });
-  }
-
-  //render shallow teammates
-  let teammatesFromServer = store.getState().players.players;
-
-  //delete teammate if they disconnect
-  for (let id in LocalTeammates) {
-      if (!teammatesFromServer[id]) {
-          LocalTeammates[id].kill();
-          delete LocalTeammates[id];
-      }
-  }
-
-  for (let id in teammatesFromServer) {
-    if (id !== player.id) {
-      if (LocalTeammates[id] && teammatesFromServer[id].position){
-        this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
-
-        //healthbar
-        LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
-        LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health);
-
-        if (teammatesFromServer[id].health <= 0) {
-          LocalTeammates[id].kill();
-        }
-
-        //bullets
-          if (teammatesFromServer[id].fire[0] || teammatesFromServer[id].fire[1]) {
-            LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate);
-          }
-        //if the player already exists, just move them
-        if (teammatesFromServer[id].animation !== 'stop') {
-          LocalTeammates[id].sprite.x = teammatesFromServer[id].position.x;
-          LocalTeammates[id].sprite.y = teammatesFromServer[id].position.y;
-          LocalTeammates[id].sprite.animations.play(teammatesFromServer[id].animation);
-
-        } else {
-          LocalTeammates[id].sprite.animations.stop();
-          LocalTeammates[id].sprite.frame = 7;
-        }
-      //for a new teammate, create them at the place they need to be
-      } else if (teammatesFromServer[id].position) {
-        LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y);
-      }
-    }
   }
 }

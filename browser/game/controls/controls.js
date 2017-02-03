@@ -1,13 +1,9 @@
 import { bullets } from '../engine/create.js' //change to being from bullets file
-import Monster from '../entities/monsters.js';
 import store from '../../store.js';
 import {updatePosition, survivorFire} from '../../reducers/players.js';
 // Check for movement
 
-let monsters = [];
 let fireRate = 300;
-let monsterRate = 1000;
-var monstersLocation = [];
 
 const move = function(){
   let xCord = 0
@@ -65,15 +61,4 @@ const fireBullet = function(){
   store.dispatch(survivorFire({fire: [xCord, yCord], rate: fireRate}))
 }
 
-//#gameMaster - we need to work on this to create a monster for players
-const spawnMonster = function() {
-  if (this.game.time.now > this.nextMonster && this.game.input.activePointer.isDown) {
-    this.nextMonster = this.game.time.now + monsterRate;
-    let newMonster = new Monster(this.game, {x: this.game.input.activePointer.worldX, y: this.game.input.activePointer.worldY});
-    monsters.push(newMonster);
-    monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
-  }
-};
-
-export { move, fireBullet, spawnMonster, monsters, monstersLocation };
-
+export { moveCheck, fireBulletsCheck };

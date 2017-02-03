@@ -40,6 +40,7 @@ export default class Monster {
     this.sprite.nextAttack = 0;
     this.sprite.attackRate = 1000;
     this.sprite.body.collideWorldBounds = true;
+
   }
 
   pathHelper(path) {
