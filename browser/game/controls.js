@@ -73,7 +73,7 @@ const fire = function(direction) {
   if (this.game.time.now > this.nextFire && bullets.bullets.countDead() > 0) {
     this.nextFire = this.game.time.now + fireRate;
     var bullet = bullets.bullets.getFirstDead();
-    bullet.scale.setTo(0.25);
+    bullet.scale.setTo(1);
     bullet.body.setSize(20, 30);
     bullet.reset(this.player.x, this.player.y);
     switch (direction) {
