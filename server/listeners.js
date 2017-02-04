@@ -22,8 +22,7 @@ const listeners = function(io, socket){
     if (data.gameMode === 'survivor') {
       store.dispatch(receiveClientData(socket.id, data));
     } else {
-      console.log(data.monsters)
-      store.dispatch(updateMonsters(data.monsters))
+      store.dispatch(updateMonsters(data.monsters));
     }
   })
 }

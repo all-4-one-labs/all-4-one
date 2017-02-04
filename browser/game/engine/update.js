@@ -5,6 +5,7 @@ import store from '../../store.js';
 import { updateHealth } from '../../reducers/players.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
+import { shallowMonstersUpdate } from './shallowMonsterUpdate.js';
 
 export default function update() {
   //test text
@@ -16,16 +17,16 @@ export default function update() {
 
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
-    player.update()
+    player.update();
     teammateUpdate.call(this, player);
     this.physics.arcade.collide(player.sprite, playerCollide)
     this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
       bullet.kill();
-    })
+    });
 
     // draw the monsters
-    let survivorMonsters = store.getState().shallowMonsters
-    // console.log(store.getState())
+    shallowMonstersUpdate.call(this);
+
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster.update()
     teammateUpdate.call(this, 'gm');
