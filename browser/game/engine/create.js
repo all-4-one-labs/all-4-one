@@ -1,13 +1,18 @@
-import store from '../../store'
+import store from '../../store';
 import Survivor from '../controls/survivor.js';
 import GameMaster from '../controls/gameMaster.js';
-import socket from '../../socket'
+import socket from '../../socket';
 import Bullets from '../entities/bullets.js';
-import { createMapPrePlayer, createMapPostPlayer } from './createMap.js'
+import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg;
 
 export default function create() {
+  //sound test
+  blaster = this.add.audio('blaster');
+  epicbg = this.add.audio('epicbg');
+
+
   //this settings
   this.world.setBounds(-1920, -1280, 3840, 2560);
   this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -45,10 +50,12 @@ export default function create() {
         monsters: state.monsters,
         gameMode: state.gameMode
       });
-    }, 1000/30);
+    }, 1000/60);
   }
+
+  this.sound.setDecodedCallback([epicbg], () => epicbg.play(), this);
 
   emitClient()
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText};
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster};

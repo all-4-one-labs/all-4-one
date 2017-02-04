@@ -13,6 +13,5 @@ if( sessionStorage.getItem('mode') === 'survivor' ) {
 
 const game = new Phaser.Game(xSize, ySize, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
 game.config.disableVisibilityChange = true;
-const stage = new Phaser.Stage(game);
 
 export default game;
