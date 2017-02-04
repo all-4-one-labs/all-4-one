@@ -6,8 +6,7 @@ export default class GameMaster {
         this.game = game
         this.nextMonster = 0
         this.create = this.create.bind(this);
-        this.monster = undefined;
-        this.crosshair = undefined;
+        this.button = undefined;
     }
 
     create() {
@@ -15,11 +14,9 @@ export default class GameMaster {
     }
 
     update() {
-        if (this.crosshair) {
-            crosshairCheck.call(this);
-        }
-        if (this.monster) {
-            spawnMonster.call(this, this.monster);
+        if (this.button && this.button.key === 'crosshair') crosshairCheck.call(this);
+        else if (this.button) {
+            spawnMonster.call(this, this.button.key);
         }
     }
 

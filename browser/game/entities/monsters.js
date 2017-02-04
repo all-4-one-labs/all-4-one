@@ -27,7 +27,7 @@ export default class Monster {
 
   create(monster) {
     //set up monster sprite on the
-
+    console.log(this.spawnLocation);
     this.sprite = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, monster.name);
     this.sprite.anchor.set(0.5);
     this.sprite.scale.setTo(monster.scale);
