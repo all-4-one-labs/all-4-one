@@ -1,8 +1,5 @@
 import { gameMaster } from './create.js';
 
-let clickedMonster;
-let clickedCrosshair;
-
 function createButtons() {
     let crosshair = this.game.add.button(250, 680, 'crosshair', clickCrosshair, this, 0, 0, 0);
     let mummyC = this.game.add.button(550, 680, 'mummyC', clickMonster, this, 2, 1, 0);
@@ -37,7 +34,6 @@ function clickMonster(id) {
 function clickCrosshair(id) {
     gameMaster.crosshair = id.key;
     gameMaster.monster = undefined;
-
 }
 
 export { createButtons };

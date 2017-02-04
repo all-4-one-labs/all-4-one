@@ -6,6 +6,30 @@ let monsterRate = 1000;
 let monsters = [];
 let monstersLocation = [];
 let crosshair;
+
+/*
+Monster Dictionary:
+  To add a monster, first, add this logic to createButton.js:    
+  let monsterNameInPreload = this.game.add.button(400, 680, 'monsterNameInPreload', clickMonster, this, 2, 1, 0);
+
+  In monsterDictionary object, add 
+    monsterNameInPreload: {
+      name: monsterNameInPreload,
+      scale: 2 (if sprite 16x16, otherwise 1 if sprite 32x32),
+      animations: {
+        idle: [],
+        left: [],
+        right: []
+      },
+      body: [] for bounds size,
+      health: #,
+      attackRate: # (1000 = once per second, 500 = twice per second),
+      attack: # (power of attack, how much health will be taken off player),
+      speed: # (how many pixels moved per 1 second),
+      chanceOfAttack: 0.# (percent as decimal)
+    }
+*/
+
 const monsterDictionary = {
   mummyC: {
     name: 'mummyC',
@@ -18,7 +42,9 @@ const monsterDictionary = {
     body: [12, 12, 2, 4],
     health: 100,
     attackRate: 1000,
-    attack: 20
+    attack: 10,
+    speed: 100,
+    chanceOfAttack: 0.5
   },
   lurkerC: {
     name: 'lurkerC',
@@ -29,9 +55,11 @@ const monsterDictionary = {
       right: [0, 1, 2, 3, 4]
     },
     body: [12, 12, 2, 4],
-    health: 100,
+    health: 200,
     attackRate: 1000,
-    attack: 20
+    attack: 20,
+    speed: 50,
+    chanceOfAttack: 0.75
   },
   slimeB: {
     name: 'slimeB',
@@ -42,9 +70,11 @@ const monsterDictionary = {
       right: [0, 1, 2, 3, 4, 5, 6, 7, 8]
     },
     body: [12, 12, 2, 4],
-    health: 100,
+    health: 10,
     attackRate: 1000,
-    attack: 20
+    attack: 20,
+    speed: 150,
+    chanceOfAttack: 0.1
   }
 };
 
@@ -81,7 +111,7 @@ const spawnMonster = function(clickedMonster) {
   else {
     if (crosshair) spawnLocation = {x: crosshair.x, y: crosshair.y};
     else {
-      spawnLocation = {x: 10, y: 10};
+      spawnLocation = {x: 0, y: 0};
     }
   }
 

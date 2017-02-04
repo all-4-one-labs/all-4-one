@@ -1,6 +1,7 @@
 // import { player } from './create.js'
 import store from '../../store.js'
 import Teammate from '../entities/teammate.js'
+import {bullets} from './create.js'
 
 let LocalTeammates = {}
 
@@ -20,6 +21,15 @@ function teammateUpdate(player) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
 
         this.physics.arcade.collide(player.player, LocalTeammates[id].sprite);
+        this.physics.arcade.collide(bullets.sprite, LocalTeammates[id].sprite, (teammate, bullet) => {
+          bullet.kill();
+          teammate.health -= 20;
+          if (teammate.health <= 0) {
+            teammate.kill();
+            teammate.healthBar.kill()
+            
+          }
+        })
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
