@@ -17,9 +17,3 @@ export default (state = initialState, action) => {
   }
   return newState
 }
-
-module.exports = { updateMonsters }
-
-
-
-///reducers are combining wrong so that the data is in the player object

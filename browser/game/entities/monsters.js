@@ -16,12 +16,14 @@ easystar.setAcceptableTiles([0]);
 
 export default class Monster {
 
-  constructor(game, spawnLocation){
+  constructor(game, spawnLocation, id){
     this.game = game;
     this.spawnLocation = spawnLocation;
     this.create();
     this.pathHelper = this.pathHelper.bind(this);
     this.nextPathfinding = 0;
+    this.id = id
+    this.animation = 'idle'
   }
 
   create() {
@@ -43,7 +45,7 @@ export default class Monster {
 
   pathHelper(path) {
     if (path && path.length > 0) {
-      // console.log(path);
+      // console.log(path);1
       this.game.physics.arcade.moveToXY(this.sprite, path[1].x * 32, path[1].y * 32, 100);
     } else {
       this.game.physics.arcade.moveToXY(this.sprite, 1920, 1280, 100);
@@ -53,9 +55,11 @@ export default class Monster {
   update(playerX, playerY) {
     if (playerX < this.sprite.x) {
       this.sprite.animations.play('left');
+      this.animation = 'left'
     }
     else if (playerX > this.sprite.x) {
       this.sprite.animations.play('right');
+      this.animation = 'right'
     }
 
     if (this.game.time.now > this.nextPathfinding) {
