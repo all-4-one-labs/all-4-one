@@ -2,15 +2,16 @@ const initialState = []
 
 const UPDATE_MONSTERS = 'UPDATE_MONSTERS'
 
-export const updateMonsters = (monsterArray) => ({
+const updateMonsters = (monsterArray) => ({
   type: UPDATE_MONSTERS,
   monsterArray
 })
 
-export default (state = initialState, action) => {
+const monsterReducers = (state = initialState, action) => {
   let newState
   switch (action.type) {
     case UPDATE_MONSTERS:
+      console.log('monster reducer', action)
       newState = action.monsterArray
       break
     default: return state
@@ -18,8 +19,4 @@ export default (state = initialState, action) => {
   return newState
 }
 
-module.exports = { updateMonsters }
-
-
-
-///reducers are combining wrong so that the data is in the player object
+module.exports = {updateMonsters, monsterReducers}

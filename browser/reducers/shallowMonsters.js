@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
   let newState
   switch (action.type) {
     case RECEIVE_MONSTER_DATA:
-      console.log(data)
+      // console.log(data)
       newState = action.data
       break
     default: return state
