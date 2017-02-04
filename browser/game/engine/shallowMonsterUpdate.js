@@ -1,12 +1,10 @@
-// import { player } from './create.js'
-import store from '../../store.js'
-import shallowMonster from '../entities/shallowMonster.js'
+import store from '../../store.js';
+import shallowMonster from '../entities/shallowMonster.js';
 
-let LocalMonsters = {}
+let LocalMonsters = {};
 
 function shallowMonsterUpdate(player) {
-  let monstersFromServer = store.getState().monsters;
-
+  let monstersFromServer = store.getState().shallowMonsters;
   //delete monster if they die
   for (let id in LocalMonsters) {
       if (!monstersFromServer[id]) {
@@ -18,7 +16,6 @@ function shallowMonsterUpdate(player) {
   for (let id in monstersFromServer) {
     //the first half of this conditional decides whether we create the shallow object or just update it
     if (LocalMonsters[id] && monstersFromServer[id].x){
-
       this.physics.arcade.collide(player.sprite, LocalMonsters[id].sprite);
 
       //healthbar
@@ -44,9 +41,9 @@ function shallowMonsterUpdate(player) {
       }
     //otherwise we create them at the place they need to be
     } else if (monstersFromServer[id].x) {
-    LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y);
+      LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y);
     }
   }
 }
 
-export {shallowMonsterUpdate, LocalMonsters}
+export {shallowMonsterUpdate, LocalMonsters};

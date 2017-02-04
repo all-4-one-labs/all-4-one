@@ -5,15 +5,17 @@ import store from '../../store.js';
 import { updateHealth } from '../../reducers/players.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
-import { shallowMonstersUpdate } from './shallowMonsterUpdate.js';
+import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 
 export default function update() {
   //test text
-  let time = store.getState().game.time
-  testText.setText(time)
-  if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" })
+  let time = store.getState().game.time;
+  testText.setText(time);
+  if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" });
   // this.game.paused = true
   //  Collision
+
+  // console.log(store.getState());
 
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
@@ -25,10 +27,10 @@ export default function update() {
     });
 
     // draw the monsters
-    shallowMonstersUpdate.call(this);
+    shallowMonsterUpdate.call(this, player);
 
   } else if (store.getState().gameMode === 'gamemaster') {
-    gameMaster.update()
+    gameMaster.update();
     teammateUpdate.call(this, 'gm');
   }
 
@@ -46,7 +48,6 @@ export default function update() {
     }
 
 
-
   //player win
   if (store.getState().game.timeUp) {
       let winMessageText = 'SURVIVORS WIN';
@@ -57,32 +58,32 @@ export default function update() {
    }
   //handle gmMonsters
   //#gamemaster - maybe? not sure how this logic is going to work
-  let monstersToDispatch = []
-  for (let i = 0; i < gmMonsters.length; i++) {
-      let tempMonster = {health: gmMonsters[i].sprite.health, x: gmMonsters[i].sprite.x, y: gmMonsters[i].sprite.y, animation: gmMonsters[i].animation, id: gmMonsters[i].id}
-      monstersToDispatch.push(tempMonster)
+  let monstersToDispatch = {};
+  for (let id in gmMonsters) {
+      let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation};
+      monstersToDispatch[id] = tempMonster;
       //choose the closest survivor and path to them
-      let closest
-      let distanceToClosest = 0
-      for (let id in LocalTeammates) {
-        if (LocalTeammates[id].sprite) {
-          let currentDistance = Phaser.Math.distance(gmMonsters[i].sprite.x, gmMonsters[i].sprite.y, LocalTeammates[id].sprite.x, LocalTeammates[id].sprite.y)
+      let closest;
+      let distanceToClosest = 0;
+      for (let teammateID in LocalTeammates) {
+        if (LocalTeammates[teammateID].sprite) {
+          let currentDistance = Phaser.Math.distance(gmMonsters[id].sprite.x, gmMonsters[id].sprite.y, LocalTeammates[teammateID].sprite.x, LocalTeammates[teammateID].sprite.y);
           if (currentDistance > distanceToClosest) {
-            distanceToClosest = currentDistance
-            closest = LocalTeammates[id]
+            distanceToClosest = currentDistance;
+            closest = LocalTeammates[teammateID];
           }
         }
       }
 
       //gmMonsters path to the player
       //GM
-      if (closest) gmMonsters[i].update(closest.sprite.x, closest.sprite.y)
-      //old: gmMonsters[i].update(player.sprite.x, player.sprite.y);
+      if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y);
+      //old: gmMonsters[id].update(player.sprite.x, player.sprite.y);
 
     if (player) {
       //gmMonsters attack the player
       //TBD
-      this.physics.arcade.collide(player.sprite, gmMonsters[i].sprite, (player, monster) => {
+      this.physics.arcade.collide(player.sprite, gmMonsters[id].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
               player.body.immovable = true;
               monster.nextAttack = this.game.time.now + monster.attackRate;
@@ -97,30 +98,30 @@ export default function update() {
 
       //gmMonsters collide with each other
       //GM
-      for (let j = 0; j < gmMonsters.length; j++) {
-          if (i !== j && gmMonsters[j]) {
-              this.physics.arcade.collide(gmMonsters[i].sprite, gmMonsters[j].sprite);
+      for (let otherIDs in gmMonsters) {
+          if (id !== otherIDs) {
+              this.physics.arcade.collide(gmMonsters[id].sprite, gmMonsters[otherIDs].sprite);
           }
       }
 
       //gmMonsters collide with the player
       //TBD
-      this.physics.arcade.collide(gmMonsters[i].sprite, playerCollide);
+      this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
 
       //gmMonsters collide with bullets
       //player
-      this.physics.arcade.collide(bullets.sprite, gmMonsters[i].sprite, (monster, bullet) => {
+      this.physics.arcade.collide(bullets.sprite, gmMonsters[id].sprite, (monster, bullet) => {
           bullet.kill();
           monster.health -= 20;
           if (monster.health <= 0 ) {
               monster.kill();
               monster.healthBar.kill();
-              gmMonsters.splice(i, 1);
+              delete gmMonsters[id];
           }
       });
 
 
     }
   }
-  store.dispatch(updateMonsters(monstersToDispatch))
+  store.dispatch(updateMonsters(monstersToDispatch));
 }

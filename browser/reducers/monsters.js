@@ -1,19 +1,19 @@
-const initialState = []
+const initialState = {};
 
-const UPDATE_MONSTERS = 'UPDATE_MONSTERS'
+const UPDATE_MONSTERS = 'UPDATE_MONSTERS';
 
-export const updateMonsters = (monsterArray) => ({
+export const updateMonsters = (monsterObject) => ({
   type: UPDATE_MONSTERS,
-  monsterArray
-})
+  monsterObject
+});
 
 export default (state = initialState, action) => {
-  let newState
+  let newState;
   switch (action.type) {
     case UPDATE_MONSTERS:
-      newState = action.monsterArray
-      break
-    default: return state
+      newState = action.monsterObject;
+      break;
+    default: return state;
   }
-  return newState
-}
+  return newState;
+};

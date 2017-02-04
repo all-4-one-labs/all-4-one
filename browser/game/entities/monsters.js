@@ -16,14 +16,13 @@ easystar.setAcceptableTiles([0]);
 
 export default class Monster {
 
-  constructor(game, spawnLocation, id){
+  constructor(game, spawnLocation){
     this.game = game;
     this.spawnLocation = spawnLocation;
     this.create();
     this.pathHelper = this.pathHelper.bind(this);
     this.nextPathfinding = 0;
-    this.id = id
-    this.animation = 'idle'
+    this.animation = 'idle';
   }
 
   create() {
