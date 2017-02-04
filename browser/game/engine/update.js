@@ -60,15 +60,13 @@ export default function update() {
 
 
   for (let i = 0; i < monsters.length; i++) {
-    // monsters[i].update(monsters[i]); //take out
+    monsters[i].update(monsters[i]); //take out
     if (player) {
       monsters[i].update(player.sprite.x, player.sprite.y);
       this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
           if (this.game.time.now > monster.nextAttack) {
-              // console.log(monster)
               player.body.immovable = true;
               monster.nextAttack = this.game.time.now + monster.attackRate;
-              console.log(monster.chanceOfAttack)
               if (Math.random() < monster.chanceOfAttack) {
                   player.health -= monster.attack;
               }

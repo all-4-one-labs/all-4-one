@@ -9,10 +9,10 @@ let crosshair;
 
 /*
 Monster Dictionary:
-  To add a monster, first, add this logic to createButton.js:    
+  To add a monster, first, add this logic to createButton.js:
   let monsterNameInPreload = this.game.add.button(400, 680, 'monsterNameInPreload', clickMonster, this, 2, 1, 0);
 
-  In monsterDictionary object, add 
+  In monsterDictionary object, add
     monsterNameInPreload: {
       name: monsterNameInPreload,
       scale: 2 (if sprite 16x16, otherwise 1 if sprite 32x32),
@@ -85,8 +85,9 @@ const crosshairCheck = function() {
   if ((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) {
     if (this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown) {
       if(crosshair) crosshair.kill();
-      crosshair = this.game.add.sprite(pointer.x,pointer.y, 'crosshair');
+      crosshair = this.game.add.sprite(pointer.worldX, pointer.worldY, 'crosshair');
       crosshair.scale.setTo(0.2);
+      crosshair.anchor.set(0.5);
     }
   }
   else {

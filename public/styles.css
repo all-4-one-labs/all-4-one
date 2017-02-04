@@ -42,3 +42,18 @@ a:hover {
     font-color: red;
     background-color: turquoise;
 }
+
+#continue {
+    position:fixed;
+    top:50%;
+    left: 40%;
+    font-size: 50px;
+}
+
+#instructions {
+    position:fixed;
+    top:30%;
+    left:30%;
+    font-size: 80px;
+}
+
