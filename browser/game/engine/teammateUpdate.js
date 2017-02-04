@@ -18,7 +18,7 @@ function teammateUpdate(player) {
     if (id !== player.id) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
 
-        this.physics.arcade.collide(player.player, LocalTeammates[id].sprite);
+        this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
