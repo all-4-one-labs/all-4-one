@@ -41,13 +41,14 @@ export default function create() {
   const emitClient = () => {
     setInterval(() => {
       let state = store.getState();
-      // console.log(state)
       socket.emit('send_all_data', {
         position: state.players.position,
         animation: state.players.animation,
         fire: state.players.fire,
         rate: state.players.rate,
-        health: state.players.health
+        health: state.players.health,
+        monsters: state.monsters,
+        gameMode: state.gameMode
       });
     }, 1000/60);
   }

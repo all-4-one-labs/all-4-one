@@ -16,10 +16,9 @@ function teammateUpdate(player) {
 
   for (let id in teammatesFromServer) {
     if (id !== player.id) {
-      //perhaps we don't need the second half of the conditional below....add initial state?????????????
       if (LocalTeammates[id] && teammatesFromServer[id].position){
 
-        this.physics.arcade.collide(player.player, LocalTeammates[id].sprite);
+        this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
@@ -50,4 +49,4 @@ function teammateUpdate(player) {
   }
 }
 
-export {teammateUpdate}
+export {teammateUpdate, LocalTeammates}

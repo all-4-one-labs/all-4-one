@@ -22,11 +22,10 @@ export default class Monster {
     this.create();
     this.pathHelper = this.pathHelper.bind(this);
     this.nextPathfinding = 0;
+    this.animation = 'idle';
   }
 
   create() {
-    //set up monster sprite on the 
-
     this.sprite = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, 'monsterA');
     this.sprite.anchor.set(0.5);
     this.sprite.scale.setTo(2);
@@ -45,7 +44,7 @@ export default class Monster {
 
   pathHelper(path) {
     if (path && path.length > 0) {
-      // console.log(path);
+      // console.log(path);1
       this.game.physics.arcade.moveToXY(this.sprite, path[1].x * 32, path[1].y * 32, 100);
     } else {
       this.game.physics.arcade.moveToXY(this.sprite, 1920, 1280, 100);
@@ -55,9 +54,11 @@ export default class Monster {
   update(playerX, playerY) {
     if (playerX < this.sprite.x) {
       this.sprite.animations.play('left');
+      this.animation = 'left'
     }
     else if (playerX > this.sprite.x) {
       this.sprite.animations.play('right');
+      this.animation = 'right'
     }
 
     if (this.game.time.now > this.nextPathfinding) {
