@@ -1,10 +1,16 @@
-let clickedMonster;
+import { gameMaster } from './create.js';
 
+let clickedMonster;
+let clickedCrosshair;
 
 function createButtons() {
-    let mummyC = this.game.add.button(400, 680, 'mummyC', clickMonster, this, 2, 1, 0);
-    let lurkerC = this.game.add.button(600, 680, 'lurkerC', clickMonster, this, 2, 1, 0);
-    let slimeB = this.game.add.button(800, 680, 'slimeB', clickMonster, this, 2, 1, 0);
+    let crosshair = this.game.add.button(250, 680, 'crosshair', clickCrosshair, this, 0, 0, 0);
+    let mummyC = this.game.add.button(550, 680, 'mummyC', clickMonster, this, 2, 1, 0);
+    let lurkerC = this.game.add.button(850, 680, 'lurkerC', clickMonster, this, 2, 1, 0);
+    let slimeB = this.game.add.button(1150, 680, 'slimeB', clickMonster, this, 2, 1, 0);
+
+    crosshair.height = 30;
+    crosshair.width = 30;
 
     mummyC.height = 30;
     mummyC.width = 30;
@@ -24,7 +30,14 @@ function createButtons() {
 }
 
 function clickMonster(id) {
-    clickedMonster = id.key;
+    gameMaster.monster = id.key;
+    gameMaster.crosshair = undefined;
 }
 
-export { createButtons, clickedMonster };
+function clickCrosshair(id) {
+    gameMaster.crosshair = id.key;
+    gameMaster.monster = undefined;
+
+}
+
+export { createButtons };

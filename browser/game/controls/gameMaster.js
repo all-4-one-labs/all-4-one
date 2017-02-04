@@ -1,11 +1,13 @@
-import { spawnMonster } from './gameMasterControls.js';
-import { createButtons, clickedMonster } from '../engine/createButtons.js';
+import { spawnMonster, crosshairCheck } from './gameMasterControls.js';
+import { createButtons } from '../engine/createButtons.js';
 
 export default class GameMaster {
     constructor(game){
         this.game = game
         this.nextMonster = 0
-        this.create = this.create.bind(this)
+        this.create = this.create.bind(this);
+        this.monster = undefined;
+        this.crosshair = undefined;
     }
 
     create() {
@@ -13,7 +15,12 @@ export default class GameMaster {
     }
 
     update() {
-        spawnMonster.call(this, clickedMonster);
+        if (this.crosshair) {
+            crosshairCheck.call(this);
+        }
+        if (this.monster) {
+            spawnMonster.call(this, this.monster);
+        }
     }
 
 }

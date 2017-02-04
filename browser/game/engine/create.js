@@ -4,7 +4,6 @@ import GameMaster from '../controls/gameMaster.js';
 import socket from '../../socket'
 import Bullets from '../entities/bullets.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js'
-import { createButtons } from './createButtons.js';
 
 let player, bullets, teamBullet, survivor, gameMaster, testText;
 

@@ -5,6 +5,7 @@ import store from '../../store.js';
 let monsterRate = 1000;
 let monsters = [];
 let monstersLocation = [];
+let crosshair;
 const monsterDictionary = {
   mummyC: {
     name: 'mummyC',
@@ -47,22 +48,18 @@ const monsterDictionary = {
   }
 };
 
-const spawnMonster = function(clickedMonster) {
-  let pointer = this.game.input.activePointer
-  let text = 'CAN\'T SPAWN HERE'
+const crosshairCheck = function() {
+  let text = 'CAN\'T PLACE HERE'
   let style = { font: "24px Arial", fill: "#ffffff", align: "center" }
-  let enemyPlayers = store.getState().players.players;
-  if (!enemyPlayers) enemyPlayers = {}
-  let playerMultiplier = Object.keys(enemyPlayers).length;
-
+  let pointer = this.game.input.activePointer;
   if ((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) {
-    if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster) {
-      this.nextMonster = this.game.time.now + monsterRate/playerMultiplier;
-      let newMonster = new Monster(this.game, {x: pointer.worldX, y: pointer.worldY}, monsterDictionary[clickedMonster]);
-      monsters.push(newMonster);
-      monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
+    if (this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown) {
+      if(crosshair) crosshair.kill();
+      crosshair = this.game.add.sprite(pointer.x,pointer.y, 'crosshair');
+      crosshair.scale.setTo(0.2);
     }
-  } else {
+  }
+  else {
     if (this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown) {
       let alert = this.game.add.text(540, 360, text, style)
       alert.fixedToCamera = true;
@@ -71,7 +68,29 @@ const spawnMonster = function(clickedMonster) {
       }, 1000)
     }
   }
+}
 
+const spawnMonster = function(clickedMonster) {
+  let enemyPlayers = store.getState().players.players;
+  let spawnLocation;
+  let pointer = this.game.input.activePointer;
+  if (!enemyPlayers) enemyPlayers = {};
+  let playerMultiplier = Object.keys(enemyPlayers).length;
+
+  if ((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) spawnLocation = {x: pointer.worldX, y: pointer.worldY}
+  else {
+    if (crosshair) spawnLocation = {x: crosshair.x, y: crosshair.y};
+    else {
+      spawnLocation = {x: 10, y: 10};
+    }
+  }
+
+  if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster) {
+      this.nextMonster = this.game.time.now + monsterRate/ playerMultiplier;
+      let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster]);
+      monsters.push(newMonster);
+      monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
+  }
 };
 
-export {spawnMonster, monsters, monstersLocation}
+export {spawnMonster, monsters, monstersLocation, crosshairCheck}
