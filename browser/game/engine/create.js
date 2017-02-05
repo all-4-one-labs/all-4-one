@@ -18,25 +18,24 @@ export default function create() {
   this.physics.startSystem(Phaser.Physics.ARCADE);
 
   // map, order matters!
-  createMapPrePlayer(this)
+  createMapPrePlayer(this);
 
   if (store.getState().gameMode === 'survivor') {
     survivor = new Survivor(this);
     player = survivor.createPlayer();
     bullets = survivor.createBullets();
-    console.log('create', bullets)
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster = new GameMaster(this);
   }
 
-  createMapPostPlayer()
+  createMapPostPlayer();
 
   teamBullet = new Bullets(this);
 
   let text = '15:00';
   let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
-  testText = this.add.text(1215, 0, text, style)
-  testText.fixedToCamera = true
+  testText = this.add.text(1215, 0, text, style);
+  testText.fixedToCamera = true;
 
   const emitClient = () => {
     setInterval(() => {
@@ -50,12 +49,12 @@ export default function create() {
         monsters: state.monsters,
         gameMode: state.gameMode
       });
-    }, 1000/60);
-  }
+    }, 1000 / 60);
+  };
 
   this.sound.setDecodedCallback([epicbg], () => epicbg.play(), this);
 
-  emitClient()
+  emitClient();
 }
 
 export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster};

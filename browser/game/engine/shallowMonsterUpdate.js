@@ -1,5 +1,7 @@
 import store from '../../store.js';
 import shallowMonster from '../entities/shallowMonster.js';
+import { updateHealth } from '../../reducers/players.js';
+import { bullets } from './create.js';
 
 let LocalMonsters = {};
 
@@ -16,7 +18,24 @@ function shallowMonsterUpdate(player) {
   for (let id in monstersFromServer) {
     //the first half of this conditional decides whether we create the shallow object or just update it
     if (LocalMonsters[id] && monstersFromServer[id].x){
-      this.physics.arcade.collide(player.sprite, LocalMonsters[id].sprite);
+      //player collision with monsters - survivor side
+      this.physics.arcade.collide(player.sprite, LocalMonsters[id].sprite, (player, monster) => {
+        if (this.game.time.now > monster.nextAttack) {
+          player.body.immovable = true;
+          monster.nextAttack = this.game.time.now + monster.attackRate;
+          player.health -= 20;
+          store.dispatch(updateHealth({health: player.health}));
+        }
+        if (player.health <= 0) {
+          player.kill();
+          player.healthBar.kill();
+        }
+      });
+
+      //bullet collision with monsters - survivor side
+      this.physics.arcade.collide(bullets.sprite, LocalMonsters[id].sprite, (monster, bullet) => {
+        bullet.kill();
+      });
 
       //healthbar
       LocalMonsters[id].sprite.healthBar.setPosition(LocalMonsters[id].sprite.x - 7, LocalMonsters[id].sprite.y - 40);

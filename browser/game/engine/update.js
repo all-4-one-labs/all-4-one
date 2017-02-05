@@ -1,11 +1,11 @@
-import { bullets, player, testText, gameMaster } from './create.js';
+import { bullets, player, testText, gameMaster, teamBullet } from './create.js';
 import { playerCollide, bulletCollide } from './createMap.js';
 import { gmMonsters } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
-import { updateHealth } from '../../reducers/players.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
+// import { updateHealth } from '../../reducers/players.js';
 
 export default function update() {
   //test text
@@ -56,72 +56,55 @@ export default function update() {
       winMessage.fixedToCamera = true
       this.game.paused = true
    }
+
   //handle gmMonsters
   //#gamemaster - maybe? not sure how this logic is going to work
   let monstersToDispatch = {};
   for (let id in gmMonsters) {
-      let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation};
-      monstersToDispatch[id] = tempMonster;
-      //choose the closest survivor and path to them
-      let closest;
-      let distanceToClosest = 0;
-      for (let teammateID in LocalTeammates) {
-        if (LocalTeammates[teammateID].sprite) {
-          let currentDistance = Phaser.Math.distance(gmMonsters[id].sprite.x, gmMonsters[id].sprite.y, LocalTeammates[teammateID].sprite.x, LocalTeammates[teammateID].sprite.y);
-          if (currentDistance > distanceToClosest) {
-            distanceToClosest = currentDistance;
-            closest = LocalTeammates[teammateID];
-          }
+    let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation};
+    monstersToDispatch[id] = tempMonster;
+
+    //variables for pathfinding
+    let closest;
+    let distanceToClosest = 0;
+    //iterating through teammates
+    for (let teammateID in LocalTeammates) {
+    //gmMonsters collide with player
+      this.physics.arcade.collide(gmMonsters[id].sprite, LocalTeammates[teammateID]);
+
+    //choose the closest survivor and path to them
+      if (LocalTeammates[teammateID].sprite) {
+        let currentDistance = Phaser.Math.distance(gmMonsters[id].sprite.x, gmMonsters[id].sprite.y, LocalTeammates[teammateID].sprite.x, LocalTeammates[teammateID].sprite.y);
+        if (currentDistance > distanceToClosest) {
+          distanceToClosest = currentDistance;
+          closest = LocalTeammates[teammateID];
         }
       }
-
-      //gmMonsters path to the player
-      //GM
-      if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y);
-      //old: gmMonsters[id].update(player.sprite.x, player.sprite.y);
-
-    if (player) {
-      //gmMonsters attack the player
-      //TBD
-      this.physics.arcade.collide(player.sprite, gmMonsters[id].sprite, (player, monster) => {
-          if (this.game.time.now > monster.nextAttack) {
-              player.body.immovable = true;
-              monster.nextAttack = this.game.time.now + monster.attackRate;
-              player.health -= 20;
-              store.dispatch(updateHealth({health: player.health}));
-          }
-          if (player.health <= 0) {
-              player.kill();
-              player.healthBar.kill();
-          }
-      });
-
-      //gmMonsters collide with each other
-      //GM
-      for (let otherIDs in gmMonsters) {
-          if (id !== otherIDs) {
-              this.physics.arcade.collide(gmMonsters[id].sprite, gmMonsters[otherIDs].sprite);
-          }
-      }
-
-      //gmMonsters collide with the player
-      //TBD
-      this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
-
-      //gmMonsters collide with bullets
-      //player
-      this.physics.arcade.collide(bullets.sprite, gmMonsters[id].sprite, (monster, bullet) => {
-          bullet.kill();
-          monster.health -= 20;
-          if (monster.health <= 0 ) {
-              monster.kill();
-              monster.healthBar.kill();
-              delete gmMonsters[id];
-          }
-      });
-
-
     }
+
+    //gmMonsters path to the player
+    if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y);
+
+    //gmMonsters collide with map
+    this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
+
+    //gmMonsters collide with each other
+    for (let otherIDs in gmMonsters) {
+        if (id !== otherIDs) {
+            this.physics.arcade.collide(gmMonsters[id].sprite, gmMonsters[otherIDs].sprite);
+        }
+    }
+
+    //gmMonsters collide with bullets and deal damage
+    this.physics.arcade.collide(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
+      bullet.kill();
+      monster.health -= 20;
+      if (monster.health <= 0 ) {
+        monster.kill();
+        monster.healthBar.kill();
+        delete gmMonsters[id];
+      }
+    });
   }
   store.dispatch(updateMonsters(monstersToDispatch));
 }

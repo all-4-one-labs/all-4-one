@@ -16,6 +16,8 @@ export default class shallowMonster {
     this.sprite.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, true);
     this.game.physics.arcade.enable(this.sprite);
     this.sprite.health = 100;
+    this.sprite.nextAttack = 0;
+    this.sprite.attackRate = 1000;
     this.sprite.body.immovable = true;
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bar: {color: '#ed2a2a'}, bg: {color: 'black'}});
   }
