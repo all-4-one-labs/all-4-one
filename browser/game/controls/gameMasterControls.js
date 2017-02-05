@@ -118,7 +118,6 @@ const spawnMonster = function(clickedMonster) {
 
   if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster) {
       this.nextMonster = this.game.time.now + monsterRate/ playerMultiplier;
-      console.log(spawnLocation);
       let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster]);
       monsters.push(newMonster);
       monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
