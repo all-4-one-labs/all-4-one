@@ -16,7 +16,7 @@ export default class GameMaster {
     update() {
         if (this.button && this.button.key === 'crosshair') crosshairCheck.call(this);
         else if (this.button) {
-            spawnMonster.call(this, this.button.key);
+            spawnMonster.call(this, this.button);
         }
     }
 

@@ -1,11 +1,9 @@
 import Monster from '../entities/monsters.js';
 import store from '../../store.js';
 
-
-let monsterRate = 1000;
 let monsters = [];
-let monstersLocation = [];
 let crosshair;
+// let monstersLocation = [];
 
 /*
 Monster Dictionary:
@@ -26,7 +24,10 @@ Monster Dictionary:
       attackRate: # (1000 = once per second, 500 = twice per second),
       attack: # (power of attack, how much health will be taken off player),
       speed: # (how many pixels moved per 1 second),
-      chanceOfAttack: 0.# (percent as decimal)
+      chanceOfAttack: 0.# (percent as decimal),
+      spawnRate: how fast to spawn,
+      clickableFrame: frame to show when monster is available,
+      unclickableFrame: frame to show when monster is in cooldown phase
     }
 */
 
@@ -44,7 +45,10 @@ const monsterDictionary = {
     attackRate: 1000,
     attack: 10,
     speed: 100,
-    chanceOfAttack: 0.5
+    chanceOfAttack: 0.5,
+    spawnRate: 1000,
+    clickableFrame: 2,
+    unclickableFrame: 3
   },
   lurkerC: {
     name: 'lurkerC',
@@ -59,7 +63,10 @@ const monsterDictionary = {
     attackRate: 1000,
     attack: 20,
     speed: 50,
-    chanceOfAttack: 0.75
+    chanceOfAttack: 0.75,
+    spawnRate: 1500,
+    clickableFrame: 2,
+    unclickableFrame: 3
   },
   slimeB: {
     name: 'slimeB',
@@ -74,7 +81,10 @@ const monsterDictionary = {
     attackRate: 1000,
     attack: 20,
     speed: 150,
-    chanceOfAttack: 0.1
+    chanceOfAttack: 0.1,
+    spawnRate: 500,
+    clickableFrame: 2,
+    unclickableFrame: 3
   }
 };
 
@@ -116,12 +126,16 @@ const spawnMonster = function(clickedMonster) {
     }
   }
 
-  if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster) {
-      this.nextMonster = this.game.time.now + monsterRate/ playerMultiplier;
-      let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster]);
+  if (this.game.time.now > this.nextMonster && this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).isDown && clickedMonster.key) {
+      this.nextMonster = this.game.time.now + monsterDictionary[clickedMonster.key].spawnRate / playerMultiplier;
+      let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster.key]);
+      clickedMonster.frame = monsterDictionary[clickedMonster.key].unclickableFrame;
       monsters.push(newMonster);
-      monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
+      // monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
+      setTimeout(() => {
+        clickedMonster.frame = monsterDictionary[clickedMonster.key].clickableFrame;
+      }, monsterDictionary[clickedMonster.key].spawnRate);
   }
 };
 
-export {spawnMonster, monsters, monstersLocation, crosshairCheck }
+export {spawnMonster, monsters, crosshairCheck };
