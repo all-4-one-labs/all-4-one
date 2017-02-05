@@ -27,6 +27,8 @@ export default class Monster {
 
   create(monster) {
     this.sprite = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, monster.name);
+    this.sprite.worldPosition.x = this.spawnLocation.x;
+    this.sprite.worldPosition.y = this.spawnLocation.y;
     this.sprite.anchor.set(0.5);
     this.sprite.scale.setTo(monster.scale);
     this.sprite.animations.add('idle', monster.animations.idle, 20, true);
@@ -57,7 +59,7 @@ export default class Monster {
     this.sprite.animations.play('right');
     this.game.physics.arcade.moveToXY(this.sprite, 1920, 1280, this.sprite.speed);
     this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
-    this.sprite.healthBar.setPercent(this.sprite.health);
+    this.sprite.healthBar.setPercent(100);
   }
 
   // this is the real update

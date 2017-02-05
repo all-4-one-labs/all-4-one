@@ -14,20 +14,6 @@ export default function update() {
   // this.game.paused = true
   //  Collision
 
-  //camera move
-    if (this.input.keyboard.addKey(Phaser.Keyboard.W).isDown) {
-        this.game.camera.y -= 15;
-    }
-    else if (this.input.keyboard.addKey(Phaser.Keyboard.A).isDown) {
-        this.game.camera.x -= 15;
-    }
-    else if (this.input.keyboard.addKey(Phaser.Keyboard.S).isDown) {
-        this.game.camera.y += 15;
-    }
-    else if (this.input.keyboard.addKey(Phaser.Keyboard.D).isDown) {
-        this.game.camera.x += 15;
-    }
-
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
     player.update()
@@ -37,7 +23,7 @@ export default function update() {
       bullet.kill();
     })
   } else if (store.getState().gameMode === 'gamemaster') {
-    gameMaster.update()
+    gameMaster.update();
     teammateUpdate.call(this, 'gm');
   }
 

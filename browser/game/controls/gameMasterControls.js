@@ -1,92 +1,24 @@
 import Monster from '../entities/monsters.js';
 import store from '../../store.js';
+import monsterDictionary from './monsterDictionary.js';
 
 let monsters = [];
 let crosshair;
-// let monstersLocation = [];
 
-/*
-Monster Dictionary:
-  To add a monster, first, add this logic to createButton.js:
-  let monsterNameInPreload = this.game.add.button(400, 680, 'monsterNameInPreload', clickMonster, this, 2, 1, 0);
-
-  In monsterDictionary object, add
-    monsterNameInPreload: {
-      name: monsterNameInPreload,
-      scale: 2 (if sprite 16x16, otherwise 1 if sprite 32x32),
-      animations: {
-        idle: [],
-        left: [],
-        right: []
-      },
-      body: [] for bounds size,
-      health: #,
-      attackRate: # (1000 = once per second, 500 = twice per second),
-      attack: # (power of attack, how much health will be taken off player),
-      speed: # (how many pixels moved per 1 second),
-      chanceOfAttack: 0.# (percent as decimal),
-      spawnRate: how fast to spawn,
-      clickableFrame: frame to show when monster is available,
-      unclickableFrame: frame to show when monster is in cooldown phase
-    }
-*/
-
-const monsterDictionary = {
-  mummyC: {
-    name: 'mummyC',
-    scale: 2,
-    animations: {
-      idle: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      left: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      right: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    },
-    body: [12, 12, 2, 4],
-    health: 100,
-    attackRate: 1000,
-    attack: 10,
-    speed: 100,
-    chanceOfAttack: 0.5,
-    spawnRate: 1000,
-    clickableFrame: 2,
-    unclickableFrame: 3
-  },
-  lurkerC: {
-    name: 'lurkerC',
-    scale: 2,
-    animations: {
-      idle: [0, 1, 2, 3, 4],
-      left: [0, 1, 2, 3, 4],
-      right: [0, 1, 2, 3, 4]
-    },
-    body: [12, 12, 2, 4],
-    health: 200,
-    attackRate: 1000,
-    attack: 20,
-    speed: 50,
-    chanceOfAttack: 0.75,
-    spawnRate: 1500,
-    clickableFrame: 2,
-    unclickableFrame: 3
-  },
-  slimeB: {
-    name: 'slimeB',
-    scale: 2,
-    animations: {
-      idle: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      left: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      right: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    body: [12, 12, 2, 4],
-    health: 10,
-    attackRate: 1000,
-    attack: 20,
-    speed: 150,
-    chanceOfAttack: 0.1,
-    spawnRate: 500,
-    clickableFrame: 2,
-    unclickableFrame: 3
-  }
-};
+const camera = function() {
+      if (this.input.keyboard.addKey(Phaser.Keyboard.W).isDown) {
+          this.game.camera.y -= 15;
+      }
+      else if (this.input.keyboard.addKey(Phaser.Keyboard.A).isDown) {
+          this.game.camera.x -= 15;
+      }
+      else if (this.input.keyboard.addKey(Phaser.Keyboard.S).isDown) {
+          this.game.camera.y += 15;
+      }
+      else if (this.input.keyboard.addKey(Phaser.Keyboard.D).isDown) {
+          this.game.camera.x += 15;
+      }
+}
 
 const crosshairCheck = function() {
   let text = 'CAN\'T PLACE HERE'
@@ -120,7 +52,7 @@ const spawnMonster = function(clickedMonster) {
 
   if ((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) spawnLocation = {x: pointer.worldX, y: pointer.worldY}
   else {
-    if (crosshair) spawnLocation = {x: crosshair.x, y: crosshair.y};
+    if (crosshair) spawnLocation = {x: crosshair.x, y: crosshair.y };
     else {
       spawnLocation = {x: 0, y: 0};
     }
@@ -131,11 +63,10 @@ const spawnMonster = function(clickedMonster) {
       let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster.key]);
       clickedMonster.frame = monsterDictionary[clickedMonster.key].unclickableFrame;
       monsters.push(newMonster);
-      // monstersLocation.push({x: newMonster.sprite.position.x, y: newMonster.sprite.position.y, health: newMonster.sprite.health });
       setTimeout(() => {
         clickedMonster.frame = monsterDictionary[clickedMonster.key].clickableFrame;
       }, monsterDictionary[clickedMonster.key].spawnRate);
   }
 };
 
-export {spawnMonster, monsters, crosshairCheck };
+export {spawnMonster, monsters, crosshairCheck, camera };

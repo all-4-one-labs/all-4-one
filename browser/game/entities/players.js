@@ -55,6 +55,5 @@ export default class Player {
     this.sprite.healthBar.setPercent(this.sprite.health);
     move.call(this);
     if (this.sprite.health > 0) fireBullet.call(this);
-    spawnMonster.call(this, 'mummyC');
   }
 }

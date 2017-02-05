@@ -1,4 +1,4 @@
-import { spawnMonster, crosshairCheck } from './gameMasterControls.js';
+import { spawnMonster, crosshairCheck, camera } from './gameMasterControls.js';
 import { createButtons } from '../engine/createButtons.js';
 
 export default class GameMaster {
@@ -6,6 +6,7 @@ export default class GameMaster {
         this.game = game
         this.nextMonster = 0
         this.create = this.create.bind(this);
+        this.update = this.update.bind(this);
         this.button = undefined;
     }
 
@@ -14,6 +15,9 @@ export default class GameMaster {
     }
 
     update() {
+        //crosshair and monster spawn
+        camera.call(this.game);
+
         if (this.button && this.button.key === 'crosshair') crosshairCheck.call(this);
         else if (this.button) {
             spawnMonster.call(this, this.button);
@@ -21,3 +25,4 @@ export default class GameMaster {
     }
 
 }
+
