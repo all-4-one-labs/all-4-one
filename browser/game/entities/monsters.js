@@ -26,8 +26,6 @@ export default class Monster {
   }
 
   create(monster) {
-    //set up monster sprite on the
-    console.log(this.spawnLocation);
     this.sprite = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, monster.name);
     this.sprite.anchor.set(0.5);
     this.sprite.scale.setTo(monster.scale);
@@ -47,12 +45,11 @@ export default class Monster {
   }
 
   pathHelper(path) {
-    // if (path && path.length > 0) {
-    //   // console.log(path);
-    //   // this.game.physics.arcade.moveToXY(this.sprite, path[1].x * 32, path[1].y * 32, this.sprite.speed);
-    // } else {
-      // this.game.physics.arcade.moveToXY(this.sprite, 1920, 1280, this.sprite.speed);
-    // }
+    if (path && path.length > 0) {
+      this.game.physics.arcade.moveToXY(this.sprite, path[1].x * 32, path[1].y * 32, this.sprite.speed);
+    } else {
+      this.game.physics.arcade.moveToXY(this.sprite, 1920, 1280, this.sprite.speed);
+    }
   }
 
   //below is the fake update

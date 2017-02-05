@@ -26,9 +26,6 @@ function createButtons() {
     dock.width = 1200;
     dock.fixedToCamera = true;
 
-    // button.onInputOver.add(over, this);
-    // button.onInputOut.add(out, this);
-    // button.onInputUp.add(up, this);
 }
 
 function clickMonster(button) {
