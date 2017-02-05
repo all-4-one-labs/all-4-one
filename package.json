@@ -11,7 +11,7 @@
     "build-watch": "check-node-version --node '>= 6.7.0' && webpack -w",
     "build-branch": "bin/build-branch.sh",
     "deploy-heroku": "bin/deploy-heroku.sh",
-    "start": "nodemon server/server.js",
+    "start": "check-node-version --node '>= 6.7.0' && nodemon server/server.js",
     "seed": "node db/seed.js"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "easystarjs": "^0.3.1",
     "expose-loader": "^0.7.1",
     "express": "^4.12.3",
+    "nodemon": "^1.11.0",
     "p2": "^0.7.1",
     "phaser": "^2.6.2",
     "pixi": "^0.3.1",
