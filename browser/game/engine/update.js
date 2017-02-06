@@ -15,8 +15,6 @@ export default function update() {
   // this.game.paused = true
   //  Collision
 
-  // console.log(store.getState());
-
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
     player.update();
@@ -59,14 +57,38 @@ export default function update() {
 
   //handle gmMonsters
   //#gamemaster - maybe? not sure how this logic is going to work
+
+
+  // for (let i = 0; i < monsters.length; i++) {
+  //   monsters[i].update(monsters[i]); //take out
+  //   if (player) {
+  //     monsters[i].update(player.sprite.x, player.sprite.y);
+  //     this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
+  //         if (this.game.time.now > monster.nextAttack) {
+  //             player.body.immovable = true;
+  //             monster.nextAttack = this.game.time.now + monster.attackRate;
+  //             player.health -= monster.attack;
+  //             store.dispatch(updateHealth({health: player.health}));
+  //         }
+  //         if (player.health <= 0) {
+  //             player.kill();
+  //             player.healthBar.kill();
+  //         }
+
+  //     });
+
+  //     for (let j = 0; j < monsters.length; j++) {
+  //         if (i !== j && monsters[j]) {
+  //             this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);
+  //         }
+
   let monstersToDispatch = {};
   for (let id in gmMonsters) {
-    let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation};
+    let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation, name: gmMonsters[id].monster.name};
     monstersToDispatch[id] = tempMonster;
-
     //variables for pathfinding
     let closest;
-    let distanceToClosest = 0;
+    let distanceToClosest = 100000000000000;
     //iterating through teammates
     for (let teammateID in LocalTeammates) {
     //gmMonsters collide with player
@@ -75,7 +97,7 @@ export default function update() {
     //choose the closest survivor and path to them
       if (LocalTeammates[teammateID].sprite) {
         let currentDistance = Phaser.Math.distance(gmMonsters[id].sprite.x, gmMonsters[id].sprite.y, LocalTeammates[teammateID].sprite.x, LocalTeammates[teammateID].sprite.y);
-        if (currentDistance > distanceToClosest) {
+        if (currentDistance < distanceToClosest) {
           distanceToClosest = currentDistance;
           closest = LocalTeammates[teammateID];
         }
