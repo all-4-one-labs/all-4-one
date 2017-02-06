@@ -5,12 +5,13 @@ import socket from '../../socket';
 import Bullets from '../entities/bullets.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg;
 
 export default function create() {
   //sound test
   blaster = this.add.audio('blaster');
   epicbg = this.add.audio('epicbg');
+  darknessbg = this.add.audio('darknessbg');
 
 
   //this settings
@@ -53,10 +54,10 @@ export default function create() {
     }, 1000 / 60);
   };
 
-  this.sound.setDecodedCallback([epicbg], () => epicbg.play(), this);
+  this.sound.setDecodedCallback([epicbg], () => darknessbg.play('', 0, 1, true), this);
 
   emitClient();
 
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster};
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg};

@@ -16,6 +16,7 @@ export default function preload() {
   //sound test
   this.load.audio('blaster', 'assets/blaster.mp3');
   this.load.audio('epicbg', 'assets/epicbg.mp3');
+  this.load.audio('darknessbg', 'assets/darkness.mp3');
 
   store.dispatch(receiveGameMode(sessionStorage.getItem('mode')));
 

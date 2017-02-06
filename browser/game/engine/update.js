@@ -1,4 +1,4 @@
-import { bullets, player, testText, gameMaster, teamBullet } from './create.js';
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg } from './create.js';
 import { playerCollide, bulletCollide } from './createMap.js';
 import { gmMonsters } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
@@ -14,6 +14,10 @@ export default function update() {
   let time = store.getState().game.time;
   testText.setText(time);
   if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" });
+  if (time === '01:56') {
+    darknessbg.stop();
+    epicbg.play('', 0, 1);
+  }
   // this.game.paused = true
   //  Collision
 
