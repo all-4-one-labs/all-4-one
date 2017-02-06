@@ -23,7 +23,7 @@ function shallowMonsterUpdate(player) {
         if (this.game.time.now > monster.nextAttack) {
           player.body.immovable = true;
           monster.nextAttack = this.game.time.now + monster.attackRate;
-          player.health -= 20;
+          player.health -= monster.attack;
           store.dispatch(updateHealth({health: player.health}));
         }
         if (player.health <= 0) {
@@ -49,18 +49,17 @@ function shallowMonsterUpdate(player) {
       }
 
       //if the player already exists, just move them
-      if (monstersFromServer[id].animation !== 'idle') {
         LocalMonsters[id].sprite.x = monstersFromServer[id].x;
         LocalMonsters[id].sprite.y = monstersFromServer[id].y;
         LocalMonsters[id].sprite.animations.play(monstersFromServer[id].animation);
 
-      } else {
-        LocalMonsters[id].sprite.animations.stop();
-        LocalMonsters[id].sprite.frame = 7;
-      }
+      // } else {
+      //   LocalMonsters[id].sprite.animations.stop();
+      //   LocalMonsters[id].sprite.frame = 7;
+      // }
     //otherwise we create them at the place they need to be
     } else if (monstersFromServer[id].x) {
-      LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y);
+      LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y, monstersFromServer[id].name);
     }
   }
 }
