@@ -26,6 +26,7 @@ export default function create() {
     bullets = survivor.createBullets();
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster = new GameMaster(this);
+    gameMaster.create();
   }
 
   createMapPostPlayer();
@@ -55,6 +56,7 @@ export default function create() {
   this.sound.setDecodedCallback([epicbg], () => epicbg.play(), this);
 
   emitClient();
+
 }
 
 export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster};

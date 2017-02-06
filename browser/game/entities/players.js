@@ -1,6 +1,7 @@
 
 import { move, fireBullet } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
+import {spawnMonster} from '../controls/gameMasterControls.js';
 
 import store from '../../store.js';
 import { updateHealth } from '../../reducers/players.js';
@@ -31,6 +32,7 @@ export default class Player {
     //collision
     this.game.physics.arcade.enable(this.sprite);
     this.sprite.body.collideWorldBounds = true;
+    this.sprite.body.setSize(6, 20, 13, 12)
 
     //health bar (maybe factor this out so we can give it its own render layer?)
     this.sprite.health = 100;

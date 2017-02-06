@@ -11,6 +11,15 @@
     text-decoration: none;
 }
 
+#gamemasterInstructions, #survivorInstructions {
+    position: relative;
+    top: 20px;
+    font-size: 20px;
+    text-align: center;
+    align-content: center;
+}
+
+
 #survivor {
     position: fixed;
     top: 50%;
@@ -42,3 +51,18 @@ a:hover {
     font-color: red;
     background-color: turquoise;
 }
+
+#continue {
+    position:relative;
+    text-align: center;
+    font-size: 50px;
+    top: 40px;
+}
+
+#instructions {
+    position:fixed;
+    top:30%;
+    left:30%;
+    font-size: 80px;
+}
+

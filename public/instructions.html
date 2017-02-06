@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tesseract</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+    </head>
+    <body>
+        <div id='gamemasterInstructions'>
+            <h1> Use W-A-S-D to pan camera </h1>
+            <h1> Click on the monsters at bottom to select the monster type. Use spacebar to spawn monster.</h1>
+            <h1> You can only spawn monsters in the border areas (dark green) </h1>
+            <h1> You can also use the crosshair to set a spawn point. Click inside the game itself to spawn monsters at spawn point. </h1>
+            <h1 style="color:red;font-size:80px"> Goal: Eliminate all players!! </h1>
+        </div>
+        <div id='survivorInstructions'>
+            <h1> Use W-A-S-D to move player </h1>
+            <h1> Use arrow keys to shoot in that direction.</h1>
+            <h1 style="color:red;font-size:80px"> Goal: Survive!! </h1>
+        </div>
+        <a id='continue' href='game.html'> <div>Continue to Game</div> </a>
+        <script type="text/javascript">
+            if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
+            else if (sessionStorage.getItem('mode') === 'gamemaster') document.getElementById("survivorInstructions").style.display = "none";
+        </script>
+    </body>
+</html>
