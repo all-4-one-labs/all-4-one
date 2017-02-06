@@ -1,16 +1,15 @@
-const store = require('./store.js')
 const { broadcastGameState, gameTimer } = require('./game/engine')
 const listeners = require('./listeners')
 
 var path, {resolve} = require('path');
 
-var http = require('http');
-var server = http.createServer();
+const http = require('http');
+const server = http.createServer();
 
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-var socketio = require('socket.io');
+const socketio = require('socket.io');
 
 server.on('request', app);
 
@@ -20,13 +19,14 @@ server.on('request', app);
 // this needs to be below the server.on('request', app) so that our
 // express app takes precedence over our socekt server for typical
 // HTTP requests
-var io = socketio(server);
+const io = socketio(server);
 
 //put state here for now. this needs to be redux (or something) eventually
 // let players = {}
 
 // // use socket server as an event emitter in order to listen for new connctions
-io.on('connection', (socket) => {listeners(io, socket)})
+io.on('connection', (socket) => {
+listeners(io, socket)})
 
 broadcastGameState(io)
 

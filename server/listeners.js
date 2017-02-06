@@ -9,14 +9,10 @@ const listeners = function(io, socket){
   console.log('A new client has connected')
   console.log('socket id: ', socket.id)
 
-
-
   socket.on('disconnect', function(){
     console.log('socket id ' + socket.id + ' has disconnected.');
     store.dispatch(removePlayer(socket.id));
   });
-
-
 
   socket.on('send_all_data', (data) => {
     if (data.gameMode === 'survivor') {
