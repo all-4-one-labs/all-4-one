@@ -5,6 +5,7 @@ import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
+import { camera } from '../controls/gameMasterControls.js';
 // import { updateHealth } from '../../reducers/players.js';
 
 export default function update() {
@@ -26,24 +27,28 @@ export default function update() {
 
     // draw the monsters
     shallowMonsterUpdate.call(this, player);
+  if (player.sprite.health <= 0) {
+    this.game.camera.follow(null);
+    camera.call(this);
+  }
 
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster.update();
     teammateUpdate.call(this, 'gm');
   }
 
-  if (this.input.activePointer.isDown) {
-        if (this.origDragPoint) {
-            // move the camera by the amount the mouse has moved since last update
-            this.game.camera.x += this.origDragPoint.x - this.input.activePointer.position.x;
-            this.game.camera.y += this.origDragPoint.y - this.input.activePointer.position.y;
-        }
-        // set new drag origin to current position
-        this.origDragPoint = this.input.activePointer.position.clone();
-    }
-    else {
-        this.origDragPoint = null;
-    }
+  // if (this.input.activePointer.isDown) {
+  //       if (this.origDragPoint) {
+  //           // move the camera by the amount the mouse has moved since last update
+  //           this.game.camera.x += this.origDragPoint.x - this.input.activePointer.position.x;
+  //           this.game.camera.y += this.origDragPoint.y - this.input.activePointer.position.y;
+  //       }
+  //       // set new drag origin to current position
+  //       this.origDragPoint = this.input.activePointer.position.clone();
+  //   }
+  //   else {
+  //       this.origDragPoint = null;
+  //   }
 
 
   //player win
