@@ -2,7 +2,8 @@ import Monster from '../entities/monsters.js';
 import store from '../../store.js';
 import monsterDictionary from './monsterDictionary.js';
 
-let monsters = [];
+let gmMonsters = {};
+let monsterId = 0;
 let crosshair;
 
 const camera = function() {
@@ -64,11 +65,12 @@ const spawnMonster = function(clickedMonster) {
       this.nextMonster = this.game.time.now + monsterDictionary[clickedMonster.key].spawnRate / playerMultiplier;
       let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster.key]);
       clickedMonster.frame = monsterDictionary[clickedMonster.key].unclickableFrame;
-      monsters.push(newMonster);
+      gmMonsters[monsterId] = newMonster;
+      monsterId++;
       setTimeout(() => {
         clickedMonster.frame = monsterDictionary[clickedMonster.key].clickableFrame;
       }, monsterDictionary[clickedMonster.key].spawnRate);
   }
 };
 
-export {spawnMonster, monsters, crosshairCheck, camera };
+export {spawnMonster, gmMonsters, crosshairCheck, camera };

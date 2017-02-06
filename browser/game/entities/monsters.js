@@ -23,6 +23,7 @@ export default class Monster {
     this.create(monster);
     this.pathHelper = this.pathHelper.bind(this);
     this.nextPathfinding = 0;
+    this.animation = 'idle';
   }
 
   create(monster) {
@@ -40,7 +41,6 @@ export default class Monster {
     this.sprite.attackRate = monster.attackRate;
     this.sprite.attack = monster.attack;
     this.sprite.speed = monster.speed;
-    this.sprite.chanceOfAttack = monster.chanceOfAttack
   }
 
   pathHelper(path) {
@@ -51,40 +51,32 @@ export default class Monster {
     }
   }
 
-  //below is the fake update
-  update(monster) {
-    this.sprite.animations.play('right');
-    this.game.physics.arcade.moveToXY(this.sprite, 1920, 1280, this.sprite.speed);
-    this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
-    this.sprite.healthBar.setPercent(100);
-  }
-
   // this is the real update
-  // update(playerX, playerY) {
-  //   if (playerX < this.sprite.x) {
-  //     this.sprite.animations.play('left');
-  //   }
-  //   else if (playerX > this.sprite.x) {
-  //     this.sprite.animations.play('right');
-  //   }
+  update(playerX, playerY) {
+    if (playerX < this.sprite.x) {
+      this.sprite.animations.play('left');
+    }
+    else if (playerX > this.sprite.x) {
+      this.sprite.animations.play('right');
+    }
 
-  //   if (this.game.time.now > this.nextPathfinding) {
-  //     this.nextPathfinding = this.game.time.now + pathfindingRate;
-  //     let gridMonster = {x: Math.round(this.sprite.x / 32), y: Math.round(this.sprite.y / 32)};
-  //     let gridPlayer = {x: Math.round(playerX / 32), y: Math.round(playerY / 32)};
-  //     if (gridMonster.x > 119) gridMonster.x = 119;
-  //     if (gridMonster.y > 79) gridMonster.y = 79;
+    if (this.game.time.now > this.nextPathfinding) {
+      this.nextPathfinding = this.game.time.now + pathfindingRate;
+      let gridMonster = {x: Math.round(this.sprite.x / 32), y: Math.round(this.sprite.y / 32)};
+      let gridPlayer = {x: Math.round(playerX / 32), y: Math.round(playerY / 32)};
+      if (gridMonster.x > 119) gridMonster.x = 119;
+      if (gridMonster.y > 79) gridMonster.y = 79;
 
 
-  //     easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
-  //     // console.log('monster:', grid[gridMonster.x][gridMonster.y], 'player:', grid[gridPlayer.x][gridPlayer.y]);
-  //     easystar.setIterationsPerCalculation(1000);
-  //     easystar.enableDiagonals();
-  //     easystar.calculate();
-  //   }
+      easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
+      // console.log('monster:', grid[gridMonster.x][gridMonster.y], 'player:', grid[gridPlayer.x][gridPlayer.y]);
+      easystar.setIterationsPerCalculation(1000);
+      easystar.enableDiagonals();
+      easystar.calculate();
+    }
 
-  //   this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
-  //   this.sprite.healthBar.setPercent(this.sprite.health);
+    this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
+    this.sprite.healthBar.setPercent(this.sprite.health);
 
-  // }
+  }
 }

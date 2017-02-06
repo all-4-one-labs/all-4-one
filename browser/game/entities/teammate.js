@@ -1,5 +1,5 @@
 import HealthBar from './HealthBar.js';
-import { teamBullet } from '../engine/create.js' //change to being from bullets file
+import { teamBullet, blaster } from '../engine/create.js' //change to being from bullets file
 
 export default class Teammate {
   constructor(id, game, xCord, yCord){
@@ -32,6 +32,7 @@ export default class Teammate {
   fire (xCord, yCord, fireRate) {
 
     if ((xCord || yCord) && this.game.time.now > this.nextFire && teamBullet.sprite.countDead() > 0) {
+        blaster.play();
         this.nextFire = this.game.time.now + fireRate
         let bullet = teamBullet.sprite.getFirstDead()
         bullet.scale.setTo(1)

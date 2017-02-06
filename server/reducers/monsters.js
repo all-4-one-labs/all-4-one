@@ -1,25 +1,21 @@
-const initialState = {};
-const MONSTER_MOVE = 'MONSTER_MOVE';
+const initialState = [];
 
+const UPDATE_MONSTERS = 'UPDATE_MONSTERS';
 
-const monsterMove = (id, data) => ({
-  type: MONSTER_MOVE,
-  id,
-  data
+const updateMonsters = (monsterArray) => ({
+  type: UPDATE_MONSTERS,
+  monsterArray
 });
 
-const monstersReducers = (state = initialState, action) => {
+const monsterReducers = (state = initialState, action) => {
   let newState;
-
   switch (action.type) {
-    case MONSTER_MOVE:
-      newState = Object.assign( {}, state, action.data);
+    case UPDATE_MONSTERS:
+      newState = action.monsterArray;
       break;
-    default:
-      return state;
+    default: return state;
   }
   return newState;
-}
+};
 
-
-module.exports = { monstersReducers, monsterMove }
+module.exports = {updateMonsters, monsterReducers};

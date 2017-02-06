@@ -17,7 +17,6 @@ Monster Dictionary:
       attackRate: # (1000 = once per second, 500 = twice per second),
       attack: # (power of attack, how much health will be taken off player),
       speed: # (how many pixels moved per 1 second),
-      chanceOfAttack: 0.# (percent as decimal),
       spawnRate: how fast to spawn,
       clickableFrame: frame to show when monster is available,
       unclickableFrame: frame to show when monster is in cooldown phase
@@ -38,7 +37,6 @@ const monsterDictionary = {
     attackRate: 1000,
     attack: 10,
     speed: 100,
-    chanceOfAttack: 0.5,
     spawnRate: 1000,
     clickableFrame: 2,
     unclickableFrame: 3
@@ -56,7 +54,6 @@ const monsterDictionary = {
     attackRate: 1000,
     attack: 20,
     speed: 50,
-    chanceOfAttack: 0.75,
     spawnRate: 1500,
     clickableFrame: 2,
     unclickableFrame: 3
@@ -74,7 +71,6 @@ const monsterDictionary = {
     attackRate: 1000,
     attack: 20,
     speed: 150,
-    chanceOfAttack: 0.1,
     spawnRate: 500,
     clickableFrame: 2,
     unclickableFrame: 3

@@ -13,6 +13,10 @@ export default function preload() {
   this.load.image('crosshair', 'assets/crosshair.png');
   this.load.image('dock', 'assets/dock.png');
 
+  //sound test
+  this.load.audio('blaster', 'assets/blaster.mp3');
+  this.load.audio('epicbg', 'assets/epicbg.mp3');
+
   store.dispatch(receiveGameMode(sessionStorage.getItem('mode')));
 
 }
