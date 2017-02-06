@@ -6,6 +6,7 @@ import {bullets} from './create.js'
 let LocalTeammates = {}
 
 function teammateUpdate(player) {
+  // EI: .players.players?
   let teammatesFromServer = store.getState().players.players;
   //delete teammate if they disconnect
   for (let id in LocalTeammates) {

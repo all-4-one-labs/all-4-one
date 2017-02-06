@@ -1,6 +1,7 @@
 import { gameMaster } from './create.js';
 
 function createButtons() {
+    // EI: const?
     let dock = this.game.add.sprite(40, 640, 'dock');
     let crosshair = this.game.add.button(120, 680, 'crosshair', clickMonster, this, 0, 0, 0);
     let mummyC = this.game.add.button(420, 680, 'mummyC', clickMonster, this, 2, 1, 5);

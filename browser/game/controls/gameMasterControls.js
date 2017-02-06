@@ -2,7 +2,8 @@ import Monster from '../entities/monsters.js';
 import store from '../../store.js';
 import monsterDictionary from './monsterDictionary.js';
 
-let gmMonsters = {};
+// EI: gmMonsters can be const?
+const gmMonsters = {};
 let monsterId = 0;
 let crosshair;
 

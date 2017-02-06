@@ -3,6 +3,7 @@ import shallowMonster from '../entities/shallowMonster.js';
 import { updateHealth } from '../../reducers/players.js';
 import { bullets } from './create.js';
 
+// EI: const?
 let LocalMonsters = {};
 
 function shallowMonsterUpdate(player) {
@@ -44,6 +45,7 @@ function shallowMonsterUpdate(player) {
       //this is questionable and could lead to a very hard to debug desync issue if the monsters
       //are dying on the survivor side but not the GM side. It also might be unnecessary
       //Leaving it in for now to see how it goes. To anyone coming here to debug, we're doing the same thing with the teammate object
+      // EI: potentially not necessary?
       if (monstersFromServer[id].health <= 0) {
         LocalMonsters[id].kill();
       }
