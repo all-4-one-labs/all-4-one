@@ -7,6 +7,7 @@ import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 import { camera } from '../controls/gameMasterControls.js';
 // import { updateHealth } from '../../reducers/players.js';
+let deathAlert = true;
 
 export default function update() {
   //test text
@@ -27,10 +28,22 @@ export default function update() {
 
     // draw the monsters
     shallowMonsterUpdate.call(this, player);
-  if (player.sprite.health <= 0) {
-    this.game.camera.follow(null);
-    camera.call(this);
-  }
+
+    // what happens when the player dies
+    if (player.sprite.health <= 0 ) {
+      this.game.camera.follow(null);
+      camera.call(this);
+      if (deathAlert) {
+        deathAlert = false;
+        let text = 'YOU DIED!';
+        let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
+        let alert = this.game.add.text(540, 360, text, style);
+        alert.fixedToCamera = true;
+        setTimeout(() => {
+          alert.destroy()
+        }, 5000);
+      }
+    }
 
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster.update();
