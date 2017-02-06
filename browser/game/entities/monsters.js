@@ -27,8 +27,6 @@ export default class Monster {
 
   create(monster) {
     this.sprite = this.game.add.sprite(this.spawnLocation.x, this.spawnLocation.y, monster.name);
-    this.sprite.worldPosition.x = this.spawnLocation.x;
-    this.sprite.worldPosition.y = this.spawnLocation.y;
     this.sprite.anchor.set(0.5);
     this.sprite.scale.setTo(monster.scale);
     this.sprite.animations.add('idle', monster.animations.idle, 20, true);
@@ -40,7 +38,6 @@ export default class Monster {
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bar: {color: '#ed2a2a'}, bg: {color: 'black'}});
     this.sprite.nextAttack = 0;
     this.sprite.attackRate = monster.attackRate;
-    this.sprite.body.collideWorldBounds = true;
     this.sprite.attack = monster.attack;
     this.sprite.speed = monster.speed;
     this.sprite.chanceOfAttack = monster.chanceOfAttack

@@ -52,7 +52,9 @@ const spawnMonster = function(clickedMonster) {
 
   if ((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) spawnLocation = {x: pointer.worldX, y: pointer.worldY}
   else {
-    if (crosshair) spawnLocation = {x: crosshair.x, y: crosshair.y };
+    if (crosshair) {
+      spawnLocation = {x: crosshair.x, y: crosshair.y};
+    }
     else {
       spawnLocation = {x: 0, y: 0};
     }
