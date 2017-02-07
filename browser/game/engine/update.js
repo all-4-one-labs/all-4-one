@@ -78,31 +78,6 @@ export default function update() {
    }
 
   //handle gmMonsters
-  //#gamemaster - maybe? not sure how this logic is going to work
-
-
-  // for (let i = 0; i < monsters.length; i++) {
-  //   monsters[i].update(monsters[i]); //take out
-  //   if (player) {
-  //     monsters[i].update(player.sprite.x, player.sprite.y);
-  //     this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
-  //         if (this.game.time.now > monster.nextAttack) {
-  //             player.body.immovable = true;
-  //             monster.nextAttack = this.game.time.now + monster.attackRate;
-  //             player.health -= monster.attack;
-  //             store.dispatch(updateHealth({health: player.health}));
-  //         }
-  //         if (player.health <= 0) {
-  //             player.kill();
-  //             player.healthBar.kill();
-  //         }
-
-  //     });
-
-  //     for (let j = 0; j < monsters.length; j++) {
-  //         if (i !== j && monsters[j]) {
-  //             this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);
-  //         }
 
   let monstersToDispatch = {};
   for (let id in gmMonsters) {
