@@ -27,15 +27,20 @@ function createButtons() {
     dock.width = 1200;
     dock.fixedToCamera = true;
 
+    //Hotkeys
     let key1 = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
-    key1.onDown.add(clickMonster, this, 0, crosshair);
+    key1.onDown.add(clickMonster, this.game, 0, crosshair);
 
 
 
 }
 
-function clickMonster(button) {
-    gameMaster.button = button;
+function clickMonster(button, hotkey) {
+    if (button.key) gameMaster.button = button;
+    else {
+        gameMaster.button = hotkey;
+    }
+    console.log(gameMaster.button);
 }
 
 

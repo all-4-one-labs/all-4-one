@@ -39,8 +39,7 @@ const monsterDictionary = {
     speed: 100,
     spawnRate: 1000,
     clickableFrame: 2,
-    unclickableFrame: 3,
-    shortcut: 1
+    unclickableFrame: 3
   },
   lurkerC: {
     name: 'lurkerC',
@@ -57,8 +56,7 @@ const monsterDictionary = {
     speed: 50,
     spawnRate: 1500,
     clickableFrame: 2,
-    unclickableFrame: 3,
-    shortcut: 2
+    unclickableFrame: 3
   },
   slimeB: {
     name: 'slimeB',
@@ -75,8 +73,7 @@ const monsterDictionary = {
     speed: 150,
     spawnRate: 500,
     clickableFrame: 2,
-    unclickableFrame: 3,
-    shortcut: 3
+    unclickableFrame: 3
   }
 };
 
