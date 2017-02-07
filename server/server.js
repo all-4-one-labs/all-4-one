@@ -1,4 +1,4 @@
-const { broadcastGameState, gameTimer } = require('./game/engine')
+const { startgame } = require('./game/engine')
 const listeners = require('./listeners')
 
 var path, {resolve} = require('path');
@@ -22,27 +22,27 @@ const io = socketio(server);
 
 // // use socket server as an event emitter in order to listen for new connctions
 io.on('connection', (socket) => {
-listeners(io, socket)})
+listeners(io, socket)});
 
-broadcastGameState(io)
+// broadcastGameState(io)
+// let time = 10 * 60
+// gameTimer(time, io)
 
-let time = 10 * 60
-gameTimer(time, io)
-
-let gms = false;
+let gmExist = false;
 app.get('/gmjoinrequest', (req, res) => {
-  if (gms) {
-    res.send(gms);
+  if (gmExist) {
+    res.send(gmExist);
   } else {
-    res.send(gms);
-    gms = true;
+    res.send(gmExist);
+    startgame(io);
+    gmExist = true;
   }
 });
 
-let survivors = 0;
+let numSurvivors = 0;
 app.get('/survivorjoinrequest', (req, res) => {
-  survivors++;
-  if (survivors > 4) res.send(true);
+  numSurvivors++;
+  if (numSurvivors > 4) res.send(true);
   else res.send(false);
 });
 
