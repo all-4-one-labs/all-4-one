@@ -16,7 +16,7 @@ export default function update() {
   if (time[0] === '0' && time[1] === '0') testText.setStyle({ font: "24px Arial", fill: "#ff0044", align: "center" });
   if (time === '01:56') {
     darknessbg.stop();
-    epicbg.play('', 0, 1);
+    epicbg.play('', 0, 0.9);
   }
   // this.game.paused = true
   //  Collision
@@ -86,7 +86,7 @@ export default function update() {
     }
 
     //gmMonsters path to the player
-    if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y);
+    if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y, distanceToClosest);
 
     //gmMonsters collide with map
     this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);

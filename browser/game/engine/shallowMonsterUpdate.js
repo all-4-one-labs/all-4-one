@@ -29,6 +29,7 @@ function shallowMonsterUpdate(player) {
         if (player.health <= 0) {
           player.kill();
           player.healthBar.kill();
+          //dispatch to remove teammate
         }
       });
 
