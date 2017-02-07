@@ -54,20 +54,6 @@ export default function update() {
     teammateUpdate.call(this, 'gm');
   }
 
-  // if (this.input.activePointer.isDown) {
-  //       if (this.origDragPoint) {
-  //           // move the camera by the amount the mouse has moved since last update
-  //           this.game.camera.x += this.origDragPoint.x - this.input.activePointer.position.x;
-  //           this.game.camera.y += this.origDragPoint.y - this.input.activePointer.position.y;
-  //       }
-  //       // set new drag origin to current position
-  //       this.origDragPoint = this.input.activePointer.position.clone();
-  //   }
-  //   else {
-  //       this.origDragPoint = null;
-  //   }
-
-
   //player win
   if (store.getState().game.timeUp) {
       let winMessageText = 'SURVIVORS WIN';
@@ -77,40 +63,13 @@ export default function update() {
       this.game.paused = true
    }
 
-  //handle gmMonsters
-  //#gamemaster - maybe? not sure how this logic is going to work
-
-
-  // for (let i = 0; i < monsters.length; i++) {
-  //   monsters[i].update(monsters[i]); //take out
-  //   if (player) {
-  //     monsters[i].update(player.sprite.x, player.sprite.y);
-  //     this.physics.arcade.collide(player.sprite, monsters[i].sprite, (player, monster) => {
-  //         if (this.game.time.now > monster.nextAttack) {
-  //             player.body.immovable = true;
-  //             monster.nextAttack = this.game.time.now + monster.attackRate;
-  //             player.health -= monster.attack;
-  //             store.dispatch(updateHealth({health: player.health}));
-  //         }
-  //         if (player.health <= 0) {
-  //             player.kill();
-  //             player.healthBar.kill();
-  //         }
-
-  //     });
-
-  //     for (let j = 0; j < monsters.length; j++) {
-  //         if (i !== j && monsters[j]) {
-  //             this.physics.arcade.collide(monsters[i].sprite, monsters[j].sprite);
-  //         }
-
   let monstersToDispatch = {};
   for (let id in gmMonsters) {
     let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation, name: gmMonsters[id].monster.name};
     monstersToDispatch[id] = tempMonster;
     //variables for pathfinding
     let closest;
-    let distanceToClosest = 100000000000000;
+    let distanceToClosest = 10000000000;
     //iterating through teammates
     for (let teammateID in LocalTeammates) {
     //gmMonsters collide with player
