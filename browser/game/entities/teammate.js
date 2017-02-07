@@ -7,6 +7,7 @@ export default class Teammate {
     this.game = game;
     this.create(xCord, yCord);
     this.nextFire = 0;
+    this.totalHealth = 100;
   }
 
   create(xCord, yCord) {
@@ -20,7 +21,6 @@ export default class Teammate {
     this.sprite.body.immovable = true;
     // this.sprite.body.setSize(60, 80, 45, 35);
     this.sprite.health = 100;
-
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bar: {color: 'blue'}, bg: {color: 'black'}});
     this.cursors = this.game.input.keyboard.createCursorKeys();
   }
@@ -41,5 +41,5 @@ export default class Teammate {
         this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)
       }
   }
-  
+
 }
