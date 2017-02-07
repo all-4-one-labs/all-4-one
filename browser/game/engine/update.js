@@ -61,6 +61,7 @@ export default function update() {
       let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
       winMessage.fixedToCamera = true
       this.game.paused = true
+      setTimeout(window.location = '/', 1000)
    }
 
   let monstersToDispatch = {};

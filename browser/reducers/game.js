@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
       newState = Object.assign({}, state, {time: action.minutes + ':' + action.seconds})
       break
     case END_GAME:
-      newState = Object.assign({}, state, {timeUp: true})
+      newState = Object.assign({}, state, {timeUp: true, winner: action.data})
       break
     default: return state
   }
