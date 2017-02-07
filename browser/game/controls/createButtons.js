@@ -45,6 +45,16 @@ function clickEvent(button, hotkey) {
     if (button.key) gameMaster.button = button;
     else {
         gameMaster.button = hotkey;
+
+        //mimic a button press
+        let over = gameMaster.button._onOverFrame;
+        let out = gameMaster.button._onOutFrame;
+        let down = gameMaster.button._onDownFrame;
+
+        gameMaster.button.setFrames(over, down, out);
+        setTimeout(() => {
+            gameMaster.button.setFrames(over, out, down);
+        }, 100)
     }
 }
 
