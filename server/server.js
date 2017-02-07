@@ -13,7 +13,6 @@ const socketio = require('socket.io');
 
 server.on('request', app);
 
-
 // creates a new connection server for web sockets and integrates
 // it into our HTTP server 
 // this needs to be below the server.on('request', app) so that our
@@ -21,16 +20,12 @@ server.on('request', app);
 // HTTP requests
 const io = socketio(server);
 
-//put state here for now. this needs to be redux (or something) eventually
-// let players = {}
-
 // // use socket server as an event emitter in order to listen for new connctions
 io.on('connection', (socket) => {
 listeners(io, socket)})
 
 broadcastGameState(io)
 
-//don't forget to change this back to 15 minutes
 let time = 2 * 60
 gameTimer(time, io)
 
