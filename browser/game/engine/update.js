@@ -78,7 +78,6 @@ export default function update() {
    }
 
   //handle gmMonsters
-
   let monstersToDispatch = {};
   for (let id in gmMonsters) {
     let tempMonster = {health: gmMonsters[id].sprite.health, x: gmMonsters[id].sprite.x, y: gmMonsters[id].sprite.y, animation: gmMonsters[id].animation, name: gmMonsters[id].monster.name};
