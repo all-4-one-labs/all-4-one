@@ -5,15 +5,15 @@ import socket from '../../socket';
 import Bullets from '../entities/bullets.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup;
 
 export default function create() {
   //sound test
   blaster = this.add.audio('blaster');
   epicbg = this.add.audio('epicbg');
   darknessbg = this.add.audio('darknessbg');
-  
-  healthBarsGroup = this.add.group(); 
+
+  healthBarsGroup = this.add.group();
 
   //this settings
   this.world.setBounds(-1920, -1280, 3840, 2560);
@@ -32,6 +32,9 @@ export default function create() {
   }
 
   createMapPostPlayer();
+
+  // layer the flying monsters correctly on map
+  flyingMonstersGroup = this.add.group();
 
   teamBullet = new Bullets(this);
 
@@ -61,4 +64,4 @@ export default function create() {
 
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup};
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup};

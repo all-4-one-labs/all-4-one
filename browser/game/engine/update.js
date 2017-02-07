@@ -1,4 +1,4 @@
-import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup } from './create.js';
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup } from './create.js';
 import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
@@ -7,6 +7,7 @@ import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 import { camera } from '../controls/gameMasterControls.js';
 import { dashboard } from '../controls/createButtons.js';
+import { flyingMonsterGroup } from '../entities/monsters.js';
 // import { updateHealth } from '../../reducers/players.js';
 let playerDied = true;
 
@@ -131,7 +132,7 @@ export default function update() {
     if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y);
 
     //gmMonsters collide with map
-    this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
+    if (!gmMonsters[id].fly) this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
 
     //gmMonsters collide with each other
     for (let otherIDs in gmMonsters) {
@@ -154,12 +155,21 @@ export default function update() {
   store.dispatch(updateMonsters(monstersToDispatch));
 
   // This brings these game objects to the top of the layer stack, in the order they are run (for example, dashboard will be on top of everything)
+
   // bring behind layers (layers sprites can go behind) to top of layers
   this.game.world.bringToTop(behindLayer);
+  this.game.world.moveDown(behindLayer);
+
+  //bring flying monsters on top of the layers
+  this.game.world.bringToTop(flyingMonstersGroup);
+
   // bring healthBarsGroup to top of layers
   this.game.world.bringToTop(healthBarsGroup);
+
   //bring dock to top of layers
   if (dashboard) this.game.world.bringToTop(dashboard);
+
+
 
 
 }

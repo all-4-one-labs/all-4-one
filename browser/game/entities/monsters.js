@@ -1,6 +1,7 @@
 // import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
 import mapArray from './map.js';
+import { flyingMonstersGroup, healthBarsGroup } from '../engine/create.js';
 import easystarjs from 'easystarjs';
 let easystar = new easystarjs.js();
 //120 x 80 (32px each)
@@ -12,6 +13,7 @@ for (let i = 0; i < mapArray.length; i += 120) {
 }
 easystar.setGrid(grid);
 easystar.setAcceptableTiles([0]);
+let flyingMonsterGroup;
 
 export default class Monster {
 
@@ -67,14 +69,23 @@ export default class Monster {
       if (gridMonster.x > 119) gridMonster.x = 119;
       if (gridMonster.y > 79) gridMonster.y = 79;
 
-      easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
-      easystar.setIterationsPerCalculation(1000);
-      easystar.enableDiagonals();
-      easystar.calculate();
+      if (this.fly) {
+        this.game.physics.arcade.moveToXY(this.sprite, playerX, playerY, this.sprite.speed);
+        flyingMonsterGroup = this.sprite;
+        flyingMonstersGroup.add(this.sprite);
+        // healthBarsGroup.add(this.sprite);
+      }
+      else {
+        easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
+        easystar.setIterationsPerCalculation(1000);
+        easystar.enableDiagonals();
+        easystar.calculate();
+      }
     }
 
     this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
     this.sprite.healthBar.setPercent(this.sprite.health, this.totalHealth);
-
   }
 }
+
+export { flyingMonsterGroup }

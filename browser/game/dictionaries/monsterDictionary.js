@@ -19,9 +19,12 @@ Monster Dictionary:
       attack: # (power of attack, how much health will be taken off player),
       speed: # (how many pixels moved per 1 second),
       spawnRate: how fast to spawn,
-      clickableFrame: frame to show when monster is available,
-      unclickableFrame: frame to show when monster is in cooldown phase,
-      flying: whether it flies or not
+      flying: boolean; true if it flies in the air (aka no collision with walls),
+      overFrame: frame for when mouse goes over button; not used currently,
+      outFrame: frame for when mouse exits button; not used currently,
+      downFrame: frame for when button is 'clicked'; used for when monster has been chosen by hotkey,
+      upFrame: frame for when button is no longer 'clicked'; default frame for monster,
+      unclickableFrame: frame to show when monster is in cooldown phase
     }
 */
 
@@ -66,7 +69,7 @@ const monsterDictionary = {
     outFrame: 1,
     downFrame: 5,
     upFrame: 2,
-   unclickableFrame: 3,
+    unclickableFrame: 3,
   },
   slimeB: {
     name: 'slimeB',
@@ -99,6 +102,8 @@ const monsterDictionary = {
     },
     body: [12, 12, 2, 4],
     health: 80,
+    attackRate: 1000,
+    attack: 20,
     speed: 100,
     spawnRate: 1500,
     flying: true,
