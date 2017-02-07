@@ -1,4 +1,5 @@
-import { gameMaster } from './create.js';
+import { gameMaster } from '../engine/create.js';
+import { spawnMonster } from './gameMasterControls.js';
 
 function createButtons() {
     let dock = this.game.add.sprite(40, 640, 'dock');
@@ -25,6 +26,11 @@ function createButtons() {
 
     dock.width = 1200;
     dock.fixedToCamera = true;
+
+    let key1 = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+    key1.onDown.add(clickMonster, this, 0, crosshair);
+
+
 
 }
 
