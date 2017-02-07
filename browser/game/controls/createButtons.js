@@ -1,5 +1,7 @@
 import { gameMaster } from '../engine/create.js';
 
+let dashboard;
+
 function createButtons() {
     let dock = this.game.add.sprite(40, 640, 'dock');
     let crosshair = this.game.add.button(120, 680, 'crosshair', clickEvent, this, 0, 0, 0);
@@ -25,6 +27,14 @@ function createButtons() {
 
     dock.width = 1200;
     dock.fixedToCamera = true;
+
+    dashboard = this.game.add.group();
+    dashboard.add(dock);
+    dashboard.add(crosshair);
+    dashboard.add(mummyC);
+    dashboard.add(lurkerC);
+    dashboard.add(slimeB);
+
 
     //Hotkeys
     let key1 = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
@@ -59,4 +69,4 @@ function clickEvent(button, hotkey) {
 }
 
 
-export { createButtons };
+export { createButtons, dashboard };
