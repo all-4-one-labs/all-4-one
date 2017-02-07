@@ -7,6 +7,7 @@ export default class shallowMonster {
     this.game = game;
     this.monster = monsterDictionary[name]
     this.create(xCord, yCord);
+    this.totalHealth = this.monster.health;
   }
 
   create(xCord, yCord) {

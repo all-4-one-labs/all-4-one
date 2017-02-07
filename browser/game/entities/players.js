@@ -15,6 +15,7 @@ export default class Player {
     this.nextFire = 0;
     this.nextMonster = 0;
     this.create();
+    this.totalHealth = 100;
   }
 
   create() {
@@ -53,7 +54,7 @@ export default class Player {
     this.sprite.body.velocity.x = 0;
     this.sprite.body.velocity.y = 0;
     this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
-    this.sprite.healthBar.setPercent(this.sprite.health);
+    this.sprite.healthBar.setPercent(this.sprite.health, this.totalHealth);
     move.call(this);
     if (this.sprite.health > 0) fireBullet.call(this);
   }

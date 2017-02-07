@@ -39,7 +39,7 @@ function shallowMonsterUpdate(player) {
 
       //healthbar
       LocalMonsters[id].sprite.healthBar.setPosition(LocalMonsters[id].sprite.x - 7, LocalMonsters[id].sprite.y - 40);
-      LocalMonsters[id].sprite.healthBar.setPercent(monstersFromServer[id].health);
+      LocalMonsters[id].sprite.healthBar.setPercent(monstersFromServer[id].health, LocalMonsters[id].totalHealth);
 
       //this is questionable and could lead to a very hard to debug desync issue if the monsters
       //are dying on the survivor side but not the GM side. It also might be unnecessary
