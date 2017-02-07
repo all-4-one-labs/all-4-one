@@ -24,6 +24,7 @@ export default class Monster {
     this.nextPathfinding = 0;
     this.animation = 'idle';
     this.totalHealth = this.monster.health;
+    this.fly = monster.flying;
   }
 
   create(monster) {
@@ -41,7 +42,6 @@ export default class Monster {
     this.sprite.attackRate = monster.attackRate;
     this.sprite.attack = monster.attack;
     this.sprite.speed = monster.speed;
-    // healthBarsGroup.add(this.sprite.healthBar)
   }
 
   pathHelper(path) {
@@ -52,7 +52,6 @@ export default class Monster {
     }
   }
 
-  // this is the real update
   update(playerX, playerY) {
     if (playerX < this.sprite.x) {
       this.sprite.animations.play('left');
@@ -68,9 +67,7 @@ export default class Monster {
       if (gridMonster.x > 119) gridMonster.x = 119;
       if (gridMonster.y > 79) gridMonster.y = 79;
 
-
       easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
-      // console.log('monster:', grid[gridMonster.x][gridMonster.y], 'player:', grid[gridPlayer.x][gridPlayer.y]);
       easystar.setIterationsPerCalculation(1000);
       easystar.enableDiagonals();
       easystar.calculate();

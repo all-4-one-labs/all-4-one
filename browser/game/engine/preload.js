@@ -7,7 +7,7 @@ export default function preload() {
   this.load.spritesheet('mummyC', 'assets/UsedPixelMobs/MummyC.png', 16, 16);
   this.load.spritesheet('lurkerC', 'assets/UsedPixelMobs/LurkerC.png', 16, 16);
   this.load.spritesheet('slimeB', 'assets/UsedPixelMobs/SlimeB.png', 16, 16);
-  this.load.image('button', 'assets/bulletReal.png');
+  this.load.spritesheet('sentryC', 'assets/UsedPixelMobs/SentryC.png', 16, 16);
   this.load.tilemap('tilemap', 'tilemap/tesseract.json', null, Phaser.Tilemap.TILED_JSON);
   this.load.image('tileset', 'tilemap/tilesets/terrain_atlas.png');
   this.load.image('crosshair', 'assets/crosshair.png');

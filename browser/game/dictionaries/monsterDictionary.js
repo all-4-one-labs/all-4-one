@@ -20,7 +20,8 @@ Monster Dictionary:
       speed: # (how many pixels moved per 1 second),
       spawnRate: how fast to spawn,
       clickableFrame: frame to show when monster is available,
-      unclickableFrame: frame to show when monster is in cooldown phase
+      unclickableFrame: frame to show when monster is in cooldown phase,
+      flying: whether it flies or not
     }
 */
 
@@ -40,7 +41,8 @@ const monsterDictionary = {
     speed: 100,
     spawnRate: 1000,
     clickableFrame: 2,
-    unclickableFrame: 3
+    unclickableFrame: 3,
+    flying: false
   },
   lurkerC: {
     name: 'lurkerC',
@@ -57,7 +59,8 @@ const monsterDictionary = {
     speed: 50,
     spawnRate: 1500,
     clickableFrame: 2,
-    unclickableFrame: 3
+    unclickableFrame: 3,
+    flying: false
   },
   slimeB: {
     name: 'slimeB',
@@ -74,7 +77,24 @@ const monsterDictionary = {
     speed: 150,
     spawnRate: 500,
     clickableFrame: 2,
-    unclickableFrame: 3
+    unclickableFrame: 3,
+    flying: false
+  },
+  sentryC: {
+    name: 'sentryC',
+    scale: 2,
+    animations: {
+      idle: [3],
+      left: [0, 1, 2, 3],
+      right: [12, 13, 14, 15]
+    },
+    body: [12, 12, 2, 4],
+    health: 80,
+    speed: 100,
+    spawnRate: 1500,
+    clickableFrame: 2,
+    unclickableFrame: 3,
+    flying: true
   }
 };
 

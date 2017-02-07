@@ -1,6 +1,6 @@
 // import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
-import monsterDictionary from '../controls/monsterDictionary.js';
+import monsterDictionary from '../dictionaries/monsterDictionary.js';
 
 export default class shallowMonster {
   constructor(id, game, xCord, yCord, name){
@@ -26,8 +26,6 @@ export default class shallowMonster {
     this.sprite.attack = this.monster.attack;
     this.sprite.body.immovable = true;
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bar: {color: '#ed2a2a'}, bg: {color: 'black'}});
-    // healthBarsGroup.add(this.sprite.healthBar)
-
   }
 
   kill() {

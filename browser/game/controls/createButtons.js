@@ -3,11 +3,18 @@ import { gameMaster } from '../engine/create.js';
 let dashboard;
 
 function createButtons() {
+
+    /// last three numbers is overFrame, outFrame, downFrame
     let dock = this.game.add.sprite(40, 640, 'dock');
-    let crosshair = this.game.add.button(120, 680, 'crosshair', clickEvent, this, 0, 0, 0);
-    let mummyC = this.game.add.button(420, 680, 'mummyC', clickEvent, this, 2, 1, 5);
-    let lurkerC = this.game.add.button(720, 680, 'lurkerC', clickEvent, this, 2, 1, 5);
-    let slimeB = this.game.add.button(1020, 680, 'slimeB', clickEvent, this, 2, 1, 5);
+    let crosshair = this.game.add.button(100, 680, 'crosshair', clickEvent, this, 0, 0, 0);
+    let mummyC = this.game.add.button(250, 680, 'mummyC', clickEvent, this, 2, 1, 5);
+    let lurkerC = this.game.add.button(500, 680, 'lurkerC', clickEvent, this, 2, 1, 5);
+    let slimeB = this.game.add.button(750, 680, 'slimeB', clickEvent, this, 2, 1, 5);
+    let sentryC = this.game.add.button(1000, 680, 'sentryC', clickEvent, this, 2, 1, 5);
+
+
+    dock.width = 1200;
+    dock.fixedToCamera = true;
 
     crosshair.height = 30;
     crosshair.width = 30;
@@ -25,8 +32,9 @@ function createButtons() {
     slimeB.width = 30;
     slimeB.fixedToCamera = true;
 
-    dock.width = 1200;
-    dock.fixedToCamera = true;
+    sentryC.height = 30;
+    sentryC.width = 30;
+    sentryC.fixedToCamera = true;
 
     dashboard = this.game.add.group();
     dashboard.add(dock);
@@ -34,6 +42,7 @@ function createButtons() {
     dashboard.add(mummyC);
     dashboard.add(lurkerC);
     dashboard.add(slimeB);
+    dashboard.add(sentryC);
 
 
     //Hotkeys
@@ -48,6 +57,9 @@ function createButtons() {
 
     let key4 = this.game.input.keyboard.addKey(Phaser.Keyboard.FOUR);
     key4.onDown.add(clickEvent, this.game, 0, slimeB);
+
+    let key5 = this.game.input.keyboard.addKey(Phaser.Keyboard.FIVE);
+    key5.onDown.add(clickEvent, this.game, 0, sentryC);
 
 }
 
