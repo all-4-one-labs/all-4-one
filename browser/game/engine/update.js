@@ -7,7 +7,7 @@ import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 import { camera } from '../controls/gameMasterControls.js';
 // import { updateHealth } from '../../reducers/players.js';
-let deathAlert = true;
+let playerDied = true;
 
 export default function update() {
   //test text
@@ -37,8 +37,8 @@ export default function update() {
     if (player.sprite.health <= 0 ) {
       this.game.camera.follow(null);
       camera.call(this);
-      if (deathAlert) {
-        deathAlert = false;
+      if (playerDied) {
+        playerDied = false;
         let text = 'YOU DIED!';
         let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
         let alert = this.game.add.text(540, 360, text, style);

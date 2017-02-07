@@ -1,10 +1,10 @@
 import { spawnMonster, crosshairCheck, camera } from './gameMasterControls.js';
-import { createButtons } from '../engine/createButtons.js';
+import { createButtons } from './createButtons.js';
 
 export default class GameMaster {
     constructor(game){
         this.game = game
-        this.nextMonster = 0
+        this.nextMonster = 0;
         this.create = this.create.bind(this);
         this.update = this.update.bind(this);
         this.button = undefined;
