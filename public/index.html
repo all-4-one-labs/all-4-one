@@ -14,9 +14,19 @@
     <body>
         <div id="title"> Welcome to the TESSERACT ZONE! </div>
         <div id="subtitle"> Select your player </div>
-        <a id='gamemaster' href='instructions.html'>Game Master</a>
-        <a id=survivor href='instructions.html'>Survivor</a>
+        <button id='gamemaster' onclick="gmValidationCheck()"">Game Master</button>
+        <button id='survivor' onclick="survivorValidationCheck()">Survivor</button>
+
+
+
+<!--         <a id='gamemaster' href='instructions.html'>Game Master</a>
+        <a id='survivor' href='instructions.html'>Survivor</a> -->
+
 <!--         <a id='pvp' href='instructions.html'>PvP</a>
- -->    </body>
+ -->    
+
+
+    </body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./startingMode.js"></script>
 </html>

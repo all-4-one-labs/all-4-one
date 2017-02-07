@@ -26,12 +26,32 @@ listeners(io, socket)})
 
 broadcastGameState(io)
 
-let time = 2 * 60
+let time = 10 * 60
 gameTimer(time, io)
+
+let gms = false;
+app.get('/gmjoinrequest', (req, res) => {
+  if (gms) {
+    res.send(gms);
+  } else {
+    res.send(gms);
+    gms = true;
+  }
+});
+
+let survivors = 0;
+app.get('/survivorjoinrequest', (req, res) => {
+  survivors++;
+  if (survivors > 4) res.send(true);
+  else res.send(false);
+});
 
 app.use(express.static(resolve(__dirname, '..', 'public')))
 
 app.get('/', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
+
+
+
 
 server.listen(process.env.PORT || 4020, function () {
     console.log('The server is listening on port ' + 4020/*TODO: fix this: process.env.PORT ? process.env.PORT : 4020*/);
