@@ -1,4 +1,4 @@
-const initialState = {time: '15:00', timeUp: false}
+const initialState = {time: '10:00', timeUp: false}
 
 const UPDATE_TIME = 'UPDATE_TIME'
 const END_GAME = 'END_GAME'
