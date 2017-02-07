@@ -4,7 +4,7 @@ import { createButtons } from './createButtons.js';
 export default class GameMaster {
     constructor(game){
         this.game = game
-        this.nextMonster = 0
+        this.nextMonster = 0;
         this.create = this.create.bind(this);
         this.update = this.update.bind(this);
         this.button = undefined;
@@ -20,6 +20,7 @@ export default class GameMaster {
 
         if (this.button && this.button.key === 'crosshair') crosshairCheck.call(this);
         else if (this.button) {
+            console.log(this);
             spawnMonster.call(this, this.button);
         }
     }

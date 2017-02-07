@@ -2,6 +2,7 @@
 Monster Dictionary:
   To add a monster, first, add this logic to createButton.js:
   let monsterNameInPreload = this.game.add.button(400, 680, 'monsterNameInPreload', clickMonster, this, 2, 1, 0);
+  also don't forget to create a hotkey too!
 
   In monsterDictionary object, add
     monsterNameInPreload: {

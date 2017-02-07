@@ -1,5 +1,4 @@
 import { gameMaster } from '../engine/create.js';
-import { spawnMonster } from './gameMasterControls.js';
 
 function createButtons() {
     let dock = this.game.add.sprite(40, 640, 'dock');
@@ -29,18 +28,24 @@ function createButtons() {
 
     //Hotkeys
     let key1 = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
-    key1.onDown.add(clickMonster, this.game, 0, crosshair);
+    key1.onDown.add(clickEvent, this.game, 0, crosshair);
 
+    let key2 = this.game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    key2.onDown.add(clickEvent, this.game, 0, mummyC);
 
+    let key3 = this.game.input.keyboard.addKey(Phaser.Keyboard.THREE);
+    key3.onDown.add(clickEvent, this.game, 0, lurkerC);
+
+    let key4 = this.game.input.keyboard.addKey(Phaser.Keyboard.FOUR);
+    key4.onDown.add(clickEvent, this.game, 0, slimeB);
 
 }
 
-function clickMonster(button, hotkey) {
+function clickEvent(button, hotkey) {
     if (button.key) gameMaster.button = button;
     else {
         gameMaster.button = hotkey;
     }
-    console.log(gameMaster.button);
 }
 
 
