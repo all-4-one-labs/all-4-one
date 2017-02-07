@@ -54,14 +54,15 @@ export default function update() {
     teammateUpdate.call(this, 'gm');
   }
 
-  //player win
+  //player win\
+  //this should be expanded into a generic 'end of game' method
   if (store.getState().game.timeUp) {
       let winMessageText = 'SURVIVORS WIN';
       let winMessageStyle = { font: '96px Arial', fill: '#ff0044', align: 'center' };
       let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
       winMessage.fixedToCamera = true
       this.game.paused = true
-      setTimeout(window.location = '/', 1000)
+      setTimeout(window.location = '/', 7000)
    }
 
   let monstersToDispatch = {};

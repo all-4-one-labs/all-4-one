@@ -38,7 +38,7 @@ const gameTimer = (duration, io) => {
 const startgame = (io) => {
   //this is copied from the server file. when this is fully implemented,
   //it can be removed from there
-  let time = 1 * 30;
+  let time = 10 * 60;
   gameTimer(time, io);
   broadcastGameState(io);
 };
