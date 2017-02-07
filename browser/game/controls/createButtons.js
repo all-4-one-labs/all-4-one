@@ -1,16 +1,18 @@
 import { gameMaster } from '../engine/create.js';
+import monsterDictionary from '../dictionaries/monsterDictionary.js';
 
 let dashboard;
+let prevButton = {};
 
 function createButtons() {
 
-    /// last three numbers is overFrame, outFrame, downFrame
+    /// last three numbers is overFrame, outFrame, downFrame, upFrame. we don't want it to change since physically clicking the buttons don't do anything. Use hotkeys instead
     let dock = this.game.add.sprite(40, 640, 'dock');
-    let crosshair = this.game.add.button(100, 680, 'crosshair', clickEvent, this, 0, 0, 0);
-    let mummyC = this.game.add.button(250, 680, 'mummyC', clickEvent, this, 2, 1, 5);
-    let lurkerC = this.game.add.button(500, 680, 'lurkerC', clickEvent, this, 2, 1, 5);
-    let slimeB = this.game.add.button(750, 680, 'slimeB', clickEvent, this, 2, 1, 5);
-    let sentryC = this.game.add.button(1000, 680, 'sentryC', clickEvent, this, 2, 1, 5);
+    let crosshair = this.game.add.button(100, 680, 'crosshair', doNothing, this, 0, 0, 0, 0);
+    let mummyC = this.game.add.button(250, 680, 'mummyC', doNothing, this, 2, 2, 2, 2);
+    let lurkerC = this.game.add.button(500, 680, 'lurkerC', doNothing, this, 2, 2, 2, 2);
+    let slimeB = this.game.add.button(750, 680, 'slimeB', doNothing, this, 2, 2, 2, 2);
+    let sentryC = this.game.add.button(1000, 680, 'sentryC', doNothing, this, 2, 2, 2, 2);
 
 
     dock.width = 1200;
@@ -45,7 +47,7 @@ function createButtons() {
     dashboard.add(sentryC);
 
 
-    //Hotkeys
+    //Hotkeys - third argument is priority
     let key1 = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
     key1.onDown.add(clickEvent, this.game, 0, crosshair);
 
@@ -63,22 +65,20 @@ function createButtons() {
 
 }
 
-function clickEvent(button, hotkey) {
-    if (button.key) gameMaster.button = button;
-    else {
-        gameMaster.button = hotkey;
-
-        //mimic a button press
-        let over = gameMaster.button._onOverFrame;
-        let out = gameMaster.button._onOutFrame;
-        let down = gameMaster.button._onDownFrame;
-
-        gameMaster.button.setFrames(over, down, out);
-        setTimeout(() => {
-            gameMaster.button.setFrames(over, out, down);
-        }, 100)
-    }
+function doNothing() {
+    //fake function. use hotkeys to 'click' buttons
 }
 
+function clickEvent(button, hotkey) {
+        if (prevButton.key !== 'crosshair' && Object.keys(prevButton).length !== 0) prevButton.frame = monsterDictionary[prevButton.key].upFrame;
+        gameMaster.button = hotkey;
+        prevButton = gameMaster.button;
+
+        //mimic a button press
+        if (hotkey.key !== 'crosshair') {
+            let down = monsterDictionary[hotkey.key].downFrame;
+            gameMaster.button.frame = down;
+        }
+}
 
 export { createButtons, dashboard };

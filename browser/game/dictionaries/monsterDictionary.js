@@ -40,9 +40,12 @@ const monsterDictionary = {
     attack: 10,
     speed: 100,
     spawnRate: 1000,
-    clickableFrame: 2,
-    unclickableFrame: 3,
-    flying: false
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
+    unclickableFrame: 3
   },
   lurkerC: {
     name: 'lurkerC',
@@ -58,9 +61,12 @@ const monsterDictionary = {
     attack: 20,
     speed: 50,
     spawnRate: 1500,
-    clickableFrame: 2,
-    unclickableFrame: 3,
-    flying: false
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
+   unclickableFrame: 3,
   },
   slimeB: {
     name: 'slimeB',
@@ -76,9 +82,12 @@ const monsterDictionary = {
     attack: 20,
     speed: 150,
     spawnRate: 500,
-    clickableFrame: 2,
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
     unclickableFrame: 3,
-    flying: false
   },
   sentryC: {
     name: 'sentryC',
@@ -92,9 +101,12 @@ const monsterDictionary = {
     health: 80,
     speed: 100,
     spawnRate: 1500,
-    clickableFrame: 2,
+    flying: true,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
     unclickableFrame: 3,
-    flying: true
   }
 };
 
