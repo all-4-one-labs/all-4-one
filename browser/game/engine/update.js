@@ -6,6 +6,7 @@ import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 import { camera } from '../controls/gameMasterControls.js';
+import { dashboard } from '../controls/createButtons.js';
 // import { updateHealth } from '../../reducers/players.js';
 let playerDied = true;
 
@@ -147,4 +148,9 @@ export default function update() {
     });
   }
   store.dispatch(updateMonsters(monstersToDispatch));
+
+  //dock bring to top of layers
+  this.game.world.bringToTop(dashboard);
+
+
 }
