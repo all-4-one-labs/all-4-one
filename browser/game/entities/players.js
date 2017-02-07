@@ -1,4 +1,4 @@
-
+// import {healthBarsGroup} from '../engine/create.js'
 import { move, fireBullet } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 import {spawnMonster} from '../controls/gameMasterControls.js';
@@ -39,6 +39,7 @@ export default class Player {
     this.sprite.health = 100;
     store.dispatch(updateHealth({health: this.sprite.health}));
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bg: {color: 'black'}});
+    // healthBarsGroup.add(this.sprite.healthBar)
 
     //controls
     this.cursors = this.game.input.keyboard.createCursorKeys();

@@ -1,3 +1,4 @@
+// import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
 import { teamBullet, blaster } from '../engine/create.js' //change to being from bullets file
 
@@ -22,6 +23,7 @@ export default class Teammate {
     // this.sprite.body.setSize(60, 80, 45, 35);
     this.sprite.health = 100;
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bar: {color: 'blue'}, bg: {color: 'black'}});
+    // healthBarsGroup.add(this.sprite.healthBar)
     this.cursors = this.game.input.keyboard.createCursorKeys();
   }
 

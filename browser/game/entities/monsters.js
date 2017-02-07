@@ -1,3 +1,4 @@
+// import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
 import mapArray from './map.js';
 import easystarjs from 'easystarjs';
@@ -40,6 +41,7 @@ export default class Monster {
     this.sprite.attackRate = monster.attackRate;
     this.sprite.attack = monster.attack;
     this.sprite.speed = monster.speed;
+    // healthBarsGroup.add(this.sprite.healthBar)
   }
 
   pathHelper(path) {

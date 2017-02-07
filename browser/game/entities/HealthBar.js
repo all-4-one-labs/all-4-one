@@ -19,6 +19,8 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
+import {healthBarsGroup} from '../engine/create.js';
+
 
 var HealthBar = function(game, providedConfig) {
     this.game = game;
@@ -27,7 +29,7 @@ var HealthBar = function(game, providedConfig) {
     this.setPosition(this.config.x, this.config.y);
     this.drawBackground();
     this.drawHealthBar();
-    this.setFixedToCamera(this.config.isFixedToCamera);
+    this.setFixedToCamera(this.config.isFixedToCamera); 
 };
 HealthBar.prototype.constructor = HealthBar;
 
@@ -77,6 +79,7 @@ HealthBar.prototype.drawBackground = function() {
 
     this.bgSprite = this.game.add.sprite(this.x, this.y, bmd);
     this.bgSprite.anchor.set(0.5);
+    healthBarsGroup.add(this.bgSprite);
 
     if(this.flipped){
         this.bgSprite.scale.x = -1;
@@ -92,6 +95,7 @@ HealthBar.prototype.drawHealthBar = function() {
 
     this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, bmd);
     this.barSprite.anchor.y = 0.5;
+    healthBarsGroup.add(this.barSprite)
 
     if(this.flipped){
         this.barSprite.scale.x = -1;

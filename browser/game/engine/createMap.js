@@ -1,5 +1,5 @@
            // Not the best way to export playerCollide and bulletCollide
-let map, playerCollide, bulletCollide;
+let map, playerCollide, bulletCollide, behindLayer;
 
 function createMapPrePlayer(game) {
   map = game.add.tilemap('tilemap');
@@ -11,13 +11,16 @@ function createMapPrePlayer(game) {
   groundLayer.resizeWorld();
   map.createLayer('playerOnBottom');
   map.createLayer('playerOnTop');
+  behindLayer = game.add.group();
 }
 
 function createMapPostPlayer() {
   map.setCollisionBetween(1, 2000, true, 'playerCollide');
   map.setCollisionBetween(1, 2000, true, 'bulletCollide');
-  map.createLayer('playerBehindBottom');
-  map.createLayer('playerBehindTop');    
+  let playerBehindBottom = map.createLayer('playerBehindBottom');
+  behindLayer.add(playerBehindBottom)
+  let playerBehindTop = map.createLayer('playerBehindTop');
+  behindLayer.add(playerBehindTop);
 } 
 
-export { createMapPrePlayer, createMapPostPlayer, playerCollide, bulletCollide };
+export { createMapPrePlayer, createMapPostPlayer, playerCollide, bulletCollide, behindLayer };

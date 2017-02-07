@@ -1,5 +1,5 @@
-import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg } from './create.js';
-import { playerCollide, bulletCollide } from './createMap.js';
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup } from './create.js';
+import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
@@ -153,8 +153,13 @@ export default function update() {
   }
   store.dispatch(updateMonsters(monstersToDispatch));
 
-  //dock bring to top of layers
-  this.game.world.bringToTop(dashboard);
+  // This brings these game objects to the top of the layer stack, in the order they are run (for example, dashboard will be on top of everything)
+  // bring behind layers (layers sprites can go behind) to top of layers
+  this.game.world.bringToTop(behindLayer);
+  // bring healthBarsGroup to top of layers
+  this.game.world.bringToTop(healthBarsGroup);
+  //bring dock to top of layers
+  if (dashboard) this.game.world.bringToTop(dashboard);
 
 
 }

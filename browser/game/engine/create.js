@@ -5,14 +5,15 @@ import socket from '../../socket';
 import Bullets from '../entities/bullets.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup;
 
 export default function create() {
   //sound test
   blaster = this.add.audio('blaster');
   epicbg = this.add.audio('epicbg');
   darknessbg = this.add.audio('darknessbg');
-
+  
+  healthBarsGroup = this.add.group(); 
 
   //this settings
   this.world.setBounds(-1920, -1280, 3840, 2560);
@@ -60,4 +61,4 @@ export default function create() {
 
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg};
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup};
