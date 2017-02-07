@@ -2,10 +2,10 @@ import { gameMaster } from '../engine/create.js';
 
 function createButtons() {
     let dock = this.game.add.sprite(40, 640, 'dock');
-    let crosshair = this.game.add.button(120, 680, 'crosshair', clickMonster, this, 0, 0, 0);
-    let mummyC = this.game.add.button(420, 680, 'mummyC', clickMonster, this, 2, 1, 5);
-    let lurkerC = this.game.add.button(720, 680, 'lurkerC', clickMonster, this, 2, 1, 5);
-    let slimeB = this.game.add.button(1020, 680, 'slimeB', clickMonster, this, 2, 1, 5);
+    let crosshair = this.game.add.button(120, 680, 'crosshair', clickEvent, this, 0, 0, 0);
+    let mummyC = this.game.add.button(420, 680, 'mummyC', clickEvent, this, 2, 1, 5);
+    let lurkerC = this.game.add.button(720, 680, 'lurkerC', clickEvent, this, 2, 1, 5);
+    let slimeB = this.game.add.button(1020, 680, 'slimeB', clickEvent, this, 2, 1, 5);
 
     crosshair.height = 30;
     crosshair.width = 30;
