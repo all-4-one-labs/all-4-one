@@ -3,6 +3,7 @@ import ShallowMonster from '../entities/shallowMonster.js';
 import { updateHealth } from '../../reducers/players.js';
 import { bullets } from './create.js';
 import { flyingMonstersGroup } from './create.js';
+import { survivorFire } from '../../reducers/players.js';
 
 let LocalMonsters = {};
 
@@ -31,6 +32,7 @@ function shallowMonsterUpdate(player) {
         if (player.health <= 0) {
           player.kill();
           player.healthBar.kill();
+          store.dispatch(survivorFire({fire: [], /*rate: 100000000*/}))
           //dispatch to remove teammate
         }
       });
