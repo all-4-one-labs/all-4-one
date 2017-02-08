@@ -21,13 +21,17 @@ export default function update() {
     epicbg.play('', 0, 1);
   }
   // this.game.paused = true
-  //  Collision
+  // Collision
+  // teambullet collision
+  this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {
+      teambullet.kill();
+  });
 
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
     player.update();
     teammateUpdate.call(this, player);
-    this.physics.arcade.collide(player.sprite, playerCollide)
+    this.physics.arcade.collide(player.sprite, playerCollide);
     this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
       bullet.kill();
     });
