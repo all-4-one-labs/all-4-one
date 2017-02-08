@@ -81,7 +81,7 @@
     border-radius: 8px;
 }
 
-#continue:hover {
+button:hover {
     background-color: turquoise;
 }
 
@@ -204,4 +204,30 @@ body {
     background-size: cover;
 }
 
+#continueA {
+    position:fixed;
+    top: 50%;
+    left: 20%;
+    font-size: 50px;
+    margin: 10px;
+    padding:10px;
+    border-style: solid;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    border-radius: 8px;
+}
 
+#continueB {
+    position:fixed;
+    top: 50%;
+    right: 20%;
+    font-size: 50px;
+    margin: 10px;
+    padding:10px;
+    border-style: solid;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    border-radius: 8px;
+}
