@@ -1,11 +1,10 @@
 import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg } from './create.js';
 import { playerCollide, bulletCollide } from './createMap.js';
-import { gmMonsters } from '../controls/gameMasterControls.js';
+import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
-import { camera } from '../controls/gameMasterControls.js';
 // import { updateHealth } from '../../reducers/players.js';
 let playerDied = true;
 
@@ -40,7 +39,7 @@ export default function update() {
       if (playerDied) {
         playerDied = false;
         let text = 'YOU DIED!';
-        let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
+        let style = { font: '24px Arial', fill: '#ffffff', align: 'center' };
         let alert = this.game.add.text(540, 360, text, style);
         alert.fixedToCamera = true;
         setTimeout(() => {
@@ -62,7 +61,7 @@ export default function update() {
       let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
       winMessage.fixedToCamera = true
       this.game.paused = true
-      setTimeout(window.location = '/', 7000)
+      setTimeout(() => {location.href = '/'}, 7000)
    }
 
   let monstersToDispatch = {};

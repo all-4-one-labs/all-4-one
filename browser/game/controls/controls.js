@@ -38,7 +38,6 @@ const move = function(){
   store.dispatch(updatePosition({ position: this.sprite.position, animation: direction }))
 }
 
-
 //fire bullets
 
 const fireBullet = function(){
