@@ -29,7 +29,7 @@ var HealthBar = function(game, providedConfig) {
     this.setPosition(this.config.x, this.config.y);
     this.drawBackground();
     this.drawHealthBar();
-    this.setFixedToCamera(this.config.isFixedToCamera); 
+    this.setFixedToCamera(this.config.isFixedToCamera);
 };
 HealthBar.prototype.constructor = HealthBar;
 
@@ -118,6 +118,7 @@ HealthBar.prototype.setPosition = function (x, y) {
 
 HealthBar.prototype.setPercent = function(newValue, monsterHealth){
     if(newValue < 0) newValue = 0;
+    if (!monsterHealth) monsterHealth = 100;
 
     var newWidth =  (newValue * this.config.width) / monsterHealth;
 
