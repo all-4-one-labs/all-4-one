@@ -37,7 +37,7 @@
     text-align: center;
     top: 10%;
     left: 41%;
-    font-size: 500%;
+    font-size: 600%;
     color:  white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
@@ -50,9 +50,9 @@
 #subtitle {
     position: fixed;
     text-align: center;
-    top: 250px;
-    left: 42%;
-    font-size: 250%;
+    top: 35%;
+    left: 40%;
+    font-size: 350%;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
@@ -68,7 +68,7 @@
 
 #continue {
     position:fixed;
-    top: 70%;
+    top: 50%;
     right: 40%;
     font-size: 50px;
     margin: 10px;
@@ -88,7 +88,7 @@ button:hover {
 #one {
     position: relative;
     top: 80px;
-    left: 40%;
+    left: 44%;
     font-size: 20px;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -102,7 +102,7 @@ button:hover {
 #two {
     position: relative;
     top: 80px;
-    left: 30%;
+    left: 35%;
     font-size: 20px;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -116,7 +116,7 @@ button:hover {
 #three {
     position: relative;
     top: 80px;
-    left: 35%;
+    left: 38%;
     font-size: 20px;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -144,7 +144,7 @@ button:hover {
 #five {
     position: relative;
     top: 80px;
-    left: 20%;
+    left: 25%;
     font-size: 20px;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
