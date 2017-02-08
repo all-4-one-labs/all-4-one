@@ -19,6 +19,7 @@ function shallowMonsterUpdate(player) {
   for (let id in monstersFromServer) {
     //the first half of this conditional decides whether we create the shallow object or just update it
     if (LocalMonsters[id] && monstersFromServer[id].x){
+      flyingMonstersGroup.add(LocalMonsters[id].sprite);
       //player collision with monsters - survivor side
       this.physics.arcade.collide(player.sprite, LocalMonsters[id].sprite, (player, monster) => {
         if (this.game.time.now > monster.nextAttack) {
