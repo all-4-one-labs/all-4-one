@@ -1,5 +1,5 @@
 import HealthBar from './HealthBar.js';
-import monsterDictionary from '../controls/monsterDictionary.js';
+import monsterDictionary from '../dictionaries/monsterDictionary.js';
 
 export default class shallowMonster {
   constructor(id, game, xCord, yCord, name){
