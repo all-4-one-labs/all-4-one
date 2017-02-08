@@ -144,5 +144,4 @@ export default function update() {
   //bring dock to top of layers
   if (dashboard) this.game.world.bringToTop(dashboard);
 
-
 }

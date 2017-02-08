@@ -20,7 +20,16 @@ export default class Player {
   create() {
 
   //set up sprite sprite on the map
-  this.sprite = this.game.add.sprite(0, 0, this.playerType.name);
+  let spawnArray = [
+    [ 1000, 1000],
+    [ 2000, 1000],
+    [ 2800, 1800],
+    [ 1900, 1870],
+    [ 2195, 1040],
+    [ 1564, 1564]
+  ];
+  let randomNumber = Math.round(Math.random() * spawnArray.length-1);
+  this.sprite = this.game.add.sprite(spawnArray[randomNumber][0], spawnArray[randomNumber][1], this.playerType.name);
   this.sprite.anchor.set(0.5);
   this.sprite.scale.setTo(1);
   this.sprite.animations.add('left', this.playerType.animations.left, 7, true);
