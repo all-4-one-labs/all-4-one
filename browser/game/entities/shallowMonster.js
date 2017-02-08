@@ -2,7 +2,7 @@
 import HealthBar from './HealthBar.js';
 import monsterDictionary from '../dictionaries/monsterDictionary.js';
 
-export default class shallowMonster {
+export default class ShallowMonster {
   constructor(id, game, xCord, yCord, name){
     this.id = id;
     this.game = game;

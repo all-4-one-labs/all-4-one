@@ -1,5 +1,5 @@
 import store from '../../store.js';
-import shallowMonster from '../entities/shallowMonster.js';
+import ShallowMonster from '../entities/shallowMonster.js';
 import { updateHealth } from '../../reducers/players.js';
 import { bullets } from './create.js';
 import { flyingMonstersGroup } from './create.js';
@@ -61,7 +61,7 @@ function shallowMonsterUpdate(player) {
       // }
     //otherwise we create them at the place they need to be
     } else if (monstersFromServer[id].x) {
-      LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y, monstersFromServer[id].name);
+      LocalMonsters[id] = new ShallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y, monstersFromServer[id].name);
     }
   }
 }
