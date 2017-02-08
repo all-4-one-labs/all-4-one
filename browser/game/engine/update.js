@@ -1,4 +1,4 @@
-import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg } from './create.js';
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, teamExplosions} from './create.js';
 import { playerCollide, bulletCollide } from './createMap.js';
 import { gmMonsters } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
@@ -101,15 +101,27 @@ export default function update() {
     }
 
     //gmMonsters collide with bullets and deal damage
-    this.physics.arcade.collide(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
-      bullet.kill();
-      monster.health -= 20;
-      if (monster.health <= 0 ) {
-        monster.kill();
-        monster.healthBar.kill();
-        delete gmMonsters[id];
-      }
-    });
+    if (gmMonsters[id]) {
+      this.physics.arcade.collide(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
+        bullet.kill();
+        monster.health -= 20;
+        if (monster.health <= 0 ) {
+          monster.kill();
+          monster.healthBar.kill();
+          delete gmMonsters[id];
+        }
+      });
+    }
+    if (gmMonsters[id]) {
+      this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
+        monster.health -= 20;
+        if (monster.health <= 0 ) {
+          monster.kill();
+          monster.healthBar.kill();
+          delete gmMonsters[id];
+        }
+      });
+    }
   }
   store.dispatch(updateMonsters(monstersToDispatch));
 }

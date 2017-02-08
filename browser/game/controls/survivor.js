@@ -5,14 +5,15 @@ import { player } from '../engine/create.js';
 import { playerCollide } from '../engine/createMap.js';
 
 export default class Survivor {
-    constructor(game){
+    constructor(game, playerType){
         this.game = game;
+        this.playerType = playerType
         this.createPlayer = this.createPlayer.bind(this);
         this.createBullets = this.createBullets.bind(this);
         this.update = this.update.bind(this);
     }
     createPlayer() {
-        return new Player(socket.id, this.game);
+        return new Player(socket.id, this.game, this.playerType);
     }
     createBullets() {
         return new Bullets(this.game);
