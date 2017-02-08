@@ -83,7 +83,7 @@ export default function update() {
       this.physics.arcade.collide(gmMonsters[id].sprite, LocalTeammates[teammateID]);
 
     //choose the closest survivor and path to them
-      if (LocalTeammates[teammateID].sprite) {
+      if (LocalTeammates[teammateID].sprite && LocalTeammates[teammateID].sprite.health) {
         let currentDistance = Phaser.Math.distance(gmMonsters[id].sprite.x, gmMonsters[id].sprite.y, LocalTeammates[teammateID].sprite.x, LocalTeammates[teammateID].sprite.y);
         if (currentDistance < distanceToClosest) {
           distanceToClosest = currentDistance;
