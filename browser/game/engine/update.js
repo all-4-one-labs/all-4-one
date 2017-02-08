@@ -162,7 +162,7 @@ export default function update() {
   // bring behind layers (layers sprites can go behind) to top of layers
   this.game.world.bringToTop(behindLayer);
 
-  //bring flying monsters on top of the layers (GM side)
+  //bring flying monsters on top of the layers
   this.game.world.bringToTop(flyingMonstersGroup);
 
   // bring healthBarsGroup to top of layers
@@ -170,8 +170,6 @@ export default function update() {
 
   //bring dock to top of layers
   if (dashboard) this.game.world.bringToTop(dashboard);
-
-
 
 
 }
