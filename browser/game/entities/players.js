@@ -4,6 +4,14 @@ import survivorsDictionary from '../dictionaries/survivorsDictionary.js';
 import store from '../../store.js';
 import { updateHealth, updatePlayerType } from '../../reducers/players.js';
 
+  let spawnArray = [
+    [ 1000, 1000],
+    [ 2000, 1000],
+    [ 2800, 1800],
+    [ 1900, 1870],
+    [ 2195, 1040],
+    [ 1564, 1564]
+  ];
 
 export default class Player {
   constructor(id, game, playerType){
@@ -20,14 +28,6 @@ export default class Player {
   create() {
 
   //set up sprite sprite on the map
-  let spawnArray = [
-    [ 1000, 1000],
-    [ 2000, 1000],
-    [ 2800, 1800],
-    [ 1900, 1870],
-    [ 2195, 1040],
-    [ 1564, 1564]
-  ];
   let randomNumber = Math.round(Math.random() * spawnArray.length-1);
   this.sprite = this.game.add.sprite(spawnArray[randomNumber][0], spawnArray[randomNumber][1], this.playerType.name);
   this.sprite.anchor.set(0.5);

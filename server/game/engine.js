@@ -6,7 +6,7 @@ const broadcastGameState = (io) => {
     let state = store.getState();
     // console.log(state)
     io.emit('game_data', state);
-  }, 1000 / 60);
+  }, 1000 / 30);
 };
 
 const endgame = (io) => {
