@@ -1,3 +1,4 @@
+// import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
 import { teamBullet, blaster, teamExplosions } from '../engine/create.js' //change to being from bullets file
 import survivorsDictionary from '../dictionaries/survivorsDictionary.js'
@@ -9,6 +10,7 @@ export default class Teammate {
     this.playerType = survivorsDictionary[playerType]
     this.create(xCord, yCord);
     this.nextFire = 0;
+    this.totalHealth = 100;
   }
 
   create(xCord, yCord) {
@@ -22,7 +24,6 @@ export default class Teammate {
     this.sprite.body.immovable = true;
     // this.sprite.body.setSize(60, 80, 45, 35);
     this.sprite.health = 100;
-
     this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bar: {color: 'blue'}, bg: {color: 'black'}});
     this.cursors = this.game.input.keyboard.createCursorKeys();
   }
@@ -44,6 +45,7 @@ export default class Teammate {
       }
   }
 
+
   rangeSplash(xCord, yCord, fireRate) {
     if ((xCord || yCord) && this.game.time.now > this.nextFire && teamExplosions.sprite.countDead() > 0) {
       this.nextFire = this.game.time.now + fireRate
@@ -61,4 +63,5 @@ export default class Teammate {
       }, 2000)
     }
   }
+
 }

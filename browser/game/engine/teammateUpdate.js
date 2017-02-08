@@ -24,7 +24,7 @@ function teammateUpdate(player) {
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
-        LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health);
+        LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health, LocalTeammates[id].totalHealth);
         if (teammatesFromServer[id].health <= 0) {
           LocalTeammates[id].kill();
         }

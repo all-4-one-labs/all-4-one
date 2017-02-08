@@ -106,24 +106,9 @@ const rangeSplash = function() {
 
 
   }
-  
+
   store.dispatch(survivorFire({fire: [addX, addY], rate: 1000}))
 
-  // if (pressed && sheet && this.game.time.now > this.nextFire) {
-  //   console.log('in if')
-  //   this.nextFire = this.game.time.now + 500
-  //   let explosion = this.game.add.sprite(this.sprite.x + addX, this.sprite.y + addY, 'explosion')
-  //   // explosions.add(explosion)
-  //   explosion.animations.add('explosion', this.sprite.attackAnimations.animate, 20, false)
-  //   explosion.animations.add('explosionBack', this.sprite.attackAnimations.animateBack, 60, false)
-  //   explosion.animations.play('explosion')
-  //   setTimeout(()=>{
-  //     explosion.animations.play('explosionBack')
-  //   }, 1500)
-  //   setTimeout(()=>{
-  //     explosion.kill()
-  //   }, 2000)
-  // }
 }
 
 export { move, fireBullet, rangeSplash }

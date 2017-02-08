@@ -1,4 +1,3 @@
-
 import { move, fireBullet, rangeSplash } from '../controls/controls.js';
 import HealthBar from './HealthBar.js';
 import survivorsDictionary from '../dictionaries/survivorsDictionary.js';
@@ -15,6 +14,7 @@ export default class Player {
   this.nextFire = 0;
   this.nextMonster = 0;
   this.create();
+  this.totalHealth = 100;
   }
 
   create() {

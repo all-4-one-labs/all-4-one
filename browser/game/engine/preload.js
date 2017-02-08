@@ -8,12 +8,13 @@ export default function preload() {
   // this.load.spritesheet('swordLeftRight', 'assets/Survivors/swordLeftRight.png', 16, 16);
   this.load.spritesheet('explosion', 'assets/explosionFull.png', 64, 64);
   this.load.image('bullet', 'assets/bullet.png');
-  this.load.spritesheet('mummyC', 'assets/Monsters/MummyC.png', 16, 16);
-  this.load.spritesheet('lurkerC', 'assets/Monsters/LurkerC.png', 16, 16);
-  this.load.spritesheet('slimeB', 'assets/Monsters/SlimeB.png', 16, 16);
-  this.load.image('button', 'assets/bulletReal.png');
-  this.load.tilemap('tilemap', '/assets/Tilemap/tesseract.json', null, Phaser.Tilemap.TILED_JSON);
-  this.load.image('tileset', '/assets/Tilemap/tilesets/terrain_atlas.png');
+  this.load.spritesheet('mummyC', 'assets/UsedPixelMobs/MummyC.png', 16, 16);
+  this.load.spritesheet('lurkerC', 'assets/UsedPixelMobs/LurkerC.png', 16, 16);
+  this.load.spritesheet('slimeB', 'assets/UsedPixelMobs/SlimeB.png', 16, 16);
+  this.load.spritesheet('sentryC', 'assets/UsedPixelMobs/SentryC.png', 16, 16);
+  this.load.spritesheet('earthSmallerB', 'assets/UsedPixelMobs/EarthSmallerB.png', 16, 16);
+  this.load.tilemap('tilemap', 'tilemap/tesseract.json', null, Phaser.Tilemap.TILED_JSON);
+  this.load.image('tileset', 'tilemap/tilesets/terrain_atlas.png');
   this.load.image('crosshair', 'assets/crosshair.png');
   this.load.image('dock', 'assets/dock.png');
 

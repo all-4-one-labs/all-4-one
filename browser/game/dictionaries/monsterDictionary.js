@@ -2,7 +2,7 @@
 Monster Dictionary:
   To add a monster, first, add this logic to createButton.js:
   let monsterNameInPreload = this.game.add.button(400, 680, 'monsterNameInPreload', clickMonster, this, 2, 1, 0);
-  also don't forget to create a hotkey too!
+  also don't forget to create a hotkey too and add it to the dashboard!
 
   In monsterDictionary object, add
     monsterNameInPreload: {
@@ -19,7 +19,11 @@ Monster Dictionary:
       attack: # (power of attack, how much health will be taken off player),
       speed: # (how many pixels moved per 1 second),
       spawnRate: how fast to spawn,
-      clickableFrame: frame to show when monster is available,
+      flying: boolean; true if it flies in the air (aka no collision with walls),
+      overFrame: frame for when mouse goes over button; not used currently,
+      outFrame: frame for when mouse exits button; not used currently,
+      downFrame: frame for when button is 'clicked'; used for when monster has been chosen by hotkey,
+      upFrame: frame for when button is no longer 'clicked'; default frame for monster,
       unclickableFrame: frame to show when monster is in cooldown phase
     }
 */
@@ -39,7 +43,11 @@ const monsterDictionary = {
     attack: 10,
     speed: 100,
     spawnRate: 1000,
-    clickableFrame: 2,
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
     unclickableFrame: 3
   },
   lurkerC: {
@@ -56,7 +64,11 @@ const monsterDictionary = {
     attack: 20,
     speed: 50,
     spawnRate: 1500,
-    clickableFrame: 2,
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
     unclickableFrame: 3
   },
   slimeB: {
@@ -73,8 +85,54 @@ const monsterDictionary = {
     attack: 20,
     speed: 150,
     spawnRate: 500,
-    clickableFrame: 2,
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
     unclickableFrame: 3
+  },
+  sentryC: {
+    name: 'sentryC',
+    scale: 2,
+    animations: {
+      idle: [0, 1, 2, 3],
+      left: [0, 1, 2, 3],
+      right: [12, 13, 14, 15]
+    },
+    body: [12, 12, 2, 4],
+    health: 80,
+    attackRate: 1000,
+    attack: 20,
+    speed: 100,
+    spawnRate: 1500,
+    flying: false,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 5,
+    upFrame: 2,
+    unclickableFrame: 3
+  },
+  earthSmallerB: {
+    name: 'earthSmallerB',
+    scale: 2,
+    animations: {
+      idle: [0, 1, 2, 3],
+      left: [0, 1, 2, 3],
+      right: [0, 1, 2, 3]
+    },
+    body: [12, 12, 2, 4],
+    health: 50,
+    attackRate: 1000,
+    attack: 10,
+    speed: 100,
+    spawnRate: 1500,
+    flying: true,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 3,
+    upFrame: 0,
+    unclickableFrame: 2
   }
 };
 
