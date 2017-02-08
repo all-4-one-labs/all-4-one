@@ -1,7 +1,7 @@
 import store from '../../store.js';
 import shallowMonster from '../entities/shallowMonster.js';
 import { updateHealth } from '../../reducers/players.js';
-import { bullets, explosions } from './create.js';
+import { bullets } from './create.js';
 
 let LocalMonsters = {};
 
@@ -37,6 +37,7 @@ function shallowMonsterUpdate(player) {
       this.physics.arcade.collide(bullets.sprite, LocalMonsters[id].sprite, (monster, bullet) => {
         bullet.kill();
       });
+
       //healthbar
       LocalMonsters[id].sprite.healthBar.setPosition(LocalMonsters[id].sprite.x - 7, LocalMonsters[id].sprite.y - 40);
       LocalMonsters[id].sprite.healthBar.setPercent(monstersFromServer[id].health);

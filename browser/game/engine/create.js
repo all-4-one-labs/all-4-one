@@ -23,7 +23,6 @@ export default function create() {
   createMapPrePlayer(this);
 
   let playerType = sessionStorage.getItem('playerType')
-  console.log(playerType)
   if (store.getState().gameMode === 'survivor') {
     survivor = new Survivor(this, playerType);
     player = survivor.createPlayer();
