@@ -1,4 +1,4 @@
-const initialState = {time: '15:00', timeUp: false}
+const initialState = {time: '10:00', timeUp: false}
 
 const UPDATE_TIME = 'UPDATE_TIME'
 const END_GAME = 'END_GAME'
@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
       newState = Object.assign({}, state, {time: action.minutes + ':' + action.seconds})
       break
     case END_GAME:
-      newState = Object.assign({}, state, {timeUp: true})
+      newState = Object.assign({}, state, {timeUp: true, winner: action.data})
       break
     default: return state
   }

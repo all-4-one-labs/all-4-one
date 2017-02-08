@@ -4,7 +4,6 @@ const { updateMonsters } = require('./reducers/monsters');
 
 const listeners = function(io, socket){
 
-  
   //receives the newly connected socket
   //called for each browser that connects to our server
   console.log('A new client has connected')

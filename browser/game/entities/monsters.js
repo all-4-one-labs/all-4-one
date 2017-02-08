@@ -5,7 +5,6 @@ import { flyingMonstersGroup } from '../engine/create.js';
 import easystarjs from 'easystarjs';
 let easystar = new easystarjs.js();
 //120 x 80 (32px each)
-let pathfindingRate = 500;
 
 let grid = [];
 for (let i = 0; i < mapArray.length; i += 120) {
@@ -53,7 +52,15 @@ export default class Monster {
     }
   }
 
-  update(playerX, playerY) {
+  update(playerX, playerY, distanceToClosest) {
+    let pathfindingRate;
+    if (distanceToClosest > 1000) {
+      pathfindingRate = 1500;
+    } else if (distanceToClosest > 500) {
+      pathfindingRate = 1000;
+    } else {
+      pathfindingRate = 500;
+    }
     if (playerX < this.sprite.x) {
       this.sprite.animations.play('left');
     }
@@ -74,7 +81,7 @@ export default class Monster {
       }
       else {
         easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
-        easystar.setIterationsPerCalculation(1000);
+        easystar.setIterationsPerCalculation(750);
         easystar.enableDiagonals();
         easystar.calculate();
       }
