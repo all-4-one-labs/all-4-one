@@ -6,11 +6,12 @@ import Bullets from '../entities/bullets.js';
 import Explosions from '../entities/explosions.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions;
 
 export default function create() {
   //sound test
   blaster = this.add.audio('blaster');
+  explosionsound = this.add.audio('explosionsound');
   epicbg = this.add.audio('epicbg');
   darknessbg = this.add.audio('darknessbg');
 
@@ -68,5 +69,5 @@ export default function create() {
 
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions };
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions };
 

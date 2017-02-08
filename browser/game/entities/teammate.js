@@ -1,6 +1,6 @@
 // import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
-import { teamBullet, blaster, teamExplosions } from '../engine/create.js' //change to being from bullets file
+import { teamBullet, blaster, teamExplosions, explosionsound } from '../engine/create.js' //change to being from bullets file
 import survivorsDictionary from '../dictionaries/survivorsDictionary.js'
 
 export default class Teammate {
@@ -55,12 +55,15 @@ export default class Teammate {
       explosion.animations.add('explosion', this.playerType.attackAnimations.animate, 20, false)
       explosion.animations.add('explosionBack', this.playerType.attackAnimations.animateBack, 60, false)
       explosion.animations.play('explosion')
-      setTimeout(()=>{
-        explosion.animations.play('explosionBack')
-      }, 1500)
-      setTimeout(()=>{
-        explosion.kill()
-      }, 2000)
+      setTimeout( () => {
+        explosionsound.play('', 0, 1.0);
+      }, 1300);
+      setTimeout( () => {
+        explosion.animations.play('explosionBack');
+      }, 1500);
+      setTimeout( () => {
+        explosion.kill();
+      }, 2000);
     }
   }
 

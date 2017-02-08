@@ -1,4 +1,4 @@
-import { bullets, blaster } from '../engine/create.js' //change to being from bullets file
+import { bullets, blaster, explosionsound } from '../engine/create.js' //change to being from bullets file
 import store from '../../store.js'
 import {updatePosition, survivorFire} from '../../reducers/players.js'
 import {explosions} from '../engine/create.js'
@@ -97,14 +97,15 @@ const rangeSplash = function() {
     explosion.animations.add('explosion', this.sprite.attackAnimations.animate, 20, false)
     explosion.animations.add('explosionBack', this.sprite.attackAnimations.animateBack, 60, false)
     explosion.animations.play('explosion')
-    setTimeout(()=>{
-      explosion.animations.play('explosionBack')
-    }, 1500)
-    setTimeout(()=>{
-      explosion.kill()
-    }, 2000)
-
-
+    setTimeout( () => {
+      explosionsound.play('', 0, 1.0);
+    }, 1300);
+    setTimeout( () => {
+      explosion.animations.play('explosionBack');
+    }, 1500);
+    setTimeout( () => {
+      explosion.kill();
+    }, 2000);
   }
 
   store.dispatch(survivorFire({fire: [addX, addY], rate: 1000}))

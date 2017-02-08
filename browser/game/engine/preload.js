@@ -18,6 +18,7 @@ export default function preload() {
 
   //sound test
   this.load.audio('blaster', 'assets/Sounds/blaster.mp3');
+  this.load.audio('explosionsound', 'assets/Sounds/explosions.mp3');
   this.load.audio('epicbg', 'assets/Sounds/epicbg.mp3');
   this.load.audio('darknessbg', 'assets/Sounds/darkness.mp3');
 
