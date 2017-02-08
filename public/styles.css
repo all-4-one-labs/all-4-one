@@ -200,7 +200,7 @@ button:hover {
 body {
     margin: 0px;
     padding: 0px;
-    background-image: url('assets/home.jpg');
+    background-image: url('home.jpg');
     background-size: cover;
 }
 
