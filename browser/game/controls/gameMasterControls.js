@@ -50,9 +50,10 @@ const spawnMonster = function(clickedMonster) {
   let enemyPlayers = store.getState().players.players;
   let spawnLocation;
   let pointer = this.game.input.activePointer;
-  let playerMultiplier = Object.keys(enemyPlayers).length;
-
+  let playerMultiplier;
   if (!enemyPlayers) enemyPlayers = {};
+  if (enemyPlayers) playerMultiplier = Object.keys(enemyPlayers).length;
+
 
   if (((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) && pointer.y < 680 ) spawnLocation = {x: pointer.worldX, y: pointer.worldY}
 

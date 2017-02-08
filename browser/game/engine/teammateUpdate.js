@@ -19,13 +19,11 @@ function teammateUpdate(player) {
     if (id !== player.id) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
 
-
         this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
         LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health, LocalTeammates[id].totalHealth);
-        console.log(LocalTeammates[id].sprite, teammatesFromServer[id].health)
         LocalTeammates[id].sprite.health = teammatesFromServer[id].health
         if (teammatesFromServer[id].health <= 0) {
           LocalTeammates[id].kill();
@@ -51,7 +49,7 @@ function teammateUpdate(player) {
         }
       //else create them at the place they need to be
       } else if (teammatesFromServer[id].position) {
-      LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y, teammatesFromServer[id].playerType);
+        LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y, teammatesFromServer[id].playerType);
       }
     }
   }
