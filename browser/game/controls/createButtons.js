@@ -7,13 +7,15 @@ let prevButton = {};
 function createButtons() {
 
     /// last three numbers is overFrame, outFrame, downFrame, upFrame. we don't want it to change since physically clicking the buttons don't do anything. Use hotkeys instead
+    let begin = 250;
+    let increment = 150;
     let dock = this.game.add.sprite(40, 640, 'dock');
-    let crosshair = this.game.add.button(100, 680, 'crosshair', doNothing, this, 0, 0, 0, 0);
-    let mummyC = this.game.add.button(250, 680, 'mummyC', doNothing, this, 2, 2, 2, 2);
-    let lurkerC = this.game.add.button(500, 680, 'lurkerC', doNothing, this, 2, 2, 2, 2);
-    let slimeB = this.game.add.button(750, 680, 'slimeB', doNothing, this, 2, 2, 2, 2);
-    let sentryC = this.game.add.button(1000, 680, 'sentryC', doNothing, this, 2, 2, 2, 2);
-
+    let crosshair = this.game.add.button(begin, 680, 'crosshair', doNothing, this, 0, 0, 0, 0);
+    let mummyC = this.game.add.button(begin + increment, 680, 'mummyC', doNothing, this, 2, 2, 2, 2);
+    let lurkerC = this.game.add.button(begin + increment * 2, 680, 'lurkerC', doNothing, this, 2, 2, 2, 2);
+    let slimeB = this.game.add.button(begin + increment * 3, 680, 'slimeB', doNothing, this, 2, 2, 2, 2);
+    let sentryC = this.game.add.button(begin + increment * 4, 680, 'sentryC', doNothing, this, 2, 2, 2, 2);
+    let earthSmallerB = this.game.add.button(begin + increment * 5, 680, 'earthSmallerB', doNothing, this, 0, 0, 0, 0);
 
     dock.width = 1200;
     dock.fixedToCamera = true;
@@ -38,6 +40,10 @@ function createButtons() {
     sentryC.width = 30;
     sentryC.fixedToCamera = true;
 
+    earthSmallerB.height = 30;
+    earthSmallerB.width = 30;
+    earthSmallerB.fixedToCamera = true;
+
     dashboard = this.game.add.group();
     dashboard.add(dock);
     dashboard.add(crosshair);
@@ -45,6 +51,7 @@ function createButtons() {
     dashboard.add(lurkerC);
     dashboard.add(slimeB);
     dashboard.add(sentryC);
+    dashboard.add(earthSmallerB);
 
 
     //Hotkeys - third argument is priority
@@ -62,6 +69,9 @@ function createButtons() {
 
     let key5 = this.game.input.keyboard.addKey(Phaser.Keyboard.FIVE);
     key5.onDown.add(clickEvent, this.game, 0, sentryC);
+
+    let key6 = this.game.input.keyboard.addKey(Phaser.Keyboard.SIX);
+    key6.onDown.add(clickEvent, this.game, 0, earthSmallerB);
 
 }
 

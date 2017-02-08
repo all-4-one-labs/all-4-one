@@ -9,16 +9,10 @@
     border-style: solid;
     text-align: center;
     text-decoration: none;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
 }
-
-#gamemasterInstructions, #survivorInstructions {
-    position: relative;
-    top: 20px;
-    font-size: 20px;
-    text-align: center;
-    align-content: center;
-}
-
 
 #survivor {
     position: fixed;
@@ -31,38 +25,172 @@
     border-style: solid;
     text-align: center;
     text-decoration: none;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
 }
 
 #title {
     position: fixed;
-    top: 20%;
-    left: 10%;
+    text-align: center;
+    top: 10%;
+    left: 41%;
     font-size: 500%;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
 }
 
 #subtitle {
     position: fixed;
-    top: 40%;
-    left: 40%;
+    text-align: center;
+    top: 250px;
+    left: 42%;
     font-size: 250%;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
 }
 
-a:hover {
-    font-color: red;
+#gamemaster:hover, #survivor:hover {
     background-color: turquoise;
 }
 
 #continue {
-    position:relative;
-    text-align: center;
+    position:fixed;
+    top: 70%;
+    right: 40%;
     font-size: 50px;
-    top: 40px;
+    margin: 10px;
+    padding:10px;
+    width: 20%;
+    border-style: solid;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
 }
 
-#instructions {
-    position:fixed;
-    top:30%;
-    left:30%;
-    font-size: 80px;
+#continue:hover {
+    background-color: turquoise;
 }
+
+#one {
+    position: relative;
+    top: 80px;
+    left: 40%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#two {
+    position: relative;
+    top: 80px;
+    left: 30%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#three {
+    position: relative;
+    top: 80px;
+    left: 35%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#four {
+    position: relative;
+    top: 80px;
+    left: 25%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#five {
+    position: relative;
+    top: 80px;
+    left: 20%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#six {
+    position: relative;
+    top: 80px;
+    left: 43%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#seven {
+    position: relative;
+    top: 80px;
+    left: 40%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+#eight {
+    position: relative;
+    top: 80px;
+    left: 35%;
+    font-size: 20px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: url('assets/home.jpg');
+    background-size: cover;
+    background-blend-mode: screen;
+
+}
+
 

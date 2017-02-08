@@ -69,7 +69,7 @@ const monsterDictionary = {
     outFrame: 1,
     downFrame: 5,
     upFrame: 2,
-    unclickableFrame: 3,
+    unclickableFrame: 3
   },
   slimeB: {
     name: 'slimeB',
@@ -90,7 +90,7 @@ const monsterDictionary = {
     outFrame: 1,
     downFrame: 5,
     upFrame: 2,
-    unclickableFrame: 3,
+    unclickableFrame: 3
   },
   sentryC: {
     name: 'sentryC',
@@ -106,12 +106,33 @@ const monsterDictionary = {
     attack: 20,
     speed: 100,
     spawnRate: 1500,
-    flying: true,
+    flying: false,
     overFrame: 2,
     outFrame: 1,
     downFrame: 5,
     upFrame: 2,
-    unclickableFrame: 3,
+    unclickableFrame: 3
+  },
+  earthSmallerB: {
+    name: 'earthSmallerB',
+    scale: 2,
+    animations: {
+      idle: [0],
+      left: [0, 1, 2, 3],
+      right: [0, 1, 2, 3]
+    },
+    body: [12, 12, 2, 4],
+    health: 50,
+    attackRate: 1000,
+    attack: 10,
+    speed: 100,
+    spawnRate: 1500,
+    flying: true,
+    overFrame: 2,
+    outFrame: 1,
+    downFrame: 3,
+    upFrame: 0,
+    unclickableFrame: 2
   }
 };
 
