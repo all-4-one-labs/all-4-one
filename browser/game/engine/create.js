@@ -39,7 +39,7 @@ export default function create() {
   teamBullet = new Bullets(this);
   teamExplosions = new Explosions(this);
 
-  let text = '15:00';
+  let text = '10:00';
   let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
   testText = this.add.text(1215, 0, text, style);
   testText.fixedToCamera = true;

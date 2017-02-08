@@ -9,3 +9,16 @@ module.exports = combineReducers({
   monsters,
   engine
 });
+
+//IMPLEMENT TO RESETssw
+// const appReducer = combineReducers({
+//   players,
+//   monsters,
+//   engine
+// });
+
+// module.exports = (state, action) => {
+//   if (action.type === 'RESET')
+//     state = undefined
+//   return rootReducer(state, action)
+// }

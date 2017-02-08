@@ -29,6 +29,7 @@ function shallowMonsterUpdate(player) {
         if (player.health <= 0) {
           player.kill();
           player.healthBar.kill();
+          //dispatch to remove teammate
         }
       });
 
@@ -51,11 +52,7 @@ function shallowMonsterUpdate(player) {
         LocalMonsters[id].sprite.x = monstersFromServer[id].x;
         LocalMonsters[id].sprite.y = monstersFromServer[id].y;
         LocalMonsters[id].sprite.animations.play(monstersFromServer[id].animation);
-
-      // } else {
-      //   LocalMonsters[id].sprite.animations.stop();
-      //   LocalMonsters[id].sprite.frame = 7;
-      // }
+        
     //otherwise we create them at the place they need to be
     } else if (monstersFromServer[id].x) {
       LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y, monstersFromServer[id].name);
