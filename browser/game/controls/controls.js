@@ -1,7 +1,6 @@
-import { bullets, blaster, explosionsound } from '../engine/create.js' //change to being from bullets file
+import { bullets, blaster, explosionsound, explosions } from '../engine/create.js' //change to being from bullets file
 import store from '../../store.js'
 import {updatePosition, survivorFire} from '../../reducers/players.js'
-import {explosions} from '../engine/create.js'
 // Check for movement
 
 let fireRate = 300

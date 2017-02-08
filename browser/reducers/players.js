@@ -45,9 +45,7 @@ export default (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case RECEIVE_SERVER_PLAYER:
-      // console.log(state)
       newState = Object.assign({}, state, action.serverPlayer);
-      // console.log(action.serverPlayer)
       break;
     case UPDATE_POSITION:
       newState = Object.assign({}, state, action.positionData);
@@ -60,7 +58,6 @@ export default (state = initialState, action) => {
       break;
     case UPDATE_HEALTH:
       newState = Object.assign({}, state, action.health);
-      // console.log('newState', newState);
       break;
     case UPDATE_PLAYER_TYPE:
       newState = Object.assign({}, state, action.playerType);
