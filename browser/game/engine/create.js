@@ -11,8 +11,6 @@ let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explos
 export default function create() {
   this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-  this.game.camera.
-
   //sound test
   blaster = this.add.audio('blaster');
   explosionsound = this.add.audio('explosionsound');
@@ -36,6 +34,8 @@ export default function create() {
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster = new GameMaster(this);
     gameMaster.create();
+    this.game.camera.x = 1000;
+    this.game.camera.y = 1000;
   }
 
   createMapPostPlayer();
