@@ -12,6 +12,7 @@
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
+    border-radius: 8px;
 }
 
 #survivor {
@@ -28,6 +29,7 @@
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
+    border-radius: 8px;
 }
 
 #title {
@@ -42,6 +44,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #subtitle {
@@ -56,6 +59,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #gamemaster:hover, #survivor:hover {
@@ -74,6 +78,7 @@
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
+    border-radius: 8px;
 }
 
 #continue:hover {
@@ -91,6 +96,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #two {
@@ -104,6 +110,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #three {
@@ -117,6 +124,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #four {
@@ -130,6 +138,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #five {
@@ -143,6 +152,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #six {
@@ -156,6 +166,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #seven {
@@ -169,6 +180,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 #eight {
@@ -182,6 +194,7 @@
     display: inline-block;
     clear: both;
     float: left;
+    border-radius: 8px;
 }
 
 body {
@@ -189,8 +202,6 @@ body {
     padding: 0px;
     background-image: url('assets/home.jpg');
     background-size: cover;
-    background-blend-mode: screen;
-
 }
 
 
