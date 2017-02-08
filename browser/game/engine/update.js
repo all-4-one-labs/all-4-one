@@ -7,7 +7,6 @@ import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 import { camera } from '../controls/gameMasterControls.js';
 import { dashboard } from '../controls/createButtons.js';
-import { flyingMonsterGroup } from '../entities/monsters.js';
 // import { updateHealth } from '../../reducers/players.js';
 let playerDied = true;
 
@@ -162,9 +161,8 @@ export default function update() {
 
   // bring behind layers (layers sprites can go behind) to top of layers
   this.game.world.bringToTop(behindLayer);
-  this.game.world.moveDown(behindLayer);
 
-  //bring flying monsters on top of the layers
+  //bring flying monsters on top of the layers (GM side)
   this.game.world.bringToTop(flyingMonstersGroup);
 
   // bring healthBarsGroup to top of layers

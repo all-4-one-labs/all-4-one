@@ -2,6 +2,7 @@ import store from '../../store.js';
 import shallowMonster from '../entities/shallowMonster.js';
 import { updateHealth } from '../../reducers/players.js';
 import { bullets } from './create.js';
+import { flyingMonstersGroup } from './create.js';
 
 let LocalMonsters = {};
 

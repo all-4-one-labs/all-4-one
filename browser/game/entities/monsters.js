@@ -1,7 +1,7 @@
 // import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
 import mapArray from './map.js';
-import { flyingMonstersGroup, healthBarsGroup } from '../engine/create.js';
+import { flyingMonstersGroup } from '../engine/create.js';
 import easystarjs from 'easystarjs';
 let easystar = new easystarjs.js();
 //120 x 80 (32px each)
@@ -13,7 +13,6 @@ for (let i = 0; i < mapArray.length; i += 120) {
 }
 easystar.setGrid(grid);
 easystar.setAcceptableTiles([0]);
-let flyingMonsterGroup;
 
 export default class Monster {
 
@@ -71,9 +70,7 @@ export default class Monster {
 
       if (this.fly) {
         this.game.physics.arcade.moveToXY(this.sprite, playerX, playerY, this.sprite.speed);
-        flyingMonsterGroup = this.sprite;
         flyingMonstersGroup.add(this.sprite);
-        // healthBarsGroup.add(this.sprite);
       }
       else {
         easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
@@ -87,5 +84,3 @@ export default class Monster {
     this.sprite.healthBar.setPercent(this.sprite.health, this.totalHealth);
   }
 }
-
-export { flyingMonsterGroup }
