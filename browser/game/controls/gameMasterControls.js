@@ -1,6 +1,6 @@
 import Monster from '../entities/monsters.js';
 import store from '../../store.js';
-import monsterDictionary from './monsterDictionary.js';
+import monsterDictionary from '../dictionaries/monsterDictionary.js';
 
 let gmMonsters = {};
 let monsterId = 0;

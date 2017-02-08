@@ -1,9 +1,10 @@
 import { bullets, blaster } from '../engine/create.js' //change to being from bullets file
-import store from '../../store.js';
-import {updatePosition, survivorFire} from '../../reducers/players.js';
+import store from '../../store.js'
+import {updatePosition, survivorFire} from '../../reducers/players.js'
+import {explosions} from '../engine/create.js'
 // Check for movement
 
-let fireRate = 300;
+let fireRate = 300
 
 const move = function(){
   let xCord = 0
@@ -21,7 +22,7 @@ const move = function(){
   //  Stand still
   if (!xCord && !yCord) {
     this.sprite.animations.stop()
-    this.sprite.frame = 7
+    this.sprite.frame = 0
     direction = 'stop'
   }
 
@@ -50,7 +51,7 @@ const fireBullet = function(){
   if (this.cursors.down.isDown) yCord = 10000
 
   if ((xCord || yCord) && this.game.time.now > this.nextFire && bullets.sprite.countDead() > 0) {
-    blaster.play('', 0, 0.3);
+    blaster.play('', 0, 0.3)
     this.nextFire = this.game.time.now + fireRate
     let bullet = bullets.sprite.getFirstDead()
     bullet.scale.setTo(1)
@@ -62,4 +63,78 @@ const fireBullet = function(){
   store.dispatch(survivorFire({fire: [xCord, yCord], rate: fireRate}))
 }
 
-export { move, fireBullet };
+const rangeSplash = function() {
+  let addX = 0
+  let addY = 0
+  let pressed = false
+
+  if (this.cursors.left.isDown) {
+    addX = -100
+    pressed = true
+  }
+  if (this.cursors.right.isDown) {
+    addX = 100
+    pressed = true
+
+  }
+  if (this.cursors.up.isDown) {
+    addY = -100
+    pressed = true
+
+  }
+  if (this.cursors.down.isDown) {
+    addY = 100
+    pressed = true
+
+  }
+
+  if ((addX || addY) && this.game.time.now > this.nextFire && explosions.sprite.countDead() > 0) {
+    this.nextFire = this.game.time.now + 1000;
+    let explosion = explosions.sprite.getFirstDead()
+    explosion.scale.setTo(1)
+    explosion.reset(this.sprite.x + addX, this.sprite.y + addY)
+    explosion.body.setSize()
+    explosion.animations.add('explosion', this.sprite.attackAnimations.animate, 20, false)
+    explosion.animations.add('explosionBack', this.sprite.attackAnimations.animateBack, 60, false)
+    explosion.animations.play('explosion')
+    setTimeout(()=>{
+      explosion.animations.play('explosionBack')
+    }, 1500)
+    setTimeout(()=>{
+      explosion.kill()
+    }, 2000)
+
+
+  }
+  
+  store.dispatch(survivorFire({fire: [addX, addY], rate: 1000}))
+
+  // if (pressed && sheet && this.game.time.now > this.nextFire) {
+  //   console.log('in if')
+  //   this.nextFire = this.game.time.now + 500
+  //   let explosion = this.game.add.sprite(this.sprite.x + addX, this.sprite.y + addY, 'explosion')
+  //   // explosions.add(explosion)
+  //   explosion.animations.add('explosion', this.sprite.attackAnimations.animate, 20, false)
+  //   explosion.animations.add('explosionBack', this.sprite.attackAnimations.animateBack, 60, false)
+  //   explosion.animations.play('explosion')
+  //   setTimeout(()=>{
+  //     explosion.animations.play('explosionBack')
+  //   }, 1500)
+  //   setTimeout(()=>{
+  //     explosion.kill()
+  //   }, 2000)
+  // }
+}
+
+export { move, fireBullet, rangeSplash }
+
+
+
+
+
+
+
+
+
+
+
