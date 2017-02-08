@@ -9,6 +9,8 @@ import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions;
 
 export default function create() {
+  this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
   //sound test
   blaster = this.add.audio('blaster');
   explosionsound = this.add.audio('explosionsound');

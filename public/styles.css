@@ -201,6 +201,7 @@ body {
     margin: 0px;
     padding: 0px;
     background-image: url('home.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
