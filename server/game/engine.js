@@ -1,6 +1,7 @@
 const store = require('../store');
 const {timerTick} = require('../reducers/engine')
 const { reset } = require('../reducers/index.js')
+const { resetState } = require('../reducers/resetReducer.js')
 
 //hacky solution for now
 let timerID
@@ -10,7 +11,7 @@ const endgame = (io, winMessage) => {
   io.emit('end_game', winMessage);
   clearInterval(timerID)
   clearInterval(broadcastID)
-  store.dispatch(reset())
+  store.dispatch(resetState())
 };
 
 
