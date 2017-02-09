@@ -110,24 +110,18 @@ export default function update() {
       this.physics.arcade.overlap(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
         bullet.kill();
         monster.health -= 20;
-        if (monster.health <= 0 ) {
-          monster.kill();
-          monster.healthBar.kill();
-          delete gmMonsters[id];
-        }
       });
-    }
-    if (gmMonsters[id]) {
       this.physics.arcade.overlap(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
         monster.health -= 20;
-        if (monster.health <= 0 ) {
-          monster.kill();
-          monster.healthBar.kill();
-          delete gmMonsters[id];
-        }
       });
+      if (gmMonsters[id].sprite.health <= 0 ) {
+        gmMonsters[id].sprite.kill();
+        gmMonsters[id].sprite.healthBar.kill();
+        delete gmMonsters[id];
+      }
     }
   }
+
   store.dispatch(updateMonsters(monstersToDispatch));
 
   // This brings these game objects to the top of the layer stack, in the order they are run (for example, dashboard will be on top of everything)
