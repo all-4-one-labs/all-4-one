@@ -51,7 +51,7 @@ export default function create() {
         monsters: state.monsters,
         gameMode: state.gameMode
       });
-    }, 1000 / 60);
+    }, 1000 / 30);
   };
 
   this.sound.setDecodedCallback([epicbg], () => darknessbg.play('', 0, 1, true), this);

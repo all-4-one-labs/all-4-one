@@ -55,8 +55,8 @@ export default function update() {
 
   //player win\
   //this should be expanded into a generic 'end of game' method
-  if (store.getState().game.timeUp) {
-      let winMessageText = 'SURVIVORS WIN';
+  if (store.getState().game.win) {
+      let winMessageText = store.getState().game.win + '';
       let winMessageStyle = { font: '96px Arial', fill: '#ff0044', align: 'center' };
       let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
       winMessage.fixedToCamera = true
