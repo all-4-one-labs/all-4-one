@@ -31,9 +31,12 @@ const playerReducers = (state = initialState, action) => {
       }
       break;
     case RECEIVE_CLIENT_DATA:
+      // console.log('receive client data')
       if (newState.players[action.id] && action.data.health <= 0){
         delete newState.players[action.id];
-        if (isEmpty(newState.players)) newState.gmWinOnState = true
+        if (isEmpty(newState.players)) {
+          newState.gmWinOnState = true
+        }
         break;
       }
       newState.players[action.id] = action.data

@@ -1,5 +1,4 @@
 const {combineReducers} = require('redux');
-
 const players = require('./players.js').playerReducers;
 const monsters = require('./monsters.js').monsterReducers;
 const engine = require('./engine.js').engineReducers;
@@ -19,7 +18,10 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === 'RESET') state = undefined
+  if (action.type === 'RESET') {
+    console.log('reset')
+    state = undefined
+  }
   return appReducer(state, action)
 }
 

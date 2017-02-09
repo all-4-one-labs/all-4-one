@@ -1,7 +1,12 @@
 const initialState = {
-  players: {players: {} },
+  players: {
+    players: {},
+    gmWinOnState: false
+   },
   monsters: [],
-  engine:{}
+  engine:{},
+  numSurvivors: 0,
+  gmExist: false
 }
 
 const RESET_STATE = 'RESET_STATE';

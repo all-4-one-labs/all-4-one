@@ -8,14 +8,19 @@ let timerID
 let broadcastID
 
 const endgame = (io, winMessage) => {
-  io.emit('end_game', winMessage);
+  console.log('BEFORE',store.getState())
   clearInterval(timerID)
   clearInterval(broadcastID)
   store.dispatch(resetState())
+  io.emit('end_game', winMessage);
+  // store.dispatch(resetPlayers(false, 0))
+  // store.dispatch(reset())
+  console.log('AFTER', store.getState())
 };
 
 
 const broadcastGameState = (io) => {
+  // console.log('broadcast')
   broadcastID = setInterval(() => {
     let state = store.getState();
     io.emit('game_data', state);
@@ -30,11 +35,12 @@ const broadcastGameState = (io) => {
 
 //duration is in seconds
 const gameTimer = (duration, io) => {
+  // console.log('gameTimer')
   let timer = duration, minutes, seconds;
+  // console.log(timer)
     timerID = setInterval(function () {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
-
       minutes = minutes < 10 ? '0' + minutes : minutes;
       seconds = seconds < 10 ? '0' + seconds : seconds;
 
@@ -50,6 +56,7 @@ const gameTimer = (duration, io) => {
 //this function will be called when enough players have connected
 
 const startgame = (io) => {
+  console.log('startgame')
   //this is copied from the server file. when this is fully implemented,
   //it can be removed from there
   let time = 10 * 60;
