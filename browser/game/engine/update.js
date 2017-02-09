@@ -26,6 +26,11 @@ export default function update() {
   this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {
       teambullet.kill();
   });
+  if (sessionStorage.getItem('type') === 'pvp') {
+    this.physics.arcade.collide(teamBullet.sprite, player.sprite, (teambullet, player) => {
+      player.health -= 20
+    })
+  }
 
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
