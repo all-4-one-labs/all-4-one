@@ -17,7 +17,7 @@ export default class Player {
   constructor(id, game, playerType){
   this.id = id;
   this.game = game;
-  this.playerType = survivorsDictionary[playerType]
+  this.playerType = survivorsDictionary[playerType];
   this.update = this.update.bind(this);
   this.nextFire = 0;
   this.nextMonster = 0;
@@ -28,7 +28,7 @@ export default class Player {
   create() {
 
   //set up sprite sprite on the map
-  let randomNumber = Math.round(Math.random() * spawnArray.length-1);
+  let randomNumber = Math.floor(Math.random() * (spawnArray.length));
   this.sprite = this.game.add.sprite(spawnArray[randomNumber][0], spawnArray[randomNumber][1], this.playerType.name);
   this.sprite.anchor.set(0.5);
   this.sprite.scale.setTo(1);
