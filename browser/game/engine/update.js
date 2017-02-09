@@ -107,7 +107,7 @@ export default function update() {
 
     //gmMonsters collide with bullets and deal damage
     if (gmMonsters[id]) {
-      this.physics.arcade.collide(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
+      this.physics.arcade.overlap(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
         bullet.kill();
         monster.health -= 20;
         if (monster.health <= 0 ) {
@@ -118,7 +118,7 @@ export default function update() {
       });
     }
     if (gmMonsters[id]) {
-      this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
+      this.physics.arcade.overlap(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
         monster.health -= 20;
         if (monster.health <= 0 ) {
           monster.kill();
