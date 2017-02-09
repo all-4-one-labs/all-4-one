@@ -33,7 +33,7 @@ function shallowMonsterUpdate(player) {
         if (player.health <= 0) {
           player.kill();
           player.healthBar.kill();
-          store.dispatch(survivorFire({fire: [], /*rate: 100000000*/}))
+          store.dispatch(survivorFire({fire: []}));
           //dispatch to remove teammate
         }
       });
