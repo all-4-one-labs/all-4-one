@@ -1,5 +1,6 @@
 const store = require('../store');
 const {timerTick} = require('../reducers/engine')
+const { reset } = require('../reducers/index.js')
 
 //hacky solution for now
 let timerID
@@ -9,13 +10,12 @@ const endgame = (io, winMessage) => {
   io.emit('end_game', winMessage);
   clearInterval(timerID)
   clearInterval(broadcastID)
-  //clean out store
+  store.dispatch(reset())
 };
 
 
 const broadcastGameState = (io) => {
   broadcastID = setInterval(() => {
-    console.log('broadcasting')
     let state = store.getState();
     io.emit('game_data', state);
     if (store.getState().players.survivorWinOnState) {
