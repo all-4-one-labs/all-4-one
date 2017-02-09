@@ -6,6 +6,7 @@ import {receiveMonsterData} from '../../reducers/shallowMonsters.js'
 export default socket => {
 
   socket.on('game_data', data => {
+    console.log(data)
     store.dispatch(receiveServerPlayer(data.players));
     store.dispatch(updateTime(data.engine.minutes, data.engine.seconds));
     store.dispatch(receiveMonsterData(data.monsters));
