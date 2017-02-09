@@ -20,7 +20,7 @@ const endgame = (io, winMessage) => {
 
 
 const broadcastGameState = (io) => {
-  // console.log('broadcast')
+  console.log('broadcast', store.getState())
   broadcastID = setInterval(() => {
     let state = store.getState();
     io.emit('game_data', state);

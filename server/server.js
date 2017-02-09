@@ -27,18 +27,17 @@ const io = socketio(server);
 io.on('connection', (socket) => {
 listeners(io, socket)});
 
-let gmPlayer = store.getState().gmExist
-console.log(store.getState())
+let gmPlayer = store.getState().engine.gmExist
+console.log(gmPlayer,'gmPlayer')
 app.get('/gmjoinrequest', (req, res) => {
   console.log('in join req')
   if (gmPlayer) {
     res.send(gmPlayer);
   } else {
-    console.log('in else')
+    console.log('in join req else')
     res.send(gmPlayer);
     startgame(io);
     store.dispatch(gmExist(true))
-    console.log(store.getState().gmExist)
   }
 });
 
