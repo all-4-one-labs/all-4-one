@@ -25,23 +25,23 @@ const playerReducers = (state = initialState, action) => {
         delete newState.players[action.id];
         if (isEmpty(newState.players)) {
           newState.gmWinOnState = true
-          console.log('hit1')
         }
       } else {
+        console.log('remove player win')
         newState.survivorWinOnState = true
       }
       break;
     case RECEIVE_CLIENT_DATA:
 
-      //this broke emit for players data but not gms for some reason
-      // if (newState.players[action.id]){
-      //   if (newState.players[action.id].health >= 0) {
-      //     delete newState.players[action.id];
-      //     if (isEmpty(newState.players)) newState.gmWinOnState = true
-      //   }
-      // } else {
-      //     newState.players[action.id] = action.data
-      // }
+      // this broke emit for players data but not gms for some reason
+      if (newState.players[action.id]){
+        if (newState.players[action.id].health >= 0) {
+          delete newState.players[action.id];
+          if (isEmpty(newState.players)) newState.gmWinOnState = true
+        }
+      } else {
+          newState.players[action.id] = action.data
+      }
       break;
     default:
       return state;

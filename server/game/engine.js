@@ -10,8 +10,9 @@ const broadcastGameState = (io) => {
   setInterval(() => {
     let state = store.getState();
     io.emit('game_data', state);
-    console.log('hi')
+    // console.log('hi')
     if (store.getState().players.survivorWinOnState) {
+      console.log('the problem is on the backend')
       endgame(io, true)
     } else if (store.getState().players.gmWinOnState) {
       endgame(io, false)
