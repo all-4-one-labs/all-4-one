@@ -2,26 +2,47 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Tesseract</title>
+        <title>All 4 One</title>
         <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
     </head>
     <body>
         <div id='gamemasterInstructions'>
-            <h1> Use W-A-S-D to pan camera </h1>
-            <h1> Click on the monsters at bottom to select the monster type. Use spacebar to spawn monster.</h1>
-            <h1> You can only spawn monsters in the border areas (dark green) </h1>
-            <h1> You can also use the crosshair to set a spawn point. Click inside the game itself to spawn monsters at spawn point. </h1>
-            <h1 style="color:red;font-size:80px"> Goal: Eliminate all players!! </h1>
+            <h1 id='one'> Use W-A-S-D to pan camera </h1>
+            <h1 id='two'>  Use the numpad to select the monster type. Use mouse click to spawn monster.</h1>
+            <h1 id='three'> You can only spawn monsters in the border areas (dark green) </h1>
+            <h1 id='four'> You can also use the crosshair to set a spawn point. Click inside the game itself to spawn monsters at spawn point. </h1>
+            <h1 style="color:red;font-size:80px" id='five'> Goal: Eliminate all players!! </h1>
+            <button id='continue' > <div>Continue to Game</div> </button>
         </div>
         <div id='survivorInstructions'>
-            <h1> Use W-A-S-D to move player </h1>
-            <h1> Use arrow keys to shoot in that direction.</h1>
-            <h1 style="color:red;font-size:80px"> Goal: Survive!! </h1>
+            <h1 id='six'> Use W-A-S-D to move player </h1>
+            <h1 id='seven'> Use arrow keys to shoot in that direction.</h1>
+            <h1 style="color:red;font-size:80px" id='eight'> Goal: Survive!! </h1>
+            <button id='continueA' > <div>Continue as Gunner</div> </button>
+            <button id='continueB' > <div>Continue as Mage</div> </button>
         </div>
-        <a id='continue' href='game.html'> <div>Continue to Game</div> </a>
         <script type="text/javascript">
             if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
             else if (sessionStorage.getItem('mode') === 'gamemaster') document.getElementById("survivorInstructions").style.display = "none";
         </script>
+        <script>
+            document.getElementById('continueA')
+            .addEventListener('click', () => {
+                sessionStorage.setItem('playerType', 'survivorA');
+                window.location = 'game.html'
+            });
+
+            document.getElementById('continueB')
+            .addEventListener('click', () => {
+                sessionStorage.setItem('playerType', 'survivorB');
+                window.location = 'game.html';
+            });
+
+            document.getElementById('continue')
+            .addEventListener('click', () => {
+                window.location = 'game.html';
+            });
+        </script>
+
     </body>
 </html>

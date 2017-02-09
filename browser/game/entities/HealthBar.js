@@ -19,6 +19,8 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
+import {healthBarsGroup} from '../engine/create.js';
+
 
 var HealthBar = function(game, providedConfig) {
     this.game = game;
@@ -77,6 +79,7 @@ HealthBar.prototype.drawBackground = function() {
 
     this.bgSprite = this.game.add.sprite(this.x, this.y, bmd);
     this.bgSprite.anchor.set(0.5);
+    healthBarsGroup.add(this.bgSprite);
 
     if(this.flipped){
         this.bgSprite.scale.x = -1;
@@ -92,6 +95,7 @@ HealthBar.prototype.drawHealthBar = function() {
 
     this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, bmd);
     this.barSprite.anchor.y = 0.5;
+    healthBarsGroup.add(this.barSprite)
 
     if(this.flipped){
         this.barSprite.scale.x = -1;
@@ -112,11 +116,11 @@ HealthBar.prototype.setPosition = function (x, y) {
 };
 
 
-HealthBar.prototype.setPercent = function(newValue){
+HealthBar.prototype.setPercent = function(newValue, monsterHealth){
     if(newValue < 0) newValue = 0;
-    if(newValue > 100) newValue = 100;
+    if (!monsterHealth) monsterHealth = 100;
 
-    var newWidth =  (newValue * this.config.width) / 100;
+    var newWidth =  (newValue * this.config.width) / monsterHealth;
 
     this.setWidth(newWidth);
 };

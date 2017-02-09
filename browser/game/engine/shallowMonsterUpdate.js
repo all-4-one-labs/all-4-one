@@ -1,7 +1,10 @@
 import store from '../../store.js';
-import shallowMonster from '../entities/shallowMonster.js';
+import ShallowMonster from '../entities/shallowMonster.js';
 import { updateHealth } from '../../reducers/players.js';
 import { bullets } from './create.js';
+import { flyingMonstersGroup } from './create.js';
+import { survivorFire } from '../../reducers/players.js';
+import monsterDictionary from '../dictionaries/monsterDictionary.js';
 
 let LocalMonsters = {};
 
@@ -18,6 +21,7 @@ function shallowMonsterUpdate(player) {
   for (let id in monstersFromServer) {
     //the first half of this conditional decides whether we create the shallow object or just update it
     if (LocalMonsters[id] && monstersFromServer[id].x){
+      if (monsterDictionary[LocalMonsters[id].sprite.key].flying) flyingMonstersGroup.add(LocalMonsters[id].sprite);
       //player collision with monsters - survivor side
       this.physics.arcade.collide(player.sprite, LocalMonsters[id].sprite, (player, monster) => {
         if (this.game.time.now > monster.nextAttack) {
@@ -29,6 +33,7 @@ function shallowMonsterUpdate(player) {
         if (player.health <= 0) {
           player.kill();
           player.healthBar.kill();
+          store.dispatch(survivorFire({fire: []}));
           //dispatch to remove teammate
         }
       });
@@ -40,7 +45,7 @@ function shallowMonsterUpdate(player) {
 
       //healthbar
       LocalMonsters[id].sprite.healthBar.setPosition(LocalMonsters[id].sprite.x - 7, LocalMonsters[id].sprite.y - 40);
-      LocalMonsters[id].sprite.healthBar.setPercent(monstersFromServer[id].health);
+      LocalMonsters[id].sprite.healthBar.setPercent(monstersFromServer[id].health, LocalMonsters[id].totalHealth);
 
       //this is questionable and could lead to a very hard to debug desync issue if the monsters
       //are dying on the survivor side but not the GM side. It also might be unnecessary
@@ -56,7 +61,7 @@ function shallowMonsterUpdate(player) {
         
     //otherwise we create them at the place they need to be
     } else if (monstersFromServer[id].x) {
-      LocalMonsters[id] = new shallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y, monstersFromServer[id].name);
+      LocalMonsters[id] = new ShallowMonster(id, this, monstersFromServer[id].x, monstersFromServer[id].y, monstersFromServer[id].name);
     }
   }
 }

@@ -1,11 +1,14 @@
-import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg } from './create.js';
-import { playerCollide, bulletCollide } from './createMap.js';
+
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, teamExplosions } from './create.js';
+import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
-// import { updateHealth } from '../../reducers/players.js';
+
+import { dashboard } from '../controls/createButtons.js';
+
 let playerDied = true;
 
 export default function update() {
@@ -18,13 +21,17 @@ export default function update() {
     epicbg.play('', 0, 0.9);
   }
   // this.game.paused = true
-  //  Collision
+  // Collision
+  // teambullet collision
+  this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {
+      teambullet.kill();
+  });
 
   // Checks which gameMode was chosen and updates appropriately
   if (store.getState().gameMode === 'survivor') {
     player.update();
     teammateUpdate.call(this, player);
-    this.physics.arcade.collide(player.sprite, playerCollide)
+    this.physics.arcade.collide(player.sprite, playerCollide);
     this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
       bullet.kill();
     });
@@ -77,7 +84,7 @@ export default function update() {
       this.physics.arcade.collide(gmMonsters[id].sprite, LocalTeammates[teammateID]);
 
     //choose the closest survivor and path to them
-      if (LocalTeammates[teammateID].sprite) {
+      if (LocalTeammates[teammateID].sprite && LocalTeammates[teammateID].sprite.health > 0) {
         let currentDistance = Phaser.Math.distance(gmMonsters[id].sprite.x, gmMonsters[id].sprite.y, LocalTeammates[teammateID].sprite.x, LocalTeammates[teammateID].sprite.y);
         if (currentDistance < distanceToClosest) {
           distanceToClosest = currentDistance;
@@ -90,7 +97,7 @@ export default function update() {
     if (closest) gmMonsters[id].update(closest.sprite.x, closest.sprite.y, distanceToClosest);
 
     //gmMonsters collide with map
-    this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
+    if (!gmMonsters[id].fly) this.physics.arcade.collide(gmMonsters[id].sprite, playerCollide);
 
     //gmMonsters collide with each other
     for (let otherIDs in gmMonsters) {
@@ -100,15 +107,36 @@ export default function update() {
     }
 
     //gmMonsters collide with bullets and deal damage
-    this.physics.arcade.collide(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
-      bullet.kill();
-      monster.health -= 20;
-      if (monster.health <= 0 ) {
-        monster.kill();
-        monster.healthBar.kill();
+    if (gmMonsters[id]) {
+      this.physics.arcade.overlap(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
+        bullet.kill();
+        monster.health -= 20;
+      });
+      this.physics.arcade.overlap(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
+        monster.health -= 20;
+      });
+      if (gmMonsters[id].sprite.health <= 0 ) {
+        gmMonsters[id].sprite.kill();
+        gmMonsters[id].sprite.healthBar.kill();
         delete gmMonsters[id];
       }
-    });
+    }
   }
+
   store.dispatch(updateMonsters(monstersToDispatch));
+
+  // This brings these game objects to the top of the layer stack, in the order they are run (for example, dashboard will be on top of everything)
+
+  // bring behind layers (layers sprites can go behind) to top of layers
+  this.game.world.bringToTop(behindLayer);
+
+  //bring flying monsters on top of the layers
+  this.game.world.bringToTop(flyingMonstersGroup);
+
+  // bring healthBarsGroup to top of layers
+  this.game.world.bringToTop(healthBarsGroup);
+
+  //bring dock to top of layers
+  if (dashboard) this.game.world.bringToTop(dashboard);
+
 }

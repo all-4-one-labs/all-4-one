@@ -19,19 +19,23 @@ function teammateUpdate(player) {
     if (id !== player.id) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
 
-
         this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
-        LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health);
+        LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health, LocalTeammates[id].totalHealth);
+        LocalTeammates[id].sprite.health = teammatesFromServer[id].health
         if (teammatesFromServer[id].health <= 0) {
           LocalTeammates[id].kill();
         }
 
-        //bullets
+        // bullets
+
           if (teammatesFromServer[id].fire[0] || teammatesFromServer[id].fire[1]) {
-            LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate);
+            if (teammatesFromServer[id].playerType === 'survivorB') {
+              LocalTeammates[id].rangeSplash(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate)
+            }
+            else LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate);
           }
         //if the player already exists, just move them
         if (teammatesFromServer[id].animation !== 'stop') {
@@ -45,7 +49,7 @@ function teammateUpdate(player) {
         }
       //else create them at the place they need to be
       } else if (teammatesFromServer[id].position) {
-      LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y);
+        LocalTeammates[id] = new Teammate(id, this, teammatesFromServer[id].position.x, teammatesFromServer[id].position.y, teammatesFromServer[id].playerType);
       }
     }
   }

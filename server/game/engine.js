@@ -16,6 +16,7 @@ const broadcastGameState = (io) => {
       endgame(io, 'GAME MASTER WINS')
     }
   }, 1000 / 30);
+
 };
 
 //duration is in seconds
