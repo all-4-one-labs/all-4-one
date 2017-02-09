@@ -56,7 +56,7 @@ const fireBullet = function(){
     bullet.body.setSize(20, 30)
     bullet.reset(this.sprite.x, this.sprite.y)
     this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600);
-     bullet.originalLocation = {x: bullet.x, y: bullet.y};
+    bullet.originalLocation = {x: bullet.x, y: bullet.y};
     //fire needs to be refactored when recieved and drawn by a new client
   }
   store.dispatch(survivorFire({fire: [xCord, yCord], rate: fireRate}))

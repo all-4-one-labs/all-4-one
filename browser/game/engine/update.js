@@ -31,6 +31,15 @@ export default function update() {
     })
   }
 
+   //kill teambullet after certain distance
+  if (teamBullet && Object.keys(teamBullet).length > 0) {
+    teamBullet.sprite.forEachAlive(bullet => {
+      let x = Math.abs(bullet.x - bullet.originalLocation.x);
+      let y = Math.abs(bullet.y - bullet.originalLocation.y);
+      if (Math.sqrt(x*x + y*y) >= 500 || x >= 500 || y >= 500) bullet.kill();
+    })
+  }
+
   // Collision
   // teambullet collision
   this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {

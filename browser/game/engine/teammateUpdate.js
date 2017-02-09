@@ -1,12 +1,12 @@
 // import { player } from './create.js'
 import store from '../../store.js'
 import Teammate from '../entities/teammate.js'
-import {bullets} from './create.js'
 
 let LocalTeammates = {}
 
 function teammateUpdate(player) {
   let teammatesFromServer = store.getState().players.players;
+
   //delete teammate if they disconnect
   for (let id in LocalTeammates) {
       if (!teammatesFromServer[id]) {
@@ -14,7 +14,6 @@ function teammateUpdate(player) {
           delete LocalTeammates[id];
       }
   }
-
   for (let id in teammatesFromServer) {
     if (id !== player.id) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
@@ -30,19 +29,18 @@ function teammateUpdate(player) {
         }
 
         // bullets
-
           if (teammatesFromServer[id].fire[0] || teammatesFromServer[id].fire[1]) {
             if (teammatesFromServer[id].playerType === 'survivorB') {
               LocalTeammates[id].rangeSplash(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate)
             }
             else LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate);
           }
+
         //if the player already exists, just move them
         if (teammatesFromServer[id].animation !== 'stop') {
           LocalTeammates[id].sprite.x = teammatesFromServer[id].position.x;
           LocalTeammates[id].sprite.y = teammatesFromServer[id].position.y;
           LocalTeammates[id].sprite.animations.play(teammatesFromServer[id].animation);
-
         } else {
           LocalTeammates[id].sprite.animations.stop();
           LocalTeammates[id].sprite.frame = 7;
