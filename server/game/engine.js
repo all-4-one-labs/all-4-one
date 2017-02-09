@@ -1,17 +1,22 @@
 const store = require('../store');
 const {timerTick} = require('../reducers/engine')
 
+const endgame = (io, teamThatWon) => {
+  //this needs to also return the server to a 'game not currently started' state
+  io.emit('end_game', teamThatWon);
+};
+
 const broadcastGameState = (io) => {
   setInterval(() => {
     let state = store.getState();
-    // console.log(state)
     io.emit('game_data', state);
+    if (store.getState().players.survivorWinOnState) {
+      endgame(io, 'SURVIVORS WIN')
+    } else if (store.getState().players.gmWinOnState) {
+      endgame(io, 'GAME MASTER WINS')
+    }
   }, 1000 / 30);
-};
 
-const endgame = (io) => {
-  //this needs to also return the server to a 'game not currently started' state
-  io.emit('end_game', {survivorWin: true});
 };
 
 //duration is in seconds
@@ -27,7 +32,7 @@ const gameTimer = (duration, io) => {
       store.dispatch(timerTick(minutes, seconds));
 
       if (--timer < 0) {
-        endgame(io);
+        endgame(io, 'surv');
         clearInterval(tick);
       }
   }, 1000);
@@ -43,4 +48,4 @@ const startgame = (io) => {
   broadcastGameState(io);
 };
 
-module.exports = { broadcastGameState, startgame };
+module.exports = { broadcastGameState, startgame, endgame };

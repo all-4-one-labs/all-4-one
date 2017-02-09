@@ -1,11 +1,12 @@
+
 import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, teamExplosions } from './create.js';
 import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
-import { gmMonsters } from '../controls/gameMasterControls.js';
+import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
-import { camera } from '../controls/gameMasterControls.js';
+
 import { dashboard } from '../controls/createButtons.js';
 
 let playerDied = true;
@@ -45,7 +46,7 @@ export default function update() {
       if (playerDied) {
         playerDied = false;
         let text = 'YOU DIED!';
-        let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
+        let style = { font: '24px Arial', fill: '#ffffff', align: 'center' };
         let alert = this.game.add.text(540, 360, text, style);
         alert.fixedToCamera = true;
         setTimeout(() => {
@@ -61,13 +62,13 @@ export default function update() {
 
   //player win\
   //this should be expanded into a generic 'end of game' method
-  if (store.getState().game.timeUp) {
-      let winMessageText = 'SURVIVORS WIN';
+  if (store.getState().game.win) {
+      let winMessageText = store.getState().game.win + '';
       let winMessageStyle = { font: '96px Arial', fill: '#ff0044', align: 'center' };
       let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
       winMessage.fixedToCamera = true
       this.game.paused = true
-      setTimeout(window.location = '/', 7000)
+      setTimeout(() => {location.href = '/'}, 7000)
    }
 
   let monstersToDispatch = {};

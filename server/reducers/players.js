@@ -1,7 +1,7 @@
+const isEmpty = require('lodash/isEmpty')
 const initialState = {players: {} };
 const REMOVE_PLAYER = 'REMOVE_PLAYER';
 const RECEIVE_CLIENT_DATA = 'RECEIVE_CLIENT_DATA';
-
 
 const removePlayer = id => ({
   type: REMOVE_PLAYER,
@@ -18,9 +18,24 @@ const playerReducers = (state = initialState, action) => {
   let newState = Object.assign( {}, state)
   switch (action.type) {
     case REMOVE_PLAYER:
-      delete newState.players[action.id];
+      //this should only happen if the game has started
+      //currently the gameMode only exists on the survivor. putting off fixing this until backend stuff is implemented
+      //once it's fixed this will be '...action[id].gameMode==='survivor''
+      if (newState.players[action.id]) {
+        delete newState.players[action.id];
+        if (isEmpty(newState.players)) {
+          newState.gmWinOnState = true
+        }
+      } else {
+        newState.survivorWinOnState = true
+      }
       break;
     case RECEIVE_CLIENT_DATA:
+      if (newState.players[action.id] && action.data.health <= 0){
+        delete newState.players[action.id];
+        if (isEmpty(newState.players)) newState.gmWinOnState = true
+        break;
+      }
       newState.players[action.id] = action.data
       break;
     default:
