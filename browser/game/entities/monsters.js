@@ -63,9 +63,11 @@ export default class Monster {
     }
     if (playerX < this.sprite.x) {
       this.sprite.animations.play('left');
+      this.animation = 'left';
     }
     else if (playerX > this.sprite.x) {
       this.sprite.animations.play('right');
+      this.animation = 'right';
     }
 
     if (this.game.time.now > this.nextPathfinding) {
