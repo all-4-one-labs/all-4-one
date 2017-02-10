@@ -74,7 +74,7 @@ const startgame = (io) => {
   store.dispatch(resetPlayers())
   store.dispatch(resetEngine())
   store.dispatch(resetMonsters())
-  let time = 10 * 60;
+  let time = 5 * 60;
   gameTimer(time, io);
   broadcastGameState(io);
 };
