@@ -57,7 +57,7 @@
 }
 
 
-#gamemaster:hover, #survivor:hover, #continue:hover, #continueA:hover, #continueB:hover {
+#gamemaster:hover, #survivor:hover, #continue:hover, #gunner:hover, #mage:hover, #shotgunner:hover  {
     background-color: turquoise;
 }
 
@@ -184,10 +184,10 @@ body {
     background-size: cover;
 }
 
-#continueA {
+#gunner {
     position:relative;
     top: 8vw;
-    left: 20vw;
+    left: 3vw;
     font-size: 3vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -195,10 +195,21 @@ body {
     border-radius: 8px;
 }
 
-#continueB {
+#mage {
     position:relative;
     top: 8vw;
-    left: 25vw;
+    left: 8vw;
+    font-size: 3vw;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    border-radius: 8px;
+}
+
+#shotgunner {
+    position:relative;
+    top: 8vw;
+    left: 13vw;
     font-size: 3vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
