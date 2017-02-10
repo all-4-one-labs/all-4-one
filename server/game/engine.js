@@ -24,7 +24,7 @@ const endgame = (io, winMessage) => {
     store.dispatch(resetPlayers())
     store.dispatch(resetEngine())
     store.dispatch(resetMonsters())
-  }, 10000)
+  }, 7000)
   // setTimeout(() => console.log('after for real',store.getState()), 15000)
 
 
