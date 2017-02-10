@@ -169,7 +169,7 @@ export default function update() {
       });
       this.physics.arcade.overlap(teamSgBullets.sprite, gmMonsters[id].sprite, (monster, sgbullet) => {
         monster.health -= sgbullet.damage;
-        // sgbullet.kill();
+        sgbullet.kill();
       });
       this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
         if (this.game.time.now > monster.nextExplosion) {
