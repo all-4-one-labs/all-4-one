@@ -33,7 +33,7 @@ function teammateUpdate(player) {
             if (teammatesFromServer[id].playerType === 'mage') {
               LocalTeammates[id].rangeSplash(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate)
             }
-            else LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].fire[1], teammatesFromServer[id].rate);
+            else LocalTeammates[id].fire(teammatesFromServer[id].fire[0], teammatesFromServer[id].rate);
           }
 
         //if the player already exists, just move them
