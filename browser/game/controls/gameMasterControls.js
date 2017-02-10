@@ -44,16 +44,11 @@ const crosshairCheck = function() {
   }
 }
 
-const spawnMonster = function(clickedMonster) {
+const spawnMonster = function(clickedMonster, maxPlayer) {
   let text = 'CAN\'T SPAWN HERE. PLACE A CROSSHAIR DOWN TO SPAWN OFF CAMERA'
   let style = { font: "24px Arial", fill: "#ffffff", align: "center" }
-  let enemyPlayers = store.getState().players.players;
   let spawnLocation;
   let pointer = this.game.input.activePointer;
-  let playerMultiplier;
-  if (!enemyPlayers) enemyPlayers = {};
-  if (enemyPlayers) playerMultiplier = Object.keys(enemyPlayers).length;
-
 
   if (((pointer.worldX < 320 || pointer.worldX > 3520) || (pointer.worldY < 320 || pointer.worldY > 2240)) && pointer.y < 680 ) spawnLocation = {x: pointer.worldX, y: pointer.worldY}
 
@@ -71,7 +66,7 @@ const spawnMonster = function(clickedMonster) {
 
 
   if (this.game.time.now > this.nextMonster && pointer.isDown && clickedMonster.key && pointer.y < 680 && spawnLocation) {
-      let monsterSpawn = monsterDictionary[clickedMonster.key].spawnRate / playerMultiplier;
+      let monsterSpawn = monsterDictionary[clickedMonster.key].spawnRate / maxPlayer;
       this.nextMonster = this.game.time.now + monsterSpawn;
       let newMonster = new Monster(this.game, spawnLocation, monsterDictionary[clickedMonster.key]);
       clickedMonster.frame = monsterDictionary[clickedMonster.key].unclickableFrame;
