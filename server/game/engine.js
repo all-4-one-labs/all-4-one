@@ -34,6 +34,7 @@ const broadcastGameState = (io) => {
   broadcastID = setInterval(() => {
     console.log('broadcast', store.getState())
     let state = store.getState();
+    console.log('this is the state', state)
     io.emit('game_data', state);
     if (store.getState().players.survivorWinOnState) {
       endgame(io, 'SURVIVORS WIN')
@@ -73,7 +74,7 @@ const startgame = (io) => {
   store.dispatch(resetPlayers())
   store.dispatch(resetEngine())
   store.dispatch(resetMonsters())
-  let time = 1 * 60;
+  let time = 10 * 60;
   gameTimer(time, io);
   broadcastGameState(io);
 };
