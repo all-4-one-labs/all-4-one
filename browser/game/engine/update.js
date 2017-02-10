@@ -4,6 +4,7 @@ import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
+import { updateHealth } from '../../reducers/players.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
 
@@ -52,6 +53,14 @@ export default function update() {
     player.update();
     teammateUpdate.call(this, player);
     this.physics.arcade.collide(player.sprite, playerCollide);
+    this.physics.arcade.collide(teamExplosions.sprite, player.sprite, (player, explosion) => {
+        if (this.game.time.now > player.nextHeal) {
+          player.nextHeal = this.game.time.now + 1500;
+          player.health = Math.min(player.health + 5, 100);
+          console.log('healing', player.health);
+          store.dispatch(updateHealth({health: player.health}));
+        }
+    });
     this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
       bullet.kill();
     });
@@ -133,7 +142,12 @@ export default function update() {
         bullet.kill();
       });
       this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
-        monster.health -= explosion.damage;
+        if (this.game.time.now > monster.nextExplosion) {
+          monster.nextExplosion = this.game.time.now + 400;
+          monster.health -= explosion.damage;
+          console.log('damage monster', monster.health);
+        }
+
       });
       if (gmMonsters[id].sprite.health <= 0 ) {
         gmMonsters[id].sprite.kill();

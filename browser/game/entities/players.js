@@ -36,6 +36,7 @@ export default class Player {
   this.sprite.animations.add('down', this.playerType.animations.down, 7, true);
   this.sprite.animations.add('up', this.playerType.animations.up, 7, true);
   this.sprite.attackType = this.playerType.attackType;
+  this.sprite.nextHeal = 0;
   this.game.camera.follow(this.sprite);
 
   //collision

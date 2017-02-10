@@ -80,10 +80,10 @@ const rangeSplash = function() {
   let addX = 0;
   let addY = 0;
 
-  if (this.cursors.left.isDown) addX = -100;
-  if (this.cursors.right.isDown) addX = 100;
-  if (this.cursors.up.isDown) addY = -100;
-  if (this.cursors.down.isDown) addY = 100;
+  if (this.cursors.left.isDown) addX = -30;
+  if (this.cursors.right.isDown) addX = 30;
+  if (this.cursors.up.isDown) addY = -30;
+  if (this.cursors.down.isDown) addY = 30;
 
   if ((addX || addY) && this.game.time.now > this.nextFire && explosions.sprite.countDead() > 0) {
     this.nextFire = this.game.time.now + this.playerType.fireRate;
