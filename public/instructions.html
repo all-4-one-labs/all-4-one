@@ -11,30 +11,40 @@
             <h1 id='two'>  Use the numpad to select the monster type. Use mouse click to spawn monster.</h1>
             <h1 id='three'> You can only spawn monsters in the border areas (dark green) </h1>
             <h1 id='four'> You can also use the crosshair to set a spawn point. Click inside the game itself to spawn monsters at spawn point. </h1>
-            <h1 style="color:red;font-size:80px" id='five'> Goal: Eliminate all players!! </h1>
-            <button id='continue' > <div>Continue to Game</div> </button>
+            <h1 id='five' > Goal: Eliminate all players!! </h1>
+            <button id='continue' > Continue to Game </button>
         </div>
         <div id='survivorInstructions'>
             <h1 id='six'> Use W-A-S-D to move player </h1>
             <h1 id='seven'> Use arrow keys to shoot in that direction.</h1>
-            <h1 style="color:red;font-size:80px" id='eight'> Goal: Survive!! </h1>
-            <button id='continueA' > <div>Continue as Gunner</div> </button>
-            <button id='continueB' > <div>Continue as Mage</div> </button>
+            <h1 id='eight'> Goal: Survive!! </h1>
+            <button id='gunner'> Continue as Gunner </button>
+            <button id='mage'> Continue as Mage </button>
+            <button id='shotgunner'> Continue as Shotgunner </button>
+            <h1 id='gunnerProfile'> long range but mediocre damage and speed </h1>
+            <h1 id='mageProfile'> short range but high damage; can also heal teammates </h1>
+            <h1 id='shotgunnerProfile'> short-to-med range; damage decreases the farther the range </h1>
         </div>
         <script type="text/javascript">
             if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
             else if (sessionStorage.getItem('mode') === 'gamemaster') document.getElementById("survivorInstructions").style.display = "none";
         </script>
         <script>
-            document.getElementById('continueA')
+            document.getElementById('gunner')
             .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'survivorA');
-                window.location = 'game.html'
+                sessionStorage.setItem('playerType', 'gunner');
+                window.location = 'game.html';
             });
 
-            document.getElementById('continueB')
+            document.getElementById('mage')
             .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'survivorB');
+                sessionStorage.setItem('playerType', 'mage');
+                window.location = 'game.html';
+            });
+
+            document.getElementById('shotgunner')
+            .addEventListener('click', () => {
+                sessionStorage.setItem('playerType', 'shotgunner');
                 window.location = 'game.html';
             });
 

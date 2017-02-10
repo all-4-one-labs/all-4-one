@@ -42,6 +42,7 @@ export default class Monster {
     this.sprite.attackRate = monster.attackRate;
     this.sprite.attack = monster.attack;
     this.sprite.speed = monster.speed;
+    this.sprite.nextExplosion = 0;
   }
 
   pathHelper(path) {

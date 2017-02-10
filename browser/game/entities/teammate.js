@@ -32,6 +32,7 @@ export default class Teammate {
     this.sprite.kill();
     this.sprite.healthBar.kill();
   }
+
   fire (xCord, yCord, fireRate) {
 
     if ((xCord || yCord) && this.game.time.now > this.nextFire && teamBullet.sprite.countDead() > 0) {
@@ -42,6 +43,8 @@ export default class Teammate {
         bullet.body.setSize(20, 30)
         bullet.reset(this.sprite.x, this.sprite.y)
         this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)
+        bullet.originalLocation = {x: bullet.x, y: bullet.y};
+        bullet.damage = this.playerType.damage;
       }
   }
 
@@ -52,9 +55,11 @@ export default class Teammate {
       let explosion = teamExplosions.sprite.getFirstDead()
       explosion.scale.setTo(1)
       explosion.reset(this.sprite.x + xCord, this.sprite.y + yCord)
+      explosion.damage = this.playerType.damage;
       explosion.animations.add('explosion', this.playerType.attackAnimations.animate, 20, false)
       explosion.animations.add('explosionBack', this.playerType.attackAnimations.animateBack, 60, false)
       explosion.animations.play('explosion')
+
       setTimeout( () => {
         explosionsound.play('', 0, 1.0);
       }, 1300);

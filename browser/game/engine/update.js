@@ -4,8 +4,10 @@ import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
 import { updateMonsters } from '../../reducers/monsters.js';
+import { updateHealth } from '../../reducers/players.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
+import { isEmpty } from 'lodash';
 
 import { dashboard } from '../controls/createButtons.js';
 
@@ -21,6 +23,26 @@ export default function update() {
     epicbg.play('', 0, 0.9);
   }
   // this.game.paused = true
+
+  //kill own bullet after certain distance
+  if (bullets && Object.keys(bullets).length > 0) {
+    bullets.sprite.forEachAlive(bullet => {
+      let x = Math.abs(bullet.x - bullet.originalLocation.x);
+      let y = Math.abs(bullet.y - bullet.originalLocation.y);
+      if (bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 200)) bullet.kill();
+      if (!bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 500)) bullet.kill();
+    })
+  }
+
+   //kill teambullet after certain distance
+  if (teamBullet && Object.keys(teamBullet).length > 0) {
+    teamBullet.sprite.forEachAlive(bullet => {
+      let x = Math.abs(bullet.x - bullet.originalLocation.x);
+      let y = Math.abs(bullet.y - bullet.originalLocation.y);
+      if (Math.sqrt(x*x + y*y) >= 500) bullet.kill();
+    })
+  }
+
   // Collision
   // teambullet collision
   this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {
@@ -32,6 +54,14 @@ export default function update() {
     player.update();
     teammateUpdate.call(this, player);
     this.physics.arcade.collide(player.sprite, playerCollide);
+    this.physics.arcade.collide(teamExplosions.sprite, player.sprite, (player, explosion) => {
+        if (this.game.time.now > player.nextHeal) {
+          player.nextHeal = this.game.time.now + 1500;
+          player.health = Math.min(player.health + 5, 100);
+          console.log('healing', player.health);
+          store.dispatch(updateHealth({health: player.health}));
+        }
+    });
     this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
       bullet.kill();
     });
@@ -60,7 +90,7 @@ export default function update() {
     teammateUpdate.call(this, 'gm');
   }
 
-  //player win\
+  //player win
   //this should be expanded into a generic 'end of game' method
   if (store.getState().game.win) {
       let winMessageText = store.getState().game.win + '';
@@ -110,11 +140,14 @@ export default function update() {
     //gmMonsters collide with bullets and deal damage
     if (gmMonsters[id]) {
       this.physics.arcade.overlap(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
+        monster.health -= bullet.damage;
         bullet.kill();
-        monster.health -= 20;
       });
-      this.physics.arcade.overlap(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
-        monster.health -= 20;
+      this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
+        if (this.game.time.now > monster.nextExplosion) {
+          monster.nextExplosion = this.game.time.now + 400;
+          monster.health -= explosion.damage;
+        }
       });
       if (gmMonsters[id].sprite.health <= 0 ) {
         gmMonsters[id].sprite.kill();

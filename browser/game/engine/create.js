@@ -26,7 +26,7 @@ export default function create() {
   // map, order matters!
   createMapPrePlayer(this);
 
-  let playerType = sessionStorage.getItem('playerType')
+  let playerType = sessionStorage.getItem('playerType');
   if (store.getState().gameMode === 'survivor') {
     survivor = new Survivor(this, playerType);
     player = survivor.createPlayer();
@@ -62,7 +62,8 @@ export default function create() {
         health: state.players.health,
         monsters: state.monsters,
         gameMode: state.gameMode,
-        playerType: state.players.playerType
+        playerType: state.players.playerType,
+        heal: state.players.heal
       });
     }, 1000 / 30);
   };
