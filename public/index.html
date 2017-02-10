@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>All 4 One</title>
+        <title>All 4 Pebble 4 Kingdom 4 One</title>
         <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
     </head>
     <body>
@@ -13,5 +13,15 @@
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
     </body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script> 
+        document.getElementById('gamemaster').style.display = "none";
+        document.getElementById('survivor').style.display = "none";
+
+        setTimeout(()=>{
+            document.getElementById('gamemaster').style.display = "initial";
+            document.getElementById('survivor').style.display = "initial";
+        }, 10000)
+
+    </script>
     <script src="./startingMode.js"></script>
 </html>
