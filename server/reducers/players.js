@@ -39,7 +39,6 @@ const playerReducers = (state = initialState, action) => {
       }
       break;
     case RECEIVE_CLIENT_DATA:
-      
           if (!blacklist[action.id]) {      
             if (newState.players[action.id] && action.data.health <= 0){
               blacklist[action.id] = true

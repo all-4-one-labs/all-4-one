@@ -29,12 +29,9 @@ listeners(io, socket)});
 
 let gmPlayer = store.getState().engine.gmExist
 app.get('/gmjoinrequest', (req, res) => {
-  console.log('in join req')
   if (gmPlayer) {
-    console.log('in join if')
     res.send(gmPlayer);
   } else {
-    console.log('in join req else')
     res.send(gmPlayer);
     startgame(io);
     store.dispatch(gmExist(true))

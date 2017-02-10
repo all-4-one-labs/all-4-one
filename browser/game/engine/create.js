@@ -3,10 +3,11 @@ import Survivor from '../controls/survivor.js';
 import GameMaster from '../controls/gameMaster.js';
 import socket from '../../socket';
 import Bullets from '../entities/bullets.js';
+import SgBullets from '../entities/sgbullets.js';
 import Explosions from '../entities/explosions.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions, emitID;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions, sgBullets, teamSgBullets, emitID;
 
 export default function create() {
   this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -31,6 +32,8 @@ export default function create() {
     survivor = new Survivor(this, playerType);
     player = survivor.createPlayer();
     bullets = survivor.createBullets();
+    explosions = new Explosions(this);
+    sgBullets = new SgBullets(this);
   } else if (store.getState().gameMode === 'gamemaster') {
     gameMaster = new GameMaster(this);
     gameMaster.create();
@@ -42,9 +45,9 @@ export default function create() {
 
   // layer the flying monsters correctly on map
   flyingMonstersGroup = this.add.group();
-  explosions = new Explosions(this);
   teamBullet = new Bullets(this);
   teamExplosions = new Explosions(this);
+  teamSgBullets = new SgBullets(this);
 
   let text = '10:00';
   let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
@@ -73,5 +76,4 @@ export default function create() {
 
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions, emitID };
-
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions, sgBullets, teamSgBullets, emitID };
