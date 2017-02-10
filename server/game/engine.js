@@ -2,35 +2,30 @@ const store = require('../store');
 const {timerTick, resetEngine} = require('../reducers/engine')
 const {resetPlayers} = require('../reducers/players')
 const {resetMonsters} = require('../reducers/monsters')
- 
-// const { reset } = require('../reducers/index.js')
-// const { resetState } = require('../reducers/resetReducer.js')
 
 //hacky solution for now
+//'for now'
 let timerID
 let broadcastID
 
 const endgame = (io, winMessage) => {
-  // console.log('ndgamesockets',io.sockets.connected)
+  //this is currently not working as intended
   for (let s in io.sockets.connected) {
     s.disconnected = true
   }
-  // console.log('aaaaaa', io.sockets.clients())
-  // console.log('BEFORE',store.getState())
   clearInterval(timerID)
   clearInterval(broadcastID)
   store.dispatch(resetPlayers())
   store.dispatch(resetEngine())
   store.dispatch(resetMonsters())
   io.emit('end_game', winMessage);
-  setTimeout(()=>{
+  setTimeout(() => {
     store.dispatch(resetPlayers())
     store.dispatch(resetEngine())
     store.dispatch(resetMonsters())
   }, 10000)
-  setTimeout(()=>console.log('after for real',store.getState()), 15000)
+  // setTimeout(() => console.log('after for real',store.getState()), 15000)
 
-  // console.log('AFTER', store.getState())
 };
 
 
