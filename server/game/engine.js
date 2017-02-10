@@ -1,27 +1,34 @@
 const store = require('../store');
-const {timerTick} = require('../reducers/engine')
-const { reset } = require('../reducers/index.js')
-const { resetState } = require('../reducers/resetReducer.js')
+const {timerTick, resetEngine} = require('../reducers/engine')
+const {resetPlayers} = require('../reducers/players')
+const {resetMonsters} = require('../reducers/monsters')
+ 
+// const { reset } = require('../reducers/index.js')
+// const { resetState } = require('../reducers/resetReducer.js')
 
 //hacky solution for now
 let timerID
 let broadcastID
 
 const endgame = (io, winMessage) => {
-  console.log('BEFORE',store.getState())
+  // console.log(io.sockets)
+  for (let s in io.sockets.sockets.connected) {
+    s.disconnect(true)
+  }
+  // console.log('BEFORE',store.getState())
   clearInterval(timerID)
   clearInterval(broadcastID)
-  store.dispatch(resetState())
+  store.dispatch(resetPlayers())
+  store.dispatch(resetEngine())
+  store.dispatch(resetMonsters())
   io.emit('end_game', winMessage);
-  // store.dispatch(resetPlayers(false, 0))
-  // store.dispatch(reset())
-  console.log('AFTER', store.getState())
+  // console.log('AFTER', store.getState())
 };
 
 
 const broadcastGameState = (io) => {
-  console.log('broadcast', store.getState())
   broadcastID = setInterval(() => {
+    console.log('broadcast', store.getState())
     let state = store.getState();
     io.emit('game_data', state);
     if (store.getState().players.survivorWinOnState) {

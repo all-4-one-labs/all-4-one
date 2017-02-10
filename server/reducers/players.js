@@ -2,6 +2,7 @@ const isEmpty = require('lodash/isEmpty')
 const initialState = {players: {}, gmWinOnState: false };
 const REMOVE_PLAYER = 'REMOVE_PLAYER';
 const RECEIVE_CLIENT_DATA = 'RECEIVE_CLIENT_DATA';
+const RESET_PLAYERS = 'RESET_PLAYERS'
 
 const removePlayer = id => ({
   type: REMOVE_PLAYER,
@@ -12,6 +13,10 @@ const receiveClientData = (id, data) => ({
   type: RECEIVE_CLIENT_DATA,
   id,
   data
+})
+
+const resetPlayers = () => ({
+  type: RESET_PLAYERS
 })
 
 const playerReducers = (state = initialState, action) => {
@@ -31,16 +36,19 @@ const playerReducers = (state = initialState, action) => {
       }
       break;
     case RECEIVE_CLIENT_DATA:
-      console.log('receive client data')
+      // console.log('receive client data')
       if (newState.players[action.id] && action.data.health <= 0){
         delete newState.players[action.id];
         if (isEmpty(newState.players)) {
+          console.log('RECEIVE WIN BABY')
           newState.gmWinOnState = true
         }
         break;
       }
       newState.players[action.id] = action.data
       break;
+    case RESET_PLAYERS:
+      return initialState
     default:
       return state;
   }
@@ -48,4 +56,4 @@ const playerReducers = (state = initialState, action) => {
 }
 
 
-module.exports = { playerReducers, removePlayer, receiveClientData };
+module.exports = { playerReducers, removePlayer, receiveClientData, resetPlayers };

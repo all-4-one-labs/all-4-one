@@ -4,9 +4,10 @@ const initialState = {
     gmWinOnState: false
    },
   monsters: [],
-  engine:{},
-  numSurvivors: 0,
-  gmExist: false
+  engine:{  
+    numSurvivors: 0,
+    gmExist: false
+  },
 }
 
 const RESET_STATE = 'RESET_STATE';

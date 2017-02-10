@@ -32,6 +32,7 @@ console.log(gmPlayer,'gmPlayer')
 app.get('/gmjoinrequest', (req, res) => {
   console.log('in join req')
   if (gmPlayer) {
+    console.log('in join if')
     res.send(gmPlayer);
   } else {
     console.log('in join req else')
