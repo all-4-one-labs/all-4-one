@@ -7,6 +7,7 @@ export default function preload() {
   this.load.spritesheet('shotgunner', 'assets/Survivors/shotgunner.png', 32, 32);
   this.load.spritesheet('explosion', 'assets/Misc/explosionFull.png', 64, 64);
   this.load.image('bullet', 'assets/Misc/bullet.png');
+  this.load.image('sgbullet', 'assets/Misc/bulletRed.png');
   this.load.spritesheet('mummyC', 'assets/Monsters/MummyC.png', 16, 16);
   this.load.spritesheet('lurkerC', 'assets/Monsters/LurkerC.png', 16, 16);
   this.load.spritesheet('slimeB', 'assets/Monsters/SlimeB.png', 16, 16);

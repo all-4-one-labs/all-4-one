@@ -1,6 +1,6 @@
 // import {healthBarsGroup} from '../engine/create.js'
 import HealthBar from './HealthBar.js';
-import { teamBullet, blaster, teamExplosions, explosionsound } from '../engine/create.js' //change to being from bullets file
+import { teamBullet, blaster, teamExplosions, explosionsound, teamSgBullets } from '../engine/create.js' //change to being from bullets file
 import survivorsDictionary from '../dictionaries/survivorsDictionary.js'
 
 export default class Teammate {
@@ -35,22 +35,21 @@ export default class Teammate {
 
   fire (angle, fireRate) {
 
-    if ((angle >= 0) && this.game.time.now > this.nextFire && teamBullet.sprite.countDead() > 0) {
+    if ((angle >= 0) && this.game.time.now > this.nextFire) {
       blaster.play('', 0, 0.3);
       this.nextFire = this.game.time.now + this.playerType.fireRate;
 
       if (this.playerType.shotgun) {
         for (let i = -2; i < 3; i++) {
-          let bullet = teamBullet.sprite.getFirstDead();
-          bullet.scale.setTo(1);
-          bullet.body.setSize(20, 30);
-          bullet.shotgun = true;
-          bullet.reset(this.sprite.x, this.sprite.y);
-          let xCord = this.sprite.x + (10000 * Math.cos(angle + (Math.PI / 18 * i)));
-          let yCord = this.sprite.y + (-10000 * Math.sin(angle + (Math.PI / 18 * i)));
-          this.game.physics.arcade.moveToXY(bullet, xCord, yCord, 600);
-          bullet.originalLocation = {x: bullet.x, y: bullet.y};
-          bullet.damage = this.playerType.damage;
+          let sgbullet = teamSgBullets.sprite.getFirstDead();
+          sgbullet.scale.setTo(1);
+          sgbullet.body.setSize(20, 30);
+          sgbullet.reset(this.sprite.x, this.sprite.y);
+          let xCord = this.sprite.x + (10000 * Math.cos(angle + (Math.PI / 25 * i)));
+          let yCord = this.sprite.y + (-10000 * Math.sin(angle + (Math.PI / 25 * i)));
+          this.game.physics.arcade.moveToXY(sgbullet, xCord, yCord, 600);
+          sgbullet.originalLocation = {x: sgbullet.x, y: sgbullet.y};
+          sgbullet.damage = this.playerType.damage;
         }
       } else {
         let bullet = teamBullet.sprite.getFirstDead();
@@ -68,7 +67,7 @@ export default class Teammate {
 
 
   rangeSplash(xCord, yCord, fireRate) {
-    if ((xCord || yCord) && this.game.time.now > this.nextFire && teamExplosions.sprite.countDead() > 0) {
+    if ((xCord || yCord) && this.game.time.now > this.nextFire) {
       this.nextFire = this.game.time.now + fireRate
       let explosion = teamExplosions.sprite.getFirstDead()
       explosion.scale.setTo(1)

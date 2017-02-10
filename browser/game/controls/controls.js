@@ -1,4 +1,4 @@
-import { bullets, blaster, explosionsound, explosions } from '../engine/create.js';
+import { bullets, blaster, explosionsound, explosions, sgBullets } from '../engine/create.js';
 import store from '../../store.js';
 import {updatePosition, survivorFire} from '../../reducers/players.js';
 // Check for movement
@@ -50,21 +50,20 @@ const fireBullet = function(){
   else if (this.cursors.left.isDown) angle = Math.PI;
   else if (this.cursors.down.isDown) angle = 3 / 2 * Math.PI;
 
-  if ((angle >= 0) && this.game.time.now > this.nextFire && bullets.sprite.countDead() > 0) {
+  if ((angle >= 0) && this.game.time.now > this.nextFire) {
     blaster.play('', 0, 0.3);
     this.nextFire = this.game.time.now + this.playerType.fireRate;
 
     if (this.playerType.shotgun) {
       for (let i = -2; i < 3; i++) {
-        let bullet = bullets.sprite.getFirstDead();
-        bullet.scale.setTo(1);
-        bullet.body.setSize(20, 30);
-        bullet.shotgun = true;
-        bullet.reset(this.sprite.x, this.sprite.y);
+        let sgbullet = sgBullets.sprite.getFirstDead();
+        sgbullet.scale.setTo(1);
+        sgbullet.body.setSize(20, 30);
+        sgbullet.reset(this.sprite.x, this.sprite.y);
         let xCord = this.sprite.x + (10000 * Math.cos(angle + (Math.PI / 25 * i)));
         let yCord = this.sprite.y + (-10000 * Math.sin(angle + (Math.PI / 25 * i)));
-        this.game.physics.arcade.moveToXY(bullet, xCord, yCord, 600);
-        bullet.originalLocation = {x: bullet.x, y: bullet.y};
+        this.game.physics.arcade.moveToXY(sgbullet, xCord, yCord, 600);
+        sgbullet.originalLocation = {x: sgbullet.x, y: sgbullet.y};
       }
     } else {
       let bullet = bullets.sprite.getFirstDead();
@@ -90,7 +89,7 @@ const rangeSplash = function() {
   if (this.cursors.up.isDown) addY = -30;
   if (this.cursors.down.isDown) addY = 30;
 
-  if ((addX || addY) && this.game.time.now > this.nextFire && explosions.sprite.countDead() > 0) {
+  if ((addX || addY) && this.game.time.now > this.nextFire) {
     this.nextFire = this.game.time.now + this.playerType.fireRate;
     let explosion = explosions.sprite.getFirstDead()
     explosion.scale.setTo(1)
@@ -111,18 +110,7 @@ const rangeSplash = function() {
   }
 
   store.dispatch(survivorFire({fire: [addX, addY], rate: this.playerType.fireRate}));
-
 }
 
 export { move, fireBullet, rangeSplash }
-
-
-
-
-
-
-
-
-
-
 

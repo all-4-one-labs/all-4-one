@@ -1,5 +1,5 @@
 
-import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, teamExplosions, emitID } from './create.js';
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, teamExplosions, emitID, sgBullets, teamSgBullets } from './create.js';
 import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
@@ -28,8 +28,7 @@ export default function update() {
     bullets.sprite.forEachAlive(bullet => {
       let x = Math.abs(bullet.x - bullet.originalLocation.x);
       let y = Math.abs(bullet.y - bullet.originalLocation.y);
-      if (bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 200)) bullet.kill();
-      if (!bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 500)) bullet.kill();
+      if (Math.round(Math.sqrt(x*x + y*y)) >= 500) bullet.kill();
     })
   }
 
@@ -43,10 +42,33 @@ export default function update() {
     })
   }
 
+  //kill own sgbullet after certain distance
+  if (sgBullets && Object.keys(sgBullets).length > 0) {
+    sgBullets.sprite.forEachAlive(sgbullet => {
+      let x = Math.abs(sgbullet.x - sgbullet.originalLocation.x);
+      let y = Math.abs(sgbullet.y - sgbullet.originalLocation.y);
+      if (Math.round(Math.sqrt(x*x + y*y)) >= 200) sgbullet.kill();
+    })
+  }
+
+    //kill teamsgbullet after certain distance
+  if (teamSgBullets && Object.keys(teamSgBullets).length > 0) {
+    teamSgBullets.sprite.forEachAlive(sgbullet => {
+      let x = Math.abs(sgbullet.x - sgbullet.originalLocation.x);
+      let y = Math.abs(sgbullet.y - sgbullet.originalLocation.y);
+      if (Math.round(Math.sqrt(x*x + y*y)) >= 200) sgbullet.kill();
+    })
+  }
+
+
   // Collision
   // teambullet collision
   this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {
       teambullet.kill();
+  });
+
+  this.physics.arcade.collide(teamSgBullets.sprite, bulletCollide, (teamsgbullet) => {
+      teamsgbullet.kill();
   });
 
   // Checks which gameMode was chosen and updates appropriately
@@ -54,6 +76,7 @@ export default function update() {
     player.update();
     teammateUpdate.call(this, player);
     this.physics.arcade.collide(player.sprite, playerCollide);
+    //this is used for mage healing
     this.physics.arcade.collide(teamExplosions.sprite, player.sprite, (player, explosion) => {
         if (this.game.time.now > player.nextHeal) {
           player.nextHeal = this.game.time.now + 1500;
@@ -63,6 +86,10 @@ export default function update() {
     });
     this.physics.arcade.collide(bullets.sprite, bulletCollide, (bullet) => {
       bullet.kill();
+    });
+
+    this.physics.arcade.collide(sgBullets.sprite, bulletCollide, (sgbullet) => {
+      sgbullet.kill();
     });
 
     // draw the monsters
@@ -141,6 +168,10 @@ export default function update() {
       this.physics.arcade.overlap(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
         monster.health -= bullet.damage;
         bullet.kill();
+      });
+      this.physics.arcade.collide(teamSgBullets.sprite, gmMonsters[id].sprite, (monster, sgbullet) => {
+        monster.health -= sgbullet.damage;
+        sgbullet.kill();
       });
       this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
         if (this.game.time.now > monster.nextExplosion) {
