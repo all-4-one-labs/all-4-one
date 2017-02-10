@@ -42,7 +42,7 @@ export default class Teammate {
         bullet.scale.setTo(1)
         bullet.body.setSize(20, 30)
         bullet.reset(this.sprite.x, this.sprite.y)
-        this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 100)
+        this.game.physics.arcade.moveToXY(bullet, this.sprite.x + xCord, this.sprite.y + yCord, 600)
         bullet.originalLocation = {x: bullet.x, y: bullet.y};
         bullet.damage = this.playerType.damage;
       }

@@ -3,9 +3,11 @@ import preload from './preload.js';
 import update from './update.js';
 
 let xSize, ySize;
-if( sessionStorage.getItem('mode') === 'survivor' ) {
+if ( sessionStorage.getItem('mode') === 'survivor' ) {
   xSize = 1280;
+  //window.innerwidth
   ySize = 720;
+  //window.innerheight
 } else if ( sessionStorage.getItem('mode') === 'gamemaster') {
   xSize = 1280; //3840
   ySize = 720; //2560
