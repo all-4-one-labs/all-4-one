@@ -11,10 +11,11 @@ let timerID
 let broadcastID
 
 const endgame = (io, winMessage) => {
-  // console.log(io.sockets)
-  for (let s in io.sockets.sockets.connected) {
-    s.disconnect(true)
+  // console.log('ndgamesockets',io.sockets.connected)
+  for (let s in io.sockets.connected) {
+    s.disconnected = true
   }
+  // console.log('aaaaaa', io.sockets.clients())
   // console.log('BEFORE',store.getState())
   clearInterval(timerID)
   clearInterval(broadcastID)
@@ -22,6 +23,13 @@ const endgame = (io, winMessage) => {
   store.dispatch(resetEngine())
   store.dispatch(resetMonsters())
   io.emit('end_game', winMessage);
+  setTimeout(()=>{
+    store.dispatch(resetPlayers())
+    store.dispatch(resetEngine())
+    store.dispatch(resetMonsters())
+  }, 10000)
+  setTimeout(()=>console.log('after for real',store.getState()), 15000)
+
   // console.log('AFTER', store.getState())
 };
 
@@ -66,7 +74,10 @@ const startgame = (io) => {
   console.log('startgame')
   //this is copied from the server file. when this is fully implemented,
   //it can be removed from there
-  let time = 10 * 60;
+  store.dispatch(resetPlayers())
+  store.dispatch(resetEngine())
+  store.dispatch(resetMonsters())
+  let time = 1 * 60;
   gameTimer(time, io);
   broadcastGameState(io);
 };
