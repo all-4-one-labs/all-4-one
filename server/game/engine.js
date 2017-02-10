@@ -10,6 +10,7 @@ let broadcastID
 
 const endgame = (io, winMessage) => {
   //this is currently not working as intended
+  console.log(io.sockets.connected)
   for (let s in io.sockets.connected) {
     s.disconnected = true
   }
@@ -32,7 +33,6 @@ const endgame = (io, winMessage) => {
 
 const broadcastGameState = (io) => {
   broadcastID = setInterval(() => {
-    console.log('broadcast', store.getState())
     let state = store.getState();
     console.log('this is the state', state)
     io.emit('game_data', state);
