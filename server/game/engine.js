@@ -1,13 +1,38 @@
-const store  = require('../store');
-const {timerTick} = require('../reducers/engine')
+const store = require('../store');
+const {timerTick, resetEngine} = require('../reducers/engine')
+const {resetPlayers} = require('../reducers/players')
+const {resetMonsters} = require('../reducers/monsters')
 
-const endgame = (io, teamThatWon) => {
-  //this needs to also return the server to a 'game not currently started' state
-  io.emit('end_game', teamThatWon);
+//hacky solution for now
+//'for now'
+let timerID
+let broadcastID
+
+const endgame = (io, winMessage) => {
+  //this is currently not working as intended
+  for (let s in io.sockets.connected) {
+    s.disconnected = true
+  }
+  clearInterval(timerID)
+  clearInterval(broadcastID)
+  store.dispatch(resetPlayers())
+  store.dispatch(resetEngine())
+  store.dispatch(resetMonsters())
+  io.emit('end_game', winMessage);
+  setTimeout(() => {
+    store.dispatch(resetPlayers())
+    store.dispatch(resetEngine())
+    store.dispatch(resetMonsters())
+  }, 10000)
+  // setTimeout(() => console.log('after for real',store.getState()), 15000)
+
+
 };
 
+
 const broadcastGameState = (io) => {
-  setInterval(() => {
+  broadcastID = setInterval(() => {
+    console.log('broadcast', store.getState())
     let state = store.getState();
     io.emit('game_data', state);
     if (store.getState().players.survivorWinOnState) {
@@ -21,19 +46,20 @@ const broadcastGameState = (io) => {
 
 //duration is in seconds
 const gameTimer = (duration, io) => {
+  // console.log('gameTimer')
   let timer = duration, minutes, seconds;
-    let tick = setInterval(function () {
+  // console.log(timer)
+    timerID = setInterval(function () {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
-
       minutes = minutes < 10 ? '0' + minutes : minutes;
       seconds = seconds < 10 ? '0' + seconds : seconds;
 
       store.dispatch(timerTick(minutes, seconds));
 
       if (--timer < 0) {
-        endgame(io, 'surv');
-        clearInterval(tick);
+        endgame(io, 'SURVIVORS WIN');
+        clearInterval(timerID);
       }
   }, 1000);
 };
@@ -41,9 +67,13 @@ const gameTimer = (duration, io) => {
 //this function will be called when enough players have connected
 
 const startgame = (io) => {
+  console.log('startgame')
   //this is copied from the server file. when this is fully implemented,
   //it can be removed from there
-  let time = 10 * 60;
+  store.dispatch(resetPlayers())
+  store.dispatch(resetEngine())
+  store.dispatch(resetMonsters())
+  let time = 1 * 60;
   gameTimer(time, io);
   broadcastGameState(io);
 };

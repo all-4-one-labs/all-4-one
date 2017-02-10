@@ -11,16 +11,23 @@ const listeners = function(io, socket){
 
   socket.on('disconnect', function(){
     console.log('socket id ' + socket.id + ' has disconnected.');
-    store.dispatch(removePlayer(socket.id));
+    console.log('gmExist:', store.getState().gmExist)
+    if (store.getState().gmExist){
+      store.dispatch(removePlayer(socket.id));
+    }
   });
 
   socket.on('send_all_data', (data) => {
-    if (data.gameMode === 'survivor') {
-      store.dispatch(receiveClientData(socket.id, data));
-    } else {
-      store.dispatch(updateMonsters(data.monsters));
-    }
+    // console.log('send_all_data', data)
+    // if (store.getState().gmExist) {
+      if (data.gameMode === 'survivor') {
+        store.dispatch(receiveClientData(socket.id, data));
+      } else {
+        store.dispatch(updateMonsters(data.monsters));
+      }
+    // }
   })
 }
 
 module.exports = listeners;
+  
