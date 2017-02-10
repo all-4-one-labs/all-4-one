@@ -13,5 +13,15 @@
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
     </body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script> 
+        document.getElementById('gamemaster').style.display = "none";
+        document.getElementById('survivor').style.display = "none";
+
+        setTimeout(()=>{
+            document.getElementById('gamemaster').style.display = "initial";
+            document.getElementById('survivor').style.display = "initial";
+        }, 10000)
+
+    </script>
     <script src="./startingMode.js"></script>
 </html>

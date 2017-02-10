@@ -16,6 +16,7 @@ document.getElementById('survivor')
 function gmValidationCheck() {
   axios('/gmjoinrequest')
     .then(response => {
+      console.log(response.data)
       if (response.data) alert('gm is full');
       else window.location = '/instructions.html';
     })

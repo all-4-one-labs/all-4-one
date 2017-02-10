@@ -27,9 +27,11 @@ const io = socketio(server, {reconnect: false});
 io.on('connection', (socket) => {
 listeners(io, socket)});
 
-let gmPlayer = store.getState().engine.gmExist
 app.get('/gmjoinrequest', (req, res) => {
+  let gmPlayer = store.getState().engine.gmExist
+  // console.log(gmPlayer)
   if (gmPlayer) {
+    // console.log('in if')
     res.send(gmPlayer);
   } else {
     res.send(gmPlayer);
