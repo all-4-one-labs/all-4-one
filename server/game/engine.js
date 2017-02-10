@@ -2,28 +2,31 @@ const store = require('../store');
 const {timerTick, resetEngine} = require('../reducers/engine')
 const {resetPlayers} = require('../reducers/players')
 const {resetMonsters} = require('../reducers/monsters')
- 
-// const { reset } = require('../reducers/index.js')
-// const { resetState } = require('../reducers/resetReducer.js')
 
 //hacky solution for now
+//'for now'
 let timerID
 let broadcastID
 
 const endgame = (io, winMessage) => {
-  // console.log(io.sockets)
-  for (let  s in io.sockets.sockets.connected) {
-    s.disconnect(true)
+  //this is currently not working as intended
+  for (let s in io.sockets.connected) {
+    s.disconnected = true
   }
-  io.disconnect()
-  // console.log('BEFORE',store.getState())
   clearInterval(timerID)
   clearInterval(broadcastID)
   store.dispatch(resetPlayers())
   store.dispatch(resetEngine())
   store.dispatch(resetMonsters())
   io.emit('end_game', winMessage);
-  // console.log('AFTER', store.getState())
+  setTimeout(() => {
+    store.dispatch(resetPlayers())
+    store.dispatch(resetEngine())
+    store.dispatch(resetMonsters())
+  }, 10000)
+  // setTimeout(() => console.log('after for real',store.getState()), 15000)
+
+
 };
 
 
@@ -31,6 +34,7 @@ const broadcastGameState = (io) => {
   broadcastID = setInterval(() => {
     console.log('broadcast', store.getState())
     let state = store.getState();
+    console.log('this is the state', state)
     io.emit('game_data', state);
     if (store.getState().players.survivorWinOnState) {
       endgame(io, 'SURVIVORS WIN')
@@ -67,6 +71,9 @@ const startgame = (io) => {
   console.log('startgame')
   //this is copied from the server file. when this is fully implemented,
   //it can be removed from there
+  store.dispatch(resetPlayers())
+  store.dispatch(resetEngine())
+  store.dispatch(resetMonsters())
   let time = 10 * 60;
   gameTimer(time, io);
   broadcastGameState(io);

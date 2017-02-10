@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
       break;
     case SURVIVOR_FIRE:
       newState = Object.assign({}, state, action.fireData);
-      break; 
+      break;
     case SURVIVOR_SPLASH:
       newState = Object.assign({}, state, action.splashData);
       break;

@@ -1,4 +1,3 @@
-// import { player } from './create.js'
 import store from '../../store.js'
 import Teammate from '../entities/teammate.js'
 
@@ -17,9 +16,8 @@ function teammateUpdate(player) {
   for (let id in teammatesFromServer) {
     if (id !== player.id) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
-
         this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
-
+        
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);
         LocalTeammates[id].sprite.healthBar.setPercent(teammatesFromServer[id].health, LocalTeammates[id].totalHealth);

@@ -21,14 +21,13 @@ server.on('request', app);
 // this needs to be below the server.on('request', app) so that our
 // express app takes precedence over our socekt server for typical
 // HTTP requests
-const io = socketio(server);
+const io = socketio(server, {reconnect: false});
 
 // // use socket server as an event emitter in order to listen for new connctions
 io.on('connection', (socket) => {
 listeners(io, socket)});
 
 let gmPlayer = store.getState().engine.gmExist
-console.log(gmPlayer,'gmPlayer')
 app.get('/gmjoinrequest', (req, res) => {
   console.log('in join req')
   if (gmPlayer) {

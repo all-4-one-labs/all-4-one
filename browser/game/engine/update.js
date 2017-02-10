@@ -7,6 +7,7 @@ import { updateMonsters } from '../../reducers/monsters.js';
 import { updateHealth } from '../../reducers/players.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
+import { isEmpty } from 'lodash';
 
 import { dashboard } from '../controls/createButtons.js';
 
@@ -37,8 +38,7 @@ export default function update() {
     teamBullet.sprite.forEachAlive(bullet => {
       let x = Math.abs(bullet.x - bullet.originalLocation.x);
       let y = Math.abs(bullet.y - bullet.originalLocation.y);
-      if (bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 200)) bullet.kill();
-      if (!bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 500)) bullet.kill();
+      if (Math.round(Math.sqrt(x*x + y*y)) >= 500) bullet.kill();
     })
   }
 
@@ -59,8 +59,7 @@ export default function update() {
       if (Math.round(Math.sqrt(x*x + y*y)) >= 200) sgbullet.kill();
     })
   }
-
-
+  
   // Collision
   // teambullet collision
   this.physics.arcade.collide(teamBullet.sprite, bulletCollide, (teambullet) => {
@@ -116,7 +115,7 @@ export default function update() {
     teammateUpdate.call(this, 'gm');
   }
 
-  //player win\
+  //player win
   //this should be expanded into a generic 'end of game' method
   if (store.getState().game.win) {
       let winMessageText = store.getState().game.win + '';
@@ -178,7 +177,6 @@ export default function update() {
           monster.nextExplosion = this.game.time.now + 400;
           monster.health -= explosion.damage;
         }
-
       });
       if (gmMonsters[id].sprite.health <= 0 ) {
         gmMonsters[id].sprite.kill();

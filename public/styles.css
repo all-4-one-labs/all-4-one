@@ -29,31 +29,29 @@
 }
 
 #gamemaster {
-    position: relative;
+    position: fixed;
     top: 30vw;
-    left: 0vw;
+    left: 22vw;
     font-size: 3vw;
-    width: 20vw;
     text-align: center;
-    text-decoration: none;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
     border-radius: 8px;
+    width: 20vw;
 }
 
 #survivor {
-    position: relative;
+    position: fixed;
     top: 30vw;
-    left: 8vw;
+    left: 50vw;
     font-size: 3vw;
-    width: 20vw;
     text-align: center;
-    text-decoration: none;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
     border-radius: 8px;
+    width: 20vw;
 }
 
 
@@ -126,11 +124,8 @@
 #continue {
     position:relative;
     top: 11vw;
-    left: 35vw;
+    left: 32vw;
     font-size: 3vw;
-    margin: 10px;
-    padding:10px;
-    border-style: solid;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
@@ -200,7 +195,7 @@ body {
 #mage {
     position:fixed;
     top: 25vw;
-    left: 37vw;
+    left: 35vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -238,7 +233,7 @@ body {
 #mageProfile {
     position: relative;
     top: 15vw;
-    left: 18vw;
+    left: 16.5vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
