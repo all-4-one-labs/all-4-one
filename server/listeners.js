@@ -30,4 +30,3 @@ const listeners = function(io, socket){
 }
 
 module.exports = listeners;
-  

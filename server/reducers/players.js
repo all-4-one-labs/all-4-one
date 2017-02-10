@@ -40,7 +40,6 @@ const playerReducers = (state = initialState, action) => {
       if (newState.players[action.id] && action.data.health <= 0){
         delete newState.players[action.id];
         if (isEmpty(newState.players)) {
-          console.log('RECEIVE WIN BABY')
           newState.gmWinOnState = true
         }
         break;
