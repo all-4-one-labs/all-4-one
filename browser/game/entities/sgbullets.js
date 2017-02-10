@@ -13,6 +13,6 @@ export default class SgBullets {
     this.sprite.setAll('anchor.y', 0.5);
     this.sprite.setAll('checkWorldBounds', true);
     this.sprite.setAll('outOfBoundsKill', true);
-    this.sprite.setAll('body.mass', 0.5);
+    this.sprite.setAll('body.mass', 0.7);
   }
 }

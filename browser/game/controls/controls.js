@@ -59,7 +59,7 @@ const fireBullet = function(){
       for (let i = -2; i < 3; i++) {
         let sgbullet = sgBullets.sprite.getFirstDead();
         sgbullet.scale.setTo(1);
-        sgbullet.body.setSize(20, 30);
+        sgbullet.body.setSize(20, 35);
         sgbullet.reset(this.sprite.x, this.sprite.y);
         let xCord = this.sprite.x + (10000 * Math.cos(angle + (Math.PI / 25 * i)));
         let yCord = this.sprite.y + (-10000 * Math.sin(angle + (Math.PI / 25 * i)));
@@ -69,7 +69,7 @@ const fireBullet = function(){
     } else {
       let bullet = bullets.sprite.getFirstDead();
       bullet.scale.setTo(1);
-      bullet.body.setSize(20, 30);
+      bullet.body.setSize(20, 35);
       bullet.reset(this.sprite.x, this.sprite.y);
       let xCord = this.sprite.x + (10000 * Math.cos(angle));
       let yCord = this.sprite.y + (-10000 * Math.sin(angle));
@@ -85,10 +85,10 @@ const rangeSplash = function() {
   let addX = 0;
   let addY = 0;
 
-  if (this.cursors.left.isDown) addX = -30;
-  if (this.cursors.right.isDown) addX = 30;
-  if (this.cursors.up.isDown) addY = -30;
-  if (this.cursors.down.isDown) addY = 30;
+  if (this.cursors.left.isDown) addX = -35;
+  if (this.cursors.right.isDown) addX = 35;
+  if (this.cursors.up.isDown) addY = -35;
+  if (this.cursors.down.isDown) addY = 35;
 
   if ((addX || addY) && this.game.time.now > this.nextFire) {
     this.nextFire = this.game.time.now + this.playerType.fireRate;
