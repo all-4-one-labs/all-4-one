@@ -28,6 +28,21 @@
     border-radius: 8px;
 }
 
+#loading {
+    position: relative;
+    text-align: center;
+    top: 15vw;
+    left: 30vw;
+    font-size: 4vw;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    display: inline-block;
+    clear: both;
+    float: left;
+    border-radius: 8px;
+}
+
 #gamemaster {
     position: fixed;
     top: 30vw;

@@ -8,6 +8,7 @@
     <body>
         <div id="title"> All 4 One </div>
         <div id="subtitle"> Select your player </div>
+        <div id="loading"> Loading... </div>
         <button id='gamemaster' onclick="gmValidationCheck()">Game Master</button>
         <button id='survivor' onclick="survivorValidationCheck()">Survivor</button>
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
@@ -16,8 +17,11 @@
     <script> 
         document.getElementById('gamemaster').style.display = "none";
         document.getElementById('survivor').style.display = "none";
+        document.getElementById('subtitle').style.display = "none";
 
         setTimeout(()=>{
+            document.getElementById('loading').style.display = "none";        
+            document.getElementById('subtitle').style.display = "initial";
             document.getElementById('gamemaster').style.display = "initial";
             document.getElementById('survivor').style.display = "initial";
         }, 10000)
