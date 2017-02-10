@@ -5,5 +5,5 @@ import reducer from './reducers';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 window.store = store;
-
+console.log(store)
 export default store;

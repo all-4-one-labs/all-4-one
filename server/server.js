@@ -11,6 +11,9 @@ const app = express();
 
 const socketio = require('socket.io');
 
+const store = require('./store')
+const { addSurvivor, gmExist } = require('./reducers/engine');
+
 server.on('request', app);
 
 // creates a new connection server for web sockets and integrates
@@ -24,20 +27,24 @@ const io = socketio(server);
 io.on('connection', (socket) => {
 listeners(io, socket)});
 
-let gmExist = false;
+let gmPlayer = store.getState().engine.gmExist
+console.log(gmPlayer,'gmPlayer')
 app.get('/gmjoinrequest', (req, res) => {
-  if (gmExist) {
-    res.send(gmExist);
+  console.log('in join req')
+  if (gmPlayer) {
+    console.log('in join if')
+    res.send(gmPlayer);
   } else {
-    res.send(gmExist);
+    console.log('in join req else')
+    res.send(gmPlayer);
     startgame(io);
-    gmExist = true;
+    store.dispatch(gmExist(true))
   }
 });
 
-let numSurvivors = 0;
+let numSurvivors = store.getState().numSurvivors
 app.get('/survivorjoinrequest', (req, res) => {
-  numSurvivors++;
+  store.dispatch(addSurvivor)
   if (numSurvivors > 4) res.send(true);
   else res.send(false);
 });

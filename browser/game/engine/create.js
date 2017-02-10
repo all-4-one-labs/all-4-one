@@ -6,7 +6,7 @@ import Bullets from '../entities/bullets.js';
 import Explosions from '../entities/explosions.js';
 import { createMapPrePlayer, createMapPostPlayer } from './createMap.js';
 
-let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions;
+let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions, emitID;
 
 export default function create() {
   this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -52,7 +52,7 @@ export default function create() {
   testText.fixedToCamera = true;
 
   const emitClient = () => {
-    setInterval(() => {
+    emitID = setInterval(() => {
       let state = store.getState();
       socket.emit('send_all_data', {
         position: state.players.position,
@@ -73,5 +73,5 @@ export default function create() {
 
 }
 
-export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions };
+export {player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explosionsound, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, explosions, teamExplosions, emitID };
 

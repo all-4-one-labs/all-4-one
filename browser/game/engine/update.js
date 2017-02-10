@@ -1,5 +1,5 @@
 
-import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, teamExplosions } from './create.js';
+import { bullets, player, testText, gameMaster, teamBullet, epicbg, darknessbg, healthBarsGroup, flyingMonstersGroup, teamExplosions, emitID } from './create.js';
 import { playerCollide, bulletCollide, behindLayer } from './createMap.js';
 import { gmMonsters, camera } from '../controls/gameMasterControls.js';
 import store from '../../store.js';
@@ -98,6 +98,7 @@ export default function update() {
       let winMessage = this.add.text(240, 300, winMessageText, winMessageStyle)
       winMessage.fixedToCamera = true
       this.game.paused = true
+      clearInterval(emitID)
       setTimeout(() => {location.href = '/'}, 7000)
    }
 

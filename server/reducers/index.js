@@ -1,24 +1,26 @@
 const {combineReducers} = require('redux');
-
 const players = require('./players.js').playerReducers;
 const monsters = require('./monsters.js').monsterReducers;
 const engine = require('./engine.js').engineReducers;
 
-module.exports = combineReducers({
-  players,
-  monsters,
-  engine
+const RESET = 'RESET'
+
+const reset = () => ({
+  type: RESET
 });
 
-//IMPLEMENT TO RESET
-// const appReducer = combineReducers({
-//   players,
-//   monsters,
-//   engine
-// });
+const appReducer = combineReducers({
+  players,
+  monsters,
+  engine,
+});
 
-// module.exports = (state, action) => {
-//   if (action.type === 'RESET')
+// const rootReducer = (state, action) => {
+//   if (action.type === 'RESET') {
+//     console.log('reset')
 //     state = undefined
-//   return rootReducer(state, action)
+//   }
+//   return appReducer(state, action)
 // }
+
+module.exports = { appReducer, reset }
