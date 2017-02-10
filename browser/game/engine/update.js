@@ -38,7 +38,8 @@ export default function update() {
     teamBullet.sprite.forEachAlive(bullet => {
       let x = Math.abs(bullet.x - bullet.originalLocation.x);
       let y = Math.abs(bullet.y - bullet.originalLocation.y);
-      if (Math.sqrt(x*x + y*y) >= 500) bullet.kill();
+      if (bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 200)) bullet.kill();
+      if (!bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 500)) bullet.kill();
     })
   }
 
@@ -57,7 +58,6 @@ export default function update() {
         if (this.game.time.now > player.nextHeal) {
           player.nextHeal = this.game.time.now + 1500;
           player.health = Math.min(player.health + 5, 100);
-          console.log('healing', player.health);
           store.dispatch(updateHealth({health: player.health}));
         }
     });
@@ -145,7 +145,6 @@ export default function update() {
         if (this.game.time.now > monster.nextExplosion) {
           monster.nextExplosion = this.game.time.now + 400;
           monster.health -= explosion.damage;
-          console.log('damage monster', monster.health);
         }
 
       });
