@@ -54,7 +54,7 @@ export default function update() {
     player.update();
     teammateUpdate.call(this, player);
     this.physics.arcade.collide(player.sprite, playerCollide);
-    this.physics.arcade.collide(teamExplosions.sprite, player.sprite, (player, explosion) => {
+    this.physics.arcade.overlap(teamExplosions.sprite, player.sprite, (player, explosion) => {
         if (this.game.time.now > player.nextHeal) {
           player.nextHeal = this.game.time.now + 1500;
           player.health = Math.min(player.health + 5, 100);
@@ -143,7 +143,7 @@ export default function update() {
         monster.health -= bullet.damage;
         bullet.kill();
       });
-      this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
+      this.physics.arcade.overlap(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
         if (this.game.time.now > monster.nextExplosion) {
           monster.nextExplosion = this.game.time.now + 400;
           monster.health -= explosion.damage;
