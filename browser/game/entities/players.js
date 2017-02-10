@@ -22,7 +22,6 @@ export default class Player {
   this.nextFire = 0;
   this.nextMonster = 0;
   this.create();
-  this.totalHealth = 100;
   }
 
   create() {
