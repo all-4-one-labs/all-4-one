@@ -63,7 +63,6 @@ export default function create() {
         monsters: state.monsters,
         gameMode: state.gameMode,
         playerType: state.players.playerType,
-        heal: state.players.heal
       });
     }, 1000 / 30);
   };
