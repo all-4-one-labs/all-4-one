@@ -18,23 +18,30 @@
             <h1 id='six'> Use W-A-S-D to move player </h1>
             <h1 id='seven'> Use arrow keys to shoot in that direction.</h1>
             <h1 id='eight'> Goal: Survive!! </h1>
-            <button id='continueA' > Continue as Gunner </button>
-            <button id='continueB' > Continue as Mage </button>
+            <button id='gunner' > <div>Continue as Gunner</div> </button>
+            <button id='mage' > <div>Continue as Mage</div> </button>
+            <button id='shotgunner' > <div>Continue as Shotgunner</div> </button>
         </div>
         <script type="text/javascript">
             if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
             else if (sessionStorage.getItem('mode') === 'gamemaster') document.getElementById("survivorInstructions").style.display = "none";
         </script>
         <script>
-            document.getElementById('continueA')
+            document.getElementById('gunner')
             .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'survivorA');
-                window.location = 'game.html'
+                sessionStorage.setItem('playerType', 'gunner');
+                window.location = 'game.html';
             });
 
-            document.getElementById('continueB')
+            document.getElementById('mage')
             .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'survivorB');
+                sessionStorage.setItem('playerType', 'mage');
+                window.location = 'game.html';
+            });
+
+            document.getElementById('shotgunner')
+            .addEventListener('click', () => {
+                sessionStorage.setItem('playerType', 'shotgunner');
                 window.location = 'game.html';
             });
 

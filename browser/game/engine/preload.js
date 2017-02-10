@@ -2,9 +2,9 @@ import store from '../../store.js';
 import {receiveGameMode} from '../../reducers/gameMode.js';
 
 export default function preload() {
-  this.load.spritesheet('survivorA', 'assets/Survivors/SurvivorA.png', 32, 32);
-  this.load.spritesheet('survivorB', 'assets/Survivors/SurvivorB.png', 32, 32);
-  this.load.spritesheet('survivorC', 'assets/Survivors/SurvivorC.png', 32, 32);
+  this.load.spritesheet('gunner', 'assets/Survivors/gunner.png', 32, 32);
+  this.load.spritesheet('mage', 'assets/Survivors/mage.png', 32, 32);
+  this.load.spritesheet('shotgunner', 'assets/Survivors/shotgunner.png', 32, 32);
   this.load.spritesheet('explosion', 'assets/Misc/explosionFull.png', 64, 64);
   this.load.image('bullet', 'assets/Misc/bullet.png');
   this.load.spritesheet('mummyC', 'assets/Monsters/MummyC.png', 16, 16);

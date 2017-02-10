@@ -22,7 +22,6 @@ export default class Player {
   this.nextFire = 0;
   this.nextMonster = 0;
   this.create();
-  this.totalHealth = 100;
   }
 
   create() {
@@ -42,10 +41,10 @@ export default class Player {
   //collision
   this.game.physics.arcade.enable(this.sprite);
   this.sprite.body.collideWorldBounds = true;
-  this.sprite.body.setSize(6, 20, 13, 12)
+  this.sprite.body.setSize(6, 20, 13, 12);
 
   //health bar (maybe factor this out so we can give it its own render layer?)
-  this.sprite.health = 100;
+  this.sprite.health = this.playerType.totalHealth;
   store.dispatch(updatePlayerType({playerType: this.playerType.name}));
   store.dispatch(updateHealth({health: this.sprite.health}));
   this.sprite.healthBar = new HealthBar(this.game, {width: 70, height: 10, x: this.sprite.x - 7, y: this.sprite.y - 40, bg: {color: 'black'}});
@@ -61,7 +60,7 @@ export default class Player {
 
   // attacks
   if (this.playerType.attackAnimations) {
-    this.sprite.attackAnimations = this.playerType.attackAnimations
+    this.sprite.attackAnimations = this.playerType.attackAnimations;
   }
 }
 
@@ -69,7 +68,7 @@ export default class Player {
   this.sprite.body.velocity.x = 0;
   this.sprite.body.velocity.y = 0;
   this.sprite.healthBar.setPosition(this.sprite.x - 7, this.sprite.y - 40);
-  this.sprite.healthBar.setPercent(this.sprite.health);
+  this.sprite.healthBar.setPercent(this.sprite.health, this.playerType.totalHealth);
   move.call(this);
   if (this.sprite.health > 0) {
     if (this.sprite.attackType === 'fireBullet') fireBullet.call(this);

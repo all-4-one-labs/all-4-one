@@ -116,11 +116,11 @@ HealthBar.prototype.setPosition = function (x, y) {
 };
 
 
-HealthBar.prototype.setPercent = function(newValue, monsterHealth){
+HealthBar.prototype.setPercent = function(newValue, totalHealth){
     if(newValue < 0) newValue = 0;
-    if (!monsterHealth) monsterHealth = 100;
+    if (!totalHealth) totalHealth = 100;
 
-    var newWidth =  (newValue * this.config.width) / monsterHealth;
+    var newWidth =  (newValue * this.config.width) / totalHealth;
 
     this.setWidth(newWidth);
 };

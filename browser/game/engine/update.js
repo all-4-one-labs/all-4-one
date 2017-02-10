@@ -27,7 +27,8 @@ export default function update() {
     bullets.sprite.forEachAlive(bullet => {
       let x = Math.abs(bullet.x - bullet.originalLocation.x);
       let y = Math.abs(bullet.y - bullet.originalLocation.y);
-      if (Math.sqrt(x*x + y*y) >= 500 || x >= 500 || y >= 500) bullet.kill();
+      if (bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 200)) bullet.kill();
+      if (!bullet.shotgun && (Math.round(Math.sqrt(x*x + y*y)) >= 500)) bullet.kill();
     })
   }
 
@@ -36,7 +37,7 @@ export default function update() {
     teamBullet.sprite.forEachAlive(bullet => {
       let x = Math.abs(bullet.x - bullet.originalLocation.x);
       let y = Math.abs(bullet.y - bullet.originalLocation.y);
-      if (Math.sqrt(x*x + y*y) >= 500 || x >= 500 || y >= 500) bullet.kill();
+      if (Math.sqrt(x*x + y*y) >= 500) bullet.kill();
     })
   }
 
@@ -128,11 +129,11 @@ export default function update() {
     //gmMonsters collide with bullets and deal damage
     if (gmMonsters[id]) {
       this.physics.arcade.overlap(teamBullet.sprite, gmMonsters[id].sprite, (monster, bullet) => {
+        monster.health -= bullet.damage;
         bullet.kill();
-        monster.health -= 20;
       });
-      this.physics.arcade.overlap(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
-        monster.health -= 20;
+      this.physics.arcade.collide(teamExplosions.sprite, gmMonsters[id].sprite, (monster, explosion) => {
+        monster.health -= explosion.damage;
       });
       if (gmMonsters[id].sprite.health <= 0 ) {
         gmMonsters[id].sprite.kill();
