@@ -12,9 +12,10 @@ let broadcastID
 
 const endgame = (io, winMessage) => {
   // console.log(io.sockets)
-  for (let s in io.sockets.sockets.connected) {
+  for (let  s in io.sockets.sockets.connected) {
     s.disconnect(true)
   }
+  io.disconnect()
   // console.log('BEFORE',store.getState())
   clearInterval(timerID)
   clearInterval(broadcastID)
