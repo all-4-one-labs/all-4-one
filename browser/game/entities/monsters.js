@@ -77,6 +77,8 @@ export default class Monster {
       let gridPlayer = {x: Math.round(playerX / 32), y: Math.round(playerY / 32)};
       if (gridMonster.x > 119) gridMonster.x = 119;
       if (gridMonster.y > 79) gridMonster.y = 79;
+      if (gridPlayer.x > 119) gridPlayer.x = 119;
+      if (gridPlayer.y > 79) gridPlayer.y = 79;
 
       if (this.fly) {
         this.game.physics.arcade.moveToXY(this.sprite, playerX, playerY, this.sprite.speed);
