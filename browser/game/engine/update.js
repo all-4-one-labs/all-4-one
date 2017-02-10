@@ -7,7 +7,6 @@ import { updateMonsters } from '../../reducers/monsters.js';
 import { updateHealth } from '../../reducers/players.js';
 import { teammateUpdate, LocalTeammates } from './teammateUpdate.js';
 import { shallowMonsterUpdate } from './shallowMonsterUpdate.js';
-import { isEmpty } from 'lodash';
 
 import { dashboard } from '../controls/createButtons.js';
 
@@ -78,7 +77,7 @@ export default function update() {
     this.physics.arcade.overlap(teamExplosions.sprite, player.sprite, (player, explosion) => {
         if (this.game.time.now > player.nextHeal) {
           player.nextHeal = this.game.time.now + 1500;
-          player.health = Math.min(player.health + 5, 100);
+          player.health = Math.min(player.health + 10, 100);
           store.dispatch(updateHealth({health: player.health}));
         }
     });
