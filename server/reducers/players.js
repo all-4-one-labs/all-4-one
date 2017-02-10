@@ -36,6 +36,12 @@ const playerReducers = (state = initialState, action) => {
         if (isEmpty(newState.players)) newState.gmWinOnState = true
         break;
       }
+      if (!isEmpty(action.data.heal)) {
+        for (let id in action.data.heal) {
+          newState.players[id].health = action.data.heal[id];
+          delete action.data.heal[id];
+        }
+      }
       newState.players[action.id] = action.data
       break;
     default:

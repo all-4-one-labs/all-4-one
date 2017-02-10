@@ -8,6 +8,7 @@ const SURVIVOR_FIRE = 'SURVIVOR_FIRE';
 const SURVIVOR_SPLASH = 'SURVIVOR_SPLASH';
 const UPDATE_HEALTH = 'UPDATE_HEALTH';
 const UPDATE_PLAYER_TYPE = 'UPDATE_PLAYER_TYPE';
+const TEAM_HEAL = 'TEAM_HEAL';
 
 //Action Creators
 export const receiveServerPlayer = (serverPlayer) => ({
@@ -28,6 +29,11 @@ export const survivorFire = (fireData) => ({
 export const updateHealth = (health) => ({
   type: UPDATE_HEALTH,
   health
+})
+
+export const teamHeal = (data) => ({
+  type: TEAM_HEAL,
+  teamHeal: { heal: data }
 })
 
 export const updatePlayerType = (playerType) => ({
@@ -52,7 +58,7 @@ export default (state = initialState, action) => {
       break;
     case SURVIVOR_FIRE:
       newState = Object.assign({}, state, action.fireData);
-      break; 
+      break;
     case SURVIVOR_SPLASH:
       newState = Object.assign({}, state, action.splashData);
       break;
@@ -61,6 +67,9 @@ export default (state = initialState, action) => {
       break;
     case UPDATE_PLAYER_TYPE:
       newState = Object.assign({}, state, action.playerType);
+      break;
+    case TEAM_HEAL:
+      newState = Object.assign({}, state, action.teamHeal);
       break;
     default: return state;
   }

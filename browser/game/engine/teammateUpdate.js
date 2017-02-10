@@ -1,6 +1,7 @@
-// import { player } from './create.js'
 import store from '../../store.js'
 import Teammate from '../entities/teammate.js'
+import { explosions } from './create.js'
+import { teamHeal } from '../../reducers/players.js';
 
 let LocalTeammates = {}
 
@@ -19,6 +20,14 @@ function teammateUpdate(player) {
       if (LocalTeammates[id] && teammatesFromServer[id].position){
 
         this.physics.arcade.collide(player.sprite, LocalTeammates[id].sprite);
+
+        //medic heals
+        this.physics.arcade.collide(explosions.sprite, LocalTeammates[id].sprite, (team, exp) => {
+          let newHealth = Math.min(team.health + 5, LocalTeammates[id].totalHealth);
+          let temp = {};
+          temp[id] = newHealth;
+          store.dispatch(teamHeal(temp));
+        });
 
         //healthbar
         LocalTeammates[id].sprite.healthBar.setPosition(LocalTeammates[id].sprite.x - 7, LocalTeammates[id].sprite.y - 40);

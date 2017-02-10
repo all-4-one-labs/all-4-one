@@ -1,4 +1,4 @@
-const store = require('../store');
+const store  = require('../store');
 const {timerTick} = require('../reducers/engine')
 
 const endgame = (io, teamThatWon) => {
