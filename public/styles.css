@@ -184,35 +184,81 @@ body {
     background-size: cover;
 }
 
+
 #gunner {
-    position:relative;
-    top: 8vw;
-    left: 3vw;
-    font-size: 3vw;
+    position:fixed;
+    top: 25vw;
+    left: 4vw;
+    font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
     border-radius: 8px;
+    width: 25vw;
 }
 
 #mage {
-    position:relative;
-    top: 8vw;
-    left: 8vw;
-    font-size: 3vw;
+    position:fixed;
+    top: 25vw;
+    left: 37vw;
+    font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
     border-radius: 8px;
+    width: 25vw;
 }
 
 #shotgunner {
-    position:relative;
-    top: 8vw;
-    left: 13vw;
-    font-size: 3vw;
+    position:fixed;
+    top: 25vw;
+    left: 65vw;
+    font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#79CDCD;
     border-radius: 8px;
+    width: 25vw;
+}
+
+#gunnerProfile {
+    position: relative;
+    top: 15vw;
+    left: 5vw;
+    font-size: 2vw;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    border-radius: 8px;
+    width: 20vw;
+    text-align: center;
+    display: inline-flex;
+}
+
+#mageProfile {
+    position: relative;
+    top: 15vw;
+    left: 18vw;
+    font-size: 2vw;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    border-radius: 8px;
+    width: 20vw;
+    text-align: center;
+    display: inline-flex;
+}
+
+#shotgunnerProfile {
+    position: relative;
+    top: 15vw;
+    left: 26vw;
+    font-size: 2vw;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#79CDCD;
+    border-radius: 8px;
+    width: 20vw;
+    text-align: center;
+    display: inline-flex;
 }

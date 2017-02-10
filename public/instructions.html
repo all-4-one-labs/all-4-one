@@ -18,9 +18,12 @@
             <h1 id='six'> Use W-A-S-D to move player </h1>
             <h1 id='seven'> Use arrow keys to shoot in that direction.</h1>
             <h1 id='eight'> Goal: Survive!! </h1>
-            <button id='gunner' > <div>Continue as Gunner</div> </button>
-            <button id='mage' > <div>Continue as Mage</div> </button>
-            <button id='shotgunner' > <div>Continue as Shotgunner</div> </button>
+            <button id='gunner'> Continue as Gunner </button>
+            <button id='mage'> Continue as Mage </button>
+            <button id='shotgunner'> Continue as Shotgunner </button>
+            <h1 id='gunnerProfile'> long range but mediocre damage and speed </h1>
+            <h1 id='mageProfile'> short range but high damage; can also heal teammates </h1>
+            <h1 id='shotgunnerProfile'> short-to-med range; damage decreases the farther the range </h1>
         </div>
         <script type="text/javascript">
             if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
