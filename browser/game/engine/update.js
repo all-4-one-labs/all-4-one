@@ -22,7 +22,7 @@ export default function update() {
   }
   // this.game.paused = true
 
-  //kill bullet after certain distance
+  //kill own bullet after certain distance
   if (bullets && Object.keys(bullets).length > 0) {
     bullets.sprite.forEachAlive(bullet => {
       let x = Math.abs(bullet.x - bullet.originalLocation.x);
