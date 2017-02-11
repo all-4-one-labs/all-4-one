@@ -1,9 +1,23 @@
-const players = require('../../browser/reducers/players.js');
-const store = require('../../browser/store.js');
-const mocha = require('mocha');
+const players  = require('../../browser/reducers/players.js');
+const { expect } = require('chai');
+const {createStore, combineReducers} = require('redux');
 
-// describe('player reducers', () => {
-//     it('should return a state', () => {
-//         expect(store.dispatch(players.)
-//     })
-// })
+describe('player reducers', () => {
+    let store;
+
+    beforeEach('create a test store', () => {
+        store = createStore(combineReducers({players}));
+    })
+
+    it('should return a position', () => {
+        const position = { position: {x: 1, y: 1}, animation: 'left' }
+        const expectedAction = {
+            type: 'UPDATE_POSITION',
+            positionData: {
+                position: {x: 1, y: 1},
+                animation: 'left'
+            }
+        }
+        expect(store.dispatch(players.updatePosition(position))).to.be.deep.equal(expectedAction);
+    })
+})

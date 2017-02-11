@@ -2,7 +2,7 @@
     position: relative;
     text-align: center;
     top: 10vw;
-    left: 35vw;
+    left: 40vw;
     font-size: 5vw;
     color:  white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -17,7 +17,7 @@
     position: relative;
     text-align: center;
     top: 15vw;
-    left: 30vw;
+    left: 35vw;
     font-size: 4vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -32,7 +32,7 @@
     position: relative;
     text-align: center;
     top: 15vw;
-    left: 30vw;
+    left: 42vw;
     font-size: 4vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -46,7 +46,7 @@
 #gamemaster {
     position: fixed;
     top: 30vw;
-    left: 22vw;
+    left: 27vw;
     font-size: 3vw;
     text-align: center;
     color: white;
@@ -59,7 +59,7 @@
 #survivor {
     position: fixed;
     top: 30vw;
-    left: 50vw;
+    left: 55vw;
     font-size: 3vw;
     text-align: center;
     color: white;
