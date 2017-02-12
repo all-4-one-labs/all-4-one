@@ -21,7 +21,6 @@ const listeners = function(io, socket){
     // console.log('send_all_data', data)
     // if (store.getState().gmExist) {
       if (data.gameMode === 'survivor') {
-        console.log('DATA:', data)
         store.dispatch(receiveClientData(socket.id, data));
       } else {
         store.dispatch(updateMonsters(data.monsters));
