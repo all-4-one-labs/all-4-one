@@ -4,29 +4,30 @@
         <meta charset="UTF-8" />
         <title>All 4 One</title>
         <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
-        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     </head>
     <body>
         <div id="title"> All 4 One </div>
         <div id="subtitle"> Select your player </div>
         <div id="loading"> Loading... </div>
-        <button id='gamemaster' onclick="gmValidationCheck()">Game Master</button>
-        <button id='survivor' onclick="survivorValidationCheck()">Survivor</button>
+        <button id='gamemaster' onclick="window.location.href='/instructions.html'">Game Master</button>
+        <button id='survivor' onclick="window.location.href='/instructions.html'">Survivor</button>
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
     </body>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script> 
         document.getElementById('gamemaster').style.display = "none";
         document.getElementById('survivor').style.display = "none";
         document.getElementById('subtitle').style.display = "none";
 
         setTimeout(()=>{
-            document.getElementById('loading').style.display = "none";
+            document.getElementById('loading').style.display = "none";        
             document.getElementById('subtitle').style.display = "initial";
             document.getElementById('gamemaster').style.display = "initial";
             document.getElementById('survivor').style.display = "initial";
         }, 10000)
+        document.getElementById('gamemaster')
+            .addEventListener('click', () => sessionStorage.setItem('mode', 'gamemaster'));
 
+        document.getElementById('survivor')
+            .addEventListener('click', () => sessionStorage.setItem('mode', 'survivor'));
     </script>
-    <script src="./startingMode.js"></script>
 </html>

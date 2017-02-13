@@ -1,10 +1,27 @@
-document.getElementById('gamemaster')
-.addEventListener('click', () => sessionStorage.setItem('mode', 'gamemaster'));
 
-document.getElementById('survivor')
-.addEventListener('click', () => sessionStorage.setItem('mode', 'survivor'));
+///
+document.getElementById('gunner')
+.addEventListener('click', () => {
+    sessionStorage.setItem('playerType', 'gunner');
+    survivorValidationCheck();
+});
 
+document.getElementById('mage')
+.addEventListener('click', () => {
+    sessionStorage.setItem('playerType', 'mage');
+    survivorValidationCheck();
+});
 
+document.getElementById('shotgunner')
+.addEventListener('click', () => {
+    sessionStorage.setItem('playerType', 'shotgunner');
+    survivorValidationCheck();
+});
+
+document.getElementById('continue')
+.addEventListener('click', () => {
+    gmValidationCheck();
+});
 
 // document.getElementById('pvp')
 // .addEventListener('click', () => {
@@ -16,15 +33,15 @@ document.getElementById('survivor')
 function gmValidationCheck() {
   axios('/gmjoinrequest')
     .then(response => {
-      if (response.data) alert('GM is taken!');
-      else window.location = '/instructions.html';
+      if (response.data) alert('Sorry, there\'s already a game master in this game.');
+      else window.location = '/game.html';
     })
 }
 
 function survivorValidationCheck() {
   axios('/survivorjoinrequest')
     .then(response => {
-      if (response.data) alert('Survivors are full!');
-      else window.location = '/instructions.html';
+      if (response.data) alert('Sorry, this game is at maximum survivors');
+      else window.location = '/game.html';
     })
 }

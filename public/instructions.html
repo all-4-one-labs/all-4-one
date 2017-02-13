@@ -30,30 +30,7 @@
             if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
             else if (sessionStorage.getItem('mode') === 'gamemaster') document.getElementById("survivorInstructions").style.display = "none";
         </script>
-        <script>
-            document.getElementById('gunner')
-            .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'gunner');
-                window.location = 'game.html';
-            });
-
-            document.getElementById('mage')
-            .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'mage');
-                window.location = 'game.html';
-            });
-
-            document.getElementById('shotgunner')
-            .addEventListener('click', () => {
-                sessionStorage.setItem('playerType', 'shotgunner');
-                window.location = 'game.html';
-            });
-
-            document.getElementById('continue')
-            .addEventListener('click', () => {
-                window.location = 'game.html';
-            });
-        </script>
-
     </body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./startingMode.js"></script>
 </html>
