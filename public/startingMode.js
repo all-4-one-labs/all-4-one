@@ -16,7 +16,7 @@ document.getElementById('survivor')
 function gmValidationCheck() {
   axios('/gmjoinrequest')
     .then(response => {
-      if (response.data) alert('gm is full');
+      if (response.data) alert('GM is taken!');
       else window.location = '/instructions.html';
     })
 }
@@ -24,7 +24,7 @@ function gmValidationCheck() {
 function survivorValidationCheck() {
   axios('/survivorjoinrequest')
     .then(response => {
-      if (response.data) alert('survivors are full');
+      if (response.data) alert('Survivors are full!');
       else window.location = '/instructions.html';
     })
 }
