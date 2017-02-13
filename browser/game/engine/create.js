@@ -11,7 +11,9 @@ let player, bullets, teamBullet, survivor, gameMaster, testText, blaster, explos
 
 export default function create() {
   this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-
+  this.game.scale.pageAlignHorizontally = true;
+  this.game.scale.pageAlignVeritcally = true;
+  this.game.scale.refresh();
   //sound test
   blaster = this.add.audio('blaster');
   explosionsound = this.add.audio('explosionsound');

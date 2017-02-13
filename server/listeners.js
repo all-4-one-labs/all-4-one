@@ -11,10 +11,7 @@ const listeners = function(io, socket){
 
   socket.on('disconnect', function(){
     console.log('socket id ' + socket.id + ' has disconnected.');
-    console.log('gmExist:', store.getState().gmExist)
-    if (store.getState().gmExist){
-      store.dispatch(removePlayer(socket.id));
-    }
+    store.dispatch(removePlayer(socket.id));
   });
 
   socket.on('send_all_data', (data) => {
