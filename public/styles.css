@@ -1,72 +1,106 @@
 #title {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
-    top: 10vw;
-    left: 40vw;
+    top: 7vw;
+    left: 27vw;
     font-size: 5vw;
     color:  white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     display: inline-block;
     clear: both;
     float: left;
-    border-radius: 8px;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.7vw 1vw 0.01vw 1vw;
 }
 
 #subtitle {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
-    top: 15vw;
-    left: 35vw;
-    font-size: 4vw;
+    top: 13vw;
+    left: 23vw;
+    font-size: 3vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     display: inline-block;
     clear: both;
     float: left;
-    border-radius: 8px;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.4vw 1vw 0.3vw 1vw;
 }
 
-#loading {
+#loading {    
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
-    top: 15vw;
-    left: 42vw;
+    top: 13vw;
+    left: 33vw;
     font-size: 4vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     display: inline-block;
     clear: both;
     float: left;
-    border-radius: 8px;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: 2px 2px 20px black;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 0.3vw;
+    padding-top: 0.01vw;
 }
 
 #gamemaster {
     position: fixed;
+    font-family: 'Press Start 2P', cursive;
     top: 30vw;
-    left: 27vw;
+    left: 13vw;
     font-size: 3vw;
     text-align: center;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
-    border-radius: 8px;
-    width: 20vw;
+    background-color :#c1e5ff;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #survivor {
     position: fixed;
+    font-family: 'Press Start 2P', cursive;
     top: 30vw;
-    left: 55vw;
+    left: 57vw;
     font-size: 3vw;
     text-align: center;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
-    border-radius: 8px;
-    width: 20vw;
+    background-color :#c1e5ff;
+    display: inline-block;
+    clear: both;
+    float: left;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 
@@ -76,114 +110,181 @@
 
 #one {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 5vw;
-    left: 35vw;
+    left: 25vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #two {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 6vw;
-    left: 15vw;
-    font-size: 2vw;
+    left: 12vw;
+    text-align: center;
+    font-size: 1.7vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    width: 80vw;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.2vw 0.3vw 0.2vw;
 }
 
 #three {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 7vw;
-    left: 19vw;
-    font-size: 2vw;
+    left: 11vw;
+    text-align: center;
+    font-size: 1.7vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    width: 80vw;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #four {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 8vw;
-    left: 12vw;
+    left: 13.2vw;
     font-size: 2vw;
     width: 75vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
     display: table;
-    text-align: center;
+    text-align: center;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #five {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 9vw;
-    left: 23vw;
-    font-size: 4vw;
+    left: 8vw;
+    font-size: 3vw;
     color: red;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #continue {
     position:relative;
+    font-family: 'Press Start 2P', cursive;
     top: 11vw;
-    left: 32vw;
+    left: 24vw;
     font-size: 3vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 
 #six {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 5vw;
-    left: 35vw;
+    left: 25vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #seven {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 6vw;
-    left: 30vw;
+    left: 10vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #eight {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 7vw;
-    left: 34vw;
+    left: 20vw;
     font-size: 4vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
     color:red;
-    display: table;
+    display: table;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 body {
@@ -192,83 +293,127 @@ body {
     background-image: url('home.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 
 
 #gunner {
     position:fixed;
+    font-family: 'Press Start 2P', cursive;
     top: 25vw;
     left: 4vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    width: 25vw;
+    width: 25vw;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #mage {
     position:fixed;
+    font-family: 'Press Start 2P', cursive;
     top: 25vw;
-    left: 35vw;
+    left: 37vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    width: 25vw;
+    width: 25vw;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #shotgunner {
     position:fixed;
+    font-family: 'Press Start 2P', cursive;
     top: 25vw;
-    left: 65vw;
+    left: 68.5vw;
     font-size: 2vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
-    width: 25vw;
+    width: 25vw;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #gunnerProfile {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 15vw;
     left: 5vw;
-    font-size: 2vw;
+    font-size: 1.7vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
     width: 20vw;
     text-align: center;
-    display: inline-flex;
+    display: inline-flex;    
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #mageProfile {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 15vw;
     left: 16.5vw;
-    font-size: 2vw;
+    font-size: 1.7vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
     width: 20vw;
     text-align: center;
     display: inline-flex;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
 #shotgunnerProfile {
     position: relative;
+    font-family: 'Press Start 2P', cursive;
     top: 15vw;
     left: 26vw;
-    font-size: 2vw;
+    font-size: 1.7vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color :#79CDCD;
+    background-color :#c1e5ff;
     border-radius: 8px;
     width: 20vw;
     text-align: center;
     display: inline-flex;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
+
