@@ -41,12 +41,12 @@
 }
 
 #loading {    
-    position: relative;
+       position: relative;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
     top: 13vw;
-    left: 33vw;
-    font-size: 4vw;
+    left: 35vw;
+    font-size: 3vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
@@ -56,12 +56,9 @@
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     box-shadow: 2px 2px 20px black;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    padding-bottom: 0.3vw;
-    padding-top: 0.01vw;
+    padding: 0.4vw 1vw 0.3vw 1vw;
 }
 
 #gamemaster {
