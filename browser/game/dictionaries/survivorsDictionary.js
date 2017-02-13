@@ -9,7 +9,7 @@ const survivorsDictionary = {
       right: [6, 7, 8]
     },
     attackType: 'fireBullet',
-    totalHealth: 120,
+    totalHealth: 110,
     fireRate: 300,
     damage: 25,
   },
@@ -28,8 +28,8 @@ const survivorsDictionary = {
       animate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
       animateBack: [31, 30, 29, 28, 27, 26, 25, 24, 23, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     },
-    totalHealth: 140,
-    fireRate: 1000,
+    totalHealth: 130,
+    fireRate: 1200,
     damage: 20,
   },
   shotgunner: {
@@ -43,7 +43,7 @@ const survivorsDictionary = {
     },
     attackType: 'fireBullet',
     shotgun: true,
-    totalHealth: 120,
+    totalHealth: 110,
     fireRate: 1000,
     damage: 20,
   },

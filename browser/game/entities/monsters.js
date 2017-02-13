@@ -86,7 +86,7 @@ export default class Monster {
       }
       else {
         easystar.findPath(gridMonster.x, gridMonster.y, gridPlayer.x, gridPlayer.y, (path) => this.pathHelper(path));
-        easystar.setIterationsPerCalculation(750);
+        easystar.setIterationsPerCalculation(600);
         easystar.enableDiagonals();
         easystar.calculate();
       }
