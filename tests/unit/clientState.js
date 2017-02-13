@@ -6,8 +6,6 @@ import shallowMonsters, { receiveMonsterData } from '../../browser/reducers/shal
 import { expect } from 'chai';
 import { createStore } from 'redux';
 
-//redux
-
 describe('Redux architecture for client state', () => {
     describe('action creators for players', () => {
         it('receiveServerPlayer', () => {
