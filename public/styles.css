@@ -100,8 +100,132 @@
     padding: 0.5vw 0.7vw 0.3vw 1vw;
 }
 
+#developers {
+    position: relative;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 34vw;
+    left: 70vw;
+    font-size: 1vw;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#c1e5ff;
+    display: inline-block;
+    clear: both;
+    float: left;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+}
 
-#gamemaster:hover, #survivor:hover, #continue:hover, #gunner:hover, #mage:hover, #shotgunner:hover  {
+#modal {
+    position: fixed;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 5vw;
+    left: 10vw;
+    font-size: 1vw;
+    color:  white;
+    visibility: hidden;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#c1e5ff;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    height: 40vw;
+    width: 80vw;
+    z-index: 1;
+}
+
+#modalClose {
+    position: fixed;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 43vw;
+    left: 48vw;
+    font-size: 1vw;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color :#c1e5ff;
+    border-radius: 4px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 2px 2px 20px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+}
+
+#richName {
+    position: fixed;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 15vw;
+    left: 25vw;
+    font-size: 1vw;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+}
+
+#richImage {
+    position: fixed;
+    top: 10vw;
+    left: 15vw;
+    width: 10vw;
+    height: 10vw;
+}
+
+#richLink {
+    position: fixed;
+    top: 18vw;
+    left: 25vw;
+    color: white;
+}
+
+#evanName {
+    position: fixed;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 15vw;
+    left: 65vw;
+    font-size: 1vw;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+}
+
+#jeffName {
+    position: fixed;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 30vw;
+    left: 25vw;
+    font-size: 1vw;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+}
+
+#tedName {
+    position: fixed;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    top: 30vw;
+    left: 65vw;
+    font-size: 1vw;
+    color:  white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+}
+
+
+#gamemaster:hover, #survivor:hover, #continue:hover, #gunner:hover, #mage:hover, #shotgunner:hover, #developers:hover {
     background-color: turquoise;
 }
 

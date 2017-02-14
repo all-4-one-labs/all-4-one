@@ -12,6 +12,14 @@
         <div id="loading"> Loading... </div>
         <button id='gamemaster' onclick="window.location.href='/instructions.html'">Game Master</button>
         <button id='survivor' onclick="window.location.href='/instructions.html'">Survivor</button>
+        <button id="developers" onclick='hide()'> About the Developers </button>
+        <div id='modal'>
+            <image id='richImage' src='/developers/Rich.png'/> <div id='richName'> Richard Shyong <a id='richLink' href='https://github.com/rshyong'>https://github.com/rshyong</a></div>
+            <div id='evanName'> Evan Scribner </div>
+            <div id='jeffName'> Jeffrey Horn </div>
+            <div id='tedName'> Tedman Hsu </div>
+            <button id='modalClose' onclick='hide()'> Close </button>
+        <div>
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
     </body>
     <script>
@@ -24,11 +32,18 @@
             document.getElementById('subtitle').style.display = "initial";
             document.getElementById('gamemaster').style.display = "initial";
             document.getElementById('survivor').style.display = "initial";
-        }, 10000)
+        }, 1000)
         document.getElementById('gamemaster')
             .addEventListener('click', () => sessionStorage.setItem('mode', 'gamemaster'));
 
         document.getElementById('survivor')
             .addEventListener('click', () => sessionStorage.setItem('mode', 'survivor'));
+
+        function hide() {
+            let x = document.getElementById('modal')
+            console.log(x.style.visibility);
+            if (x.style.visibility === 'visible' ) x.style.visibility = "hidden";
+            else x.style.visibility = "visible"
+        }
     </script>
 </html>
