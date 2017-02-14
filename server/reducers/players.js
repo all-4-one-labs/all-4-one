@@ -32,10 +32,10 @@ const playerReducers = (state = initialState, action) => {
         blacklist[action.id] = true
         delete newState.players[action.id]
         if (isEmpty(newState.players)) {
-          newState.gmWinOnState = true
+          // newState.gmWinOnState = true
         }
       } else {
-        newState.survivorWinOnState = true
+        // newState.survivorWinOnState = true
       }
       break;
     case RECEIVE_CLIENT_DATA:
