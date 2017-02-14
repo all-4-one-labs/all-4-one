@@ -36,7 +36,6 @@ const playerReducers = (state = initialState, action) => {
          newState.gmWinOnState = true
         }
       } else {
-        console.log('it happened')
         newState.survivorWinOnState = true
       }
       break;
