@@ -29,17 +29,19 @@ const playerReducers = (state = initialState, action) => {
       //currently the gameMode only exists on the survivor. putting off fixing this until backend stuff is implemented
       //once it's fixed this will be '...action[id].gameMode==='survivor''
       if (newState.players[action.id]) {
+        // console.log(newState.players[action.id])
         blacklist[action.id] = true
         delete newState.players[action.id]
         if (isEmpty(newState.players)) {
-          // newState.gmWinOnState = true
+         newState.gmWinOnState = true
         }
       } else {
-        // newState.survivorWinOnState = true
+        console.log('it happened')
+        newState.survivorWinOnState = true
       }
       break;
     case RECEIVE_CLIENT_DATA:
-          if (!blacklist[action.id]) {      
+          if (!blacklist[action.id]) {
             if (newState.players[action.id] && action.data.health <= 0){
               blacklist[action.id] = true
               delete newState.players[action.id]

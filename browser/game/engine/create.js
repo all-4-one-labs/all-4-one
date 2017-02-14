@@ -51,7 +51,7 @@ export default function create() {
   teamExplosions = new Explosions(this);
   teamSgBullets = new SgBullets(this);
 
-  let text = '10:00';
+  let text = '5:00';
   let style = { font: "24px Arial", fill: "#ffffff", align: "center" };
   testText = this.add.text(1215, 0, text, style);
   testText.fixedToCamera = true;

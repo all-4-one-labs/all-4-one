@@ -25,7 +25,7 @@ $(document).ready(function(){
         $('#subtitle').show();
         $('#gamemaster').show();
         $('#survivor').show();
-    }, 10000)
+    }, 5000)
 
     $('#gamemaster').click(() => {
         $('body').animate({opacity: '0.0'}, "slow", () => {
