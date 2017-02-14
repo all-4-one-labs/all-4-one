@@ -40,7 +40,7 @@
     padding: 0.4vw 1vw 0.3vw 1vw;
 }
 
-#loading {    
+#loading {
        position: relative;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
@@ -115,7 +115,7 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -135,7 +135,7 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -156,7 +156,7 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -178,7 +178,7 @@
     background-color :#c1e5ff;
     border-radius: 8px;
     display: table;
-    text-align: center;    
+    text-align: center;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -197,7 +197,7 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -209,14 +209,14 @@
 #continue {
     position:relative;
     font-family: 'Press Start 2P', cursive;
-    top: 11vw;
+    top: 10vw;
     left: 24vw;
     font-size: 3vw;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -236,7 +236,7 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -255,7 +255,7 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -275,7 +275,7 @@
     background-color :#c1e5ff;
     border-radius: 8px;
     color:red;
-    display: table;    
+    display: table;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -304,7 +304,7 @@ body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    width: 25vw;    
+    width: 25vw;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -323,7 +323,7 @@ body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    width: 25vw;    
+    width: 25vw;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -342,7 +342,7 @@ body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     background-color :#c1e5ff;
     border-radius: 8px;
-    width: 25vw;    
+    width: 25vw;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -354,7 +354,7 @@ body {
 #gunnerProfile {
     position: relative;
     font-family: 'Press Start 2P', cursive;
-    top: 15vw;
+    top: 13vw;
     left: 5vw;
     font-size: 1.7vw;
     color: white;
@@ -363,7 +363,7 @@ body {
     border-radius: 8px;
     width: 20vw;
     text-align: center;
-    display: inline-flex;    
+    display: inline-flex;
     border-radius: 4px;
     border-color: gray;
     border-style: solid;
@@ -375,7 +375,7 @@ body {
 #mageProfile {
     position: relative;
     font-family: 'Press Start 2P', cursive;
-    top: 15vw;
+    top: 13vw;
     left: 16.5vw;
     font-size: 1.7vw;
     color: white;
@@ -396,7 +396,7 @@ body {
 #shotgunnerProfile {
     position: relative;
     font-family: 'Press Start 2P', cursive;
-    top: 15vw;
+    top: 13vw;
     left: 26vw;
     font-size: 1.7vw;
     color: white;
