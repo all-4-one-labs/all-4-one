@@ -23,37 +23,5 @@
         <div>
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
     </body>
-    <script>
-        $(document).ready(function(){
-            $("#gamemaster").hide();
-            $("#survivor").hide();
-            $("#subtitle").hide();
-
-            setTimeout(()=>{
-                $('#loading').hide();
-                $('#subtitle').show();
-                $('#gamemaster').show();
-                $('#survivor').show();
-            }, 1000)
-
-            $('#gamemaster').click(() => {
-                sessionStorage.setItem('mode', 'gamemaster')
-                window.location.href='/instructions.html'
-            })
-
-            $('#survivor').click(() => {
-                sessionStorage.setItem('mode', 'survivor')
-                window.location.href='/instructions.html'
-            })
-
-            $("#developers, #modalClose").click(() => {
-                if ( $('#modal').css('visibility') === 'visible' ){
-                    $("#modal").css("visibility", "hidden");
-                } else {
-                    $("#modal").css("visibility", "visible");
-                }
-            })
-
-        });
-    </script>
+    <script src='/startingMode.js' ></script>
 </html>

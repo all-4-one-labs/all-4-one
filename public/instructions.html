@@ -5,6 +5,7 @@
         <title>All 4 One</title>
         <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
         <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
     <body>
         <div id='gamemasterInstructions'>
@@ -26,11 +27,7 @@
             <h1 id='mageProfile'> short range; high damage; can also heal teammates </h1>
             <h1 id='shotgunnerProfile'> short-to-med range; medium damage; bullets will also knockback enemies </h1>
         </div>
-        <script type="text/javascript">
-            if (sessionStorage.getItem('mode') === 'survivor') document.getElementById("gamemasterInstructions").style.display = "none";
-            else if (sessionStorage.getItem('mode') === 'gamemaster') document.getElementById("survivorInstructions").style.display = "none";
-        </script>
     </body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./startingMode.js"></script>
+    <script src="/startingMode.js"></script>
 </html>
