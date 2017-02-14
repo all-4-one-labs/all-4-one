@@ -5,45 +5,55 @@
         <title>All 4 One</title>
         <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
         <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
     <body>
         <div id="title"> All 4 One </div>
         <div id="subtitle"> Select your player </div>
         <div id="loading"> Loading... </div>
-        <button id='gamemaster' onclick="window.location.href='/instructions.html'">Game Master</button>
-        <button id='survivor' onclick="window.location.href='/instructions.html'">Survivor</button>
-        <button id="developers" onclick='hide()'> About the Developers </button>
+        <button id='gamemaster'>Game Master</button>
+        <button id='survivor'>Survivor</button>
+        <button id="developers"> About the Developers </button>
         <div id='modal'>
             <image id='richImage' src='/developers/Rich.png'/> <div id='richName'> Richard Shyong <a id='richLink' href='https://github.com/rshyong'>https://github.com/rshyong</a></div>
             <div id='evanName'> Evan Scribner </div>
             <div id='jeffName'> Jeffrey Horn </div>
             <div id='tedName'> Tedman Hsu </div>
-            <button id='modalClose' onclick='hide()'> Close </button>
+            <button id='modalClose'> Close </button>
         <div>
         <!--<a id='pvp' href='instructions.html'>PvP</a>-->
     </body>
     <script>
-        document.getElementById('gamemaster').style.display = "none";
-        document.getElementById('survivor').style.display = "none";
-        document.getElementById('subtitle').style.display = "none";
+        $(document).ready(function(){
+            $("#gamemaster").hide();
+            $("#survivor").hide();
+            $("#subtitle").hide();
 
-        setTimeout(()=>{
-            document.getElementById('loading').style.display = "none";
-            document.getElementById('subtitle').style.display = "initial";
-            document.getElementById('gamemaster').style.display = "initial";
-            document.getElementById('survivor').style.display = "initial";
-        }, 1000)
-        document.getElementById('gamemaster')
-            .addEventListener('click', () => sessionStorage.setItem('mode', 'gamemaster'));
+            setTimeout(()=>{
+                $('#loading').hide();
+                $('#subtitle').show();
+                $('#gamemaster').show();
+                $('#survivor').show();
+            }, 1000)
 
-        document.getElementById('survivor')
-            .addEventListener('click', () => sessionStorage.setItem('mode', 'survivor'));
+            $('#gamemaster').click(() => {
+                sessionStorage.setItem('mode', 'gamemaster')
+                window.location.href='/instructions.html'
+            })
 
-        function hide() {
-            let x = document.getElementById('modal')
-            console.log(x.style.visibility);
-            if (x.style.visibility === 'visible' ) x.style.visibility = "hidden";
-            else x.style.visibility = "visible"
-        }
+            $('#survivor').click(() => {
+                sessionStorage.setItem('mode', 'survivor')
+                window.location.href='/instructions.html'
+            })
+
+            $("#developers, #modalClose").click(() => {
+                if ( $('#modal').css('visibility') === 'visible' ){
+                    $("#modal").css("visibility", "hidden");
+                } else {
+                    $("#modal").css("visibility", "visible");
+                }
+            })
+
+        });
     </script>
 </html>
