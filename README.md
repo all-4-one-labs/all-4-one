@@ -1,5 +1,5 @@
 # all-4-one
-Please visit our game at all-4-one.online.
+Please visit our game at <a href='all-4-one.online'>all-4-one.online</a>.
 
 To Play:
 1) Make sure you have a friend! (this is a multiplayer game)
